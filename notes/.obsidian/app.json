@@ -1,0 +1,18 @@
+{
+  "useTab": true,
+  "tabSize": 2,
+  "useMarkdownLinks": false,
+  "attachmentFolderPath": "bin/attachments",
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "showFrontmatter": true,
+  "spellcheck": true,
+  "communityPluginSortOrder": "releaseReverse",
+  "legacyEditor": false,
+  "trashOption": "local",
+  "livePreview": true,
+  "showLineNumber": true,
+  "strictLineBreaks": true,
+  "mobilePullAction": "templater-obsidian:bin/templates/Temporal/Now.md",
+  "showUnsupportedFiles": true
+}

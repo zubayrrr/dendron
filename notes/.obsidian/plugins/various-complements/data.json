@@ -1,0 +1,703 @@
+{
+  "strategy": "english-only",
+  "matchStrategy": "prefix",
+  "maxNumberOfSuggestions": 5,
+  "maxNumberOfWordsAsPhrase": 3,
+  "minNumberOfCharactersTriggered": 0,
+  "minNumberOfWordsTriggeredPhrase": 1,
+  "complementAutomatically": true,
+  "delayMilliSeconds": 0,
+  "disableSuggestionsDuringImeOn": false,
+  "insertAfterCompletion": true,
+  "firstCharactersDisableSuggestions": ":/^",
+  "showMatchStrategy": true,
+  "showComplementAutomatically": true,
+  "showIndexingStatus": true,
+  "descriptionOnSuggestion": "Short",
+  "selectSuggestionKeys": "Enter",
+  "additionalCycleThroughSuggestionsKeys": "None",
+  "disableUpDownKeysForCycleThroughSuggestionsKeys": false,
+  "openSourceFileKey": "None",
+  "propagateEsc": false,
+  "enableCurrentFileComplement": true,
+  "currentFileMinNumberOfCharacters": 0,
+  "onlyComplementEnglishOnCurrentFileComplement": false,
+  "enableCurrentVaultComplement": false,
+  "currentVaultMinNumberOfCharacters": 0,
+  "includeCurrentVaultPathPrefixPatterns": "",
+  "excludeCurrentVaultPathPrefixPatterns": "",
+  "includeCurrentVaultOnlyFilesUnderCurrentDirectory": false,
+  "enableCustomDictionaryComplement": false,
+  "customDictionaryPaths": "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt",
+  "columnDelimiter": "Tab",
+  "customDictionaryWordRegexPattern": "",
+  "delimiterToHideSuggestion": "",
+  "delimiterToDivideSuggestionsForDisplayFromInsertion": "",
+  "caretLocationSymbolAfterComplement": "",
+  "displayedTextSuffix": " => ...",
+  "enableInternalLinkComplement": true,
+  "suggestInternalLinkWithAlias": false,
+  "excludeInternalLinkPathPrefixPatterns": "",
+  "enableFrontMatterComplement": true,
+  "frontMatterComplementMatchStrategy": "inherit",
+  "insertCommaAfterFrontMatterCompletion": false,
+  "showLogAboutPerformanceInConsole": false,
+  "selectionHistoryTree": {
+    "27017": {
+      "27017": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1657832894380
+        }
+      }
+    },
+    "resources.movies": {
+      "resources.movies": {
+        "internalLink": {
+          "count": 3,
+          "lastUpdated": 1655529751710
+        }
+      }
+    },
+    "deployment": {
+      "deployment": {
+        "currentFile": {
+          "count": 18,
+          "lastUpdated": 1656237166077
+        }
+      }
+    },
+    "repository": {
+      "repository": {
+        "currentFile": {
+          "count": 35,
+          "lastUpdated": 1657899658390
+        }
+      }
+    },
+    "specific": {
+      "specific": {
+        "currentFile": {
+          "count": 6,
+          "lastUpdated": 1656320445531
+        }
+      }
+    },
+    "component": {
+      "component": {
+        "currentFile": {
+          "count": 4,
+          "lastUpdated": 1656153339737
+        }
+      }
+    },
+    "Configuration": {
+      "Configuration": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1655636162347
+        }
+      }
+    },
+    "available": {
+      "available": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1656150470027
+        }
+      }
+    },
+    "permissions": {
+      "permissions": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1656320713734
+        }
+      }
+    },
+    "components": {
+      "components": {
+        "currentFile": {
+          "count": 6,
+          "lastUpdated": 1656320929743
+        }
+      }
+    },
+    "CodeDeploy": {
+      "CodeDeploy": {
+        "currentFile": {
+          "count": 6,
+          "lastUpdated": 1655545021118
+        }
+      }
+    },
+    "infrastructure": {
+      "infrastructure": {
+        "currentFile": {
+          "count": 6,
+          "lastUpdated": 1656154051548
+        }
+      }
+    },
+    "Continuous": {
+      "Continuous": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1655444516822
+        }
+      }
+    },
+    "automated": {
+      "automated": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655444473322
+        }
+      }
+    },
+    "production": {
+      "production": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1655444555673
+        }
+      }
+    },
+    "--repository-name": {
+      "--repository-name": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1655446656221
+        }
+      }
+    },
+    "configuration": {
+      "configuration": {
+        "currentFile": {
+          "count": 7,
+          "lastUpdated": 1656320717499
+        }
+      }
+    },
+    "CodePipeline": {
+      "CodePipeline": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655545023112
+        }
+      }
+    },
+    "CloudFormation": {
+      "CloudFormation": {
+        "currentFile": {
+          "count": 15,
+          "lastUpdated": 1655821415612
+        }
+      }
+    },
+    "Beanstalk": {
+      "Beanstalk": {
+        "currentFile": {
+          "count": 13,
+          "lastUpdated": 1655652686500
+        }
+      }
+    },
+    "OpsWorks": {
+      "OpsWorks": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1655630183627
+        }
+      }
+    },
+    "manage": {
+      "manage": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655630176296
+        }
+      }
+    },
+    "applications": {
+      "applications": {
+        "currentFile": {
+          "count": 5,
+          "lastUpdated": 1657820104050
+        }
+      }
+    },
+    "Elastic": {
+      "Elastic": {
+        "currentFile": {
+          "count": 8,
+          "lastUpdated": 1655652111211
+        }
+      }
+    },
+    "environment": {
+      "environment": {
+        "currentFile": {
+          "count": 13,
+          "lastUpdated": 1657833030284
+        }
+      }
+    },
+    "elastic": {
+      "elastic": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655631805207
+        }
+      }
+    },
+    "instance": {
+      "instance": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1655632569027
+        }
+      }
+    },
+    "availability": {
+      "availability": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655631861768
+        }
+      }
+    },
+    "allows": {
+      "allows": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655632000285
+        }
+      }
+    },
+    "Load Balancer": {
+      "Load Balancer": {
+        "internalLink": {
+          "count": 1,
+          "lastUpdated": 1655632518194
+        }
+      }
+    },
+    "successful": {
+      "successful": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655632577574
+        }
+      }
+    },
+    "Management": {
+      "Management": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655636165321
+        }
+      }
+    },
+    "Environment": {
+      "Environment": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1655636227830
+        }
+      }
+    },
+    "dependencies": {
+      "dependencies": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1655738194632
+        }
+      }
+    },
+    "Deployment": {
+      "Deployment": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655652011539
+        }
+      }
+    },
+    "architecture": {
+      "architecture": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1655652419675
+        }
+      }
+    },
+    "mandatory": {
+      "mandatory": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655652225725
+        }
+      }
+    },
+    "beanstalk": {
+      "beanstalk": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655652681019
+        }
+      }
+    },
+    "multiple": {
+      "multiple": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655652753363
+        }
+      }
+    },
+    "Gateway": {
+      "Gateway": {
+        "currentFile": {
+          "count": 4,
+          "lastUpdated": 1655709143092
+        }
+      }
+    },
+    "frontend": {
+      "frontend": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655708953714
+        }
+      }
+    },
+    "instaces": {
+      "instaces": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655737670354
+        }
+      }
+    },
+    "template": {
+      "template": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655737755474
+        }
+      }
+    },
+    "condition": {
+      "condition": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655820477995
+        }
+      }
+    },
+    "Condition": {
+      "Condition": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655820757756
+        }
+      }
+    },
+    "Prometheus": {
+      "Prometheus": {
+        "currentFile": {
+          "count": 37,
+          "lastUpdated": 1656154357909
+        }
+      }
+    },
+    "prometheus": {
+      "prometheus": {
+        "currentFile": {
+          "count": 4,
+          "lastUpdated": 1656153671001
+        }
+      }
+    },
+    "Application": {
+      "Application": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655885336120
+        }
+      }
+    },
+    "Kubernetes": {
+      "Kubernetes": {
+        "currentFile": {
+          "count": 4,
+          "lastUpdated": 1656154444698
+        }
+      }
+    },
+    "container_name": {
+      "container_name": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1655897126980
+        }
+      }
+    },
+    "specify": {
+      "specify": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656067557310
+        }
+      }
+    },
+    "Monitoring": {
+      "Monitoring": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656150535404
+        }
+      }
+    },
+    "Traditional": {
+      "Traditional": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656152189395
+        }
+      }
+    },
+    "responsible": {
+      "responsible": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1656153345679
+        }
+      }
+    },
+    "microservices": {
+      "microservices": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656152306726
+        }
+      }
+    },
+    "monitoring": {
+      "monitoring": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1656154412411
+        }
+      }
+    },
+    "constantly": {
+      "constantly": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656152411406
+        }
+      }
+    },
+    "Pushgateway": {
+      "Pushgateway": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656152725399
+        }
+      }
+    },
+    "mechanism": {
+      "mechanism": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656152958421
+        }
+      }
+    },
+    "metrics": {
+      "metrics": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656153185263
+        }
+      }
+    },
+    "conditions": {
+      "conditions": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656153384410
+        }
+      }
+    },
+    "http_requests_total": {
+      "http_requests_total": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656153821105
+        }
+      }
+    },
+    "standalone": {
+      "standalone": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656154017981
+        }
+      }
+    },
+    "Federation": {
+      "Federation": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656154280789
+        }
+      }
+    },
+    "environments": {
+      "environments": {
+        "currentFile": {
+          "count": 4,
+          "lastUpdated": 1656237346006
+        }
+      }
+    },
+    "development": {
+      "development": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656237092799
+        }
+      }
+    },
+    "Persistent": {
+      "Persistent": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656237756640
+        }
+      }
+    },
+    "my-namespace": {
+      "my-namespace": {
+        "currentFile": {
+          "count": 3,
+          "lastUpdated": 1656238319025
+        }
+      }
+    },
+    "necessary": {
+      "necessary": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656320467364
+        }
+      }
+    },
+    "kubernetes": {
+      "kubernetes": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656320711397
+        }
+      }
+    },
+    "private": {
+      "private": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1656323659128
+        }
+      }
+    },
+    "Components": {
+      "Components": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657820795111
+        }
+      }
+    },
+    "Container": {
+      "Container": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1657830547646
+        }
+      }
+    },
+    "containers": {
+      "containers": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657828025682
+        }
+      }
+    },
+    "CONTAINER_ID": {
+      "CONTAINER_ID": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657828219629
+        }
+      }
+    },
+    "Networks": {
+      "Networks": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657830500635
+        }
+      }
+    },
+    "MongoDB": {
+      "MongoDB": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657832268399
+        }
+      }
+    },
+    "structure": {
+      "structure": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657832757425
+        }
+      }
+    },
+    "docker-compose": {
+      "docker-compose": {
+        "currentFile": {
+          "count": 2,
+          "lastUpdated": 1657833170091
+        }
+      }
+    },
+    "Example": {
+      "Example": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657832961064
+        }
+      }
+    },
+    "Repository": {
+      "Repository": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657898781342
+        }
+      }
+    },
+    "registry": {
+      "registry": {
+        "currentFile": {
+          "count": 1,
+          "lastUpdated": 1657899110519
+        }
+      }
+    }
+  }
+}

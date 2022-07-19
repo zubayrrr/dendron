@@ -1,0 +1,16 @@
+{
+  "inboxDir": "inbox",
+  "assetsDir": "inbox/assets",
+  "openNewNote": true,
+  "youtubeNoteTitle": "Youtube - %title%",
+  "youtubeNote": "---\ntags:\n  - videos\n  - webmark\n---\n\n# [%videoTitle%](%videoURL%)\n\n%videoPlayer%",
+  "twitterNoteTitle": "Tweet from %tweetAuthorName% (%date%)",
+  "twitterNote": "---\ntags:\n  - tweets\n  - webmark\n---\n\n# [%tweetAuthorName%](%tweetURL%)\n\n%tweetContent%",
+  "parseableArticleNoteTitle": "%title%",
+  "parsableArticleNote": "---\ntags:\n  - articles\n  - webmark\n---\n\n# [%articleTitle%](%articleURL%)\n\n%articleContent%",
+  "notParseableArticleNoteTitle": "Article %date%",
+  "notParsableArticleNote": "---\ntags:\n  - articles\n  - webmark\n---\n\n[%articleURL%](%articleURL%)",
+  "textSnippetNoteTitle": "Swipe %date%",
+  "textSnippetNote": "---\ntags:\n  - swipes\n  - webmark\n---\n%content%",
+  "downloadImages": true
+}

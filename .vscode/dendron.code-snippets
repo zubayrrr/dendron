@@ -1,0 +1,56 @@
+{
+  "todo": {
+    "prefix": "to",
+    "scope": "markdown,yaml",
+    "body": "- [ ] ",
+    "description": "render todo box"
+  },
+  "date": {
+    "prefix": "date",
+    "scope": "markdown,yaml",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+    "description": "today's date"
+  },
+  "lexicon": {
+    "prefix": "lexicon",
+    "scope": "markdown,yaml",
+    "body": "\n- Type: [[lexicon.${1|nouns,verbs,adjectives|}]]\n\n***\n\n$CLIPBOARD$2",
+    "description": "Type of lexicon"
+  },
+  "areas": {
+    "prefix": "areas",
+    "scope": "markdown,yaml",
+    "body": "\n- Areas: [[${1:areas.}]]\n\n***",
+    "description": "Area of Interest"
+  },
+  "related": {
+    "prefix": "related",
+    "scope": "markdown,yaml",
+    "body": "\n- Related: [[${1:devlog.}]]\n\n***",
+    "description": "Related to"
+  },
+  "tags": {
+    "prefix": "tags",
+    "scope": "markdown,yaml",
+    "body": "\ntags:\n\t- $0",
+    "description": "Related tags"
+  },
+  "podcast": {
+    "prefix": "podcast",
+    "scope": "markdown,yaml",
+    "body": "\n- Source: $0\n- Guests: $1\n***",
+    "description": "Podcast info"
+  },
+  "test": {
+    "prefix": "test",
+    "scope": "markdown,yaml",
+    "body": "${1|one,two,three|}",
+    "description": "test snippets"
+  },
+  "time": {
+    "prefix": "time",
+    "scope": "markdown,yaml",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+    "description": "time"
+  }
+}

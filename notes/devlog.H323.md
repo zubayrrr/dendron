@@ -1,0 +1,11 @@
+---
+id: hpafiuwhvr1px06pf2jeabw
+title: H.323
+desc: ""
+updated: 1656561403277
+created: 1656561351343
+---
+
+H.323 is an ITU Telecommunication Standardization Sector (ITU-T) recommendation that describes protocols for the provision of audio-visual (A/V) communication sessions on all packet networks. H.323 provides standards for equipment, computers and services for multimedia communication across packet based networks and specifies transmission protocols for real-time video, audio and data details.
+
+H.323 is widely used in IP based videoconferencing, Voice over Internet Protocol (VoIP) and Internet telephony. Users can communicate through the Internet and make use of a variety of products that are H.323 standard compatible.
