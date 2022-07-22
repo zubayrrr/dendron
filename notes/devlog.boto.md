@@ -2,7 +2,7 @@
 id: e7pods321uz4fxgzzdhf002
 title: Boto
 desc: ""
-updated: 1658181553418
+updated: 1658501106637
 created: 1653408519142
 ---
 
@@ -102,6 +102,11 @@ for vpc in vpcs:
 ## Labs
 
 - [[devlog.ec2 server status check]]
+- [[devlog.add env tags to  ec2 servers]]
+- [[devlog.EKS cluster information]]
+- [[devlog.Automate Data Backup of EC2 instances]]
+- [[devlog.Automate cleanup of old Snapshots]]
+- [[devlog.Restore volume from a snapshot of EC2 instance]]
 
 ## Resources
 

@@ -12,7 +12,7 @@ This is [[my|archive.about]] personal wiki and a commonplace book; notes by me, 
 
 🚧 Permanently under construction 🚧
 
-![](https://res.cloudinary.com/zubayr/image/upload/v1655356619/wiki/bhcrbb2fwwk7vfuanhfu.png)
+![](https://res.cloudinary.com/zubayr/image/upload/v1658499909/wiki/ajevkuyebljlxiblyst2.png)
 
 This wiki was made possible with [dendron.so](https://dendron.so) and [obisidian.md](https://obsidian.md). Stored on [Github Repository](https://github.com/zubayrrr/dendron) and hosted on [Netlify](https://netlify.com) for free.
 

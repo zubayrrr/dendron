@@ -4,16 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "d7d0c0e9be3b05f0",
+        "id": "7eee916555263282",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "root.md",
-            "mode": "source",
-            "backlinks": true,
-            "source": false
-          }
+          "type": "graph",
+          "state": {}
         }
       }
     ],
@@ -62,7 +57,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 259
+    "width": 259,
+    "collapsed": true
   },
   "right": {
     "id": "340adbf4124eab23",
@@ -78,7 +74,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "root.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,7 +101,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "root.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -128,12 +122,12 @@
     "width": 299,
     "collapsed": true
   },
-  "active": "9abb3c025a4219b6",
+  "active": "7eee916555263282",
   "lastOpenFiles": [
+    "root.md",
     "workbench.md",
     "tags.phrases.md",
     "devlog.jenkins.md",
-    "root.md",
     "swipes.2022-03-17 01-46-43.md",
     "devlog.runlevel.md",
     "areas.devops.md",
