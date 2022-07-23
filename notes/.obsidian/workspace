@@ -7,8 +7,13 @@
         "id": "7eee916555263282",
         "type": "leaf",
         "state": {
-          "type": "graph",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "root.md",
+            "mode": "source",
+            "backlinks": true,
+            "source": false
+          }
         }
       }
     ],
@@ -74,6 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "root.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,6 +107,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "root.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }

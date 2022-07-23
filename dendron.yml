@@ -83,7 +83,7 @@ preview:
     enableKatex: true
     automaticallyShowPreview: false
 publishing:
-    theme: custom
+    theme: dark
     enableFMTitle: true
     enableNoteTitleForLink: true
     enableMermaid: true
