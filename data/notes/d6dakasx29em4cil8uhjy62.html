@@ -1,0 +1,113 @@
+<h1 id="ipv4"><a aria-hidden="true" class="anchor-heading" href="#ipv4"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ipv4</h1>
+<h1 id="ipv4-addressing"><a aria-hidden="true" class="anchor-heading" href="#ipv4-addressing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IPv4 Addressing</h1>
+<p>The IPv4 address is a 32-bit number that uniquely identifies a network interface on a system. An IPv4 address is written in decimal digits, divided into four 8-bit fields that are separated by periods. Each 8-bit field represents a byte of the IPv4 address. This form of representing the bytes of an IPv4 address is often referred to as the dotted-decimal format.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656592001/wiki/uraeawlkks6yqmy5ci3n.png"></p>
+<p>The following figure shows the component parts of an IPv4 address, <code>172.16.50.56</code>.</p>
+<h4 id="parts-of-ipv4"><a aria-hidden="true" class="anchor-heading" href="#parts-of-ipv4"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Parts of IPv4</h4>
+<ul>
+<li><strong>Network part:</strong> <br>
+The network part indicates the distinctive variety that’s appointed to the network. The network part conjointly identifies the category of the network that’s assigned.</li>
+<li><strong>Host Part:</strong> <br>
+The host part uniquely identifies the machine on your network. This part of the IPv4 address is assigned to every host. <br>
+For each host on the network, the network part is the same, however, the host half must vary.</li>
+<li><strong>Subnet number:</strong> <br>
+This is the nonobligatory part of IPv4. Local networks that have massive numbers of hosts are divided into subnets and subnet numbers are appointed to that.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656585458/wiki/yavrzufmne9yunyfearq.png"></p>
+<ul>
+<li>Subnet mask defines the network portion
+<ul>
+<li>Network portion if binary 1</li>
+<li>Host portion if binary 0</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656592063/wiki/gapcxwmkfgyk1pocnobt.png"></p>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Subnet</span></div>
+<a href="/notes/9vmmmhyayk6vi0i7w5cnwjv" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h1 id="classes-of-ip-address"><a aria-hidden="true" class="anchor-heading" href="#classes-of-ip-address"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Classes of IP Address</h1>
+<ul>
+<li>Default subnet mask is assigned by first octet
+<ul>
+<li>Classful Mask if using default subnet mask</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656592872/wiki/duckdmgbrvvo2am5hazc.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656593725/wiki/kbyzrh9dfdqxoigaldkq.png"></p>
+<p>The subnet mask does not actually contain network or host portion of an IPv4 address, it simply tells where to look for these portions in a given IPv4 address.</p>
+<p><strong>Notice that 127 is skipped between Class A and Class B, it is a reserved block for the loopback address(<code>127.0.0.1</code>).</strong></p>
+<h2 id="subnet-mask"><a aria-hidden="true" class="anchor-heading" href="#subnet-mask"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Subnet mask</h2>
+<p>Finally understanding what subnet mask is</p>
+<p>For example take two IP addresses and tell if they both can communicate(predict that they’re part of the same network - or share same netowkr ID)</p>
+<p><code>10.10.10.1</code> and <code>10.10.20.16</code></p>
+<p>Can you tell if they are both part of the same network? You simply CANNOT</p>
+<p>Why? Because how is it going to assume what part of this IP tells you the network ID and which portion tells you the host ?</p>
+<p>For that we need a subnet mask</p>
+<p>For the above IPs lets assume <code>255.0.0.0</code> is the subnet mask</p>
+<p>Which means(refer to the chart above) that they’re part of the same network and do not need a router to communicate, a switch will do the trick.</p>
+<p>We can use Class C subnet mask for Class A and Class B IP address but cannot use Class A and Class B subnet mask for Class C IP address.</p>
+<p>Some more examples:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656594629/wiki/hk9tpoxztalbecnkahgl.png"></p>
+<h2 id="drawbacks-of-classful-addressing"><a aria-hidden="true" class="anchor-heading" href="#drawbacks-of-classful-addressing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Drawbacks of Classful Addressing</h2>
+<ul>
+<li><strong>Lack of internal address flexibility</strong>: Large organizations are assigned "monolithic" blocks of addresses that don't match well with the structure of the internal network.</li>
+<li><strong>Inefficient use of address space</strong>: The existence of only three block sizes(classes A,B and C) leads to wastage of limited IP address space.</li>
+<li><strong>Proliferation of router table entries</strong>: As the internet grows, more entries are required for routers to handle the routing if IP datagrams, which causes performance problems for routers. Attempting to reduce inefficient address space allocation leads to even more router table entries.</li>
+</ul>
+</div></div><p></p><p></p>
+<h2 id="routable-ips"><a aria-hidden="true" class="anchor-heading" href="#routable-ips"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Routable IPs</h2>
+<ul>
+<li>Publically routable IP addresses are globally managed by ICANN.
+<ul>
+<li>Internet Corporation for Assigned Names and Numbers
+<ul>
+<li>ARIN, LACNIC, AFNIC, APNIC and RIPE NCC</li>
+</ul>
+</li>
+<li>Public IPs must be purchased before use through your ISP.</li>
+</ul>
+</li>
+</ul>
+<h2 id="private-ips"><a aria-hidden="true" class="anchor-heading" href="#private-ips"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Private IPs</h2>
+<ul>
+<li>Private IP’s can be used by anyone.</li>
+<li>Not routable outside your local area network.</li>
+<li><a href="/notes/v1ixfpfgcuwath2dqd99jaa">NAT</a> allows for routing of private IPs through a public IP.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656595632/wiki/dqv5dipadhxwg6buduxl.png"></p>
+<h2 id="specialized-ips"><a aria-hidden="true" class="anchor-heading" href="#specialized-ips"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Specialized IPs</h2>
+<ul>
+<li>
+<p>Loopback address (<code>127.x.x.x</code> range) Home</p>
+<ul>
+<li>Refers to the device itself and is used for testing </li>
+<li>Most commonly used at <code>127.0.0.1</code></li>
+</ul>
+</li>
+<li>
+<p>Automatic Private IP Addresses (APIPA)</p>
+<ul>
+<li>Dynamically assigned by OS when DHCP server is unavailable and an address has not been assigned.</li>
+<li>Range of <code>169.254.x.x</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656595864/wiki/ialin5xihhskcrxzkger.png"></p>
+<p>Special address ranges are never assigned by an administrator or DHCP server.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+<li><a href="/notes/6m8y2g4yr37x372c2r5vwej">ip</a></li>
+<li><a href="/notes/o4ojfkxlrcn9ilvc4ob7fxt">Logical Address</a></li>
+<li><a href="/notes/2lmaspsqaxrf42wuvmcp02f">Network Layer - OSI</a></li>
+<li><a href="/notes/7r0uunvdkt9sgw6ajq5vg0x">router</a></li>
+</ul>

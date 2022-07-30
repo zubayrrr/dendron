@@ -1,0 +1,63 @@
+<h1 id="aws-codepipeline"><a aria-hidden="true" class="anchor-heading" href="#aws-codepipeline"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS CodePipeline</h1>
+<p>AWS CodePipeline is a completely managed continuous delivery service(with manual approval) that assists you in automating your release pipelines for quick and reliable application and infrastructure changes.</p>
+<p>Based on the release model you set, CodePipeline automates the build, test, and deploy parts of your release process every time there is a code change. This allows you to provide features and upgrades quickly and consistently. AWS CodePipeline can be easily integrated with third-party services like GitHub or your own custom plugin. You only pay for what you use with AWS CodePipeline. There are no hidden costs or long-term obligations. — via <a href="https://www.codingninjas.com/codestudio/library/aws-codepipeline">AWS CodePipeline - Coding Ninjas CodeStudio</a></p>
+<ul>
+<li>Automatic
+<ul>
+<li>From the check-in of your code to the deployment on to your servers, CodePipeline takes care of the entire process.</li>
+</ul>
+</li>
+<li>Easy to setup
+<ul>
+<li>CodePipeline has no servers to provision, it's dead simple to configure and get working. There are pre-built plugins or you can roll your own.</li>
+</ul>
+</li>
+<li>Configurable
+<ul>
+<li>You can create, configure and modify all stages of your software release process with ease. You can implement automated testing and customize the deployment process.</li>
+</ul>
+</li>
+</ul>
+<p>CodeCommit is not the only repository you can use with <a href="/notes/3n1o179sti2wtnjkq48one1">AWS CodePipeline</a>, such as <a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a>, Github, Bitbucket and Github Enterprise.</p>
+<ul>
+<li>You need an <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a> user with right policies attached to it.</li>
+</ul>
+<p>Create Pipeline</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655279967/wiki/cavxaueres9g0y82ejum.png"></p>
+<p>Unlike <a href="/notes/49naltrgmfezkzp9g3fjfaq">AWS CodeDeploy</a> it supports <a href="/notes/gualur07hbgjlaw396spiji">AWS CodeCommit</a> so you can choose your Source as such.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655280066/wiki/ofw8mz5jopulafyhazzk.png"></p>
+<p>You can use <a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a> as a source too with change detection options.</p>
+<p>You can add a build stage if your application requires compiling or you can skip to deploy stage.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655540479/wiki/ehjwkvx8qcvu0dxznclg.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655280123/wiki/kduzm8nljigeq2dupxos.png"></p>
+<h2 id="code-pipeline-with-aws-codebuild"><a aria-hidden="true" class="anchor-heading" href="#code-pipeline-with-aws-codebuild"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Code Pipeline with <a href="/notes/ajojjq9tu40v2rnmzktfyeo">AWS CodeBuild</a></h2>
+<p>CodeBuild can be used in both build and test stages of a pipeline. You can add CodeBuild build action to a pipeline as well as CodeBuild test action.</p>
+<h2 id="versioning"><a aria-hidden="true" class="anchor-heading" href="#versioning"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Versioning</h2>
+<p>CodePipeline uses the ETag to manage and understand the flow so far for that execution of the pipeline. CodePipeline can have multiple executions at the same time. So, it needs to have a way to identify when version of the artifact is tied to which execution.</p>
+<h2 id="managing-codepipeline"><a aria-hidden="true" class="anchor-heading" href="#managing-codepipeline"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Managing CodePipeline</h2>
+<ul>
+<li>View logs for debugging</li>
+<li>Edit/Add Stages -> Action providers</li>
+<li>Toggle transitions</li>
+<li>Retry failed stages</li>
+<li>Delete</li>
+</ul>
+<h2 id="approval-action"><a aria-hidden="true" class="anchor-heading" href="#approval-action"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Approval Action</h2>
+<ul>
+<li>Setup approvers in <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a> via managed policy: <strong>AWSCodePipelineApproverAccess</strong> (from Action Provider in a stage)</li>
+</ul>
+<h2 id="codepipeline-with-aws-eventbridge"><a aria-hidden="true" class="anchor-heading" href="#codepipeline-with-aws-eventbridge"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CodePipeline with <a href="/notes/rw9ychwellnc28mzcx61xcb">AWS EventBridge</a></h2>
+<ul>
+<li>Events can come from multiple stages within the pipeline.</li>
+<li>EventBridge can watch over events and trigger <a href="/notes/g9xjnwh096t1rptwv0bol5w">AWS SNS</a> topic based on it.</li>
+<li>EventBridge can work with <a href="/notes/etxu35hmga4ee3p1w1kxj9o">AWS Lambda</a> at source stage. It can work with SNS at the build or deploy stages.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655544508/wiki/rvmsyahweeycgtzonaav.png"></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/gualur07hbgjlaw396spiji">AWS CodeCommit</a></li>
+<li><a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a></li>
+<li><a href="/notes/rslamxyhwny92aooavg497t">Jenkins with-on AWS</a></li>
+</ul>

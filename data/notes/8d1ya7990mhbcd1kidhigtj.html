@@ -1,0 +1,27 @@
+<h1 id="iw"><a aria-hidden="true" class="anchor-heading" href="#iw"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>iw</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Show / manipulate wireless devices and their configuration</p>
+<p><code>iw</code> is a newer command which is more powerful than <code>iwconfig</code>, but different syntax that <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ifconfig (Private)</a>/<a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">iwconfig (Private)</a>. (In fact there is an analogous command called <a href="/notes/6m8y2g4yr37x372c2r5vwej">ip</a> which is meant to replace ifconfig for wired interfaces</p>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<pre><code>iw list | less
+</code></pre>
+<p>To view the available WiFi hardware/interfaces:</p>
+<pre><code>$ iw dev
+</code></pre>
+<p>You can check the link details:</p>
+<pre><code>$ iw dev wlan0 link
+</code></pre>
+<p>To disconnect from an AP run:</p>
+<pre><code>$ sudo iw dev wlan0 disconnect
+</code></pre>
+<blockquote>
+<p>— via <a href="http://ict.siit.tu.ac.th/help/iw">Using iw to Manage Wireless LAN in Linux</a></p>
+</blockquote>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

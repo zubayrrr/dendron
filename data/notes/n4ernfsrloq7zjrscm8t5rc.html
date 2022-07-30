@@ -1,0 +1,55 @@
+<h1 id="redirecting-stdin--stderr"><a aria-hidden="true" class="anchor-heading" href="#redirecting-stdin--stderr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Redirecting stdin &#x26; stderr</h1>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.stderr (Private)</a> is denoted by number 2.</li>
+<li>This is commonly used to keep log of errors from various servers and services.</li>
+<li>Make sure to use <code>>></code> to append the error to the log file instead of overwriting or truncating it.</li>
+<li>Example of redirecting <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a>:
+<ul>
+<li><code>cat -k blah 2> error.txt</code>
+<ul>
+<li>Since <code>-k blah</code> is an invalid command argument, it'll throw an error that will be caught inside the <code>error.txt</code> file.</li>
+</ul>
+</li>
+<li><code>tail -n 3 /etc/shadow 2>> error.txt</code></li>
+</ul>
+</li>
+<li>You can also pass multiple arguments to save <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> as well as [stderr], such as:<br>
+<code>cat >> output.txt 2>> error.txt</code> or<br>
+<code>tail -n 2 /etc/passwd /etc/shadow > output.txt 2> error.txt</code></li>
+<li>Passing both <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.stderr (Private)</a> to same file:
+<ul>
+<li><code>tail -n 2 /etc/passwd /etc/shadow > output.txt 2>&#x26;1</code> where <code>1</code> is the ID of the stdout, <code>&#x26;</code> is the operator that redirects the error to the output</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>We can serve <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> from somewhere other than our keyboard.</li>
+<li>We can put our input in a file, suppose <code>input.txt</code> and then by doing<br>
+<code>car 0&#x3C; input.txt</code> we can ask <code>cat</code> to get the input from the <code>input.txt</code> file instead of getting it from the keyboard(which is the default). You can omit the <code>0</code> since Stdin is the only default thing it is expecting and just make it <code>cat &#x3C; input.txt</code>.</li>
+</ul>
+<hr>
+<ul>
+<li>We can now push the input to an output without using the keyboard by doing:<br>
+<code>cat &#x3C; input.txt > output.txt</code></li>
+</ul>
+<hr>
+<ul>
+<li>We can also push the input to a different file, even to another terminal instance.</li>
+<li>Step 1: Open a new terminal instance using the shortcut Ctrl + Alt + T.</li>
+<li>Step 2: Get the location of the terminal using the <a href="/notes/jdwzfnsup2nr4il6m611vvl">tty</a> command.</li>
+<li>Step 3: From the previously opened terminal, <code>cat &#x3C; input.txt > /dev/pts/2</code>. where <code>/dev/pts/2</code> is the output we got from the <a href="/notes/jdwzfnsup2nr4il6m611vvl">tty</a> command.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/qj2j8vs4rumzknty271dz04">Aliases</a></li>
+<li><a href="/notes/uua60b3x9in6imfnwfa5f7t">Everything about Linux Terminal</a></li>
+<li><a href="/notes/hmo5i20x0zc85t21ig14vnk">MapReduce in Python</a></li>
+<li><a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a></li>
+<li><a href="/notes/tubz5rys0brzeqe3c6frkw5">nohop</a></li>
+<li><a href="/notes/duu1hv74c23zfwgnsoq22i9">Piping</a></li>
+<li><a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a></li>
+<li><a href="/notes/a0fbh28d1rhy2pb0i9hlylg">Standard Data Stream</a></li>
+<li><a href="/notes/s4ptsgijppmceg9hcdsot7i">xargs</a></li>
+</ul>

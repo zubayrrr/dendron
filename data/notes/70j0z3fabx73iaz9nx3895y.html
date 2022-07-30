@@ -1,0 +1,28 @@
+<h1 id="kafka"><a aria-hidden="true" class="anchor-heading" href="#kafka"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Kafka</h1>
+<ul>
+<li>Areas: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Data Engineering (Private)</a></li>
+</ul>
+<hr>
+<ul>
+<li>Apache Kafka is a distributed publish-subscribe (pub sub) messaging system</li>
+<li>It was originally developed at LinkedIn and later on became part of Apache Project</li>
+<li>Kafka is fast, scalable, durable, fault-tolerant and distributed by design</li>
+</ul>
+<h3 id="kafka-terminologies"><a aria-hidden="true" class="anchor-heading" href="#kafka-terminologies"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Kafka terminologies</h3>
+<h4 id="topic"><a aria-hidden="true" class="anchor-heading" href="#topic"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Topic</h4>
+<p>A topic is a category or feed name to which records are published, a topic is always a multi subscriber, a topic can have zero, one or multiple subscribers that can subscribe to the topic and consume data written to it.</p>
+<h4 id="producer"><a aria-hidden="true" class="anchor-heading" href="#producer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Producer</h4>
+<p>A producer can be any application that can publish messages to a topic.</p>
+<h4 id="consumer"><a aria-hidden="true" class="anchor-heading" href="#consumer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Consumer</h4>
+<p>A consumer can be any application that subscribes to a topic and consumes the messages, a consumer can subscribe to one or more topics. They label themselves with a Consumer Group Name and each record published to a topic is delivered to one consumer instance within each subscribing consumer group. It can only be consumed once by a single consumer group. Consumer instances can be separate processes or separate machines.</p>
+<h4 id="partition"><a aria-hidden="true" class="anchor-heading" href="#partition"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Partition</h4>
+<p>Topics are broken up into ordered commit logs called partitions, paritions allows you to parallelize a topic by splitting data across multiple brokers. Each partition can be placed on separate machines to allow multiple consumer to read from a topic parallely</p>
+<h4 id="broker"><a aria-hidden="true" class="anchor-heading" href="#broker"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Broker</h4>
+<p>Kafka cluster is a set of servers, each of which is called a broker. A broker is a single machine in the kafka cluster.</p>
+<h4 id="zookeeper"><a aria-hidden="true" class="anchor-heading" href="#zookeeper"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Zookeeper</h4>
+<p>Zookeeper is used for managing and coordinating Kafka broker, it stores the metadata about Kafka cluster such as broker info, topic details etc. Zookeeper helps in managing Kafka cluster.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+</ul>

@@ -1,0 +1,215 @@
+<h1 id="big-data"><a aria-hidden="true" class="anchor-heading" href="#big-data"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Big Data</h1>
+<ul>
+<li>Areas: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Data Engineering (Private)</a></li>
+</ul>
+<hr>
+<p>Big Data is a term for collections of data sets so large and complex that it becomes difficult to process them using in-hand database management tools or traditional data processing applications.</p>
+<h3 id="5-vs-of-big-data"><a aria-hidden="true" class="anchor-heading" href="#5-vs-of-big-data"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>5 Vs of Big Data</h3>
+<ul>
+<li>Volume - Storing and processing huge data sets</li>
+<li>Variety - Storing and processing different types of data</li>
+<li>Velocity - The speed at which data is being generated</li>
+<li>Value - Finding meaning out of data, making sense of data</li>
+<li>Veracity - Uncertainty and inconsistencies in the data</li>
+</ul>
+<h3 id="use-cases"><a aria-hidden="true" class="anchor-heading" href="#use-cases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Use cases:</h3>
+<ul>
+<li>Web and E-tailing
+<ul>
+<li>Recommendation Engines</li>
+<li>Ad Targeting</li>
+<li>Search Quality</li>
+</ul>
+</li>
+<li>Telecommunications
+<ul>
+<li>Abuse and Click Fraud Detection</li>
+<li>Customer Churn Prevention</li>
+<li>Network Performance Optimization</li>
+<li>Calling Data Record(CDR) Analysis</li>
+<li>Analyzing Network to Predict Failure</li>
+</ul>
+</li>
+<li>Banks and Financial Services
+<ul>
+<li>Modeling True Risk</li>
+<li>Threat Analysis</li>
+<li>Fraud Detection</li>
+<li>Trade Surveillance</li>
+<li>Credit Scoring and Analysis</li>
+</ul>
+</li>
+<li>Retail
+<ul>
+<li>Point of Sales Transaction Analysis</li>
+<li>Customer Churn Analysis</li>
+<li>Sentiment Analysis</li>
+</ul>
+</li>
+<li>Government
+<ul>
+<li>Fraud Detection and Cybersecurity</li>
+<li>Welfare Schemes</li>
+<li>Justice</li>
+</ul>
+</li>
+<li>Healthcare and Life Sciences
+<ul>
+<li>Health Information Exchange</li>
+<li>Gene Sequencing</li>
+<li>Serialization</li>
+<li>Healthcare Service Quality Improvements</li>
+<li>Drug Safety</li>
+<li>See <a href="https://cwiki.apache.org/confluence/display/HADOOP2/poweredby">PoweredBy</a> for companies that are these technologies for Big Data</li>
+</ul>
+</li>
+<li>Semi-structured data</li>
+<li>Unstructured data</li>
+<li>Structured data</li>
+<li>Large amount of data cannot fit on a single machine that needs processing is processed using distributed machines.</li>
+<li>A distributed process has access to the computational resources across a number of machines connected through a network.</li>
+<li>After a certain point, it is easier to scale out to many lower <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">CPU (Private)</a> machines, than to try to scale up to a single machine with a high CPU.</li>
+<li>Distributed machines also have the advanteage of easily scaling, you can just add more machines.</li>
+<li>They also include fault tolerance, if one machines fails, the whole network can still go on.</li>
+</ul>
+<h3 id="hadoop"><a aria-hidden="true" class="anchor-heading" href="#hadoop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a></h3>
+<ul>
+<li>Hadoop is a way to distribute very large files across multiple machines.</li>
+<li>It uses the Hadoop Distributed File System <a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a></li>
+<li>HDFS allows a user to work with large data sets</li>
+<li>HDFS also duplicates blocks of data for fault tolerance</li>
+<li>It also then uses <a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a></li>
+<li>MapReduce allows computations on that data</li>
+<li>You've a NameNode(Master) and that connects to multiple DataNode(s)(Slave)</li>
+</ul>
+<p>Hadoop really only comes with HDFS and MapReduce and all the other technologies are addons, developed separately by different individuals.</p>
+<p>Java is highly preferable for MR</p>
+<ul>
+<li>Pig was invented by Yahoo, PigLatin is the language, it a scripting language that was brought about to replace SQL/Java in MR. Internally it runs on MR and converts the code to Java. Most stuff that can be done on Hive can be done on Pig.</li>
+<li>Sqoop was invented by a group, to bring data from RDBMS to Hadoop you write code in MapReduce, to avoid this, they brought about sqoop, sqoop doesn't use a programming language but commands to bring in data to Hadoop. sqoop also allows you to send data back to RDBMS from Hadoop. Import and Export. Used for Datapipeline, sqoop internally runs on Java.</li>
+<li>Oozie was invented by Yahoo, its like an XML file, its a scheduler, used for automating, scheduling jobs, like running queries on a specific time. Big Data tech stack may include non Big Data specific schedulers. It runs on Java internally.</li>
+</ul>
+<p>All of above technologies discussed are abstractions of MapReduce.</p>
+<p>Big Data tech stack don't only consist of Big Data tools/technologies, MySQL for example is not a Big Data specific tool/technologies.</p>
+<h3 id="hbase"><a aria-hidden="true" class="anchor-heading" href="#hbase"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="#HBase">HBase</a></h3>
+<p>Storage part, Database for Hadoop but NoSQL, invented by Facebook, HBase shell commands, works on top of Hadoop, all the modern databases are NoSQL database.
+It is different from Hive.</p>
+<h3 id="mahoot"><a aria-hidden="true" class="anchor-heading" href="#mahoot"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Mahoot</h3>
+<p>Framework for Data Science</p>
+<h3 id="flume"><a aria-hidden="true" class="anchor-heading" href="#flume"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Flume</h3>
+<p>Similar to sqoop, used in datapipelines, flume can retrieve data in realtime. Messaging queue. sqoop is only for RDBMS unlike Flume which can be used for a fetching data from many other sources.(like twitter). Flume only retrieves data to Hadoop but cannot send it back to any other targets, only incoming.</p>
+<p>There are other MQs such as Kafka, Scribe.</p>
+<p>Hadoop is a losely couple framework, you can swap out/in components like oozie and it would still work, unlike tightly coupled frameworks(like .NET frameworks)</p>
+<p>Integrations - Hadoop can be integrated well with Spark or any other Big Data frameworks.</p>
+<p>Hadoop can also be connected with non Big Data components like <a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a> or other RDBMSes.</p>
+<h3 id="hdfs"><a aria-hidden="true" class="anchor-heading" href="#hdfs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a></h3>
+<ul>
+<li>HDFS will use blocks of data, with a size of 128 MB by default.</li>
+<li>Each of these blocks is replicated 3 times.</li>
+<li>The blocks are distributed in a way to support fault tolerance.</li>
+<li>Smaller blocks provide more parallelization during processing.</li>
+<li>Multiple copies of a block prevents loss of data due to a failure of a node.</li>
+</ul>
+<h3 id="mapreduce"><a aria-hidden="true" class="anchor-heading" href="#mapreduce"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>MapReduce</h3>
+<ul>
+<li>MapReduce is a way of splitting a computation task to a distributed set of files (such as HDFS).</li>
+<li>It consists of a Job Tracker and multiple Task Trackers.</li>
+<li>The Job Tracker sends code to run on the Task Trackers.</li>
+<li>The Task Trackers allocate CPU and memory for the tasks and monitor the tasks on the worker nodes.</li>
+</ul>
+<h3 id="spark"><a aria-hidden="true" class="anchor-heading" href="#spark"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spark</h3>
+<ul>
+<li>One of the latest and open source technologies built to quickly and easily handle Big Data.</li>
+<li>It is a Framework for dealing with large data, distributing it and doing calculations across distributed network. It is written in Scala. Scala gets the Spark's latest features, Scala is written in Java so Java can also be used for Spark's lastest features.</li>
+<li>Created at AMPLab at UC Berkeley, first released in Feb of 2013.</li>
+<li>It is a flexible alternative to MapReduce. (doesn't necessarily replaces Hadoop but MapReduce)</li>
+<li>Spark can use data stored in a variety of formats
+<ul>
+<li>Cassandra</li>
+<li>AWS S3</li>
+<li><a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a> and more</li>
+</ul>
+</li>
+</ul>
+<h3 id="apache-spark-vs-mapreduce"><a aria-hidden="true" class="anchor-heading" href="#apache-spark-vs-mapreduce"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a> VS <a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a></h3>
+<ul>
+<li>MapReduce requires files to be stored in HDFS, Spark does not!</li>
+<li>Spark also can perform operations up to 100x faster than MapReduce.</li>
+<li>It is not really Hadoop VS MapReduce, people sometime make it as such because MapReduce uses HDFS.</li>
+<li>MapReduce writes most data to disk after each Map and Reduce operation.</li>
+<li>Spark keeps most of the data in memory something like RAM after each Transformation. Spark can spill over to <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">HDD (Private)</a> if you don't have enough <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">RAM (Private)</a>.</li>
+</ul>
+<h3 id="spark-rdds"><a aria-hidden="true" class="anchor-heading" href="#spark-rdds"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spark RDDs</h3>
+<ul>
+<li>At the core of Spark is the idea of a Resilient Distributed Dataset(RDD).</li>
+<li>Resilient Distributed Dataset (RDD) has 4 main features:
+<ul>
+<li>Distrbuted Collections of Data</li>
+<li>Fault-tolerant</li>
+<li>Parallel operation - ability to be partitioned</li>
+<li>Ability to use many data sources</li>
+</ul>
+</li>
+</ul>
+<p>At the abstract level it looks like:</p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.ewfeqm3kqzs.png"></p>
+<p>At physical level:</p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.3f0c49iwkep.png"></p>
+<ul>
+<li><a href="/notes/2vn2g9mhmi624b83rl5se0k">RDD</a>s are immutable, lazily evaluated and cacheable</li>
+<li>There are two types of Spark operations:
+<ul>
+<li>Transformations</li>
+<li>Actions</li>
+</ul>
+</li>
+<li>Transformations are basically a recipe to follow.</li>
+<li>Actions actually perform what the recipe says to do and returns something back.</li>
+<li>This behavior carries over to the syntax when coding.</li>
+<li>A lot of times you will write a method call off of a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">DataFrame (Private)</a> you won't see anything as a result until you call the action.</li>
+<li>This makes sense because with a large dataset, you don't want to calculate all the transformations until you are sure you want to perform them!</li>
+<li>When discussing Spark syntax you'll often see RDD versus DataFrame syntax show up.</li>
+<li>With the release of Spark 2.0, Spark is moving towards a DataFrame based syntax, but keep in mind that the way files are being distributed can still be thought of as RDDs(it is still happening in RDD at the pyhsical level), it is just the typed out syntax that is changing.</li>
+</ul>
+<h3 id="spark-dataframe-privates"><a aria-hidden="true" class="anchor-heading" href="#spark-dataframe-privates"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spark <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">DataFrame (Private)</a>s</h3>
+<ul>
+<li>Spark DataFrames are also now the standard way of using Spark's Machine Learning capabilities.</li>
+<li>Spark DataFrame documentation is still pretty new and can be sparse, it can be found on <a href="https://spark.apache.org/docs/latest/">spark.apache.org</a></li>
+</ul>
+<h3 id="python-and-spark"><a aria-hidden="true" class="anchor-heading" href="#python-and-spark"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Python and Spark</h3>
+<ul>
+<li>Realistically Spark won't be running on a single machine, it will run on a cluster on a service, like <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">AWS (Private)</a>.</li>
+<li>These cluster services will pretty much always be a <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a>) based system.</li>
+</ul>
+<hr>
+<h2 id="miscellaneous-notes"><a aria-hidden="true" class="anchor-heading" href="#miscellaneous-notes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Miscellaneous Notes</h2>
+<h3 id="scalable-cluster-computing"><a aria-hidden="true" class="anchor-heading" href="#scalable-cluster-computing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Scalable Cluster Computing</h3>
+<p>Scalable Cluster Computing is a method of combining discrete computing resources(e.g servers) to increase the performance of a single application.</p>
+<p>Does not work for applications! (i.e., not all applications "scale")</p>
+<h3 id="of-servers-nodes-and-daemons"><a aria-hidden="true" class="anchor-heading" href="#of-servers-nodes-and-daemons"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Of Servers, Nodes and Daemons</h3>
+<h4 id="servernode"><a aria-hidden="true" class="anchor-heading" href="#servernode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Server/Node</h4>
+<p>A Cluster is a collection of servers working together on one problem.</p>
+<ul>
+<li>Servers come with cores, memory, storage and network</li>
+<li>Servers can be called a "<strong>NODE</strong>" in a cluster of servers</li>
+</ul>
+<h4 id="daemon"><a aria-hidden="true" class="anchor-heading" href="#daemon"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Daemon</h4>
+<p>A daemon is a program that is constantly running and responding to requests (e.g., web server)</p>
+<ul>
+<li>Servers can have one or multiple daemons running on them</li>
+<li>Daemons can communicate with other daemons and form a network within and between servers</li>
+<li>Each daemon can also be called a "<strong>NODE</strong>"</li>
+</ul>
+<h3 id="scalable-behaviour"><a aria-hidden="true" class="anchor-heading" href="#scalable-behaviour"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Scalable Behaviour</h3>
+<p>of Scalable Systems:
+The ability to apply resources (servers, VM instances) to a problem as a means to increase performance(green line) over a single server(red line).</p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.t6kfn1dy0om.png"></p>
+<p>But, initially performance may lag due to overhead(the setup of our infrastructure).</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/lz322a84xc913sor5r5c71u">Data Warehouse</a></li>
+<li><a href="/notes/ffhm4kotv5wbd139ml9ch44">ETL</a></li>
+<li><a href="/notes/hr5l5ukjr3mfsnsn0fkw6w5">ODS</a></li>
+<li><a href="/notes/6k7g4x7ws565lditv1n8hxm">YARN</a></li>
+</ul>

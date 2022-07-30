@@ -1,0 +1,34 @@
+<h1 id="the-effect-of-permissions-on-directories"><a aria-hidden="true" class="anchor-heading" href="#the-effect-of-permissions-on-directories"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Effect of Permissions on Directories</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Permissions for files have a different effect as permissions for directories in Linux.</p>
+<p>To test, create a dir with only read permissions *<code>chmod 400 folder</code></p>
+<p>You can only run <code>ls -ld</code> but you cannot go inside the dir make any changes, add files or delete files from that dir, you cannot even <code>ls -l</code> since that would mean it would look for the file types, permissions, owners etc(content metadata cannot be read), <code>ls --color=auto</code> (often <a href="/notes/qj2j8vs4rumzknty271dz04">Aliases</a> as <code>ls</code>) is also not allowed as it would try to recogize the file types.</p>
+<p>You can however, rename the <code>folder</code> dir</p>
+<p>Adding, <code>r</code>,<code>w</code> permissions</p>
+<ul>
+<li><code>chmod 600 folder</code></li>
+</ul>
+<p>Even though write permissions have been added to <code>folder</code> you'll still not be able to perform the actions discussed above. If <code>x</code> execute permissions are not set the write permissions don't really do anything.</p>
+<p>The <code>x</code> execute permissions give access to the contents of the directory.</p>
+<ul>
+<li><code>chmod 700 folder</code></li>
+</ul>
+<p>Now you'll be able everything on that directory,</p>
+<hr>
+<h3 id="the-permissions-of-the-parent-directory-are-more-important-than-the-file-permissions"><a aria-hidden="true" class="anchor-heading" href="#the-permissions-of-the-parent-directory-are-more-important-than-the-file-permissions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The permissions of the parent directory are more important than the file permissions.</h3>
+<p>To test, create a file inside the <code>folder</code> dir and remove all permissions for that file and try to delete it.</p>
+<ul>
+<li><code>touch folder/file.txt</code></li>
+<li><code>chmod 000 folder/file.txt</code></li>
+<li><code>rm folder/file.txt</code></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/8e78vq83ld131fb43r7xf90">chmod</a></li>
+<li><a href="/notes/8f7fkugnclgo7744xnma2d2">Combining Find and Chmod Commands Together</a></li>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+</ul>

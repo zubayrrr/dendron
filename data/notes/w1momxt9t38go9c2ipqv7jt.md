@@ -1,0 +1,2 @@
+
+> Gurmukhī (Punjabi: ਗੁਰਮੁਖੀ, Punjabi pronunciation: \[ˈɡʊɾᵊmʊkʰiː\], Shahmukhi: گُرمُکھی‎) or Punjabi script is an abugida developed from the Laṇḍā scripts, standardized and used by the second Sikh guru, Guru Angad (1504–1552). Commonly regarded as a Sikh script, Gurmukhi is used in Punjab, India as the official script of the Punjabi language.—via [Gurmukhi - Wikipedia](https://en.wikipedia.org/wiki/Gurmukhi)

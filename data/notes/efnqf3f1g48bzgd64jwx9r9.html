@@ -1,0 +1,52 @@
+<h1 id="useradd"><a aria-hidden="true" class="anchor-heading" href="#useradd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>useradd</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li><code>useradd</code> command is used to add new users to the system</li>
+<li><code>sudo useradd </code> to create a new user
+<ul>
+<li>The new user will be created with the default options as specified in <code>/etc/default/useradd</code></li>
+<li>By default, a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.group (Private)</a> with the same name as the new user will be created and assigned</li>
+<li>To be able to login as the new user, a password will have to be set: <code>sudo passwd userName</code></li>
+</ul>
+</li>
+<li><code>useradd</code> also reads the contents of the file <code>/etc/login.defs</code>, which contains options for the <code>/etc/shadow</code> such as password expiration policy, ranges of user IDs when creating system and regular users and more.</li>
+</ul>
+<h3 id="creating-a-user-with-options"><a aria-hidden="true" class="anchor-heading" href="#creating-a-user-with-options"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating a user with options</h3>
+<ul>
+<li>When a user is created without passing any options, it's home directory is also not created.</li>
+<li>To create the user's home directory, use <code>-m</code> option</li>
+<li>You can give it a different name or location by passing the <code>-d</code> option followed by the path</li>
+<li>To write a comment use <code>-c</code> option followed by the string, typically a short description such as user's full name or a contact info</li>
+<li>To alot the user a specific shell pass the <code>-s</code> followed by the absolute path of the shell. Usually its <code>/bin/bash</code></li>
+<li>By default the user's primary group is same as the user's name, use the <code>-g</code> option to add the user to a different primary group (uncommon)</li>
+<li>To add the user to secondary group use the <code>-G</code> followed by group names, separated by commas (the groups should already exist)</li>
+<li>lastly the name of the user <code>james</code></li>
+</ul>
+<p><code>sudo useradd -m -d /home/james -c "C++ Developer james@email.com -s /bin/bash -G sudo,adm,mail james"</code></p>
+<p>Do not forget to create a password for the newly created user</p>
+<hr>
+<ul>
+<li>If you want to create a temporary user, set an expiration date on which the user account will be disabled.</li>
+</ul>
+<p><code>sudo useradd -e 2021-12-31 userName</code></p>
+<ul>
+<li><code>chage</code> command to change expiration date for an existing user.
+<ul>
+<li><code>sudo chage -l james</code> <code>-l</code> to get age info</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="useradd-vs-adduser"><a aria-hidden="true" class="anchor-heading" href="#useradd-vs-adduser"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>useradd</code> vs <code>adduser</code></h3>
+<ul>
+<li><code>useradd</code> is a native binary complied in a Linux system</li>
+<li><code>adduser</code> is just a perl script that uses <code>useradd</code> binary as a backend
+<ul>
+<li><code>adduser</code> is more interactive and user friendly than <code>useradd</code></li>
+<li>commonly found in Ubuntu systems.</li>
+</ul>
+</li>
+</ul>

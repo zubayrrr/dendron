@@ -1,0 +1,39 @@
+<h1 id="symlink"><a aria-hidden="true" class="anchor-heading" href="#symlink"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>symlink</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>They're similar to shortcuts in Windows but work differently from <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">hard link (Private)</a>s</li>
+<li>It is a special file type that points to or contains a reference to another file or directory.</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">hard link (Private)</a> references the files's <a href="/notes/dwnum4w9cbqdhsbd1y7but3">inode</a>, symlink references another file.</li>
+<li>If you delete the file that is being pointed by the symlink, the symlink breaks and becomes useless.</li>
+<li>symlink has its own <a href="/notes/dwnum4w9cbqdhsbd1y7but3">inode</a> structure</li>
+<li>symlink only contains the path to the original directory not its contents.</li>
+<li>Permissions of symlink doesn't matter since the permission of the target file are checked.</li>
+</ul>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li><code>ln -s /etc/passwd ./pswd</code> -s to create a symlink, check with <code>ls -l pswd</code></li>
+<li><code>ps aux > processes.txt</code>
+<ul>
+<li>To create a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">hard link (Private)</a>: <code>ln processes.txt p.txt</code></li>
+<li>To create a symlink: <code>ln -s processes.txt symlink_p.txt</code></li>
+<li>To check <code>ls -li</code></li>
+<li>If we were to change the location of <code>processes.txt</code>, <code>p.txt</code> will not be effected but <code>symlink_p.txt</code> will be broken.</li>
+</ul>
+</li>
+<li>You can create a symlink to a dir(altough you cannot create a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">hard link (Private)</a> to a dir)
+<ul>
+<li><code>ln -s /etc/ symlink_etc</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/n4mbtl0ty1ak7bjr1vwwtva">File Types in Linux</a></li>
+<li><a href="/notes/dwnum4w9cbqdhsbd1y7but3">inode</a></li>
+<li><a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a></li>
+<li><a href="/notes/hy62pxdr1mo1pamj5uggb2r">Navigating the Linux File System</a></li>
+</ul>

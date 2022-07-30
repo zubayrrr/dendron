@@ -1,0 +1,47 @@
+<h1 id="dns"><a aria-hidden="true" class="anchor-heading" href="#dns"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>DNS</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a>,<a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>Domain Name Service operates on <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Port 53 (Private)</a></p>
+</li>
+<li>
+<p>Hierarchical decentralized naming system for computers, services, or other resources connected to the internet or a private network.</p>
+</li>
+<li>
+<p>Converts domain names to <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>es</p>
+</li>
+<li>
+<p>On the latest version of Ubuntu, the DNS is under the control of <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">systemd-resolve (Private)</a> <a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a>.</p>
+</li>
+<li>
+<p>A service that provides DNS name resolution to local services and applications and can be configured with <a href="/notes/vro2wf2ayviwa9mlv92e452">netplan</a>, the default network management tool on Ubuntu.</p>
+</li>
+<li>
+<p>To display the DNS server used by the system:</p>
+<ul>
+<li><code>systemd-resolve --status</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>The Domain Name System (DNS) turns domain names into IP addresses, which browsers use to load internet pages. Every device connected to the internet has its own IP address, which is used by other devices to locate the device.</p>
+<p>In the first step DNS resolver, also called recursive resolver designed to receive DNS queries from a web browser and other applications. The resolver receives a hostname, for example, <strong><a href="http://www.example.com">www.example.com</a></strong>, and is responsible for tracking down the IP addresses for that hostname.</p>
+<p>After that root server is translating human-readable hostname into IP addresses. There are 13 logical root servers worldwide, denoted by letter A through M controlled by Cogen, the University of Maryland, and the U.S arm lab. The TLD nameserver takes the domain provided in the query and provides the IP of an authoritative name server. The authoritative name server takes the domain name and subdomain, and it returns the correct IP address to the DNS resolver.</p>
+<h2 id="dns-records"><a aria-hidden="true" class="anchor-heading" href="#dns-records"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>DNS Records</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=8Fq-hsGYS-8">Why Do Some Websites Start With WWW1? (Not WWW) - YouTube</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/l6mm6spmjonb3zpaca8nldg">Application Layer - OSI</a></li>
+<li><a href="/notes/igdvxijnp9hlki89ulb6frt">Application Layer - TCP/IP</a></li>
+<li><a href="/notes/osajilt9rsnrz5ng14pmy8x">ifconfig</a></li>
+<li><a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a></li>
+<li><a href="/notes/5xbq8dqh6wbqd14aqyn863v">ping</a></li>
+<li><a href="/notes/b9855u2ordmv6yq1723mj98">Troubleshooting for connectivity issues</a></li>
+<li><a href="/notes/g5vt947xnk6lxyiibgrskix">WWW a Normal Sub Domain</a></li>
+</ul>

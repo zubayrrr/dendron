@@ -1,0 +1,120 @@
+<h1 id="data-warehouse"><a aria-hidden="true" class="anchor-heading" href="#data-warehouse"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Data Warehouse</h1>
+<ul>
+<li>Areas: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Data Engineering (Private)</a></li>
+</ul>
+<hr>
+<ul>
+<li>A data warehouse is quite literally a large warehouse filled with data.</li>
+<li>It is not the same as a database.</li>
+<li>A data warehouse is typically built on some form of database.</li>
+<li>A database is a platform and the usage of it can be defined as the data warehouse.</li>
+<li>We don't create the data for the first time in a data warehouse, rather, it is created/brought in by external sources or our operational system send this data to our data warehouse.</li>
+<li>There is a linear relationship between data sources and data warehouse. The more data sources, the more complex the data warehouse.</li>
+<li>Data is copied, not moved.(Copies of data is sent into the warehouse)</li>
+</ul>
+<h3 id="it-is-more-than-just-a-storage-for-data"><a aria-hidden="true" class="anchor-heading" href="#it-is-more-than-just-a-storage-for-data"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>It is more than just a storage for data:</h3>
+<ul>
+<li>A datawarehouse is an integrated environment; data from a number of sources is sent into a data warehouse.</li>
+<li>Data warehouse should be subject oriented, regardless of how many systems the data is coming from.</li>
+<li>Time variant
+<ul>
+<li>Data warehouse should contain historical data and not just current data.</li>
+</ul>
+</li>
+<li>Non volatile
+<ul>
+<li>Traditionally, we periodically bring in data into our data warehouse, we do it in batches.</li>
+<li>Our data warehouse should remain stable during and between these refreshes and updates.</li>
+</ul>
+</li>
+</ul>
+<h3 id="reasons-why-we-build-a-data-warehouse"><a aria-hidden="true" class="anchor-heading" href="#reasons-why-we-build-a-data-warehouse"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Reasons why we build a data warehouse:</h3>
+<ul>
+<li>Making data-driven decisions
+<ul>
+<li>Viewing into the past, present and future; and even the unknwon for Business Intelligence</li>
+</ul>
+</li>
+<li>One stop shopping
+<ul>
+<li>Integrating data into one place for convenience (that would be lost if we were to constantly work on gathering scattered data)</li>
+</ul>
+</li>
+</ul>
+<h3 id="comparing-a-data-warehouse-to-a-devlogdata-lake-private"><a aria-hidden="true" class="anchor-heading" href="#comparing-a-data-warehouse-to-a-devlogdata-lake-private"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Comparing a Data Warehouse to a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Data Lake (Private)</a></h3>
+<ul>
+<li>Traditionally data warehouse are built on top of RDBMS(Microsoft SQL Server, Oracle, DB2)</li>
+<li>RDBMS are also used in transactional systems and other various settings.</li>
+<li>Data Warehouse are sometimes also built on top of <a href="/notes/dzgtqs70gyji1mckfvkkmfg">MDBMS</a>(Multi Dimensional Database Management Systems), colloquiolly known as "Cubes" that are special purpose databases</li>
+</ul>
+<p>Data Lakes</p>
+<ul>
+<li>on the other hand are built on top of some sort of <a href="/notes/s5t9uscswvpo3p6gebui1ea">Big Data</a> environment rather than a traditional relational data.</li>
+<li>Some people say that Data Lakes are the next generation of Data Warehouses.</li>
+</ul>
+<h3 id="comparing-data-warehouse-to-data-virtualization"><a aria-hidden="true" class="anchor-heading" href="#comparing-data-warehouse-to-data-virtualization"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Comparing Data Warehouse to Data Virtualization</h3>
+<ul>
+<li>In the days before Data Warehouses, data driven decision making was often done using "Extract Files", which were sort of like mini data warehouses, pulling data from one another but mostly without any data coordination and structure to it's queries. which led to far more time gathering, organizing, reorganizing data than actually analyzing data.</li>
+<li>Then came on the scene Distributed DBMS (DDBMS) which was kinda like the 1980s attempt at creating <a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a> of <a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> but it was largely a failure due to the lack of technology available at that time.</li>
+<li>This led to two paths:
+<ul>
+<li>Data Warehousing</li>
+<li>Data Virtualization</li>
+</ul>
+</li>
+</ul>
+<h3 id="data-virtualization"><a aria-hidden="true" class="anchor-heading" href="#data-virtualization"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Data Virtualization</h3>
+<ul>
+<li>Read-only (vs. read-write) DDBMS</li>
+<li>In-place data access</li>
+<li>Unlike a Data Warehouse, we do not duplicate the data, instead we access the data from it's source when we need it.</li>
+<li>Many names over the years:
+<ul>
+<li>Virtual Data Warehousing</li>
+<li>Enterprise Information Integration(EII)</li>
+<li>Enterprise Data Access (EDA)</li>
+</ul>
+</li>
+<li>Data Virtualization use cases
+<ul>
+<li>Simple transformations</li>
+<li>Smaller number of data sources</li>
+<li>Relaxed response time</li>
+</ul>
+</li>
+</ul>
+<h3 id="etl"><a aria-hidden="true" class="anchor-heading" href="#etl"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ETL</h3>
+<h4 id="extraction"><a aria-hidden="true" class="anchor-heading" href="#extraction"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Extract(ion)</h4>
+<h4 id="transforming"><a aria-hidden="true" class="anchor-heading" href="#transforming"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Transform(ing)</h4>
+<h4 id="loading"><a aria-hidden="true" class="anchor-heading" href="#loading"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Load(ing)</h4>
+<p>It stands between Data Sources -> Data Warehouses -> Data Marts
+<code>where -> represents ETL</code></p>
+<hr>
+<h3 id="staging-layer"><a aria-hidden="true" class="anchor-heading" href="#staging-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Staging Layer</h3>
+<ul>
+<li>"Landing Zone"</li>
+<li>"E" within ETL</li>
+<li>There are 2 variations of Staging Layers</li>
+<li>Your ETL staging layer objective should be "Focus on E with minimal T"</li>
+<li>There are two types of staging layers</li>
+<li>Non-persistent staging layer</li>
+<li>Persistent staging layer</li>
+</ul>
+<h3 id="user-access-layer"><a aria-hidden="true" class="anchor-heading" href="#user-access-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>User Access Layer</h3>
+<ul>
+<li>Where users go</li>
+<li>Data Warehouse is really synonymous with User Access Layer</li>
+<li>Dimensional data</li>
+<li>Schemas</li>
+</ul>
+<p>See also: <a href="/notes/oppcapyr6oew027thjm2z91">Data Warehouse Architecture</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+<li><a href="/notes/bq0gblqc282v024og4l0v5c">Data Mart</a></li>
+<li><a href="/notes/oppcapyr6oew027thjm2z91">Data Warehouse Architecture</a></li>
+<li><a href="/notes/ffhm4kotv5wbd139ml9ch44">ETL</a></li>
+<li><a href="/notes/dzgtqs70gyji1mckfvkkmfg">MDBMS</a></li>
+<li><a href="/notes/hr5l5ukjr3mfsnsn0fkw6w5">ODS</a></li>
+</ul>

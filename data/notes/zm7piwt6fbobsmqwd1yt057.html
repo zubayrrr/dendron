@@ -1,0 +1,49 @@
+<h1 id="chattr"><a aria-hidden="true" class="anchor-heading" href="#chattr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>chattr</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>chattr</code> is used to change <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">File Attributes (Private)</a> on a Linux file system.</p>
+<p>The operator <code>+</code> causes the selected attributes to be added to the existing attributes of the files; <code>-</code> causes them to be removed; and <code>=</code> causes them to be the only attributes that the files have. (via <code>man chattr</code>)</p>
+<p>The letters 'acdeijstuADST' select the new attributes for the files:</p>
+<ul>
+<li>append only (a)</li>
+<li>compressed (c)</li>
+<li>no dump (d)</li>
+<li>extent format (e)</li>
+<li>immutable (i)</li>
+<li>data journalling (j)</li>
+<li>secure deletion (s)</li>
+<li>no tail-merging (t)</li>
+<li>undeletable (u)</li>
+<li>no <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">atime (Private)</a> updates (A)</li>
+<li>synchronous directory updates (D)</li>
+<li>synchronous updates (S)</li>
+<li>top of directory hierarchy (T)</li>
+</ul>
+<p>The following attributes are read-only, and may be listed by <a href="/notes/pdd1ljoj7m3l5k35ixyh4ax">lsattr</a> but not modified by <a href="/notes/zm7piwt6fbobsmqwd1yt057">chattr</a>:</p>
+<ul>
+<li>huge file (h)</li>
+<li>compression error (E)</li>
+<li>indexed directory (I)</li>
+<li>compression raw access (X)</li>
+<li>compressed dirty file (Z)</li>
+</ul>
+<p>Not all flags are supported or utilized by all file systems; refer to file system-specific man pages such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">btrfs (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.ext4 (Private)</a>, and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">xfs (Private)</a> for more file system-specific details.</p>
+<blockquote>
+<p>—via <a href="https://linux.die.net/man/1/chattr">chattr(1): change file attribs on file system - Linux man page</a></p>
+</blockquote>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li><code>sudo chattr +a file.txt</code> now <code>file.txt</code> is append only</li>
+<li><code>sudo chattr +A file.txt</code> no access time (atime) update (helps save system resources)</li>
+<li><code>sudo chattr +i file.txt</code> cannot be modified, deleted, no <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">hard link (Private)</a>, no read, write, change permission. Only the the superuser (root) user has the capability to set or clear this attribute(only then the file can be removed)</li>
+<li><code>sudo chattr -R +i dirName</code> to set it recursively</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/qfc3k99hj61yzdpez1zbfg4">File Attributes</a></li>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+<li><a href="/notes/pdd1ljoj7m3l5k35ixyh4ax">lsattr</a></li>
+</ul>

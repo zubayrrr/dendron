@@ -1,0 +1,59 @@
+<h1 id="wireshark"><a aria-hidden="true" class="anchor-heading" href="#wireshark"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Wireshark</h1>
+<p>Wireshark is one of the best network protocols for analyzing freely available packages. Previously known as Ethereal, Wireshark is widely used by industries and educational institutes. Wireshark has a “live capturing” ability for packet investigation, and the output data is stored in XML, CSV, PostScript, and plain text documents. This program is the most famous network protocol analyzer, and its purpose is to see what is happening around your network. Wireshark provides all the details you need to know about the packets in movement in your network.</p>
+<h2 id="features"><a aria-hidden="true" class="anchor-heading" href="#features"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Features</h2>
+<p>Wireshark contains several useful features, the foremost of which are listed below:</p>
+<ul>
+<li>Inspecting thousands of protocols</li>
+<li>New protocols being added with every update</li>
+<li>Live-capturing of protocols with offline analysis</li>
+<li>Three-way handshake</li>
+<li>Maximum portability: runs on Solaris, Linux, Windows, MAC OS X, FreeBSD, and more</li>
+<li>Analyzing VoIP protocols</li>
+<li>Reads data from many platforms, i.e., Wi-Fi, Ethernet, HDLC, ATM, USB, Bluetooth, Frame Relay, Token Ring, and more</li>
+<li>Results can be saved in CSV, XML, PostScript, and plain text documents</li>
+<li>Reads and write a wide variety of captured file formats</li>
+</ul>
+<h2 id="lab"><a aria-hidden="true" class="anchor-heading" href="#lab"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Lab</h2>
+<ul>
+<li>Wireshark captures data from network interface.
+<ul>
+<li>You specify the interface where you want to capture data from.</li>
+</ul>
+</li>
+<li>When you want to capture data from a network that is not yours(you're not part of) you need a network interface card that can be put into monitor(or promiscuous) mode.</li>
+</ul>
+<ol>
+<li>
+<p>Start your wireshark: <code>sudo wireshark</code></p>
+</li>
+<li>
+<p>Select the Network Interface you want to capture from</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656564583/wiki/fq6qfmktq5g307dfd2hp.png"></p>
+</li>
+<li>
+<p>Wireshark will start capturing data</p>
+</li>
+</ol>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656564634/wiki/vkhseens6nesk0jpc80c.png"></p>
+<ol start="4">
+<li>As we know that data is called by different names at different layers, for example frames, packets etc.</li>
+<li>Select a frame from the frame list</li>
+</ol>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656564941/wiki/mogpgsv01imjawha3unt.png"></p>
+<p>We can see information about this particular frame, it’s source and destination IP, in this case it seems like the request was sent to my Samsung device.</p>
+<p>Below in the packet bytes menu, we can also see that the data is in scrambled state(hexdecimal and ASCII).</p>
+<p>You can even view the data in bits(binary). Right click and convert the data into your desired format.</p>
+<ol start="6">
+<li>Analyzing a layer 7 packet</li>
+</ol>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656566188/wiki/y8xnjecfoiu6lswkfinz.png"></p>
+<p>We can see that this was an HTTP frame, it originated from what application(qBittorrent), we see that our target is doing some shady torrenting.</p>
+<p>Let’s see if we can follow this stream and check what they actually got.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656566302/wiki/qoxgwp5afttglbg2yk88.png"></p>
+<p>It looks like this particular HTTP GET request sent back some data - it’s not really HTML, like you’d expect(?).</p>
+<p>You can save all the captured traffic in a <code>.pcap</code> file and try to analyze the traffic, put the captured traffic back into it’s original state etc.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a></li>
+</ul>

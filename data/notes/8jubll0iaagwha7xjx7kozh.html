@@ -1,0 +1,40 @@
+<h1 id="diff"><a aria-hidden="true" class="anchor-heading" href="#diff"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>diff</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>diff</code> stands for difference. This command is used to display the differences in the files by comparing the files line by line. Unlike its fellow members, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">cmp (Private)</a> and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">comm (Private)</a>, it tells us which lines in one file have is to be changed to make the two files identical. It can also compare the contents of directories.</p>
+<p>The important thing to remember is that diff uses certain special symbols and instructions that are required to make two files identical. It tells you the instructions on how to change the first file to make it match the second file.</p>
+<p>Special symbols are:</p>
+<ul>
+<li>a : add</li>
+<li>c : change</li>
+<li>d : delete</li>
+<li>Lines preceded by a <code>&#x3C;</code> are lines from the first file.</li>
+<li>Lines preceded by <code>></code> are lines from the second file.</li>
+</ul>
+<blockquote>
+<p>—via <a href="https://www.geeksforgeeks.org/diff-command-linux-examples/">diff command in Linux with examples - GeeksforGeeks</a></p>
+</blockquote>
+<p>Example:</p>
+<ul>
+<li><code>diff file1 file2</code></li>
+</ul>
+<p>The diff command is most commonly used to create a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">patch (Private)</a> containing the differences between one or more files that can be applied using the <code>patch</code> command.</p>
+<h3 id="other-options-include"><a aria-hidden="true" class="anchor-heading" href="#other-options-include"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Other options include</h3>
+<ul>
+<li>-B to ignore blank lines</li>
+<li>-w to ignore white spaces</li>
+<li>-i to ignore case differences</li>
+<li>-c to do a detailed comparison</li>
+<li>-y to get a detailed comparison side by side on two columns</li>
+</ul>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">cmp (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">sha256sum (Private)</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/rxd0bvtraxwcdpgrnze2b4x">cmp</a></li>
+<li><a href="/notes/ye4setkuucvc8hpttbaounr">patch</a></li>
+<li><a href="/notes/6pfeic1cz5vt0wgm5ctmmsw">sha256sum</a></li>
+<li><a href="/notes/guawfkvsbkg1eo8o36sdqxh">vim</a></li>
+</ul>

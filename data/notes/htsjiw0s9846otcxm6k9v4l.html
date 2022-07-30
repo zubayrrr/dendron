@@ -1,0 +1,71 @@
+<h1 id="apt"><a aria-hidden="true" class="anchor-heading" href="#apt"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>APT</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><strong>Apt</strong> stands for <strong>Advanced Package Tool</strong>. It doesn’t deal with ‘<strong>deb</strong>‘ package and works directly, but works with ‘<strong>deb</strong>‘ archive from the location specified in the “<strong>/etc/apt/sources.list</strong>” file.</p>
+<ul>
+<li>In the latest version of Ubuntu the <code>apt-get</code> and <code>apt-cache</code> tools were merged into a single command called <code>apt</code></li>
+<li>Unlike <a href="/notes/8aprloi9igzpborzxd016od">dpkg</a>, <code>apt</code> does not understand .deb files. It works with packages that are downloaded from repositories and calls dpkg directly after downloading the .deb archives.</li>
+<li>An APT repository is a web server which contains a collection of packages with metadata that is readable by the apt tool.</li>
+<li>A special kind of repository hosted on servers like Launchpad are <a href="/notes/z47uqjeaxrmr0ujjuiwul7t">PPA</a>s - such repositories are maintained by unofficial developers.</li>
+</ul>
+<p>The APT package index is basically a database that holds records of available packages from the repositories enabled in your system.</p>
+<p>To update the package index run the command below. This will pull the latest changes from the APT repositories:</p>
+<pre><code>sudo apt update
+</code></pre>
+<h2 id="install-a-local-deb-file-using-apt"><a aria-hidden="true" class="anchor-heading" href="#install-a-local-deb-file-using-apt"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install a local .deb file using <code>apt</code></h2>
+<pre><code>sudo apt install /path-to-file/packageName.deb
+</code></pre>
+<h2 id="list-upgradable-packages"><a aria-hidden="true" class="anchor-heading" href="#list-upgradable-packages"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>List upgradable packages</h2>
+<pre><code>sudo apt list --upgradable
+</code></pre>
+<h2 id="upgrade-the-installed-packages-to-their-latest-versions-run"><a aria-hidden="true" class="anchor-heading" href="#upgrade-the-installed-packages-to-their-latest-versions-run"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Upgrade the installed packages to their latest versions run</h2>
+<pre><code>sudo apt upgrade
+</code></pre>
+<h2 id="full-upgrading-apt-full-upgrade"><a aria-hidden="true" class="anchor-heading" href="#full-upgrading-apt-full-upgrade"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Full Upgrading (<code>apt full-upgrade</code>)</h2>
+<p>The difference between <code>upgrade</code> and <code>full-upgrade</code> is that the latter will remove the installed packages if that is needed to upgrade the whole system.</p>
+<pre><code>sudo apt full-upgrade
+</code></pre>
+<p>Be extra careful when using this command.</p>
+<h2 id="remove-an-installed-package"><a aria-hidden="true" class="anchor-heading" href="#remove-an-installed-package"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Remove an installed package</h2>
+<pre><code>sudo apt remove package_name
+</code></pre>
+<p>The <code>remove</code> command will uninstall the given packages, but it may leave some configuration files behind. If you want to remove the package including all configuration files, use <code>purge</code> instead of <code>remove</code> :</p>
+<pre><code>sudo apt purge package_name
+</code></pre>
+<h2 id="remove-the-unneeded-dependencies"><a aria-hidden="true" class="anchor-heading" href="#remove-the-unneeded-dependencies"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Remove the unneeded dependencies</h2>
+<pre><code>sudo apt autoremove
+</code></pre>
+<h2 id="clearing-cache"><a aria-hidden="true" class="anchor-heading" href="#clearing-cache"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Clearing cache</h2>
+<p><code>/var/cache/apt/archives/</code></p>
+<p>Contains all installed and upgraded packages</p>
+<pre><code>ls -l /var/cache/apt/archives/
+du -sh /var/cache/apt/archives/
+
+sudo apt clean
+</code></pre>
+<h2 id="listing-packages"><a aria-hidden="true" class="anchor-heading" href="#listing-packages"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Listing Packages</h2>
+<p>The <code>list</code> command allows you to list the available, installed and, upgradeable packages.</p>
+<p>To list all available packages use the following command:</p>
+<pre><code>sudo apt list
+</code></pre>
+<h2 id="search-a-packages-description"><a aria-hidden="true" class="anchor-heading" href="#search-a-packages-description"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Search a package’s description</h2>
+<pre><code>apt search "search term"
+</code></pre>
+<h2 id="get-list-of-installed-packages"><a aria-hidden="true" class="anchor-heading" href="#get-list-of-installed-packages"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Get list of installed packages</h2>
+<pre><code>apt list --installed | wc -l
+</code></pre>
+<h2 id="get-package-info"><a aria-hidden="true" class="anchor-heading" href="#get-package-info"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Get package info</h2>
+<pre><code>apt show packageName
+</code></pre>
+<h2 id="graphic-package-managers"><a aria-hidden="true" class="anchor-heading" href="#graphic-package-managers"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Graphic package managers</h2>
+<ul>
+<li>Synaptic</li>
+<li>Aptitude</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

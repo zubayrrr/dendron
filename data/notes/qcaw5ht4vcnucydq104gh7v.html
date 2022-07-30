@@ -1,0 +1,153 @@
+<h1 id="build-automation"><a aria-hidden="true" class="anchor-heading" href="#build-automation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Build Automation</h1>
+<ul>
+<li>Related: <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a></li>
+</ul>
+<hr>
+<h2 id="build-automation-1"><a aria-hidden="true" class="anchor-heading" href="#build-automation-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Build Automation</h2>
+<p>Build automation refers to the process of taking the source code and the other artifacts created by the developers. We’ll build this code depending on the language they’re using; we’ll compile or transpile the code to generate an executable or simply a docker image.</p>
+<p>Build automation is one of the processes in a <a href="/notes/eoy9t426lmr0wo5rpxm8g69">CI⁄CD Pipeline</a></p>
+<p>There are many tools that can help us with build automation such as: <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654367652/wiki/kvbyhogruh45cxytkvrx.png"></p>
+<p>An example pipeline would look something like:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654707436/wiki/yu0yqhx2kwkjwdbg7ieg.png"></p>
+<h2 id="what-do-build-and-package-manager-tools-do"><a aria-hidden="true" class="anchor-heading" href="#what-do-build-and-package-manager-tools-do"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>What do build and package manager tools do?</h2>
+<p>They help with:</p>
+<ul>
+<li>Compiling</li>
+<li>Compressing</li>
+<li>Transforming code from hundreds to a single file</li>
+<li>Keep artifact in storage, in an artifact repository(<a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a>).</li>
+<li>To deploy it multiple times(on different environments), make backups etc.</li>
+</ul>
+<hr>
+<h2 id="artifacts"><a aria-hidden="true" class="anchor-heading" href="#artifacts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Artifacts</h2>
+<ul>
+<li>Artifacts are apps built into a single, shareable, portable file.</li>
+<li>Building Java applications produce a special artifact file such as a <code>.jar</code> or a <code>.war</code>.</li>
+<li>Apps built from other programming languages may result in different artifact files such as a zip or a tarball.</li>
+</ul>
+<p>See also: <a href="/notes/slohd4hnb6y31jj538tm0do">Artifact Repository</a></p>
+<h2 id="building-java-applications"><a aria-hidden="true" class="anchor-heading" href="#building-java-applications"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Building Java Applications</h2>
+<ul>
+<li>
+<p>Install IntelliJ IDEA.</p>
+</li>
+<li>
+<p>Install Java(or use IDEA to Download SDK).</p>
+</li>
+<li>
+<p>Setup JDK, SDK (make sure Java executable is added to <a href="/notes/iicnw4qgra6rr5f6k4dlw3z">$PATH</a> or <code>%PATH%</code>, respectively.)</p>
+</li>
+<li>
+<p>Set <code>JAVA_HOME</code> as an <a href="/notes/o729gsazu87le197nswwxtp">environment variable</a> (Maven prerequisite).</p>
+</li>
+<li>
+<p>Use SCM to clone(<code>git clone</code>) your Java application's repository.</p>
+</li>
+<li>
+<p>Build a <a href="/notes/482tfc3v73o3d4p8yi3b4z7">Maven</a> project.</p>
+<ul>
+<li>Open source code of your Java application in IntelliJ IDEA.</li>
+<li>Wait for IDEA to index the source code.</li>
+<li>IDEA will automatically detect the <code>pom.xml</code> and resolve all the dependencies.</li>
+<li>Run the application(preview in the "Run" tab).</li>
+<li>Download <a href="https://maven.apache.org">Maven</a> and add it's <code>/bin</code>'s path to <code>$PATH</code> or <code>%PATH%</code>.</li>
+<li>Use <code>mvn</code> commands and profit!</li>
+<li>After building, <code>.jar</code> or <code>.war</code> files can be found in the <code>./target</code> folder.</li>
+</ul>
+</li>
+<li>
+<p>Build a <a href="/notes/saz485w50o682scob9knhp1">Gradle</a> project.</p>
+<ul>
+<li>Open source code of your Java application in IntelliJ IDEA</li>
+<li>If it has a gradle wrapper(folder) inside the repo, you don't need to install gradle</li>
+<li>Make sure the JVM configured is compatible with gradle wrapper's version.(<code>JAVA_HOME</code>)</li>
+<li>Run the application to check if everything is working fine</li>
+<li>Build with <code>./gradlew build</code></li>
+<li>After building, <code>.jar</code> or <code>.war</code> files can be found in the <code>./build</code> folder.</li>
+</ul>
+</li>
+</ul>
+<p>To run a <code>.jar</code>: <code>java -jar name-of-the-app-SNAPSHOT.jar</code></p>
+<h2 id="managing-java-dependencies"><a aria-hidden="true" class="anchor-heading" href="#managing-java-dependencies"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Managing Java dependencies</h2>
+<ul>
+<li>Build tools(Maven, Gradle, NPM) are required even for local development of the application.</li>
+<li>Dependencies file is what keeps track of all the dependencies used in the application. Refer to <code>pom.xml</code> for a Maven project and <code>build.gradle</code> for a Gradle project.</li>
+<li>All the dependencies for both kind of projects are fetched from <a href="https://mvnrepository.com">mvnrepository.com</a>, they're downloaded locally from the remote repository.</li>
+</ul>
+<h2 id="building-javascript--devlognodejs-private-project"><a aria-hidden="true" class="anchor-heading" href="#building-javascript--devlognodejs-private-project"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Building <a href="/notes/cxjsfosx0onyz5nt07qna7w">Javascript</a> / <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.nodejs (Private)</a> project.</h2>
+<ul>
+<li>
+<p>Install Node.js, run <code>npm</code> to check if everything is working correctly.</p>
+</li>
+<li>
+<p>Alternatively to <code>npm</code> you can also use <code>yarn</code> to manage dependencies and to run build commands.</p>
+</li>
+<li>
+<p>Use the build commands from <code>package.json</code> to build it.</p>
+</li>
+<li>
+<p>Unlike Java applications, after building a JavaScript will result in <code>.zip</code> or <code>.tgz</code> file.</p>
+</li>
+<li>
+<p>Both <code>npm</code> and <code>yarn</code> are <strong>package managers not build tools</strong>, they're used for managing dependencies not for transpiling JS code.</p>
+</li>
+<li>
+<p>Use <code>npm pack</code> to pack.</p>
+</li>
+<li>
+<p>The resulting zip or tar doesn't contain dependencies; only the application code.</p>
+</li>
+<li>
+<p>To run the application, you first need to install the dependencies.</p>
+</li>
+<li>
+<p>Unpack the zip/tar.</p>
+</li>
+<li>
+<p>Run the app.</p>
+</li>
+<li>
+<p>Package frontend JS code.</p>
+<ul>
+<li>Separate <code>package.json</code> for frontend and backend.</li>
+<li>or have a common <code>package.json</code> for both frontend and backend.</li>
+<li>React code needs to be transpiled since it uses <code>jsx</code> syntax.</li>
+<li>Compress and minify.</li>
+</ul>
+</li>
+<li>
+<p>Build tools in the JavaScript world as also known as Bundlers.</p>
+</li>
+<li>
+<p>Most popular bundler is <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.webpack (Private)</a></p>
+</li>
+<li>
+<p>Webpack will transpile, minify, bundles, compresses(removes whitespaces etc).</p>
+</li>
+</ul>
+<h2 id="publishing-build-artifacts"><a aria-hidden="true" class="anchor-heading" href="#publishing-build-artifacts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Publishing build artifacts</h2>
+<ul>
+<li>All build tools have commands for publishing the artifacts to artifact repositories.</li>
+<li>When you need the artifact, it can be <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.curl (Private)</a>ed or <a href="/notes/zt6hnpeyl30i6jlbwa48eth">wget</a>ed when needed.</li>
+</ul>
+<h2 id="enter-docker"><a aria-hidden="true" class="anchor-heading" href="#enter-docker"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Enter <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></h2>
+<ul>
+<li>With Docker in the picture, we don't really need multiple artifact repositories. We simply need a docker image repo.</li>
+<li>Furthermore, we don't need to build and move different artifact types.</li>
+<li>We also don't need to install dependencies on the server, we can simply execute commands inside the docker image.</li>
+<li>You still need to build the apps and then create the docker images.</li>
+<li>A single <code>dockerfile</code> can be used to make all the above steps seamless.</li>
+</ul>
+<p><strong>All of this is still part of the larger <a href="/notes/eoy9t426lmr0wo5rpxm8g69">CI/CD Pipeline</a></strong></p>
+<p>See also: <a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/slohd4hnb6y31jj538tm0do">Artifact Repository</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+<li><a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a></li>
+<li><a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a></li>
+<li><a href="/notes/9fa6uf6xbnv00fv944o1y1o">Prometheus</a></li>
+</ul>

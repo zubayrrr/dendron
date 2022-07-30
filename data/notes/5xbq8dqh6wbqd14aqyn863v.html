@@ -1,0 +1,64 @@
+<h1 id="ping"><a aria-hidden="true" class="anchor-heading" href="#ping"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ping</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The Ping tool is used to test whether a particular host is reachable across an IP network. A Ping measures the time it takes for packets to be sent from the local host to a destination computer and back. The Ping tool measures and records the round-trip time of the packet and any losses along the way.</p>
+<p><code>ping</code> works by sending <a href="/notes/xztkd0q1n12hpkep5men9r9">ICMP</a> echo request package to the specified destination <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> and waits for a reply. When the destination receives the package it will respond back with an <a href="/notes/xztkd0q1n12hpkep5men9r9">ICMP</a> echo reply.</p>
+<h2 id="example"><a aria-hidden="true" class="anchor-heading" href="#example"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example</h2>
+<ul>
+<li><code>ping ubuntu.com</code> sends echo request packets continiously
+<ul>
+<li><code>ping</code> will resolve domain into an address(public <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>).</li>
+<li>An IP Address can be set to multiple domain names and ping performs reverse DNS resolution asking the <a href="/notes/pjbeze05otspq0j7j48beqp">DNS</a> configured on the system what the domain of the IP is. The DNS Server will respond back with one domain.</li>
+<li>Add <code>-n</code> to prevent ping from doing reverse DNS lookup.</li>
+</ul>
+</li>
+<li>If you ping an IP Address that is down you'll get no response.</li>
+<li>To specify number of echo request packets, <code>ping -c 4 ubuntu.com</code> will send 4 packets.</li>
+<li><code>icmp_seq</code> will the number of the packet, you can use this to detect issues with bad routing.</li>
+<li><code>ttl</code> time to leave value in the received packets and is normally the number of hops nand <a href="/notes/7r0uunvdkt9sgw6ajq5vg0x">router</a>s between the source and the destination.</li>
+<li><code>time</code> ping time measured in milliseconds, round trip time, <code>rtt</code>, less is better. time less than 30 excellent, 30-50 is avg, 50-100 slow, value greater than 100 probably means you cannot run real-time applications such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.VoIP (Private)</a> or Video calls.</li>
+<li>By default <code>ping</code> waits for 1 second before it sends a packet, we can change this interval with <code>-i</code> option
+<ul>
+<li><code>ping -i 0.4 -c 5 google.com</code></li>
+<li>Only the superuer can set this value to less than 0.2 seconds</li>
+</ul>
+</li>
+<li><code>q</code> option to just get the summary</li>
+<li>Send packets witn incremental <code>ttl</code> value to discover the path a packet takes. When a router receives a packet with <code>ttl</code> value as 1, it'll discard the packet and notify the source with an ICMP time exceeded packet. So a packet with TTL value 1 really means discovering the first router towards the destination.
+<ul>
+<li><code>ping -t 1 -c 3 -n ubuntu.com</code> first router</li>
+<li><code>ping -t 2 -c 3 -n ubuntu.com</code> second router</li>
+<li><code>ping -t 2 -c 3 -n ubuntu.com</code> third router and so on</li>
+</ul>
+</li>
+</ul>
+<h3 id="troubleshooting-for-connectivity-issues"><a aria-hidden="true" class="anchor-heading" href="#troubleshooting-for-connectivity-issues"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Troubleshooting for connectivity issues</h3>
+<ul>
+<li><code>route -n</code> to get default gateway</li>
+<li><code>ping defaultGW</code> if the ping doesn't work, theres a problem with LAN, maybe unauthenticated to the wireless access point or you don't have the right IP Address set.</li>
+<li>ping a public IP Address on the internet, something stable like public DNS Server of Google (8.8.8.8) or public DNS Server of Cloudflare (1.1.1.1)
+<ul>
+<li>ping 8.8.8.8</li>
+<li>ping 1.1.1.1</li>
+<li>If this doesn't work, theres an internet connectivity issue, check router configuration or check with <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.ISP (Private)</a>.</li>
+</ul>
+</li>
+<li>ping an inter domain, something like google.com
+<ul>
+<li>If this doesn't work, you've a DNS issue, check that you're correct <a href="/notes/pjbeze05otspq0j7j48beqp">DNS</a> and theres nothing filtering the packets, probably a configuration error related to DNs on your side or the DNS server is down.</li>
+<li>change the DNS Server to 8.8.8.8 and try again.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/xztkd0q1n12hpkep5men9r9">ICMP</a></li>
+<li><a href="/notes/2lmaspsqaxrf42wuvmcp02f">Network Layer - OSI</a></li>
+<li><a href="/notes/ck6ds17ovyjf6n0sidmat7v">Networking in Linux</a></li>
+<li><a href="/notes/b22uf82a31xkdp1cnlx713v">Nmap</a></li>
+<li><a href="/notes/o922t6d9q6wur3yve290hir">SSH</a></li>
+</ul>

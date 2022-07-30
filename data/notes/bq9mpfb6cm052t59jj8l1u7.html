@@ -1,0 +1,20 @@
+<h1 id="dmidecode"><a aria-hidden="true" class="anchor-heading" href="#dmidecode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>dmidecode</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+<li>Related: <a href="/notes/laeri4eob3q0wi2i0d71atn">top</a>, <a href="/notes/hatou0atny4e6tj2yapy1zc">Free</a></li>
+</ul>
+<hr>
+<p>Dmidecode reports information about your system's hardware as described in your system BIOS according to the SMBIOS/DMI standard (see a sample output). This information typically includes system manufacturer, model name, serial number, BIOS version, asset tag as well as a lot of other details of varying level of interest and reliability depending on the manufacturer. This will often include usage status for the CPU sockets, expansion slots (e.g. AGP, PCI, ISA) and memory module slots, and the list of I/O ports (e.g. serial, parallel, USB).</p>
+<blockquote>
+<p>via — <a href="https://www.nongnu.org/dmidecode/">dmidecode</a></p>
+</blockquote>
+<pre><code>dmidecode -t memory
+</code></pre>
+<pre><code>dmidecode -t memory | grep -i size
+dmidecode -t memory | grep -i max
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

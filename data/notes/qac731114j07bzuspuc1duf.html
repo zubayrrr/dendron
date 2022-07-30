@@ -1,0 +1,123 @@
+<h1 id="viewing-files"><a aria-hidden="true" class="anchor-heading" href="#viewing-files"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Viewing Files</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>The entire configuration of a Linux system is stored on a text tle.</li>
+<li>Things such as FTP, email server, network configuration, security policy, users and their passwords, groups are also stored on a text file.</li>
+<li>There are many ways to read a text file on Linux.</li>
+<li>You can use graphical text editors(Gedit, Kate etc) to view text files as well has CLI editors.</li>
+</ul>
+<hr>
+<h2 id="commands-available-to-view-text-files-and-to-keep-track-of-files-in-real-time"><a aria-hidden="true" class="anchor-heading" href="#commands-available-to-view-text-files-and-to-keep-track-of-files-in-real-time"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Commands available to view text files and to keep track of files in real time</h2>
+<h3 id="cat-command"><a aria-hidden="true" class="anchor-heading" href="#cat-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="/notes/r3ndxve356r9xbujnl3ysp2">cat</a> command</h3>
+<ul>
+<li><code>cat</code> command allows us to:
+<ul>
+<li>Create single or multiple files</li>
+<li>View contents of file</li>
+<li>Concatenate files</li>
+<li>Redirect output in terminal or files.</li>
+</ul>
+</li>
+<li>Syntax:
+<ul>
+<li><code>cat path-to-file</code></li>
+</ul>
+</li>
+<li>Notes:
+<ul>
+<li>Most useful when viewing small files because larger files get when viewed get wrapped due to scrolling limitations.</li>
+<li>Usually no options are passed when using <code>cat</code> command but
+<ul>
+<li><code>cat -n path-to-file</code> will list the line numbers too.</li>
+</ul>
+</li>
+<li>To concatenate: <code>cat file1 file2 > new_file</code>
+<ul>
+<li><code>new_file</code> would contain the contents of both <code>file1</code> and <code>file2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="if-the-output-of-the-text-file-exceeds-the-terminal-window-we-can-use-more-or-less-command"><a aria-hidden="true" class="anchor-heading" href="#if-the-output-of-the-text-file-exceeds-the-terminal-window-we-can-use-more-or-less-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>If the output of the text file exceeds the terminal window, we can use <code>more</code> or <code>less</code> command</h3>
+<h3 id="less-private-command"><a aria-hidden="true" class="anchor-heading" href="#less-private-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">less (Private)</a> command</h3>
+<ul>
+<li><code>less</code> is a command line utility that displays the contents of a file or a command output, one page at a time. It is similar to <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">more (Private)</a>, but has more advanced features and allows you to navigate both forward and backward through the file.</li>
+<li>When starting less doesn’t read the entire file it reads the contents of a file one page(one screen) at a time which results in much faster load times compared to text editors like [[devlog.vim] or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">nano (Private)</a> .</li>
+<li>The less command is mostly used for opening large files .</li>
+<li>Syntax:
+<ul>
+<li><code>less path-to-file</code></li>
+</ul>
+</li>
+<li>Notes:
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Man Pages (Private)</a> launch the <code>less</code> command by default</li>
+<li><code>Ctrl + F</code> or <code>space</code> to move forwards one window</li>
+<li><code>Ctrl + B</code> to move backwards one window</li>
+<li><code>g</code> to go to the very beginning of the file</li>
+<li><code>G</code> to go to the very end of the file</li>
+<li>To search a string from the very top of the file, press <code>/</code> and type the string
+<ul>
+<li>Use <code>n</code> or <code>N</code> to navigate between the search results</li>
+</ul>
+</li>
+<li>To search from the bottom of the file, press <code>?</code> and type the string</li>
+</ul>
+</li>
+</ul>
+<h3 id="tail-private-command"><a aria-hidden="true" class="anchor-heading" href="#tail-private-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">tail (Private)</a> command</h3>
+<p>It is the complementary of <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">head (Private)</a> command.The tail command, as the name implies, print the last N number of data of the given input. By default it prints the last 10 lines of the specified files. If more than one file name is provided then data from each file is precedes by its file name.</p>
+<blockquote>
+<p>—via <a href="https://www.geeksforgeeks.org/tail-command-linux-examples/">Tail command in Linux with examples - GeeksforGeeks</a></p>
+</blockquote>
+<ul>
+<li>Syntax:
+<ul>
+<li><code>tail path-to-file</code></li>
+<li><code>tail -n number path-to-file</code> to view custom number of lines</li>
+<li><code>tail -n +20 path-to-file</code> to views lines from the line # 20</li>
+</ul>
+</li>
+<li><code>tail</code> is most commonly used to watch log files as they're updated
+<ul>
+<li><code>tail -f path-to-file</code> to watch the file in real time as it gets updated</li>
+</ul>
+</li>
+<li>Example:
+<ul>
+<li><code>tail -n 15 -f /var/log/auth.log</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="head-private-command"><a aria-hidden="true" class="anchor-heading" href="#head-private-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">head (Private)</a> command</h3>
+<p>It is the complementary of <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">tail (Private)</a> command. The head command, as the name implies, print the top N number of data of the given input. By default, it prints the first 10 lines of the specified files. If more than one file name is provided then data from each file is preceded by its file name.</p>
+<blockquote>
+<p>—via <a href="https://www.geeksforgeeks.org/head-command-linux-examples/">Head command in Linux with examples - GeeksforGeeks</a></p>
+</blockquote>
+<ul>
+<li>Example:
+<ul>
+<li><code>head /etc/passwd</code></li>
+<li><code>head -n -7 /etc/group</code> to view first 7 groups</li>
+</ul>
+</li>
+</ul>
+<h3 id="watch-private-command"><a aria-hidden="true" class="anchor-heading" href="#watch-private-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">watch (Private)</a> command</h3>
+<ul>
+<li><code>watch</code> is used to run any arbitrary command at regular intervals and displays the output of the command on the terminal window.</li>
+<li>It is useful when you have to execute a command repeatedly and watch the command output change over time. For example, you can use the watch command to monitor the system uptime or disk usage.</li>
+<li>The watch utility is a part of the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">procps (Private)</a> (or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">procps-ng (Private)</a>) package which is pre-installed on nearly all Linux distributions.</li>
+<li>You can use <code>-d</code> flag to view difference between two successive updates, <code>-n</code> option to change the update interval time.</li>
+<li>Examples:
+<ul>
+<li><code>watch -n 3 -d ls -l</code></li>
+<li><code>watch date</code></li>
+<li><code>watch ls</code></li>
+<li><code>watch -n 1 -d ifconfig</code> to keep track of network traffic</li>
+</ul>
+</li>
+</ul>

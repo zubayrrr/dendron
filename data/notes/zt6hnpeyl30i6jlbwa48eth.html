@@ -1,0 +1,106 @@
+<h1 id="wget"><a aria-hidden="true" class="anchor-heading" href="#wget"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>wget</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>GNU Wget is a command-line utility for downloading files from the web. With Wget, you can download files using HTTP, HTTPS, and FTP protocols. Wget provides a number of options allowing you to download multiple files, resume downloads, limit the bandwidth, recursive downloads, download in the background, mirror a website, and much more.</p>
+<p>The <code>wget</code> utility expressions take the following form:</p>
+<pre class="language-sh"><code class="language-sh">wget [options] [url]
+</code></pre>
+<p>Copy</p>
+<ul>
+<li><code>options</code> - The <a href="https://linux.die.net/man/1/wget">Wget options</a></li>
+<li><code>url</code> - URL of the file or directory you want to download or synchronize.</li>
+</ul>
+<h2 id="how-to-download-a-file-withwget"><a aria-hidden="true" class="anchor-heading" href="#how-to-download-a-file-withwget"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How to Download a File with <code>wget</code></h2>
+<p>In its simplest form, when used without any option, <code>wget</code> will download the resource specified in the [url] to the current directory.</p>
+<p>In the following example, we are downloading the Linux kernel tar archive:</p>
+<pre><code>wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.17.2.tar.xz
+</code></pre>
+<p>During the download, <code>wget</code> shows the progress bar alongside the file name, file size, download speed, and the estimated time to complete the download. Once the download is complete, you can find the downloaded file in your current working directory .</p>
+<p>To turn off the output, use the <code>-q</code> option.
+If the file already exists, <code>wget</code> will add <code>.N</code> (number) at the end of the file name.</p>
+<h2 id="saving-the-downloaded-file-under-different-name"><a aria-hidden="true" class="anchor-heading" href="#saving-the-downloaded-file-under-different-name"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Saving the Downloaded File Under Different Name</h2>
+<p>To save the downloaded file under a different name, pass the <code>-O</code> option followed by the chosen name:</p>
+<pre><code>wget -O latest-hugo.zip https://github.com/gohugoio/hugo/archive/master.zip
+</code></pre>
+<h2 id="downloading-a-file-to-a-specific-directory"><a aria-hidden="true" class="anchor-heading" href="#downloading-a-file-to-a-specific-directory"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Downloading a File to a Specific Directory</h2>
+<p>By default, <code>wget</code> will save the downloaded file in the current working directory. To save the file to a specific location, use the <code>-P</code> option:</p>
+<pre><code>wget -P /mnt/iso http://mirrors.mit.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso
+</code></pre>
+<p>The command above tells <code>wget</code> to save the CentOS 7 iso file to the <code>/mnt/iso</code> directory.</p>
+<h2 id="limiting-the-download-speed"><a aria-hidden="true" class="anchor-heading" href="#limiting-the-download-speed"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Limiting the Download Speed</h2>
+<p>To limit the download speed, use the <code>--limit-rate</code> option. By default, the speed is measured in bytes/second. Append <code>k</code> for kilobytes, <code>m</code> for megabytes, and <code>g</code> for gigabytes.</p>
+<p>The following command will download the Go binary and limit the download speed to 1MB:</p>
+<pre><code>wget --limit-rate=1m https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
+</code></pre>
+<p>This option is useful when you don’t want <code>wget</code> to consume all the available bandwidth.</p>
+<h2 id="resuming-a-download"><a aria-hidden="true" class="anchor-heading" href="#resuming-a-download"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resuming a Download</h2>
+<p>You can resume a download using the <code>-c</code> option. This is useful if your connection drops during a download of a large file, and instead of starting the download from scratch, you can continue the previous one.</p>
+<p>In the following example, we are resuming the download of the Ubuntu 18.04 iso file:</p>
+<pre><code>wget -c http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso
+</code></pre>
+<p>If the remote server does not support resuming downloads, <code>wget</code> will start the download from the beginning and overwrite the existing file.</p>
+<h2 id="downloading-in-background"><a aria-hidden="true" class="anchor-heading" href="#downloading-in-background"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Downloading in Background</h2>
+<p>To download in the background, use the <code>-b</code> option. In the following example, we are downloading the OpenSuse iso file in the background:</p>
+<pre><code>wget -b https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-DVD-x86_64-Current.iso
+</code></pre>
+<p>By default, the output is redirected to <code>wget-log</code> file in the current directory. To watch the status of the download, use the <a href="https://linuxize.com/post/linux-head-command/"><code>tail</code></a> command:</p>
+<pre><code>tail -f wget-log
+</code></pre>
+<h2 id="changing-the-wget-user-agent"><a aria-hidden="true" class="anchor-heading" href="#changing-the-wget-user-agent"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Changing the Wget User-Agent</h2>
+<p>Sometimes when downloading a file, the remote server may be set to block the Wget User-Agent. In situations like this, to emulate a different browser, pass the <code>-U</code> option.</p>
+<pre><code>wget --user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" http://wget-forbidden.com/
+</code></pre>
+<p>The command above will emulate Firefox 60 requesting the page from <code>wget-forbidden.com</code></p>
+<h2 id="downloading-multiple-files"><a aria-hidden="true" class="anchor-heading" href="#downloading-multiple-files"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Downloading Multiple Files</h2>
+<p>If you want to download multiple files at once, use the <code>-i</code> option followed by the path to a local or external file containing a list of the URLs to be downloaded. Each URL needs to be on a separate line.</p>
+<p>The following example shows how to download the Arch Linux, Debian, and Fedora iso files using the URLs specified in the <code>linux-distros.txt</code> file:</p>
+<pre><code>wget -i linux-distros.txt
+</code></pre>
+<p>linux-distros.txt</p>
+<pre class="language-txt"><code class="language-txt">http://mirrors.edge.kernel.org/archlinux/iso/2018.06.01/archlinux-2018.06.01-x86_64.iso
+https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.iso
+https://download.fedoraproject.org/pub/fedora/linux/releases/28/Server/x86_64/iso/Fedora-Server-dvd-x86_64-28-1.1.iso
+</code></pre>
+<p>Copy</p>
+<p>If you specify <code>-</code> as a filename, URLs will be read from the standard input.</p>
+<h2 id="downloading-via-ftp"><a aria-hidden="true" class="anchor-heading" href="#downloading-via-ftp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Downloading via FTP</h2>
+<p>To download a file from a password-protected FTP server, specify the username and password as shown below:</p>
+<pre><code>wget --ftp-user=FTP_USERNAME --ftp-password=FTP_PASSWORD ftp://ftp.example.com/filename.tar.gz
+</code></pre>
+<h2 id="creating-a-mirror-of-a-website"><a aria-hidden="true" class="anchor-heading" href="#creating-a-mirror-of-a-website"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating a Mirror of a Website</h2>
+<p>To create a mirror of a website with <code>wget</code>, use the <code>-m</code> option. This will create a complete local copy of the website by following and downloading all internal links as well as the website resources (JavaScript, CSS, Images).</p>
+<pre><code>wget -m https://example.com
+</code></pre>
+<p>If you want to use the downloaded website for local browsing, you will need to pass a few extra arguments to the command above.</p>
+<pre><code>wget -m -k -p https://example.com
+</code></pre>
+<p>The <code>-k</code> option will cause <code>wget</code> to convert the links in the downloaded documents to make them suitable for local viewing. The <code>-p</code> option will tell <code>wget</code> to download all necessary files for displaying the HTML page.</p>
+<p>or</p>
+<pre><code>wget --mirror --convert-links --adjust-extension --page-requisites --no-parent https://example.com
+
+# or
+
+wget -mKEpnp https://example.com
+
+</code></pre>
+<h2 id="skipping-certificate-check"><a aria-hidden="true" class="anchor-heading" href="#skipping-certificate-check"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Skipping Certificate Check</h2>
+<p>If you want to download a file over HTTPS from a host that has an invalid SSL certificate, use the <code>--no-check-certificate</code> option:</p>
+<pre><code>wget --no-check-certificate https://domain-with-invalid-ss.com
+</code></pre>
+<h2 id="downloading-to-the-standard-output"><a aria-hidden="true" class="anchor-heading" href="#downloading-to-the-standard-output"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Downloading to the Standard Output</h2>
+<p>In the following example, <code>wget</code> will quietly ( flag <code>-q</code>) download and output the latest WordPress version to stdout ( flag <code>-O -</code>) and pipe it to the <code>tar</code> utility, which will extract the archive to the <code>/var/www</code> directory.</p>
+<pre><code>wget -q -O - "http://wordpress.org/latest.tar.gz" | tar -xzf - -C /var/www
+</code></pre>
+<blockquote>
+<p>via - <a href="https://linuxize.com/post/wget-command-examples/">Wget Command in Linux with Examples | Linuxize</a></p>
+</blockquote>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a></li>
+<li><a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a></li>
+<li><a href="/notes/z1szfep23mzeolyvhmcpb2u">Wget Hacks</a></li>
+</ul>

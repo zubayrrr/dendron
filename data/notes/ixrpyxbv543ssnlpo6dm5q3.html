@@ -1,0 +1,28 @@
+<h1 id="tail"><a aria-hidden="true" class="anchor-heading" href="#tail"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>tail</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>It is the complementary of <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">head (Private)</a> command.The tail command, as the name implies, print the last N number of data of the given input. By default it prints the last 10 lines of the specified files. If more than one file name is provided then data from each file is precedes by its file name.</p>
+<blockquote>
+<p>—via <a href="https://www.geeksforgeeks.org/tail-command-linux-examples/">Tail command in Linux with examples - GeeksforGeeks</a></p>
+</blockquote>
+<ul>
+<li>Syntax:
+<ul>
+<li><code>tail path-to-file</code></li>
+<li><code>tail -n number path-to-file</code> to view custom number of lines</li>
+<li><code>tail -n +20 path-to-file</code> to views lines from the line # 20</li>
+</ul>
+</li>
+<li><code>tail</code> is most commonly used to watch log files as they're updated
+<ul>
+<li><code>tail -f path-to-file</code> to watch the file in real time as it gets updated</li>
+</ul>
+</li>
+<li>Example:
+<ul>
+<li><code>tail -n 15 -f /var/log/auth.log</code></li>
+</ul>
+</li>
+</ul>

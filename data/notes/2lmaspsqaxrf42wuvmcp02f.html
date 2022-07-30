@@ -1,0 +1,102 @@
+<h1 id="network-layer---osi"><a aria-hidden="true" class="anchor-heading" href="#network-layer---osi"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Network Layer - OSI</h1>
+<h1 id="layer-3--network-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-3--network-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 3 – Network Layer</h1>
+<ul>
+<li>At Layer 3 we're concerned with Routing(forwarding traffic with logical addresses or <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>)</li>
+<li>Routing is called Switching at Layer 3, which can be confusing because <a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a>es are Layer 2 (<a href="/notes/ofmapzoha5kl5i46y1lkc2b">Data Link Layer - OSI</a>) devices.</li>
+<li>Connection services</li>
+<li>Bandwidth usage</li>
+<li>Multiplexing strategies</li>
+</ul>
+<hr>
+<h3 id="logical-address"><a aria-hidden="true" class="anchor-heading" href="#logical-address"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Logical Address</h3>
+<ul>
+<li>Numerous routing protocols were used for logical addressing over the years:
+<ul>
+<li>AppleTalk</li>
+<li>Internetwork Packet Exchange(IPX)</li>
+<li>Internet Protocol (IP)</li>
+</ul>
+</li>
+<li>IP is one of the logical addressing schemes, only Internet Protocol (IP) remains dominant. <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>
+<ul>
+<li><a href="/notes/d6dakasx29em4cil8uhjy62">Ipv4</a></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.IPv6 (Private)</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="how-should-data-be-forwarded-or-routed"><a aria-hidden="true" class="anchor-heading" href="#how-should-data-be-forwarded-or-routed"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How should data be <em>forwarded</em> or routed?</h3>
+<p>Three main ways of achieving this are as follows:</p>
+<ul>
+<li>Packet switching(known as <em>routing</em>)
+<ul>
+<li>Data is divided into packets and forwarded.</li>
+</ul>
+</li>
+<li>Circuit switching
+<ul>
+<li>Dedicated communication link is established between two devices.</li>
+</ul>
+</li>
+<li>Message switching
+<ul>
+<li>Data is divided into messages, similar to packet switching, except, these messages may be stored then forwarded.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="route-discovery-and-selection"><a aria-hidden="true" class="anchor-heading" href="#route-discovery-and-selection"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Route Discovery and Selection</h3>
+<ul>
+<li><a href="/notes/7r0uunvdkt9sgw6ajq5vg0x">router</a>s maintain a routing table to understand how to forward a packet based on destination <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a></li>
+<li>Manually configured as a static route or dynamically through a routing protocol
+<ul>
+<li><a href="/notes/47kqarif53fgm4mn91r2kcg">RIP</a></li>
+<li><a href="/notes/613csq7phgdc2zr0y6ny2bv">OSPF</a></li>
+<li><a href="/notes/5dgunkowdd6nz8b4xzuah7l">EIGRP</a></li>
+</ul>
+</li>
+</ul>
+<p>All these routers are talking to each other and they know which way is the fastest way to the destination. The routers take into account the traffic on the network etc.</p>
+<hr>
+<h3 id="connection-services"><a aria-hidden="true" class="anchor-heading" href="#connection-services"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Connection Services</h3>
+<ul>
+<li>Layer 3 augments Layer 2 to improve reliability.</li>
+<li>Flow control
+<ul>
+<li>Prevents sender from sending data faster than receiver can get it.</li>
+</ul>
+</li>
+<li>Packet reordering
+<ul>
+<li>Allows packets to be sent over multiple links and across multiple routes for faster service.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="internet-control-message-protocol-icmp"><a aria-hidden="true" class="anchor-heading" href="#internet-control-message-protocol-icmp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Internet Control Message Protocol (ICMP)</h3>
+<ul>
+<li>Used to send error messages and operational information about an IP destination(common used one is <a href="/notes/5xbq8dqh6wbqd14aqyn863v">ping</a>).</li>
+<li>Not regularly used by end-user applications.</li>
+<li>Used in troubleshooting (<a href="/notes/5xbq8dqh6wbqd14aqyn863v">ping</a> &#x26; <a href="/notes/us0pzcrasue3gp3detje382">traceroute</a>)</li>
+</ul>
+<hr>
+<h3 id="layer-3-examples"><a aria-hidden="true" class="anchor-heading" href="#layer-3-examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 3 Examples</h3>
+<ul>
+<li><a href="/notes/7r0uunvdkt9sgw6ajq5vg0x">router</a>s</li>
+<li>Multilayer <a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a>s</li>
+<li><a href="/notes/d6dakasx29em4cil8uhjy62">Ipv4</a> protocol</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.IPv6 (Private)</a> protocol</li>
+<li><a href="/notes/xztkd0q1n12hpkep5men9r9">ICMP</a></li>
+</ul>
+<h3 id="subnet-mask"><a aria-hidden="true" class="anchor-heading" href="#subnet-mask"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Subnet mask</h3>
+<p>The network address and the host address defined in the IP address is not solely efficient to determine that the destination host is of the same sub-network or remote network. The subnet mask is a 32-bit logical address that is used along with the IP address by the routers to determine the location of the destination host to route the packet data.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656505733/wiki/g2s3ypo7rzywlll8o2m9.png"></p>
+<p><strong>For the above Example,</strong> by using a subnet mask 255.255.255.0, we get to know that the network ID is 192.168.1.0 and the host address is 0.0.0.64. When a packet arrives from 192.168.1.0 subnet and has a destination address as 192.168.1.64, then the PC will receive it from the network and process it further to the next level.</p>
+<p>Thus by using subnetting, the layer-3 will provide an inter-networking between the two different subnets as well.</p>
+<p>The IP addressing is a connectionless service, thus the layer -3 provides a connectionless service. The data packets are sent over the medium without waiting for the recipient to send the acknowledgment. If the data packets which are big in size are received from the lower level to transmit, then it splits it into small packets and forwards it.</p>
+<p>At the receiving end, it again reassembles them to the original size, thus becoming space efficient as a medium less load.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a></li>
+</ul>

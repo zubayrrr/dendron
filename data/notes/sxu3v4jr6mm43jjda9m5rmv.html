@@ -1,0 +1,80 @@
+<h1 id="idyll-documentation"><a aria-hidden="true" class="anchor-heading" href="#idyll-documentation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Idyll Documentation</h1>
+<h1 id="idyll-documentation--an-overview"><a aria-hidden="true" class="anchor-heading" href="#idyll-documentation--an-overview"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://idyll-lang.org/docs">Idyll Documentation | An overview.</a></h1>
+<h2 id="introduction"><a aria-hidden="true" class="anchor-heading" href="#introduction"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Introduction</h2>
+<p>Idyll can be used to create <a href="https://explorabl.es/">explorable explanations</a>, write data-driven stories, and add interactivity to blog engines and content management systems. The tool can generate standalone webpages or be embedded in existing pages. Choose from built-in themes or provide custom CSS.</p>
+<p><img src="https://idyll-lang.org/static/images/fugazi.gif" alt="/static/images/fugazi.gif"></p>
+<p>We offer a <a href="https://idyll.pub/">free public hosting service</a> so that you can publish your creations to the web in a matter of seconds. Continue reading to learn more about the project, or see our <a href="https://idyll-lang.org/gallery">example gallery</a>.</p>
+<p>Idyll starts with the same principles as markdown, and uses a lot of the same syntax. If you want text to appear in your output, just start writing. The real power of Idyll comes when you want to use JavaScript to enrich your writing. Special syntax allows you to embed JavaScript inline with your text. Idyll comes with a variety of components that can be used out-of-the-box to create rich documents.</p>
+<p>To include a JavaScript component, you can add tags to your text like this:</p>
+<pre><code>Lorem ipsum...
+
+[ComponentName property:variableValue onEvent:`variableValue = 5` /]
+
+Lorem ipsum...
+</code></pre>
+<p>Each tag corresponds to a React component, which receives the provided properties. Properties can be reactive variables or expressions, Idyll handles the logic to watch for variable updates and re-render components as needed. Idyll is compatible with graphics libraries like D3 and P5 and can support most JavaScript libraries that are available on npm.</p>
+<h2 id="example-usage"><a aria-hidden="true" class="anchor-heading" href="#example-usage"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example Usage</h2>
+<p>Idyll includes a number of useful components by default, for example here is a chart component, plotting a sine wave.</p>
+<p>1.02.03.04.05.06.0-1.0-0.50.51.0</p>
+<pre><code>[Chart
+  equation:` (t) => Math.sin(t)`
+  domain:`[0, 2 * Math.PI]`
+  samplePoints:1000 /]
+</code></pre>
+<p>Currently it’s static, but variables can be used to parameterize the output, allowing the chart to dynamically update. For example, we can give it a variable domain, and a variable function to plot.</p>
+<pre><code>[var name:"func" value:`Math.sin` /]
+[var name:"domainStart" value:0 /]
+[var name:"domainEnd" value:`2 * Math.PI` /]
+
+[Chart
+  equation:` (t) => func(t)`
+  domain:`[domainStart, domainEnd]`
+  samplePoints:1000 /]
+</code></pre>
+<p>These variables can be updated based on user actions, for example they can be attached to a button click:</p>
+<p>1.02.03.04.05.06.0-1.0-0.50.51.0</p>
+<pre><code>
+[Chart ... /]
+
+[Button onClick:`func = Math.sin`]sin[/Button]
+[Button onClick:`func = Math.cos`]cos[/Button]
+</code></pre>
+<p>or bound to the value of standard input widgets:</p>
+<p>1.02.03.04.05.06.0-1.0-0.50.51.0</p>
+<h4 id="update-domain"><a aria-hidden="true" class="anchor-heading" href="#update-domain"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Update Domain</h4>
+<p>Start:</p>
+<p>End:</p>
+<pre><code>[Chart ... /]
+
+#### Update Domain
+
+Start: [Range value:domainStart min:`-4 * Math.PI` max:0 step:0.01  /]
+End: [Range value:domainEnd min:0 max:`4 * Math.PI` step:0.01  /]
+</code></pre>
+<p>Write your own equation:</p>
+<p>1.02.03.04.05.06.0-3.0-2.0-1.01.02.03.0</p>
+<h4 id="update-domain-1"><a aria-hidden="true" class="anchor-heading" href="#update-domain-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Update Domain</h4>
+<p>Start:</p>
+<p>End:</p>
+<pre><code>
+[var name:"funcString" value:`"(x) => x * Math.sin(10 / (x || 1))"` /]
+[derived name:"funcFromString" value:`eval(funcString)` /]
+
+[TextInput value:funcString /]
+
+[Chart
+  equation:` (t) =>  funcFromString(t) `
+  domain:`[domainStart, domainEnd]`
+  range:`[-3, 3]`
+  samplePoints:1000 /]
+</code></pre>
+<h2 id="support"><a aria-hidden="true" class="anchor-heading" href="#support"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Support</h2>
+<p>If you like what Idyll is doing, consider <a href="https://opencollective.com/idyll">buying a sticker</a> to help sustain the project, or select from one of the other one-time and recurring donation options on Open Collective.</p>
+<p><a href="https://opencollective.com/idyll/"><img src="https://opencollective.com/idyll/donate/button@2x.png?color=blue"></a></p>
+<p>Idyll is supported by the Interactive Data Lab at the University of Washington, and by O’Reilly Media, Rhizome and The Eutopia Foundation.<img src="inbox/assets/sponsors..png" alt="sponsors"></p>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #054907;" href="/notes/j9wop01y5eo30zr168a0g3n">articles</a></li>
+<li><a class="color-tag" style="--tag-color: #ffb07c;" href="/notes/d6oeuzrs1weth2ycsn4xbcb">webmark</a></li>
+</ol>

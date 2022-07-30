@@ -1,0 +1,56 @@
+<h1 id="sgid"><a aria-hidden="true" class="anchor-heading" href="#sgid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SGID</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<h3 id="special-permission---sgid"><a aria-hidden="true" class="anchor-heading" href="#special-permission---sgid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Special Permission - <a href="/notes/51fvmn1jjdv3mqercybkjz9">SGID</a></h3>
+<ul>
+<li>SGID or Set Group ID</li>
+<li>SGID is set mainly to directories</li>
+<li>If you set SGID on directories, all files or directories created inside that directory will be owned by the same group owner of the directory where SGID was configured.</li>
+<li>This is useful in creating shared directories, which are directories that are writable at the group level.</li>
+<li>Absolute Mode: <code>chmod 2xxx directory</code></li>
+<li>Relative Mode: <code>chmod g+s directory</code></li>
+<li><code>ls -ld /programming/</code>
+<ul>
+<li><code>drwxrws---2 pr1 programmers 4096 iul 14 13:15 /programming/</code></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><code>sudo su</code></li>
+<li><code>groupadd programmers</code></li>
+<li><code>useradd -s /bin/bash pr1</code></li>
+<li><code>useradd -s /bin/bash pr2</code></li>
+<li><code>usermod -aG programmers pr1</code></li>
+<li><code>usermod -aG programmers pr2</code></li>
+<li><code>mkdir /programming/</code></li>
+<li><code>chown pr1:programmers /programming/</code></li>
+<li><code>chmod 770 /programming/</code></li>
+<li><code>su pr1</code></li>
+<li><code>cd /programming/</code></li>
+<li><code>touch source1.cpp</code></li>
+</ul>
+<p>At this point the <span class="underline">group owner of the file is the primary group of the creator</span> and the other users in the <code>programmers</code> group will not be able to change the file or work on it, we can give individual permissions to the other users but it can be a security issue.</p>
+<h3 id="setting-up-sgid"><a aria-hidden="true" class="anchor-heading" href="#setting-up-sgid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setting up SGID</h3>
+<p><code>chmod 2770 /programming</code> or <code>chmod g+s /programming</code></p>
+<p>Verify with <code>ls -ld /programming</code> or <code>stat /programming</code></p>
+<p>There will be an additional <code>s</code> letter added to the permissions, if there is an uppercase <code>S</code> it means there are not execution permissions set for that directory.</p>
+<ul>
+<li><code>su pr2</code></li>
+<li><code>cd /programming</code></li>
+<li><code>touch source2.cpp</code></li>
+<li><code>mkdir goland python</code>
+<ul>
+<li>Newly created dirs will have similar permissions as the parent directory with the SGID set</li>
+</ul>
+</li>
+<li>The group of the newly created files and dirs will be "programmers" and not "pr1"</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+<li><a href="/notes/51fvmn1jjdv3mqercybkjz9">SGID</a></li>
+</ul>

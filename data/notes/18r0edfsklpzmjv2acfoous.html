@@ -1,0 +1,54 @@
+<h1 id="sshd"><a aria-hidden="true" class="anchor-heading" href="#sshd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>sshd</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a>, <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>sshd is the OpenSSH server process. It listens to incoming connections using the SSH protocol and acts as the server for the protocol. It handles user authentication, encryption, terminal connections, file transfers, and tunneling. — via <a href="https://www.ssh.com/academy/ssh/sshd">Sshd is the Linux OpenSSH server process. How to install, setup, and diagnose.</a></p>
+</blockquote>
+<ul>
+<li><code>d</code> as in <a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a></li>
+</ul>
+<h3 id="securing-the-openssh-server-sshd"><a aria-hidden="true" class="anchor-heading" href="#securing-the-openssh-server-sshd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Securing the OpenSSH Server (sshd)</h3>
+<ul>
+<li>Default installation of SSH isn’t secure, it needs some hardening.</li>
+<li>The SSH server has a configuration file, usually <code>/etc/sshd/sshd_config</code>. The configuration file specifies encryption options, authentication options, file locations, logging, and various other parameters.</li>
+<li>Edit <code>sshd_config</code> for making any changes to the server and restart the server.</li>
+<li>Backup the file before making changes to it.</li>
+<li>Change default port from <code>Port 22</code> to a random port number
+<ul>
+<li>This is security by obscurity</li>
+<li>Not the best security practice but highly recommended</li>
+<li>Hackers could scan for specific Port 22 or they could also scan all the ports but in case of <a href="/notes/o922t6d9q6wur3yve290hir">SSH</a> most of the time the attacks are not targeted but automated.</li>
+<li>Don’t forget to make the changes to the firewall rules to allow the newly defined port.</li>
+</ul>
+</li>
+<li>Disable direct root login through <a href="/notes/o922t6d9q6wur3yve290hir">SSH</a>
+<ul>
+<li><code>#PermitRootLogin prohibit-password</code> is default; which means you can login as root using a different method such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Public Key Authentication (Private)</a> but it is recommended to change it to <code>#PermitRootLogin no</code></li>
+</ul>
+</li>
+<li>Disable password authentication</li>
+<li>List the users that have ssh access under <code>AllowUsers</code></li>
+<li>Filter ssh access at the firewall level, limit the access of ssh from a predefined list of source <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>ess</li>
+<li>An example rule is defined below</li>
+<li><code>iptables -A INPUT -p tcp --dport 2278 -s 2.2.4.5 -j ACCEPT</code></li>
+<li>Drop access for all the other IP Addresses</li>
+<li><code>iptables -A INPUT -p tcp --dport 2278 -j DROP</code></li>
+<li>Use SSH protocol version 2</li>
+<li>Set idle timeout interval
+<ul>
+<li><code>ClientAlive</code></li>
+</ul>
+</li>
+<li><code>MaxAuthTries</code> max number of authentication attempts</li>
+<li><code>MaxStartups</code> max number of concurrent unauthenticated connections to the SSH daemon</li>
+<li><code>LoginGraceTime</code> the server disconnects after this time if the user has not successfully logged in.</li>
+<li>Always use latest version of <a href="/notes/o922t6d9q6wur3yve290hir">SSH</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a></li>
+<li><a href="/notes/o922t6d9q6wur3yve290hir">SSH</a></li>
+</ul>

@@ -1,0 +1,123 @@
+<h1 id="ip-address"><a aria-hidden="true" class="anchor-heading" href="#ip-address"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IP Address</h1>
+<p>Related: <a href="/notes/9vmmmhyayk6vi0i7w5cnwjv">Subnet</a></p>
+<hr>
+<p>IP Address is basically how computers(servers) talk to each other on the internet. IP Address is provided by a Network Interface of a computer, these are public IP Addresses. IP Address are made user friendly by using a <a href="/notes/pjbeze05otspq0j7j48beqp">DNS</a>that converts a domain name to an IP Address.</p>
+<p><strong>IP Address Components:</strong></p>
+<p>Like other network layer protocols, the IP addressing scheme is integral to the process of routing IP data through an internetwork.</p>
+<p>Each host on a TCP/IP network is assigned a unique 32-bit logical address. The IP address is divided into two main parts; the Network Number and the Host Number.</p>
+<p>The network number identifies the network and must be assigned by the Internet Network Information Center (InterNIC) if the network is to be part of the Internet.</p>
+<p>The host number identifies a host in the network and is assigned by the local network administrator.</p>
+<p><strong>IP Address Format:</strong></p>
+<p>The 32-bit IP address is grouped 8 bits at a time, each group of 8 bits is an octet. Each of the four octets are separated by a dot, and represented in decimal format, this is known as dotted decimal notation. Each bit in an octet has a binary weight (128, 64, 32, 16, 8, 4, 2, 1). The minimum value for an octet is 0 (all bits set to 0), and the maximum value for an octet is 255 (all bits set to 1).</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655735910/wiki/wtzdd2lbx2pixujmqqx0.png"></p>
+<p><strong>IP Address Classes:</strong></p>
+<p>IP addressing supports three different commercial address classes; Class A, Class B, and Class C.</p>
+<p>In a class A address, the first octet is the network portion, so the class A address of, 10.1.25.1, has a major network address of 10. Octets 2, 3, and 4 (the next 24 bits) are for the hosts. Class A addresses are used for networks that have more than 65,536 hosts (actually, up to 16,581,375 hosts!).</p>
+<p>In a class B address, the first two octets are the network portion, so the class B address of, 172.16.122.204, has a major network address of 172.16. Octets 3 and 4 (the next 16 bits) are for the hosts. Class B addresses are used for networks that have between 256 and 65,536 hosts.</p>
+<p>In a class C address, the first three octets are the network portion. The class C address of, 193.18.9.45, has a major network address of 193.18.9. Octet 4 (the last 8 bits) is for hosts. Class C addresses are used for networks with less than 254 hosts.</p>
+<p>Via — <a href="http://penta2.ufrgs.br/trouble/ts_ip.htm">Basic IP Addressing and Troubleshooting Guide</a></p>
+<hr>
+<h2 id="structure-of-an-ip-address"><a aria-hidden="true" class="anchor-heading" href="#structure-of-an-ip-address"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Structure of an IP Address</h2>
+<p>IP Addresses are written in decimal dotted notation.</p>
+<p><code>192.168.0.1</code></p>
+<p>Each part of the IP address is a binary octet.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656322930/wiki/gruxal4tsobjfhxdkw00.png"></p>
+<p>This is important for <a href="/notes/9vmmmhyayk6vi0i7w5cnwjv">Subnet</a>ting.</p>
+<h2 id="networks-and-hosts"><a aria-hidden="true" class="anchor-heading" href="#networks-and-hosts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Networks and Hosts</h2>
+<p>Every IP address has a Network ID and a Host ID</p>
+<p>Network ID will remain same for every computer on this network.</p>
+<p>Host ID will be unique for every computer on this network.</p>
+<p>Subnet masks tells us which part is the Network ID and which is Host ID.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656323194/wiki/glrh3blvpzga1d4itquu.png"></p>
+<p>When we have <code>255</code> (all the 8 bits are 1) is where we essentially have a bit that is a <code>1</code>. It represents a Network ID.</p>
+<p>Last octet in the orange box is the Host ID, every bit in a subnet mask that is a <code>0</code> means there are values that can be assigned to host.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656323419/wiki/vsvc0stwao9rrbyuib2e.png"></p>
+<p>Lets say you’ve a network with several computers, they each will have different host IDs but same network ID.</p>
+<h2 id="classes-of-ipv4-address"><a aria-hidden="true" class="anchor-heading" href="#classes-of-ipv4-address"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Classes of IPv4 Address</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656323639/wiki/gnfsubay6bnavdg3spkv.png"></p>
+<p><strong>Private IP address range</strong></p>
+<p>Reserved for private/internal use in an organization according to IETF RFC-1918.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656323694/wiki/piorhozhal6mgghcyo24.png"></p>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">CIDR</span></div>
+<a href="/notes/h75m1yelgfwk39wqm1ep89z" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Subnet</span></div>
+<a href="/notes/9vmmmhyayk6vi0i7w5cnwjv" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h2 id="drawbacks-of-classful-addressing"><a aria-hidden="true" class="anchor-heading" href="#drawbacks-of-classful-addressing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Drawbacks of Classful Addressing</h2>
+<ul>
+<li><strong>Lack of internal address flexibility</strong>: Large organizations are assigned "monolithic" blocks of addresses that don't match well with the structure of the internal network.</li>
+<li><strong>Inefficient use of address space</strong>: The existence of only three block sizes(classes A,B and C) leads to wastage of limited IP address space.</li>
+<li><strong>Proliferation of router table entries</strong>: As the internet grows, more entries are required for routers to handle the routing if IP datagrams, which causes performance problems for routers. Attempting to reduce inefficient address space allocation leads to even more router table entries.</li>
+</ul>
+</div></div><p></p><p></p>
+<h2 id="classless-interdomain-routing-cidr"><a aria-hidden="true" class="anchor-heading" href="#classless-interdomain-routing-cidr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Classless Interdomain Routing (CIDR)</h2>
+<p>CIDR is a notation for describing blocks of IP addresses and is used heavily in various networking configurations. IP addresses contain 4 octets, each consisting of 8 bits giving values between 0 and 255. The decimal value that comes after the slash is the number of bits consisting of the routing prefix. This in turn can be translated into a netmask, and also designates how many available addresses are in the block.</p>
+<p>Sometimes we want to vary the length of our subnet masks and we don’t want to stick to the standard classes so we use CIDR. It helps optimize the IP space. It uses variable length subnet mask(VLSM).</p>
+<p>CIDR (Classless Inter-Domain Routing) -- also known as supernetting -- is a method of assigning Internet Protocol (IP) addresses that improves the efficiency of address distribution and replaces the previous system based on Class A, Class B and Class C networks.</p>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://cidr.xyz/">CIDR.xyz</a></li>
+<li><a href="https://www.youtube.com/watch?v=z07HTSzzp3o&#x26;t=216s">IPv4, CIDR, and VPC Subnets Made Simple! - YouTube</a></li>
+</ul>
+</div></div><p></p><p></p>
+<hr>
+<h2 id="how-is-an-ip-address-assigned"><a aria-hidden="true" class="anchor-heading" href="#how-is-an-ip-address-assigned"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How is an <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> assigned?</h2>
+<p>Apparently using some <a href="/notes/rtyj4xcc6s8nx0yi5mxhmjy">DHCP</a> magic, <a href="/notes/7r0uunvdkt9sgw6ajq5vg0x">router</a> assigns an <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> to any computer/thing that connects to it.</p>
+<p>Why is that most of the IP address start from <code>192.168.1.204</code> when they each of the octet can be anywhere between 0.255?</p>
+<p>It is because of subnet mask. If your subnet mask is <code>255.255.255.0</code> it'll match one on one with <code>192.168.1.204</code> the first three of the IP address will always remain the same IN YOUR NETWORK.</p>
+<p>The last octet or the number in subnet if it is 0 - it basically tells us that the last octet can be whatever you want (as long as it is between 0-255)</p>
+<p>The first three octets are NETWORK ID - the last octet is HOST ID</p>
+<p>HOST ID will change based on the device connected.</p>
+<p>When a networks wants to talk to something that is not on the same network - it takes the help of Default Gateway aka Router.</p>
+<p>You cannot use <code>192.168.1.0</code> it is the NETWORK ADDRESS.</p>
+<p>OR</p>
+<p>You cannot use <code>192.168.1.255</code> it is the BROADCAST ADDRESS. When you send something to last IP Address in a network, it tells it to everyone in the network.</p>
+<p>OR</p>
+<p>You cannot use <code>192.168.1.1</code> because it's the Router's address(Default Gateway)</p>
+<p>In total you can <code>253</code> addresses.</p>
+<hr>
+<p>Your IP Address is the size of 32 bits, 4 bytes(8 bits = 1 byte). Hence four binary octets.</p>
+<p>Powers of 2 chart is utilized to convert binary to decimal.</p>
+<p>8 Bit Octet Chart</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656331702/wiki/npacf0svnom9sisa86sd.png"></p>
+<h2 id="resources-1"><a aria-hidden="true" class="anchor-heading" href="#resources-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=5WfiTHiU4x8">what is an IP Address? // You SUCK at Subnetting // EP 1 - YouTube</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+<li><a href="/notes/ks0724ic46vnuso02phu8ow">Nmap - Open ports</a></li>
+<li><a href="/notes/rtyj4xcc6s8nx0yi5mxhmjy">DHCP</a></li>
+<li><a href="/notes/pjbeze05otspq0j7j48beqp">DNS</a></li>
+<li><a href="/notes/osajilt9rsnrz5ng14pmy8x">ifconfig</a></li>
+<li><a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a></li>
+<li><a href="/notes/6m8y2g4yr37x372c2r5vwej">ip</a></li>
+<li><a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a></li>
+<li><a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a></li>
+<li><a href="/notes/hjm4wdsz5kubm8h8pm006dd">Load Balancer</a></li>
+<li><a href="/notes/vro2wf2ayviwa9mlv92e452">netplan</a></li>
+<li><a href="/notes/2lmaspsqaxrf42wuvmcp02f">Network Layer - OSI</a></li>
+<li><a href="/notes/b22uf82a31xkdp1cnlx713v">Nmap</a></li>
+<li><a href="/notes/5xbq8dqh6wbqd14aqyn863v">ping</a></li>
+<li><a href="/notes/7r0uunvdkt9sgw6ajq5vg0x">router</a></li>
+<li><a href="/notes/o922t6d9q6wur3yve290hir">SSH</a></li>
+<li><a href="/notes/18r0edfsklpzmjv2acfoous">sshd</a></li>
+<li><a href="/notes/9vmmmhyayk6vi0i7w5cnwjv">Subnet</a></li>
+<li><a href="/notes/rkxi9ojd57alhi83ezqb41o">systemd-networkd</a></li>
+<li><a href="/notes/q92tfbbhyglmyk3jdtx5vm5">TCP⁄IP Model</a></li>
+</ul>

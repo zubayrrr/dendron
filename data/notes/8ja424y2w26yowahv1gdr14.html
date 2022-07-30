@@ -1,0 +1,32 @@
+<h1 id="regexp"><a aria-hidden="true" class="anchor-heading" href="#regexp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>REGEXP</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p><a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a> supports another type of pattern matching operation(<a href="/notes/d7h99jjn2d17ybx1f4pj57c">LIKE</a>) based on the <a href="/notes/wefzur43lxsejxhpzya0oz1">regular expression</a>s that is REGEXP operator</p>
+<ul>
+<li>It provide a powerful and flexible pattern match that can help us implement power search utilities for our database systems.</li>
+<li>REGEXP is the operator used when performing regular expression pattern matches. <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.RLIKE (Private)</a> is the synonym.</li>
+<li>It also supports a number of metacharacters which allow more flexibility and control when performing pattern matching.</li>
+<li>The backslash is used as an escape character. It’s only considered in the pattern match if double backslashes have used.</li>
+<li>Not case sensitive.</li>
+</ul>
+<!-- end list -->
+<pre><code>SELECT *
+FROM customers
+WHERE last_name LIKE '%field%'
+</code></pre>
+<p>Instead of using <a href="/notes/d7h99jjn2d17ybx1f4pj57c">LIKE</a>we can use REGEXP such as:</p>
+<pre><code>WHERE last_name REGEXP 'field'
+</code></pre>
+<h3 id="patterns"><a aria-hidden="true" class="anchor-heading" href="#patterns"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Patterns</h3>
+<ul>
+<li>caret(^) matches beginning of the string</li>
+<li>dollar sign($) matches end of the string</li>
+<li>p1|p2|p3, pipe matches any of the patterns p1, p2, or p3; Alternation</li>
+<li><code>[]</code> - Any character listed between the square brackets
+<ul>
+<li><code>WHERE last_name REGEXP '[gim]e'</code> searches for last name that ends in <code>e</code> but has any of the characters mentioned in the brackets before it.</li>
+<li><code>'[a-h]e'</code> will look for all characters from a to h before e</li>
+</ul>
+</li>
+</ul>

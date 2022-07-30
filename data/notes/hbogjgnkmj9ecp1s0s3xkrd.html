@@ -1,0 +1,165 @@
+<h1 id="vcv-rack"><a aria-hidden="true" class="anchor-heading" href="#vcv-rack"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Vcv Rack</h1>
+<ul>
+<li>Areas: <a href="/notes/z121gkmqfo09m8r7jgnpfgn">Music</a></li>
+</ul>
+<hr>
+<h2 id="lets-learn-vcv-rack"><a aria-hidden="true" class="anchor-heading" href="#lets-learn-vcv-rack"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Lets learn VCV Rack</h2>
+<p>It is an Eurorack Synthesizer</p>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Modular Synth</span></div>
+<a href="/notes/6jqhguhs1ulfgyyjret7rzb" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p>A modular synth lets you make sound using analogue electronics</p>
+<p>You use continuous signal, not digital.</p>
+<p>It is basically an analogue computer for sound.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658195351/wiki/kgxqrt4sva2aecff4qlq.png"></p>
+</div></div><p></p><p></p>
+<h2 id="vco"><a aria-hidden="true" class="anchor-heading" href="#vco"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>VCO</h2>
+<p><strong>Voltage Controlled Oscillator</strong></p>
+<ul>
+<li>Sounds start with an oscillator (VCO) that can produce different waveforms with different sonic qualities</li>
+<li>We use electrical signals to represent sounds and control effects
+in a modular synthesizer.</li>
+<li>An oscillator generates a repeating signal that corresponds to a
+sound.</li>
+<li>An electrical signal that is used to control a module is called a
+<strong>Control Voltage</strong> (CV).</li>
+<li>It can produce Analogue or Digital waveform.</li>
+<li>It has frequency (pitch) control.</li>
+<li>It has pulse width knob for square wave.</li>
+<li>Type of waves VCO can make:
+<ul>
+<li>Sine</li>
+<li>Triangle</li>
+<li>Sawtooth</li>
+<li>Square</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658195402/wiki/nqsqivtxdyqhniaosbts.png"></p>
+<p>Here, we have <strong>patch</strong>, a VCO's SIN output in the AUDIO's left input.</p>
+<p>What colored light's indication mean:</p>
+<ul>
+<li><strong>red</strong> = negative voltage,</li>
+<li><strong>green</strong> = positive voltage,</li>
+<li><strong>yellow</strong> = going positive and negative,</li>
+<li><strong>black</strong> = zero voltage</li>
+</ul>
+<h2 id="patching-rules"><a aria-hidden="true" class="anchor-heading" href="#patching-rules"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Patching Rules</h2>
+<ul>
+<li>Patch lead must go between an output and an inp</li>
+<li>Each input can only be connected to one output</li>
+<li>Each output can be connected to multiple inputs</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658195376/wiki/erlpgzewwnuuuaub3efo.png"></p>
+<ul>
+<li>
+<p>Set the audio encoding parameters. If the sound stutters increase the block size until the stutter stop</p>
+</li>
+<li>
+<p>Frequency is measured in Hertz (Hz) – the number of times the signal does a complete oscillation in 1 second</p>
+</li>
+<li>
+<p>Useful frequencies for sounds are about 20Hz – 20kHz</p>
+</li>
+<li>
+<p>Frequency corresponds to the pitch of a note</p>
+</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658195519/wiki/qwd0jvr4tlnndqifzr0i.png"></p>
+<p>Adding a <strong>VCA</strong> to the mix</p>
+<h2 id="vca"><a aria-hidden="true" class="anchor-heading" href="#vca"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>VCA</h2>
+<p>Voltage Controlled Amplifier. In this context, an amplifier can change the level of a signal while keeping the same proportionate shape (and sound)</p>
+<p><strong>Chaining signals through modules</strong></p>
+<ul>
+<li>We can chain the oscillator output signal through other modules (e.g. VCA) to further modify its sound</li>
+<li>A core concept in modular synthesizers to chain a signal through modules</li>
+<li>Each module in the chain can add a different modification to the signal</li>
+<li>You can add as many links in the chain as you wan to achieve the sound you like</li>
+<li>You can also split and combine signals to create chains that follow multiple paths</li>
+</ul>
+<h2 id="oscilloscope"><a aria-hidden="true" class="anchor-heading" href="#oscilloscope"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Oscilloscope</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658196175/wiki/ftswuqzpnfp4si7sxg11.png"></p>
+<p>Patch the VCA output to IN 1. The scope shows the waveform of the electrical signal on the IN 1. Adjust the TIME knob and play around with different type of waves.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658196388/wiki/cu0he6cpn3hp3ct33wqp.png"></p>
+<ul>
+<li>Waveform amplitude is the loudness of the corresponding sound (Control on the VCA)</li>
+<li>Waveform frequency is the pitch of the corresponding sound</li>
+<li>Waveform shape is the tonal quality of the corresponding sound (roughly: the more angular, the harsher the sound)</li>
+</ul>
+<h2 id="cv"><a aria-hidden="true" class="anchor-heading" href="#cv"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CV</h2>
+<p><strong>Control Voltage</strong></p>
+<p>Another core concept in <a href="/notes/6jqhguhs1ulfgyyjret7rzb">Modular Synth</a>.</p>
+<p>We can use Control Voltages (CVs) to automatically control parameters in modules
+What if we used electrical signals instead of manually turning the knobs to control the waves and their behaviour. We can use these electrical signals to automate.</p>
+<p>This type of signal is called <strong>Control Voltage</strong>.</p>
+<p>To generate CVs we can use:</p>
+<ul>
+<li>Sequencer</li>
+<li>Input device (could also be mod wheel, pads, key velocity etc. etc.)</li>
+</ul>
+<h2 id="seq-3"><a aria-hidden="true" class="anchor-heading" href="#seq-3"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SEQ 3</h2>
+<p>Sequencer</p>
+<p>We can generate CVs from a sequencer.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658199602/wiki/rokxxtvjhilnxjczjfhe.png"></p>
+<p>CV 1 from SEQ 3 to V/OCT of the VCO, Randomize SEQ 3</p>
+<h2 id="voct"><a aria-hidden="true" class="anchor-heading" href="#voct"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>V/OCT</h2>
+<p>1 Volt = 1 Octave change in pitch</p>
+<p><strong>Volt per Octave</strong></p>
+<ul>
+<li>
+<p>The V/OCT CV input to the oscillator will change the pitch by 1 octave for each volt at that input
+– Equivalent to halving or doubling the frequency
+– To move one semitone use 1/12th of a volt</p>
+</li>
+<li>
+<p><code>+ve</code> voltages go up, <code>-ve</code> voltages go down</p>
+</li>
+<li>
+<p>Change is relative to the frequency set with the manual knobs</p>
+</li>
+<li>
+<p>We can even chain CV signals through modules
+– e.g. through a VCA to change the intensity of a CV</p>
+</li>
+<li>
+<p>GATE is positive when a note is played</p>
+</li>
+<li>
+<p>CV is V/OCT for the pitch of the last note</p>
+</li>
+</ul>
+<h2 id="fm"><a aria-hidden="true" class="anchor-heading" href="#fm"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>FM</h2>
+<p><strong>Frequency Modulation</strong> is added (FM) to the output, which is a small change in frequency controlled by a CV. Creates vibratos, slurs and zaps.</p>
+<h2 id="lfo"><a aria-hidden="true" class="anchor-heading" href="#lfo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>LFO</h2>
+<p><strong>Low Frequency Oscillator</strong></p>
+<p>Is another important module. It should really be called a VCLFO, but I guess synth geeks like TLAs.</p>
+<ul>
+<li>Essential functions are the same as the oscillator we already know, except it operates at lower frequencies.</li>
+<li>Use it for vibrato or other repeating effects.</li>
+<li>LFO SQR (square wave) outputs can also be used as “Clocks” to deliver regular pulses to modules that need pulse-inputs.</li>
+<li>It has output modes: positive (UNI) and positive and negative (BI) voltage ranges.</li>
+<li><code>RESET</code> resets oscillator to the starting position (0 Volts).</li>
+</ul>
+<h2 id="adsr"><a aria-hidden="true" class="anchor-heading" href="#adsr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ADSR</h2>
+<p>An Envelope Generator, commonly <strong>Attack-Decay-Sustain-Release</strong> (ADSR) module.</p>
+<ul>
+<li>ADSR is an engineer’s model of how the loudness of a musical note changes as it is played</li>
+<li>Value of the ADSR parameters can be set by control knobs and CVs.</li>
+<li>Normally you connect the GATE input to a GATE output from a sequencer or keyboard.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658202139/wiki/urgnljzn4u8vfhhyhkhc.png"></p>
+<h2 id="notes"><a aria-hidden="true" class="anchor-heading" href="#notes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Notes</h2>
+<ul>
+<li>Use a smooth analogue CV to vary the volume of a sound. Creates “natural” decay of notes and vibrato effects.</li>
+<li>Add Pulse Width Modulation (PWM) to the oscillator square wave controlled by the CV. Creates “phasing” type sounds</li>
+</ul>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://youtube.com/playlist?list=PLcaEIjiwaCmTpG7i5Gm5jro0M6kXtl-zt">Intro to Eurorack (ft. VCV Rack)</a></li>
+</ul>

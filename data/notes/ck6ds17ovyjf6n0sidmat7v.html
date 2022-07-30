@@ -1,0 +1,27 @@
+<h1 id="networking-in-linux"><a aria-hidden="true" class="anchor-heading" href="#networking-in-linux"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Networking in Linux</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a>, <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<ul>
+<li>Getting Information about the Network Interfaces
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ifconfig (Private)</a>, <a href="/notes/6m8y2g4yr37x372c2r5vwej">ip</a></li>
+<li><code>lo</code> stands for loopback (inteface)</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">enp0s3 (Private)</a> for the <a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a> interface</li>
+<li>There are other names for interfaces such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">wlo1 (Private)</a> , <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">wlan0 (Private)</a> for wireless interface.</li>
+</ul>
+</li>
+<li>When configuring network intefaces using <a href="/notes/6m8y2g4yr37x372c2r5vwej">ip</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ipconfig (Private)</a>, <a href="/notes/qwl0e3yyytwmjda429vdwlq">route</a> you must run them as root(<a href="/notes/jqyxvlopjrxj27o648plyk9">sudo</a>)</li>
+<li>Network inteface configuration set by <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ifconfig (Private)</a> or <a href="/notes/6m8y2g4yr37x372c2r5vwej">ip</a> are not persistent, after a system restart all the changes are lost. To make them persist, we need to edit distro specifc configuration file. For example on Ubuntu you have to use <a href="/notes/vro2wf2ayviwa9mlv92e452">netplan</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">systemd-networkd (Private)</a> for static configuration of the network.</li>
+<li>Network Troubleshooting/Tesing
+<ul>
+<li><a href="/notes/5xbq8dqh6wbqd14aqyn863v">ping</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

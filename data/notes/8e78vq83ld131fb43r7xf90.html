@@ -1,0 +1,62 @@
+<h1 id="chmod"><a aria-hidden="true" class="anchor-heading" href="#chmod"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>chmod</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li><code>chmod</code> is the command used to change the permissions of a file or a directory using either the symbolic or the numeric notation (<a href="/notes/jqnpryjto5mvfqztm2qtliw">Octal Notation</a>).</li>
+<li>Only the root, or the file's owner can change the file's permissions.</li>
+</ul>
+<h3 id="syntax"><a aria-hidden="true" class="anchor-heading" href="#syntax"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Syntax:</h3>
+<p><code>chmod [who][OPERATION][permissions] filename</code></p>
+<h3 id="who"><a aria-hidden="true" class="anchor-heading" href="#who"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>who</code></h3>
+<ul>
+<li><code>u</code> the <strong>user</strong> that owns the file</li>
+<li><code>g</code> the <strong>group</strong> that the file belongs to</li>
+<li><code>o</code> the <strong>other</strong> users</li>
+<li><code>a</code> for <strong>all</strong></li>
+</ul>
+<h3 id="operation-flags"><a aria-hidden="true" class="anchor-heading" href="#operation-flags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>OPERATION flags</h3>
+<ul>
+<li><code>-</code> a hyphen means remove the specified permissions</li>
+<li><code>+</code> the plus sign means add the specified permissions</li>
+<li><code>=</code> the equals sign means change the current permissions to the specified permissions</li>
+</ul>
+<p>The permissions are specified using the letters <code>r</code>, <code>w</code> and <code>x</code></p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li>Removing <code>w</code> permissions
+<ul>
+<li><code>chmod u-w file.txt</code></li>
+</ul>
+</li>
+<li>Adding permissions
+<ul>
+<li><code>chmod u+rwx file.txt</code></li>
+</ul>
+</li>
+<li><code>chmod -v u-x,g+w,o-rwx file.txt</code></li>
+<li><code>chmod ug-r,u+x,o-rwx file.txt</code></li>
+<li><code>chmod a+r,a-wx file.txt</code></li>
+<li><code>chmod ug=rw,o= file.txt</code></li>
+</ul>
+<h3 id="absolute-changing-mode"><a aria-hidden="true" class="anchor-heading" href="#absolute-changing-mode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Absolute changing mode</h3>
+<p>Setting permission for all users, groups, others at the same time</p>
+<ul>
+<li><code>chmod 644 file.txt</code></li>
+<li><code>chmod 777 file.txt</code></li>
+<li><code>chmod 400 file.txt</code></li>
+<li><code>-R</code> for recursively assigning permissions</li>
+<li><code>chmod -R 750 dirName.txt</code> (not recommended since the permissions for files have a different effect as permissions for directories) <a href="/notes/6vzwh1eaj567nroqwy1uf5s">The Effect of Permissions on Directories</a></li>
+</ul>
+<h3 id="inherit-permissions-from-a-file"><a aria-hidden="true" class="anchor-heading" href="#inherit-permissions-from-a-file"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Inherit permissions from a file</h3>
+<ul>
+<li><code>chmod --reference=refFile.txt file.txt</code></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/8f7fkugnclgo7744xnma2d2">Combining Find and Chmod Commands Together</a></li>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+<li><a href="/notes/29n92e4t22kpncwz11elghh">SUID</a></li>
+</ul>

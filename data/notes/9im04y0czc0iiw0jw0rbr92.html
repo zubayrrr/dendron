@@ -1,0 +1,70 @@
+<h1 id="restore-volume-from-a-snapshot-of-ec2-instance"><a aria-hidden="true" class="anchor-heading" href="#restore-volume-from-a-snapshot-of-ec2-instance"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Restore volume from a snapshot of EC2 instance</h1>
+<ul>
+<li>Related: <a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a>, <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a></li>
+</ul>
+<hr>
+<p><strong>Premise</strong></p>
+<p>Say that one of our EC2 instance's volume gets corrupted but we want to restore it using one of the snapshots that we've made <a href="/notes/pr716orm61uub9wy1ksco8h">previously</a>.</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> boto3
+<span class="token keyword">from</span> operator <span class="token keyword">import</span> itemgetter
+
+ec2_client <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-west-3"</span><span class="token punctuation">)</span>
+ec2_resource <span class="token operator">=</span> boto3<span class="token punctuation">.</span>resource<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-west-3"</span><span class="token punctuation">)</span>
+
+instance_id <span class="token operator">=</span> <span class="token string">"i-04f01be7a765eaf7e"</span>
+
+volumes <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>describe_volumes<span class="token punctuation">(</span>
+    Filters<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">'Name'</span><span class="token punctuation">:</span> <span class="token string">'attachment.instance-id'</span><span class="token punctuation">,</span>
+            <span class="token string">'Values'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>instance_id<span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+instance_volume <span class="token operator">=</span> volumes<span class="token punctuation">[</span><span class="token string">'Volumes'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+snapshots <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>describe_snapshots<span class="token punctuation">(</span>
+    OwnerIds<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'self'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    Filters<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">'Name'</span><span class="token punctuation">:</span> <span class="token string">'volume-id'</span><span class="token punctuation">,</span>
+            <span class="token string">'Values'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>instance_volume<span class="token punctuation">[</span><span class="token string">'VolumeId'</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+latest_snapshot <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>snapshots<span class="token punctuation">[</span><span class="token string">'Snapshots'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> key<span class="token operator">=</span>itemgetter<span class="token punctuation">(</span><span class="token string">'StartTime'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>latest_snapshot<span class="token punctuation">[</span><span class="token string">'StartTime'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+new_volume <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>create_volume<span class="token punctuation">(</span>
+    SnapshotId<span class="token operator">=</span>latest_snapshot<span class="token punctuation">[</span><span class="token string">'SnapshotId'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    AvailabilityZone<span class="token operator">=</span><span class="token string">"eu-west-3b"</span><span class="token punctuation">,</span>
+    TagSpecifications<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">'ResourceType'</span><span class="token punctuation">:</span> <span class="token string">'volume'</span><span class="token punctuation">,</span>
+            <span class="token string">'Tags'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token string">'Key'</span><span class="token punctuation">:</span> <span class="token string">'Name'</span><span class="token punctuation">,</span>
+                    <span class="token string">'Value'</span><span class="token punctuation">:</span> <span class="token string">'prod'</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    vol <span class="token operator">=</span> ec2_resource<span class="token punctuation">.</span>Volume<span class="token punctuation">(</span>new_volume<span class="token punctuation">[</span><span class="token string">'VolumeId'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>vol<span class="token punctuation">.</span>state<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> vol<span class="token punctuation">.</span>state <span class="token operator">==</span> <span class="token string">'available'</span><span class="token punctuation">:</span>
+        ec2_resource<span class="token punctuation">.</span>Instance<span class="token punctuation">(</span>instance_id<span class="token punctuation">)</span><span class="token punctuation">.</span>attach_volume<span class="token punctuation">(</span>
+            VolumeId<span class="token operator">=</span>new_volume<span class="token punctuation">[</span><span class="token string">'VolumeId'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            Device<span class="token operator">=</span><span class="token string">'/dev/xvdb'</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a></li>
+</ul>

@@ -1,0 +1,155 @@
+<h1 id="scala"><a aria-hidden="true" class="anchor-heading" href="#scala"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Scala</h1>
+<p>Creating a variable</p>
+<p><code>var num : Int = 8;</code></p>
+<ul>
+<li>where <code>Int</code> is a class, <code>num</code> is an object and <code>8</code> is also an object, <code>;</code> semi colons are optional.</li>
+</ul>
+<p>Don't create a variable that is sharing and changing at the same time.</p>
+<p>Scala believes in concurrency, to achieve concurrency, immutability, like <code>final</code> in <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Java (Private)</a>, we have <code>val</code> in Scala.</p>
+<p>You can change value of <code>var</code> but cannot change value of <code>val</code>.</p>
+<p>We use operator overloading in Scala since its (also) a functional programming language.</p>
+<p>When we do <code>8 + 7</code> we're really doing <code>8.+(7)</code></p>
+<p><code>var result = 8.+(7)</code> the <code>+</code> operator is not really an operator its a function/method</p>
+<p>To create a class</p>
+<pre><code>case class Student(var rollno: Int, var name : String, var marks : Int)
+// dont need a separate constructor
+// for assigning defaults, just proceed with giving values for the variables that were defined, you can also do constructor overloading
+
+var s1 = Student(4) //> s1 : Demo.Student = Student(4, defaultValue, defaultValue)
+
+// when the passed value doesn't match the first variable Scala was expecting, it'll throw an error to explicitly define it
+
+var s1 = Student(name = "Somevalue")
+</code></pre>
+<h3 id="method-calls"><a aria-hidden="true" class="anchor-heading" href="#method-calls"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Method calls</h3>
+<pre><code>case class Student(var rollno: Int = 1, var name : String = "This String", var marks : Int = 100)
+{
+    def show() = println("Hello There!") // use {} if your method is larger than 1 line
+}
+
+var s1 = Student(name = "New String");
+
+// to call a method
+
+s1.show()
+</code></pre>
+<h3 id="comparing-two-objects-and-function-overloading"><a aria-hidden="true" class="anchor-heading" href="#comparing-two-objects-and-function-overloading"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Comparing two objects and function overloading</h3>
+<pre><code>case class Student(var rollno: Int = 1, var name : String = "This String", var marks : Int = 100)
+{
+    def show() = println("Hello There!") // use {} if your method is larger than 1 line
+
+    def >(s2 : Student) : Boolean = marks > s2.marks
+}
+
+var s1 = Student();
+var s2 = Student(2, "Bro", 98)
+
+s1.>(s2)
+</code></pre>
+<h3 id="lists-and-lambda-expression"><a aria-hidden="true" class="anchor-heading" href="#lists-and-lambda-expression"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>lists and lambda expression</h3>
+<pre><code>var nums = List(4, 7, 3, 9)
+
+// Looping over a list
+
+for(n &#x3C;- nums)
+{
+    println(n)
+}
+
+// Lambda Expression
+
+nums.foreach {i:Int => println(i)}
+</code></pre>
+<h3 id="list-reverse-drop-and-take"><a aria-hidden="true" class="anchor-heading" href="#list-reverse-drop-and-take"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>List Reverse, Drop and Take</h3>
+<p><code>num.reverse //> List[Int] = List(3, 2, 7, 4)</code> instead of mutating the existing <code>num</code> list, it creates a new list.</p>
+<p>to remove elements</p>
+<p><code>nums.drop(2)</code> removes first 2 elements</p>
+<p><code>nums.drop(2).take(2)</code> removes first 2 and prints next 2, even now it is creating a new list and not working on the existing list</p>
+<p>to remove syntatic sugar, <code>nums drop 2</code></p>
+<h3 id="type-hierarchy"><a aria-hidden="true" class="anchor-heading" href="#type-hierarchy"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Type hierarchy</h3>
+<p>List of AnyVal</p>
+<p><code>var a_list = List(4, 7, true)</code></p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.isoerzqte2n.png"></p>
+<p>List of "Any"</p>
+<p><code>var b_list = List(4,6,true, "String")</code></p>
+<h3 id="list-of-complex-objects"><a aria-hidden="true" class="anchor-heading" href="#list-of-complex-objects"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>List of complex objects</h3>
+<pre><code>case class Stud(rollno: Int, name: String, marks: Int)
+
+val students = List(Stud(1, "Student1", 40), Stud(2, "Student2", 80))
+
+// you can use tail head just like in java
+
+var first = students.head
+
+val rest = students.tail.head // or students.tail.tail etc
+
+val toppers = students.filter(s => s.marks>=60)
+
+val parts = students.parition(s => s.marks&#x3C;=60) // returns tuples
+
+// tuples
+
+val part1 = parts._1
+val part2 = parts._2
+
+val (part1, part2) = students.parition(s => s.marks&#x3C;=60) // returns tuples
+
+</code></pre>
+<h3 id="expressions"><a aria-hidden="true" class="anchor-heading" href="#expressions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Expressions</h3>
+<p><code>val anIfExpression = if(2 > 3) "bigger" else "smaller"</code></p>
+<h3 id="instructions-vs-expressions"><a aria-hidden="true" class="anchor-heading" href="#instructions-vs-expressions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Instructions VS Expressions</h3>
+<p>Instructions are the building blocks of imperative programms, executed one by one, a program hence a sequence of instructions.</p>
+<p>Expressions are evaluated, reduced to a single value.</p>
+<p>Instructions like expressions in Scala are denoted by the type Unit</p>
+<p><code>val theUnit = println("Hello, Scala")</code> <em>Unit, no meaningful value, = void</em></p>
+<h3 id="functions"><a aria-hidden="true" class="anchor-heading" href="#functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Functions</h3>
+<pre><code>def myFunc(param: Int) = 42
+</code></pre>
+<h3 id="oop"><a aria-hidden="true" class="anchor-heading" href="#oop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>OOP</h3>
+<p>OOP in Scala is done using Single Class Inheritance</p>
+<pre><code>class Animal
+class Dog extends Animal
+// interface
+trait carivore {
+    // we can define abstracts here
+    def eat(animal: Animal): Unit
+}
+
+class Crocodile extends Animal with Carnivore {
+    override def eat(animal: Animal): Unit = println("Crunch!")
+}
+
+// singleton object/pattern
+
+object MySingleton{
+    // we've defined both the Type MySingleton as well as the single Instance the Type can have
+    // additional implementation
+}
+
+// companions
+if you have a class/trait and singleton with the same name in the same file, they're called companions, companions have special features
+
+object Carinvore{
+    // implementation
+}
+
+// generics
+trait MyList[A]
+trait MyList[A] // Covariance
+
+// method notation
+
+val x = 1 + 2
+val y = 1.+(2)
+</code></pre>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #ffffcb;" href="/notes/9fkhgaxndflqosstx6duxkp">now</a></li>
+</ol>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+</ul>

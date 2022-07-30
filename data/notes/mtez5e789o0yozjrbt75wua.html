@@ -1,0 +1,20 @@
+<h1 id="spark-datasets"><a aria-hidden="true" class="anchor-heading" href="#spark-datasets"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spark Datasets</h1>
+<ul>
+<li>Areas: <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+</ul>
+<hr>
+<p>DataFrame – It works only on structured and semi-structured data. It organizes the data in the named column. ... DataSet – It also efficiently processes structured and unstructured data. It represents data in the form of JVM objects of row or a collection of row object.</p>
+<blockquote>
+<p>via — <a href="https://data-flair.training/blogs/apache-spark-rdd-vs-dataframe-vs-dataset">https://data-flair.training/blogs/apache-spark-rdd-vs-dataframe-vs-dataset</a></p>
+</blockquote>
+<p>They're distributed collections of JVM objects instead of distributed collections of untyped rows, they're essentially <span class="underline">typed dataframes</span>.</p>
+<p>They're most useful when: * We want to maintain type information/type safety * We want to maintain clean and concise code (especially in production) * Very effective when we want our filters/transformations are hard to express in DF or SQL.</p>
+<p>A more powerful version of Dataframes because we also have types.</p>
+<p>Avoid when:</p>
+<ul>
+<li>Performance is critical: Spark can't optimize transformation
+<ul>
+<li>All those transformations or filters are actually plain Scala objects, that will be evaluated at run-time, after Spark has the chance to plan for the operations in advance, Spark would have to evaluate all filters/transformations on row by row basis(which is slow).</li>
+</ul>
+</li>
+</ul>

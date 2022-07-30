@@ -1,0 +1,25 @@
+<h1 id="chown"><a aria-hidden="true" class="anchor-heading" href="#chown"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>chown</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The <code>chown</code> command allows you to change the user and/or group ownership of a given file, directory, or symbolic link. <code>chown</code> is root only command.</p>
+<ul>
+<li>It is not possible to disown a file</li>
+<li>Even the owner cannot change the ownership of the file, only root can</li>
+<li>The numeric user ID can also be used instead of the username(<code>cat /etc/passwd</code>)</li>
+</ul>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<p><code>sudo chown userName fileName.txt</code></p>
+<p><code>sudo chown userName file1.txt file2.txt folder</code></p>
+<p><code>sudo chown +userID file.txt</code> to avoid mistransfer using user ID prefix the userID with a <code>+</code> plus sign</p>
+<p><code>sudo chown userName:groupName file.txt</code> to change both owner and group, you can also use a <code>.</code> to separate user and group, <code>userName.groupName</code></p>
+<p>To only change the group of a file, use <code>chgrp</code> or <code>sudo chown :groupName file.txt</code></p>
+<p>Use <code>-R</code> to recursively change ownership of files inside a dir</p>
+<p><code>sudo chown -R userName:groupName folder</code></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/tm4p3a1vrsu7vo4ciwandns">chgrp</a></li>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+</ul>

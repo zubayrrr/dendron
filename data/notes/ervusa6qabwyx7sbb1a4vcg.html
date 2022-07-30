@@ -1,0 +1,124 @@
+<h1 id="aws-eks"><a aria-hidden="true" class="anchor-heading" href="#aws-eks"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS EKS</h1>
+<p>Elastic Kubernetes Service</p>
+<p>It is an alternative to <a href="/notes/y43l1e8ej1au0hfrdkqmdh7">AWS ECS</a>.</p>
+<p>EKS is a service that provides and manages a <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> control plane on its own. You have no access to the master nodes on EKS since they’re under a special AWS account.</p>
+<p>To run a Kubernetes workload, EKS establishes the control plane and Kubernetes API in your managed AWS infrastructure and you’re good to go.</p>
+<p>At this point, you can deploy workloads using native K8s tools like kubectl, Kubernetes Dashboard, Helm, and Terraform.</p>
+<ul>
+<li>You <strong>don’t have to install, operate, and maintain</strong> your Kubernetes control plane.</li>
+<li>EKS allows you to <strong>easily run tooling and plugins</strong> developed by the Kubernetes open-source community.</li>
+<li>EKS <strong>automates load distribution and parallel processing</strong> better than any DevOps engineer could.</li>
+<li>Your Kubernetes assets integrate seamlessly with AWS services if you use EKS.</li>
+<li>EKS uses VPC networking.</li>
+<li>Any application running on EKS is compatible with one running in your existing Kubernetes environment. You can migrate to EKS without applying any changes to the code.</li>
+<li>Supports <strong>EC2 spot instances</strong> using managed node groups that follow spot best practices and allow some pretty great cost savings.</li>
+</ul>
+<h2 id="managing-a-kubernetes-cluster"><a aria-hidden="true" class="anchor-heading" href="#managing-a-kubernetes-cluster"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Managing a Kubernetes cluster</h2>
+<p>Setting up a cluster in EKS is relatively complicated and comes with some prerequisites. You need to set up and use the AWS CLI and aws-iam-authenticator, and set up IAM permissions and users which adds to your workload.</p>
+<p>EKS doesn’t create worker nodes automatically, so you’re also in charge of managing that process. You also need to make extra effort to set up EKS with CloudFormation or Terraform.</p>
+<ul>
+<li>EKS comes with a <strong>well-defined way of upgrading the control plane with minimized disruption</strong>. You can then update worker nodes using the newer Kubernetes AMI, create a new worker group, and finally migrate your workload to the new nodes.</li>
+<li><strong>Scaling up the cluster is simple</strong> and based on adding more worker nodes. The control plane is fully managed, so there’s no need to worry about adding or upgrading master node sizes when your cluster grows.</li>
+<li><strong>Carrying out the most common maintenance tasks</strong> is easy in EKS – you can add worker nodes, replace them, terminate instances, and upgrade your setup with minimal disruption to your cluster.</li>
+</ul>
+<p>Via - <a href="https://cast.ai/blog/aws-eks-vs-ecs-vs-fargate-where-to-manage-your-kubernetes/">AWS EKS vs. ECS vs. Fargate vs. Kops: Where to Manage Your Kubernetes in 2022? - CAST AI – Kubernetes Automation Platform</a></p>
+<h2 id="how-does-eks-work"><a aria-hidden="true" class="anchor-heading" href="#how-does-eks-work"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How does EKS work?</h2>
+<p>You create a EKS cluster which represents a control plane. These will be master nodes.</p>
+<p>When you create an EKS service/cluster AWS will provision Kubernetes master nodes that already have Kubernetes master services installed on them.</p>
+<p>Since they're managed by AWS EKS, it'll automatically replicate the master nodes across multiple Availability Zones.</p>
+<p>Etcd is part of the master nodes which store the whole configuration/the current state of Kubernetes cluster. This storage is also replicated/backed up by AWS.</p>
+<p>For Worker Nodes:</p>
+<p>You'll create <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> instances, so called "Compute Fleet" of multiple virtual servers and connect them to EKS.</p>
+<p>Worker nodes have Kubernetes process running on it so the Kubernetes master node can communicate with them.</p>
+<p>In this case also, you need to manage the EC2 instance for your worker nodes, yourself.</p>
+<p>You have the option of "semi-managed" EC2 instances for your cluster. EKS with Nodegroup. The Nodegroup will handle some of the heavy lifting for you. Basically make it easier for you to configure new worker nodes for your cluster.
+For example: Worker nodes managed by nodegroup will get all the processes necessary installed on them(like container runtime, K8s processes) transform them into Worker Nodes.</p>
+<p>It is a good practice to use Nodegroups.</p>
+<p>You still need to configure things like <a href="/notes/gobjqdyrbtfatze61u0l31z">AutoScaling Group</a>. Even this can be delegated to AWS you can again combine <a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a> for your EKS cluster.</p>
+<p>Fully managed worker nodes with Fargate and Fully managed control plane(master nodes) with EKS.</p>
+<p>You can also use EC2 and Fargate in the same EKS cluster.</p>
+<h2 id="setting-up-eks-cluster"><a aria-hidden="true" class="anchor-heading" href="#setting-up-eks-cluster"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setting up EKS Cluster</h2>
+<ul>
+<li>Master nodes
+<ul>
+<li>Provision an EKS cluster</li>
+</ul>
+</li>
+<li>Worker nodes
+<ul>
+<li>Create Nodegroup of EC2 instances(compute fleet)</li>
+<li>OR you can use Fargate</li>
+</ul>
+</li>
+<li>Connect Nodegroup with EKS cluster</li>
+<li>Connect to cluster using <code>kubectl</code>
+<ul>
+<li>Deploy your containerized applications</li>
+</ul>
+</li>
+</ul>
+<h2 id="creating-eks-cluster-via-management-console"><a aria-hidden="true" class="anchor-heading" href="#creating-eks-cluster-via-management-console"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating EKS Cluster via Management Console</h2>
+<p><strong>Overview/steps</strong></p>
+<ol>
+<li>Create <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a> Role for EKS service</li>
+</ol>
+<p>Role is created so the EKS service(attached) has the permissions/policies to create things in AWS account. To allow AWS to create and manage components on our behalf/on our account.</p>
+<ol start="2">
+<li>Create a VPC</li>
+</ol>
+<p>This is where our worker nodes will run. </p>
+<p>A new VPC is created because EKS cluster needs specific networking configuration for it to work properly. It needs <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> and AWS specific networking rules, worker node specific firewall configuration. It is necessary for master nodes to communicate with them and manage them.</p>
+<p>Default VPC is not optimized for EKS cluster(not the best practice).</p>
+<p>Examples of rules:</p>
+<p>Firewall rules (of subnets) that are configured by Network ACLs, inside the subnet you’ve EC2 instances. EC2 instances have their own firewall rules that are defined by security groups.</p>
+<p>It is a best practice to create/configure subnets in worker node VPC, i.e creating <strong>public</strong> subnets and <strong>private</strong> subnets(creating external load balancer). </p>
+<p>Through IAM Role you give Kubernetes permissions  to change VPC configuration(Nodeport service; to open ports on our behalf in our VPC etc).</p>
+<p>You can use templates provided by AWS instead of creating the VPC by ourselves.</p>
+<ol start="3">
+<li>Create EKS Cluster (Control Plane)</li>
+</ol>
+<p>These will be a set of master nodes that are managed by AWS.</p>
+<ol start="4">
+<li>Connect to the cluster using <code>kubectl</code></li>
+</ol>
+<p>To connect to this cluster from our local machine.</p>
+<ol start="5">
+<li>Create IAM Role for EC2 service</li>
+</ol>
+<p>To give EC2 service the permissions to call AWS API and configure, create stuff in our AWS account. Essentially to create worker nodes for the EKS cluster.</p>
+<ol start="6">
+<li>Create Node Group, attach it to EKS cluster</li>
+</ol>
+<p>Node Group is a group of EC2 instances that are gonna run as worker nodes in the EKS cluster(master nodes).</p>
+<ol start="7">
+<li>Configure Auto Scaling</li>
+</ol>
+<p>This is created so that the number of EC2 instances are intelligently scaled up/down to match resource requirement.</p>
+<ol start="8">
+<li>Deploy an application to EKS cluster</li>
+</ol>
+<hr>
+<p><strong>Lab</strong></p>
+<ol>
+<li>Create IAM Role</li>
+</ol>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656319924/wiki/y1xcw9jn85hmsnyy6ckw.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656319963/wiki/uier1mhwdqxdkzrkugc3.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656320002/wiki/vrof1roeuovsnm9xbzef.png"></p>
+<p>Policy is automatically selected.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656320059/wiki/otyhdlqylbuzgrry5jj8.png"></p>
+<ol start="2">
+<li>Create a <a href="/notes/3ozxwzvy9lv8t60yjvx45e9">AWS VPC</a></li>
+</ol>
+<p>Using <a href="/notes/7zaax8a13r0jjnssx46u39a">AWS CloudFormation</a> template for creating VPC. You’ll create the entire stack(whatever components your VPC needs) from the CF template.</p>
+<p>Docs - <a href="https://docs.aws.amazon.com/eks/latest/userguide/creating-a-vpc.html">Creating a VPC for your Amazon EKS cluster - Amazon EKS</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a></li>
+<li><a href="/notes/llkdoaituan5psfnwiw8tf5">EKS cluster information</a></li>
+<li><a href="/notes/gvpkbgglehtr9ej5e0uj44j">AWS</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+<li><a href="/notes/fhi59s6yqplah2w1hfx9i5x">kOps</a></li>
+</ul>

@@ -1,0 +1,79 @@
+<h1 id="automate-tweet-and-grow-twitter-followers---it-panther"><a aria-hidden="true" class="anchor-heading" href="#automate-tweet-and-grow-twitter-followers---it-panther"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Automate Tweet and Grow Twitter Followers   It Panther</h1>
+<h1 id="automate-tweet-and-grow-twitter-followers---it-panther-1"><a aria-hidden="true" class="anchor-heading" href="#automate-tweet-and-grow-twitter-followers---it-panther-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://www.itpanther.com/automate-tweet/">Automate Tweet and Grow Twitter Followers - IT Panther</a></h1>
+<p>In this article I am going to show you steps to automate tweet. We are going to use the most popular programming language Python. If you want other automation ideas then you can read <a href="https://www.itpanther.com/python-automation-ideas-for-beginners-with-examples/">here</a>.</p>
+<p>Prerequisites:</p>
+<ol>
+<li>Download &#x26; Install <a href="https://www.python.org/downloads/">Python</a></li>
+<li>Install <a href="https://docs.tweepy.org/en/latest/install.html">Tweepy</a></li>
+</ol>
+<h2 id="twitter-developer-account"><a aria-hidden="true" class="anchor-heading" href="#twitter-developer-account"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Twitter Developer Account</h2>
+<p>You need to register with <a href="https://developer.twitter.com/">Twitter Developer Account</a> in order to get API Token and API Secret Keys. These will be required to authenticate to twitter on your behalf. Once you make a for twitter developer account than it is probably going to take approximately 24 hours before Twitter team reviews and approves your request.</p>
+<h2 id="twitter-developer-account-setup-to-automate-tweet"><a aria-hidden="true" class="anchor-heading" href="#twitter-developer-account-setup-to-automate-tweet"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Twitter Developer Account Setup to Automate Tweet</h2>
+<p>You can follow this <a href="https://developer.twitter.com/en/docs/developer-portal/overview">Twitter’s official link</a> for initial setup of your account.</p>
+<h2 id="download-inspirational-quotes-data"><a aria-hidden="true" class="anchor-heading" href="#download-inspirational-quotes-data"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Download Inspirational Quotes Data</h2>
+<p>In this program we are using Inspirational Quotes which can be <a href="https://raw.githubusercontent.com/akhiltak/inspirational-quotes/master/Quotes.csv">downloaded from here</a>. This file contains around 75000+ Inspirational Quotes. We are going to read quotes from this file and tweet it.</p>
+<p>Feel free to use any other dataset if you want.</p>
+<h2 id="python-program-to-automate-tweet"><a aria-hidden="true" class="anchor-heading" href="#python-program-to-automate-tweet"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Python Program to Automate Tweet</h2>
+<p>Here is the complete code which I have written, of-course you can change it as per your need.</p>
+<pre><code>import tweepy
+import pandas as pd
+import time
+
+latest_tweet_number = 0
+
+
+with open('C:\\twitter\\latest.txt') as f:
+    latest_tweet_number = int(f.read())
+
+print(latest_tweet_number)
+
+import pandas as pd
+df = pd.read_csv(r'C:\Users\USER\Downloads\quotes.csv', sep=';')
+
+def tweet_now(msg):
+    msg = msg[0:270]
+    try:
+
+        auth = tweepy.OAuthHandler("DthisisnotrealEcjpTv1", 
+            "h3dHaEQrjlOGT5Bqtw1DthisisnotrealLgNjVV0L05hRJ")
+        auth.set_access_token("2517455480-UQBnDthisisnotrealSn9CI5oN", 
+            "2WNbmrhXWDthisisnotrealNKBzUL")
+        api = tweepy.API(auth)
+        try:
+            api.verify_credentials()
+            print("Authentication OK")
+        except:
+            print("Error during authentication")
+        api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+        api.update_status(msg)
+        print(msg)
+
+        print("Tweeted")
+    
+    except Exception as e:
+        print(e)
+
+for idx, rows in df.iterrows():
+    if idx &#x3C;= latest_tweet_number:
+        continue
+        
+    hashtags = '#inspirational #inspiration #motivation #motivational #inspirationalquotes #inspire #motivationalquotes #quotes #love #quoteoftheday #success #believe #mindset #life #positivevibes #entrepreneur #quote #positivity #goals #selflove #happiness #lifestyle #successquotes #bhfyp #yourself #thoughts #instadaily #loveyourself #photooftheday #bhfyp'
+    tweet_now(rows['QUOTE'] + ' - ' + rows['AUTHOR'] + '\n\n\n' + hashtags)
+    
+    with open('C:\\twitter\\latest.txt',"w") as f:
+        f.write(str(idx))
+
+    print("done")
+    time.sleep(1800)
+    
+</code></pre>
+<h2 id="scheduling-program"><a aria-hidden="true" class="anchor-heading" href="#scheduling-program"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Scheduling Program</h2>
+<p>If you want to run this program 24*7 then you need to make sure that you are running it on one of the servers which remains always available. I would recommend to use IBM Cloud as you can just sign-up there without the need of using any Credit Card.</p>
+<p>I tried using IBM Cloud Functions which gives you option to run your Python program without the need of creating any servers. IBM Cloud Function is server-less which can be used to trigger your python code based on any Trigger or Scheduled Frequency.</p>
+<h2 id="automate-tweets-video"><a aria-hidden="true" class="anchor-heading" href="#automate-tweets-video"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Automate Tweets Video</h2>
+<p>If you are someone who likes to see the steps in order to understand it better than you can watch this video.</p>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #054907;" href="/notes/j9wop01y5eo30zr168a0g3n">articles</a></li>
+</ol>

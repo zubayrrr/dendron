@@ -1,0 +1,2 @@
+
+“Fortune favors the bold.”

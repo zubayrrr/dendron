@@ -1,0 +1,55 @@
+<h1 id="process"><a aria-hidden="true" class="anchor-heading" href="#process"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>process</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>In Linux, running an instance of a program is called a <strong>process</strong> and it runs in its own memory space. Each time you execute a command, a new process starts.</li>
+<li>A process is an <em>active entity</em> (whose binary is actively running in the background) as opposed to a program, which is considered to be a <em>passive entity</em>.</li>
+<li>A new process is created only when running an executable file (not when running shell builtin commands, see: <a href="/notes/8lrs6sx3o09qlh0s1j7dzoc">type</a>).</li>
+<li>If an executable file doesn't have <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> set, then the process has the permission of the user who runs it.</li>
+<li><code>task</code> and <code>processes</code> are synonyms.</li>
+</ul>
+<h3 id="process-properties"><a aria-hidden="true" class="anchor-heading" href="#process-properties"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Process properties:</h3>
+<ul>
+<li>PID (Process ID) - a unique positive integer number</li>
+<li>User</li>
+<li>Group</li>
+<li>Priority/Nice</li>
+</ul>
+<h3 id="type-of-processes"><a aria-hidden="true" class="anchor-heading" href="#type-of-processes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Type of Processes:</h3>
+<ul>
+<li>Parent</li>
+<li>Child</li>
+<li><a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a></li>
+<li>Zombie(defunct)</li>
+<li>Orphan</li>
+</ul>
+<p>In Linux, all the processes in the OS are created when existing processes invoke the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.fork (Private)</a> system call. There's an execption and that is system boot(<a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.init (Private)</a>, <a href="/notes/hbcrmipwwrxrhts4y19eqb8">systemd</a> has process ID as <code>1</code>).</p>
+<p>The process that invokes the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.fork (Private)</a> system call is the parent process and the created process is the child process. A parent may have multiple children but a child can only have one parent.</p>
+<p>For example: when you run <code>who</code>, bash is the parent(process) that started the child(process) <a href="/notes/67piqnt2wjrc373p1m7i8rj">who</a></p>
+<p>The OS maintains a table that associates every processes with data necessary for its functioning. When a process is terminated, the OS releases most of the resources and information related to the process.</p>
+<p>A terminated process whose data has not been collected is called a Zombie or defunct process. Zombie process are removed quicky and don't use a lot of resources.</p>
+<p>Ophan processes are the opposite of Zombie processes, produced when a parent process is terminated before it's child process. By default orphan processes will recieve a hangup call and get terminated.</p>
+<p>There is also a possibility of being adopted by another process such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.init (Private)</a> or <a href="/notes/hbcrmipwwrxrhts4y19eqb8">systemd</a> see: <a href="/notes/tubz5rys0brzeqe3c6frkw5">nohop</a>].</p>
+<hr>
+<h2 id="threads"><a aria-hidden="true" class="anchor-heading" href="#threads"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Threads</h2>
+<p>Multiple threads can existing within a process and share resources while different processes do not share resources. Threads are basically subprocess that run in the same memory context of a process and make application responsive. Threads may share the same data while executing.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a></li>
+<li><a href="/notes/3dz4uwat5h6zuz2tt5xluoe">foreground process</a></li>
+<li><a href="/notes/5fvsvimnn03ahdf59htc6es">kill</a></li>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+<li><a href="/notes/2x54d3zk1jvphjt0102em8k">pgrep</a></li>
+<li><a href="/notes/ungvanr0fogsuwsbfof5c4x">pkill</a></li>
+<li><a href="/notes/4cmnu8nf5qp9o17i5ecn6xx">/proc</a></li>
+<li><a href="/notes/ei7r1wwxflu59yd7m0tx6j5">ps</a></li>
+<li><a href="/notes/w31t92yckdu68yntiofqbzu">pstree</a></li>
+<li><a href="/notes/odobz2lkl658ukcl7h241iu">SIGKILL</a></li>
+<li><a href="/notes/awaxslvw2mr2x9m3pofswnj">signal</a></li>
+<li><a href="/notes/9b3sbqneahrz434hmpaw5qi">SIGTERM</a></li>
+<li><a href="/notes/laeri4eob3q0wi2i0d71atn">top</a></li>
+</ul>

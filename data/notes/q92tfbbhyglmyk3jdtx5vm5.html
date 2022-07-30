@@ -1,0 +1,604 @@
+<h1 id="tcpip-model"><a aria-hidden="true" class="anchor-heading" href="#tcpip-model"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TCP⁄IP Model</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<p>The <a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a> is just a reference/logical model. It was designed to describe the functions of the communication system by dividing the communication procedure into smaller and simpler components. But when we talk about the TCP/IP model, it was designed and developed by Department of Defense (DoD) in 1960s and is based on standard protocols. It stands for Transmission Control Protocol/Internet Protocol. The TCP/IP model is a concise version of the OSI model. It contains four layers, unlike seven layers in the OSI model.</p>
+<p>The layers are:</p>
+<ul>
+<li>Process/Application Layer</li>
+<li>Host-to-Host/Transport Layer</li>
+<li>Internet Layer</li>
+<li>Network Access/Link Layer</li>
+</ul>
+<h2 id="difference-between-tcpip-and-osi-model"><a aria-hidden="true" class="anchor-heading" href="#difference-between-tcpip-and-osi-model"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Difference between TCP/IP and OSI Model:</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>TCP/IP</th><th>OSI</th></tr></thead><tbody><tr><td>TCP refers to Transmission Control Protocol.</td><td>OSI refers to Open Systems Interconnection.</td></tr><tr><td>TCP/IP has 4 layers.</td><td>OSI has 7 layers.</td></tr><tr><td>TCP/IP is more reliable</td><td>OSI is less reliable</td></tr><tr><td>TCP/IP does not have very strict boundaries.</td><td>OSI has strict boundaries</td></tr><tr><td>TCP/IP follow a horizontal approach.</td><td>OSI follows a vertical approach.</td></tr><tr><td>TCP/IP uses both session and presentation layer in the application layer itself.</td><td>OSI uses different session and presentation layers.</td></tr><tr><td>TCP/IP developed protocols then model.</td><td>OSI developed model then protocol.</td></tr><tr><td>Transport layer in TCP/IP does not provide assurance delivery of packets.</td><td>In OSI model, transport layer provides assurance delivery of packets.</td></tr><tr><td>TCP/IP model network layer only provides connection less services.</td><td>Connection less and connection oriented both services are provided by network layer in OSI model.</td></tr><tr><td>Protocols cannot be replaced easily in TCP/IP model.</td><td>While in OSI model, Protocols are better covered and is easy to replace with the change in technology.</td></tr></tbody></table>
+<h2 id="layers"><a aria-hidden="true" class="anchor-heading" href="#layers"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layers</h2>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Network Interface Layer - TCP/IP</span></div>
+<a href="/notes/h9fwgm5qmlznj6jloqqqlfl" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h1 id="layer-1---network-interface-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-1---network-interface-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 1 - Network Interface Layer</h1>
+<ul>
+<li>Physical and electrical characteristics</li>
+<li>Describes how to transmit <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a>s across the network</li>
+<li>Determines how interface uses network medium (<a href="/notes/c56omihefzozvm01zqiihlu">Network Cables</a>)
+<ul>
+<li><a href="/notes/ypv51xf9vfv0r5h66ek30cj">Coax</a>ial, <a href="/notes/y7dwtr5ud15dkh6e7x7ose4">Fiber Optic</a>, <a href="/notes/q6rcmbb4k2on7oh9zfm90ba">Twisted Pair</a> copper cabling</li>
+</ul>
+</li>
+<li>Layer 1 Examples:
+<ul>
+<li><a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a>, Token Ring, FDDI], RS-232</li>
+</ul>
+</li>
+</ul>
+</div></div><p></p>
+<p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Internet Layer - TCP/IP</span></div>
+<a href="/notes/nhbnwxjfzr4ecq57maduvqz" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h1 id="layer-2---internet-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-2---internet-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 2 - Internet Layer</h1>
+<ul>
+<li>Packages data into IP Datagrams
+<ul>
+<li>Contains source and destination IPs</li>
+<li>Forwards datagrams between hosts across the networks</li>
+</ul>
+</li>
+<li>Routes IP datagrams across networks</li>
+<li>Connectivity occurs externally</li>
+<li>Layer 2 Examples:
+<ul>
+<li><a href="/notes/6m8y2g4yr37x372c2r5vwej">ip</a>, <a href="/notes/xztkd0q1n12hpkep5men9r9">ICMP</a>, <a href="/notes/lss53u8juapeuj7iihq287y">ARP</a>, <a href="/notes/yfgax0ghyotyfkgvbzzaz2w">RARP</a></li>
+</ul>
+</li>
+</ul>
+</div></div><p></p>
+<p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Transport Layer - TCP/IP</span></div>
+<a href="/notes/v6g48x2mriiw6z07xifqjd6" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h1 id="layer-3---transport-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-3---transport-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 3 - Transport Layer</h1>
+<p>It is very similar to the <a href="/notes/nygs97pchi3schragqr6gei">transport layer in osi model</a></p>
+<ul>
+<li>Provides communication session management between hosts</li>
+<li>Defines level of service and status of connection used for transport</li>
+<li>Layer 3 Examples:
+<ul>
+<li><a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a></li>
+<li><a href="/notes/k57h8hxtsubu8fdb61aahxc">UDP</a></li>
+<li><a href="/notes/6hu446o6fago1c26z95faj8">RTP</a></li>
+</ul>
+</li>
+</ul>
+</div></div><p></p>
+<p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Application Layer - TCP/IP</span></div>
+<a href="/notes/igdvxijnp9hlki89ulb6frt" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h1 id="layer-4---application-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-4---application-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 4 - Application Layer</h1>
+<ul>
+<li>Defines <a href="/notes/q92tfbbhyglmyk3jdtx5vm5">TCP⁄IP Model</a> application protocols</li>
+<li>Defines how programs interface with the transport layer service</li>
+<li>Layer with which the user interacts</li>
+<li>Layer 4 Examples:
+<ul>
+<li><a href="/notes/9j4ykuha11rmbi2q6e3fmm3">HTTP</a>, <a href="/notes/22lssm7x2tdw16jmkt8h4iu">TELNET (Protocol)</a>), <a href="/notes/bbn78c11atdgijfct7m51zq">FTP</a>, <a href="/notes/6hvydsuke9vd4sglh0hcgu5">SNMP</a>, <a href="/notes/pjbeze05otspq0j7j48beqp">DNS</a>, <a href="/notes/qpikj311n1w6erk114hfu5v">SMTP</a>, <a href="/notes/eg2cov6odyxlsbg37xgse3s">SSL</a>, <a href="/notes/f6qryx0qpi8p4mt9esxvl5m">TLS</a> and so on.</li>
+</ul>
+</li>
+</ul>
+</div></div><p></p><p></p>
+<h2 id="data-transfer-over-network"><a aria-hidden="true" class="anchor-heading" href="#data-transfer-over-network"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Data Transfer Over Network</h2>
+<p>When we're trying to transfer data over network, we've to tell it where its going to go. We use <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>es to get to the system but how does the data know which applications are listening on that system? Thats where Ports come into the picture.</p>
+<ul>
+<li>Port numbers can range from 0 to 65,536, you can run services on all of these ports.</li>
+<li>Ports are categorized into "Well-known" &#x26; "Reserved Ports".
+<ul>
+<li>Well-known ports range from 0 to 1024.
+<ul>
+<li>Examples: <a href="/notes/bbn78c11atdgijfct7m51zq">FTP</a> on Port 21, <a href="/notes/9j4ykuha11rmbi2q6e3fmm3">HTTP</a> on Port 80 and so on</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Ephemeral Ports:
+<ul>
+<li>Short-lived transport port that is automatically selected from predefined range</li>
+<li>Ports 1025 to 65,536</li>
+<li>Examples: Running a Web Application locally, such as TiddlyWiki on NodeJs on Port 4000.</li>
+</ul>
+</li>
+</ul>
+<h3 id="data-transfer-in-the-real-world"><a aria-hidden="true" class="anchor-heading" href="#data-transfer-in-the-real-world"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Data Transfer in the real world</h3>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656578336/wiki/ouwxuee31fco6wjridoh.png"></p>
+<h3 id="ipv4-packets"><a aria-hidden="true" class="anchor-heading" href="#ipv4-packets"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IPv4 Packets</h3>
+<p>IPv4 Packets (Packet Header) contain the following information:</p>
+<ul>
+<li>Source Address
+<ul>
+<li>IP of sender</li>
+</ul>
+</li>
+<li>Destination Address
+<ul>
+<li>IP of receiver</li>
+</ul>
+</li>
+<li>IP Flags
+<ul>
+<li>Allows packet fragmentation</li>
+</ul>
+</li>
+<li>Protocol
+<ul>
+<li><a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a> or <a href="/notes/k57h8hxtsubu8fdb61aahxc">UDP</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="ports-and-protocols"><a aria-hidden="true" class="anchor-heading" href="#ports-and-protocols"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ports and Protocols</h2>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Ports &#x26; Protocols</span></div>
+<a href="/notes/71uknccqdf1r4py2dw24d70" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Port Number     </th><th>Service name </th><th>Transport protocol</th><th>Description</th></tr></thead><tbody><tr><td>7</td><td>Echo</td><td>TCP, UDP</td><td>Echo service</td></tr><tr><td>20</td><td>FTP-data</td><td> TCP, SCTP</td><td>File Transfer Protocol data transfer</td></tr><tr><td>21</td><td>FTP</td><td> TCP, UDP, SCTP</td><td>File Transfer Protocol (FTP) control connection</td></tr><tr><td>22</td><td>SSH-SCP</td><td>TCP, UDP, SCTP </td><td> Secure Shell, secure logins, file transfers (scp, sftp), and port forwarding</td></tr><tr><td>23</td><td>Telnet</td><td>TCP</td><td>Telnet protocol—unencrypted text communications</td></tr><tr><td>25</td><td>SMTP</td><td>TCP</td><td> Simple Mail Transfer Protocol, used for email routing between mail servers</td></tr><tr><td>53</td><td>DNS</td><td>TCP, UDP</td><td> Domain Name System name resolver</td></tr><tr><td>69</td><td>TFTP</td><td>UDP</td><td>Trivial File Transfer Protocol</td></tr><tr><td>80</td><td>HTTP</td><td>TCP, UDP, SCTP</td><td>Hypertext Transfer Protocol (HTTP) uses TCP in versions 1.x and 2.  HTTP/3 uses QUIC, a transport protocol on top of UDP</td></tr><tr><td>88</td><td>Kerberos</td><td>TCP, UDP</td><td>Network authentication system</td></tr><tr><td>102</td><td>Iso-tsap</td><td>TCP</td><td>ISO Transport Service Access Point (TSAP) Class 0 protocol</td></tr><tr><td>110</td><td>POP3</td><td>TCP</td><td>Post Office Protocol, version 3 (POP3)</td></tr><tr><td>135</td><td>Microsoft EPMAP</td><td>TCP, UDP</td><td>Microsoft EPMAP (End Point Mapper), also known as DCE/RPC Locator service, used to remotely manage services including DHCP server, DNS server, and WINS. Also used by DCOM</td></tr><tr><td>137</td><td>NetBIOS-ns</td><td>TCP, UDP</td><td> NetBIOS Name Service, used for name registration and resolution</td></tr><tr><td>139</td><td>NetBIOS-ssn</td><td>TCP, UDP</td><td>NetBIOS Session Service</td></tr><tr><td>143</td><td>IMAP4</td><td>TCP, UDP</td><td> Internet Message Access Protocol (IMAP), management of electronic mail messages on a server</td></tr><tr><td>381</td><td>HP Openview</td><td>TCP, UDP</td><td>HP data alarm manager</td></tr><tr><td>383</td><td>HP Openview</td><td>TCP, UDP</td><td>HP data alarm manager</td></tr><tr><td>443</td><td>HTTP over SSL</td><td>TCP, UDP, SCTP</td><td>Hypertext Transfer Protocol Secure (HTTPS) uses TCP in versions 1.x and 2. HTTP/3 uses QUIC, a transport protocol on top of UDP.</td></tr><tr><td>464</td><td>Kerberos</td><td>TCP, UDP</td><td>Kerberos Change/Set password</td></tr><tr><td>465</td><td>SMTP over TLS/SSL, SSM</td><td>TCP</td><td>Authenticated SMTP over TLS/SSL (SMTPS), URL Rendezvous Directory for SSM (Cisco protocol)</td></tr><tr><td>587</td><td>SMTP</td><td>TCP</td><td>Email message submission</td></tr><tr><td>593</td><td>Microsoft DCOM</td><td>TCP, UDP</td><td>HTTP RPC Ep Map, Remote procedure call over Hypertext Transfer Protocol, often used by Distributed Component Object Model services and Microsoft Exchange Server</td></tr><tr><td>636</td><td>LDAP over TLS/SSL</td><td>TCP, UDP</td><td>Lightweight Directory Access Protocol over TLS/SSL</td></tr><tr><td>691</td><td>MS Exchange</td><td>TCP</td><td>MS Exchange Routing</td></tr><tr><td>902</td><td>VMware Server</td><td>unofficial</td><td>VMware ESXi</td></tr><tr><td>989</td><td>FTP over SSL</td><td>TCP, UDP</td><td>FTPS Protocol (data), FTP over TLS/SSL</td></tr><tr><td>990</td><td>FTP over SSL</td><td>TCP, UDP</td><td> FTPS Protocol (control), FTP over TLS/SSL</td></tr><tr><td>993</td><td>IMAP4 over SSL</td><td>TCP</td><td>Internet Message Access Protocol over TLS/SSL (IMAPS)</td></tr><tr><td>995</td><td>POP3 over SSL</td><td>TCP, UDP</td><td>Post Office Protocol 3 over TLS/SSL</td></tr><tr><td>1025</td><td>Microsoft RPC</td><td>TCP</td><td>Microsoft operating systems tend to allocate one or more unsuspected, publicly exposed services (probably DCOM, but who knows) among the first handful of ports immediately above the end of the service port range (1024+).</td></tr><tr><td>1194</td><td>OpenVPN</td><td>TCP, UDP</td><td>OpenVPN</td></tr><tr><td>1337</td><td>WASTE</td><td>unofficial</td><td>WASTE Encrypted File Sharing Program</td></tr><tr><td>1589</td><td>Cisco VQP</td><td>TCP, UDP</td><td>Cisco VLAN Query Protocol (VQP)</td></tr><tr><td>1725</td><td>Steam</td><td>UDP</td><td>Valve Steam Client uses port 1725 </td></tr><tr><td>2082</td><td>cPanel</td><td>unofficial</td><td>cPanel default</td></tr><tr><td>2083</td><td>radsec, cPanel</td><td>TCP, UDP</td><td> Secure RADIUS Service (radsec), cPanel default SSL</td></tr><tr><td>2483</td><td>Oracle DB</td><td>TCP, UDP</td><td>Oracle database listening for insecure client connections to the listener, replaces port 1521</td></tr><tr><td>2484</td><td>Oracle DB</td><td>TCP, UDP</td><td>Oracle database listening for SSL client connections to the listener</td></tr><tr><td>2967</td><td>Symantec AV</td><td>TCP, UDP</td><td>Symantec System Center agent (SSC-AGENT)</td></tr><tr><td>3074</td><td>XBOX Live</td><td>TCP, UDP</td><td>Xbox LIVE and Games for Windows – Live</td></tr><tr><td>3306</td><td>MySQL</td><td>TCP</td><td> MySQL database system</td></tr><tr><td>3724</td><td>World of Warcraft</td><td>TCP, UDP</td><td>Some Blizzard games, Unofficial Club Penguin Disney online game for kids</td></tr><tr><td>4664</td><td>Google Desktop</td><td>unofficial</td><td>Google Desktop Search</td></tr><tr><td>5432</td><td>PostgreSQL</td><td>TCP</td><td>PostgreSQL database system</td></tr><tr><td>5900</td><td>RFB/VNC Server</td><td>TCP, UDP</td><td>virtual Network Computing (VNC) Remote Frame Buffer RFB protocol</td></tr><tr><td>6665</td><td>IRC</td><td>TCP</td><td>Internet Relay Chat </td></tr><tr><td>6669</td><td>IRC</td><td>TCP</td><td>Internet Relay Chat </td></tr><tr><td>6881</td><td>BitTorrent</td><td>unofficial</td><td>BitTorrent is part of the full range of ports used most often</td></tr><tr><td>6999</td><td>BitTorrent</td><td>unofficial</td><td>BitTorrent is part of the full range of ports used most often</td></tr><tr><td>6970</td><td>Quicktime</td><td>unofficial</td><td>QuickTime Streaming Server</td></tr><tr><td>8086</td><td>Kaspersky AV</td><td>TCP</td><td>Kaspersky AV Control Center</td></tr><tr><td>8087</td><td>Kaspersky AV</td><td>UDP</td><td>Kaspersky AV Control Center</td></tr><tr><td>8222</td><td>VMware Server</td><td>TCP, UDP</td><td>VMware Server Management User Interface (insecure Web interface).</td></tr><tr><td>9100</td><td>PDL</td><td>TCP</td><td>PDL Data Stream, used for printing to certain network printers[1</td></tr><tr><td>10000</td><td>BackupExec</td><td>unofficial</td><td>Webmin, Web-based Unix/Linux system administration tool (default port)</td></tr><tr><td>12345</td><td>NetBus</td><td>unofficial</td><td>NetBus remote administration tool (often Trojan horse).</td></tr><tr><td>27374</td><td>Sub7</td><td>unofficial</td><td>Sub7 default</td></tr><tr><td>18006</td><td>Back Orifice</td><td>unofficial</td><td>Back Orifice 2000 remote administration tools</td></tr></tbody></table>
+<p>Via - <a href="https://www.geeksforgeeks.org/50-common-ports-you-should-know/">50 Common Ports You Should Know - GeeksforGeeks</a></p>
+</div></div><p></p><p></p>
+<h2 id="look-into"><a aria-hidden="true" class="anchor-heading" href="#look-into"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Look-into</h2>
+<ul>
+<li>IPv4/IPv6 Packet Header</li>
+<li>TCP/UDP Packet Header</li>
+</ul>
+<p>See also: <a href="/notes/ks0724ic46vnuso02phu8ow">Nmap - Open ports</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+<li><a href="/notes/igdvxijnp9hlki89ulb6frt">Application Layer - TCP/IP</a></li>
+<li><a href="/notes/s5q5ta6kr29pnzay73wor5h">IMAP</a></li>
+<li><a href="/notes/x2xmqg7ehbnyfhec51ptojw">Localhost</a></li>
+<li><a href="/notes/z8q69lpsw7fp69pghnlpypl">NAS</a></li>
+<li><a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a></li>
+<li><a href="/notes/q0drtwtbwa935iocb470hyv">POP3</a></li>
+<li><a href="/notes/ib733836seyegnblesl6130">RFC</a></li>
+<li><a href="/notes/c6l91ma2iizawnkxiioocm9">SAN</a></li>
+</ul>

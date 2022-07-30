@@ -1,0 +1,51 @@
+<h1 id="select"><a aria-hidden="true" class="anchor-heading" href="#select"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SELECT</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<hr>
+<p>To retrieve data from a single table:</p>
+<ul>
+<li>select the database to retrieve data from(in other words, to run a query against) by using the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">USE (Private)</a> keyword, once selected, the database selected will be displayed in <strong>bold</strong> on workbench navigator panel.</li>
+<li><code>USE database;</code></li>
+<li><code>SELECT column_1, column_2</code></li>
+<li><code>SELECT *</code> to select all columns</li>
+<li><code>FROM table_name</code> using the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">FROM (Private)</a> clause</li>
+</ul>
+<p>Example:</p>
+<pre><code>USE store;
+SELECT * FROM customers
+</code></pre>
+<p>Using other (optional) clauses such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">WHERE (Private)</a> and [<a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ORDER BY (Private)</a></p>
+<p>To only return customer with id = <code>1</code> and sort by first name, <code>--</code> double hyphen to comment something out</p>
+<pre><code>USE store;
+SELECT *
+FROM customers
+WHERE customer_id = 1
+-- WHERE customer_id = 1
+ORDER BY first_name
+</code></pre>
+<ul>
+<li>Use <code>SELECT *</code> to get all columns</li>
+<li>You can specify colums by:
+<ul>
+<li><code>SELECT column_1, column_2</code> you can also put different columns on different lines
+<ul>
+<li>The order of the columns specified matters</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>You can do arithemtic operations on a column
+<ul>
+<li><code>SELECT numbers + 10</code></li>
+<li><code>SELECT (numbers + 100) * 10</code> the order of operators matter, use paranthesis to change the order of operations and to also add readability.</li>
+<li><code>SELECT numbers + 10 AS new_numbers</code> to add an alias</li>
+</ul>
+</li>
+<li>To remove duplicates use:
+<ul>
+<li><code>SELECT DISTINCT column_name</code></li>
+</ul>
+</li>
+</ul>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">WHERE (Private)</a></p>

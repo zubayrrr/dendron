@@ -1,0 +1,105 @@
+<h1 id="lsof"><a aria-hidden="true" class="anchor-heading" href="#lsof"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>lsof</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Display list of files that are open by a process</p>
+<pre><code>lsof
+
+# specific options
+
+# filter by user
+
+lsof -u userName
+sudo lsof -u root
+
+# use ^ for negation
+
+sudo lsof -u ^root
+
+# filter by process
+
+sudo lsof -c ngnix
+</code></pre>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>Almost all Linux users know the ls command.</p>
+<p>Not many Linux users know about lsof command.</p>
+<p>→ls command lists file</p>
+<p>→lsof command lists opened file (by process and users)</p>
+<p>This thread will help you learn the lsof Linux command 👇🧵</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081622293516288">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>If you use lsof command without any options and arguments</p>
+<p>→lsof</p>
+<p>it will list all opened files by all the processes in the system.</p>
+<p>The output is likely to be huge and this is why you should use it wisely and in combination of other commands and options. <a href="https://twitter.com/LinuxHandbook/status/1547081626420760576/photo/1">pic.twitter.com/fIb4Awghyn</a></p>
+<p><img src="../assets/3_1547081616044048384.jpg" alt="3_1547081616044048384"></p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081626420760576">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>List all the processes that have opened a certain file</p>
+<p>→lsof path_to_file</p>
+<p>You may have to use sudo or be root for better results.</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081630933712896">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>You can list all the files opened by a certain user in Linux:</p>
+<p>→lsof -u user1</p>
+<p>Or by multiple users:</p>
+<p>→lsof -u user1 user2</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081635094470656">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>If you are wondering which of the files have been opened in a certain directory,</p>
+<p>you can use lsof command with +D option.</p>
+<p>→lsof +D path_to_directory</p>
+<p>The search is recursive. It lists all the opened files in the mentioned directory and all of its sub-directories.</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081639091634178">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>If you know the process id, you can use the -p option of the lsof command to find the files opened by a process:</p>
+<p>→lsof -p PID</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081643143438337">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>List all files opened by a Linux command:</p>
+<p>→lsof -c command</p>
+<p>This is specially helpful in debugging. Suppose you want to see what files are used by http daemon, you just need to specify the command name (httpd in our example).</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081647190904832">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>You can combine options like user and command and a process using the –a option.</p>
+<p>→lsof -a -u user_name -c command_name</p>
+<p>Think of it as the AND operator. This gives you an additional filter while trying to narrow down your search.</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081651288768513">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>You can also use lsof command to find open ports in Linux or for finding which process is using a port.</p>
+<p>List all open ports and their processes:</p>
+<p>→lsof -i</p>
+<p>To find which process is using a specific port:</p>
+<p>→lsof -i :portnumber</p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081655369736193">Tweet link</a></p>
+<hr>
+<p><img src="../assets/LinuxHandbook-1023073045781590019.jpg" alt="LinuxHandbook">
+Linux Handbook (<a href="https://twitter.com/LinuxHandbook">@LinuxHandbook</a>)</p>
+<p>You can use the negation operator to exclude a user or process while using lsof command.</p>
+<p>For example, if you want to list all the files opened by a user other than root, use:</p>
+<p><a aria-hidden="true" class="block-anchor anchor-heading" id="^root" href="#^root"><svg viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>→lsof -u </p>
+<p><a href="https://twitter.com/LinuxHandbook/status/1547081659467571201">Tweet link</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/4w41i16jw8ybk0trp8xd3le">Checking for Listening Ports</a></li>
+</ul>

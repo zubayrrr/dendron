@@ -1,0 +1,42 @@
+<h1 id="automate-data-backup-of-ec2-instances"><a aria-hidden="true" class="anchor-heading" href="#automate-data-backup-of-ec2-instances"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Automate Data Backup of EC2 instances</h1>
+<ul>
+<li>Related: <a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a>, <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a>, <a href="/notes/fsmsti0qns6uixhjwtqk7p6">AWS EBS</a></li>
+</ul>
+<hr>
+<p><strong>Premise</strong></p>
+<p>To create backup/snapshot volumes(storage) of all the EC2 instances.
+Volume snapshot is a copy of a volume.</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> boto3
+<span class="token keyword">import</span> schedule
+
+ec2_client <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-west-3"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">create_volume_snapshots</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    volumes <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>describe_volumes<span class="token punctuation">(</span>
+        Filters<span class="token operator">=</span><span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token string">'Name'</span><span class="token punctuation">:</span> <span class="token string">'tag:Name'</span><span class="token punctuation">,</span>
+                <span class="token string">'Values'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'prod'</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    <span class="token keyword">for</span> volume <span class="token keyword">in</span> volumes<span class="token punctuation">[</span><span class="token string">'Volumes'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        new_snapshot <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>create_snapshot<span class="token punctuation">(</span>
+            VolumeId<span class="token operator">=</span>volume<span class="token punctuation">[</span><span class="token string">'VolumeId'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>new_snapshot<span class="token punctuation">)</span>
+
+
+schedule<span class="token punctuation">.</span>every<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>day<span class="token punctuation">.</span>do<span class="token punctuation">(</span>create_volume_snapshots<span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    schedule<span class="token punctuation">.</span>run_pending<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/6yea3nujt8yupmf4wdtj7mk">Automate cleanup of old Snapshots</a></li>
+<li><a href="/notes/9im04y0czc0iiw0jw0rbr92">Restore volume from a snapshot of EC2 instance</a></li>
+<li><a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a></li>
+</ul>

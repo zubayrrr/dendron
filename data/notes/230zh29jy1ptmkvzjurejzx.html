@@ -1,0 +1,16 @@
+<h1 id="pre-commit-hook-npx-command-not-found"><a aria-hidden="true" class="anchor-heading" href="#pre-commit-hook-npx-command-not-found"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pre Commit Hook Npx Command Not Found</h1>
+<p>I've got the solution from here. Hope you can find it as well!</p>
+<ul>
+<li><a href="https://typicode.github.io/husky/#/?id=command-not-found">https://typicode.github.io/husky/#/?id=command-not-found</a></li>
+<li><a href="https://github.com/typicode/husky/issues/912">https://github.com/typicode/husky/issues/912</a></li>
+</ul>
+<p>Here it is, for clarity:</p>
+<ul>
+<li>add a file <code>~/.huskyrc</code> if you don't have one already</li>
+<li>make sure it includes the following:</li>
+</ul>
+<pre><code># ~/.huskyrc
+# This loads nvm.sh and sets the correct PATH before running hook
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] &#x26;&#x26; \. "$NVM_DIR/nvm.sh"
+</code></pre>

@@ -1,0 +1,19 @@
+<h1 id="devops-best-practices"><a aria-hidden="true" class="anchor-heading" href="#devops-best-practices"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>DevOps Best Practices</h1>
+<ul>
+<li>Use public key authentication for SSHing into servers.</li>
+<li>Always create a new user (Do not use root user) on new machines. Add the user to the <code>sudo</code> group.</li>
+<li>Create dedicated users for software like <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a>, <a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a> etc. Never run these services/software with root user permissions.</li>
+<li>Never keep active access keys, generate them when you need it and simply delete them after use.</li>
+<li>It is a good practice to run <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a> containers with their own service user.</li>
+<li>You should version your projects like using <a href="/notes/qkp5jc6pta8a9f35evsbvod">Git</a> tags. A tag is like a branch that doesn't change.</li>
+<li>What makes a good/senior DevOps engineer (among other things) is their ability to compare different tools and use the most efficient one to get the task done.</li>
+</ul>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://www.atlassian.com/devops/what-is-devops/devops-best-practices">DevOps Best Practices | Atlassian</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

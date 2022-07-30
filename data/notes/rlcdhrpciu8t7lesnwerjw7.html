@@ -1,0 +1,47 @@
+<h1 id="anacron"><a aria-hidden="true" class="anchor-heading" href="#anacron"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>anacron</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><strong>Anacron</strong> is used to run commands periodically with a frequency defined in days. It works a little different from <a href="/notes/odlpzat6rl1hbfz3ph8xhil">crontab</a>; assumes that a machine will not be powered on all the time.</p>
+<p>It is appropriate for running daily, weekly, and monthly scheduled jobs normally run by cron, on machines that will not run 24-7 such as laptops and desktops machines.</p>
+<p>Assuming you have a scheduled task (such as a <strong>backup script</strong>) to be run using cron every midnight, possibly when your asleep, and your desktop/laptop is off by that time. Your backup script will not be executed.</p>
+<p>However, if you use <strong>anacron</strong>, you can be assured that the next time you power on the desktop/laptop again, the backup script will be executed.</p>
+<p>Anacron is run automatically when the system starts. The tasks will have root privileges. The frequency of the jobs is expressed in days not in minutes.</p>
+<p>The file that specifies anacron jobs is located at <code>/etc/anacrontab</code></p>
+<p><code>run-parts</code> will run all the executable files found in a directory.</p>
+<p>There are four fields that define an anacron job.</p>
+<ol>
+<li>Period in days
+<ul>
+<li><code>1</code> will specify everyday, <code>7</code> specifies every week.</li>
+</ul>
+</li>
+<li>Delay in minutes
+<ul>
+<li>Specifies how long anacron will wait before executing a job.</li>
+</ul>
+</li>
+<li>Job identifier - must be unique
+<ul>
+<li>Is the name of the file that is created under <code>/var/spool/anacron</code> - job timestamp file. Will indicate the last time the job was run. It also identifies the jobs in messages and logs.</li>
+</ul>
+</li>
+<li>The command to be executed</li>
+</ol>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<pre><code>2    1    backup    /root/backup.sh
+2    1    backup    date >> /tmp/anacron.txt
+</code></pre>
+<p>Check for errors in the anacrontab file using</p>
+<pre><code>anacron -T
+</code></pre>
+<p>To run a anacron job in foreground or check status</p>
+<pre><code>anacron -d
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/odlpzat6rl1hbfz3ph8xhil">crontab</a></li>
+</ul>

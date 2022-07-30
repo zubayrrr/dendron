@@ -1,0 +1,134 @@
+<h1 id="boto"><a aria-hidden="true" class="anchor-heading" href="#boto"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Boto</h1>
+<ul>
+<li>Areas: <a href="/notes/gvpkbgglehtr9ej5e0uj44j">AWS</a>, <a href="/notes/wa4wthnhw54hd5wfyocyvqa">Python</a></li>
+</ul>
+<hr>
+<p>Boto3 is the name of the Python SDK for AWS. It allows you to directly create, update, and delete AWS resources from your Python scripts.</p>
+<h2 id="automation-on-aws-using-boto"><a aria-hidden="true" class="anchor-heading" href="#automation-on-aws-using-boto"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Automation on AWS using Boto</h2>
+<ul>
+<li>Infrastructure provisioning just like <a href="/notes/mkwoo3ek4y6bnddpy1iteb9">Terraform</a></li>
+<li>Making backups</li>
+<li>Doing cleanups</li>
+<li>Configuration of existing servers</li>
+<li>Doing health-checks/monitoring</li>
+</ul>
+<ol>
+<li>Connect to AWS account (uses <code>~/.aws/config</code> that was created using <code>aws configure</code> )</li>
+<li>Create a VPC</li>
+<li>Create a Subnet</li>
+</ol>
+<p><code>pip install boto3</code> to install the library on your local machine</p>
+<pre class="language-py"><code class="language-py"><span class="token comment"># main.py</span>
+<span class="token keyword">import</span> boto3
+
+ec2_client <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">)</span>
+<span class="token comment"># overriding default region configured on ~/.aws/config</span>
+<span class="token comment"># ec2_client = boto3.client('ec2', region_name="eu-central-1")</span>
+
+ec2_resource <span class="token operator">=</span> boto3<span class="token punctuation">.</span>resource<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">)</span>
+
+new_vpc <span class="token operator">=</span> ec2_resource<span class="token punctuation">.</span>create_vpc<span class="token punctuation">(</span>
+  CidrBlock<span class="token operator">=</span><span class="token string">"10.0.0.0/16"</span>
+<span class="token punctuation">)</span>
+
+new_vpc_create_subnet<span class="token punctuation">(</span>
+  CidrBlock<span class="token operator">=</span><span class="token string">"10.0.0.0/24"</span>
+<span class="token punctuation">)</span>
+
+new_vpc<span class="token punctuation">.</span>create_tags<span class="token punctuation">(</span>
+  Tags<span class="token operator">=</span><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token string">'Key'</span><span class="token punctuation">:</span> <span class="token string">'Name'</span><span class="token punctuation">,</span>
+      <span class="token string">'Value'</span><span class="token punctuation">:</span> 'my<span class="token operator">-</span>vpc
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+all_available_vpcs <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>describe_vpcs<span class="token punctuation">(</span><span class="token punctuation">)</span>
+vpcs <span class="token operator">=</span> all_available_vpcs<span class="token punctuation">[</span><span class="token string">"Vpcs"</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>all_available_vpcs<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> vpc <span class="token keyword">in</span> vpcs<span class="token punctuation">:</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span>vpc<span class="token punctuation">[</span><span class="token string">"VpcId"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  cidr_block_assoc_sets <span class="token operator">=</span> vpc<span class="token punctuation">[</span><span class="token string">"CidrBlockAssociationSet"</span><span class="token punctuation">]</span>
+  <span class="token keyword">for</span> assoc_set <span class="token keyword">in</span> cidr_block_assoc_sets<span class="token punctuation">:</span>
+      <span class="token keyword">print</span><span class="token punctuation">(</span>assoc_set<span class="token punctuation">[</span><span class="token string">"CidrBlockState"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="notes"><a aria-hidden="true" class="anchor-heading" href="#notes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Notes</h2>
+<p><strong>How to use <code>boto3</code></strong></p>
+<ul>
+<li>What function name we need to call?</li>
+<li>What parameters the function takes?</li>
+<li>What is returned from this function call? (<strong>response</strong>) (<strong>response datatype</strong>)</li>
+</ul>
+<p><strong><code>client</code> VS <code>resource</code></strong></p>
+<ul>
+<li>
+<p>Client is more low-level API.</p>
+</li>
+<li>
+<p>Client provides one-to-one mapping to the underlying HTTP API operations.</p>
+</li>
+<li>
+<p>Resource provides resource objects to access attributes and perform actions.</p>
+</li>
+<li>
+<p>Resource is like a wrapper around Client that makes it a higher-level API and object-oriented.</p>
+</li>
+<li>
+<p>Resource returns a <code>Resource Object</code>, we can use for subsequent calls.</p>
+</li>
+</ul>
+<p><strong>Terraform VS Python</strong></p>
+<ul>
+<li>
+<p><a href="/notes/mkwoo3ek4y6bnddpy1iteb9">Terraform</a> manages state of the infrastructure. It creates and configures.</p>
+</li>
+<li>
+<p>Since Terraform knows the current state, it also knows the different between current state and desired state. It takes care of all the decision/steps to be made.</p>
+</li>
+<li>
+<p>Terraform is idempotent(no surprises).</p>
+</li>
+<li>
+<p>If you delete the code block of a resource declaration and do <code>terraform apply</code> it'll delete the resource as it knows that you no longer want those resource based on your TF configuration file.</p>
+</li>
+<li>
+<p>Python is not idempotent, it'll create infrastructure every time you run the script. You're not "declaring" how many "resources" you want in your infra. Basically, it doesn't have state.</p>
+</li>
+<li>
+<p>You need to explicitly delete your resources. Not easy because of specific policies(like of a VPC). Requires a lot of code to make it happen.</p>
+</li>
+</ul>
+<p><strong>Use cases of Boto</strong></p>
+<ul>
+<li>More complex logic, since Python is a full fledged programming language allowing you to use conditional statements etc.</li>
+<li>Boto allows far more things than Terraform offers because of it's low-level API.</li>
+<li>Boto is an AWS library - it offers far more information than Terraform. Allowing you to do things like backups, monitoring, scheduled tasks etc.</li>
+<li>You can use other libraries in your program to extend functionality.</li>
+<li>You can even add a web interface to your program. A UI.</li>
+</ul>
+<h2 id="labs"><a aria-hidden="true" class="anchor-heading" href="#labs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Labs</h2>
+<ul>
+<li><a href="/notes/i5wu7j4cvg8tzfyzkawbsjt">Ec2 Server Status Check using Boto3</a></li>
+<li><a href="/notes/890e29fylut7y1zqv9mtw7n">Add Env Tags to  Ec2 Servers with Boto3</a></li>
+<li><a href="/notes/llkdoaituan5psfnwiw8tf5">EKS cluster information</a></li>
+<li><a href="/notes/pr716orm61uub9wy1ksco8h">Automate Data Backup of EC2 instances</a></li>
+<li><a href="/notes/6yea3nujt8yupmf4wdtj7mk">Automate cleanup of old Snapshots</a></li>
+<li><a href="/notes/9im04y0czc0iiw0jw0rbr92">Restore volume from a snapshot of EC2 instance</a></li>
+</ul>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html">Boto3 documentation</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/pr716orm61uub9wy1ksco8h">Automate Data Backup of EC2 instances</a></li>
+<li><a href="/notes/6yea3nujt8yupmf4wdtj7mk">Automate cleanup of old Snapshots</a></li>
+<li><a href="/notes/llkdoaituan5psfnwiw8tf5">EKS cluster information</a></li>
+<li><a href="/notes/9im04y0czc0iiw0jw0rbr92">Restore volume from a snapshot of EC2 instance</a></li>
+<li><a href="/notes/890e29fylut7y1zqv9mtw7n">Add Env Tags to  Ec2 Servers with Boto3</a></li>
+<li><a href="/notes/i5wu7j4cvg8tzfyzkawbsjt">Ec2 Server Status Check using Boto3</a></li>
+<li><a href="/notes/wa4wthnhw54hd5wfyocyvqa">Python</a></li>
+</ul>

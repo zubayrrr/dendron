@@ -1,0 +1,38 @@
+<h1 id="mv"><a aria-hidden="true" class="anchor-heading" href="#mv"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>mv</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The mv command (short from move) is used to rename and move and files and directories from one location to another.</p>
+<p>Syntax:</p>
+<p><code>mv [OPTIONS] SOURCE DESTINATION</code></p>
+<p>The SOURCE can be one, or more files or directories, and DESTINATION can be a single file or directory.</p>
+<ul>
+<li>When multiple files or directories are given as a SOURCE, the DESTINATION must be a directory. In this case, the SOURCE files are moved to the target directory.</li>
+<li>If you specify a single file as SOURCE, and the DESTINATION target is an existing directory, then the file is moved to the specified directory.</li>
+<li>If you specify a single file as SOURCE, and a single file as DESTINATION target then you’re renaming the file .</li>
+<li>When the SOURCE is a directory and DESTINATION doesn’t exist, SOURCE will be renamed to DESTINATION. Otherwise if DESTINATION exist, it be moved inside the DESTINATION directory.</li>
+</ul>
+<p>To move a file or directory, you need to have write permissions on both SOURCE and DESTINATION. Otherwise, you will receive a permission denied error.</p>
+<p>Example:</p>
+<ul>
+<li><code>mv file1 /tmp</code>, <code>file1</code> from the current working dir will be moved to <code>/tmp</code></li>
+<li><code>mv file1 file2</code>, <code>file1</code> will be renamed to <code>file2</code></li>
+<li><code>mv -i file1 /tmp</code> to make <code>mv</code> prompt before overwriting if <code>file1</code> already exists in <code>/tmp</code> where <code>-i</code> stands for interactive</li>
+<li>The <code>-n</code> option tells mv never to overwrite any existing file:
+<ul>
+<li><code>mv -n file1 /tmp</code></li>
+</ul>
+</li>
+<li>The <code>-u</code> option stands for <code>--update</code> will only overwrite a file if the destination file is older(only newer files will be moved)</li>
+<li>Renaming and moving at the same time:
+<ul>
+<li><code>mv dir10/c.txt dir10/dir2/cc.txt</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/iicnw4qgra6rr5f6k4dlw3z">PATH Variable</a></li>
+</ul>

@@ -1,0 +1,53 @@
+<h1 id="wired-network-topology"><a aria-hidden="true" class="anchor-heading" href="#wired-network-topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Wired Network Topology</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<p>Network Topologies:</p>
+<ul>
+<li>Physically:
+<ul>
+<li>How many devices are connected by media (physical cabling)</li>
+<li>Where are they physically located at</li>
+</ul>
+</li>
+<li>Logically:
+<ul>
+<li>How the actual network traffic flows</li>
+<li>How are they logically connected</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="bus-topology"><a aria-hidden="true" class="anchor-heading" href="#bus-topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Bus Topology</h3>
+<p>A single cable running through an area that requires network connectivity and each device "taps" into the cable using either a T-connector or vampire tap. (big thick metal cable, each device connected would clamp onto the big cable and establish a connection hence a vampire tap, very old, not used today), a single collision domain.</p>
+<hr>
+<h3 id="ring-topology"><a aria-hidden="true" class="anchor-heading" href="#ring-topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ring Topology</h3>
+<p>Uses a cable running in a circular loop and each device is connected to the ring with the data traveling in a singular direction. Ring toplogy that uses an electronic token to prevent collisions by requiring a device to hold the "token" when communicating on the network called a "Ring Token".</p>
+<h4 id="fiber-distributed-data-interface"><a aria-hidden="true" class="anchor-heading" href="#fiber-distributed-data-interface"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Fiber Distributed Data Interface</h4>
+<p>FDDI Ring in Fiber networks use two counter-rotating rings for redundancy.</p>
+<p>Modern ring networks are usually FDDI networks.</p>
+<hr>
+<h3 id="star-topology"><a aria-hidden="true" class="anchor-heading" href="#star-topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Star Topology</h3>
+<p>Most popular pysical LAN topology where devices connect to a single contralizzed point or device. Central point is normally a <a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a>.</p>
+<p>If the central device fails, the entire network fails. Star Topology has a single point of failure.</p>
+<hr>
+<h3 id="hub-and-spoke-topology"><a aria-hidden="true" class="anchor-heading" href="#hub-and-spoke-topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Hub-and-Spoke Topology</h3>
+<p>Similar to Star but with WAN Links instead of LAN connections and it is used connecting multiple sites.</p>
+<hr>
+<h3 id="full-mesh-topology"><a aria-hidden="true" class="anchor-heading" href="#full-mesh-topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Full-Mesh Topology</h3>
+<p>Most redundant toplogy where every node connects to very other node and optimal routing between nodes is always available.</p>
+<p>Number of connections can get high and messy with increasing number of devices in the network.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zubayrrr/twiki/bin/image.9pewkof3kcf.png"></p>
+<hr>
+<h3 id="partial-mesh-topology"><a aria-hidden="true" class="anchor-heading" href="#partial-mesh-topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Partial-Mesh Topology</h3>
+<p>Hybrid of the full-mesh and hub-and-spoke topologies.</p>
+<p>Provides optimal routes between some sites, while avoiding the expense of connecting every site.</p>
+<p>Network traffic patterns must be considered to design it effectively.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/24gedgrhl3apgjvrqf88y3r">Networks and Their Basic Components</a></li>
+<li><a href="/notes/yjeoqhn1zs6blkof49hvacr">Physical Layer - OSI</a></li>
+<li><a href="/notes/flsqkapy0cah8so900kymaq">Wireless Network Topology</a></li>
+</ul>

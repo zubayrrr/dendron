@@ -1,0 +1,28 @@
+<h1 id="hdparam"><a aria-hidden="true" class="anchor-heading" href="#hdparam"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>hdparam</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>“<strong>hdparm</strong>“(i.e, hard disk parameter) is one of the command line programs for Linux which is used to handle disk devices and hard disks. With the help of this command, you can get statistics about the hard disk, alter writing intervals, acoustic management, and DMA settings. It can also set parameters related to drive caches, sleep mode, power management, acoustic management, and DMA settings.</p>
+<p><strong>Note:</strong> When no flags are specified, <code>–acdgkmnru</code> is presumed.</p>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<p><strong>Command to display information of the hard drive:</strong> It is one of the most significant features as it unveils details of the hard disk drive, you need to use -I option and hard disk drive here.</p>
+<pre><code>hdparm -I /dev/sda
+hdparm -i /dev/sda
+</code></pre>
+<p><strong>Command to display all the options:</strong></p>
+<pre><code>hdparm -h
+</code></pre>
+<p><strong>Command to test hard disk drive speed:</strong></p>
+<p><code>--direct</code> option will bypass the page cache causing the reads to go directly from the drive to the hdparm command buffer; its a raw <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">IO (Private)</a></p>
+<pre><code>hdparm -t /dev/vdb
+hdparm -t --direct /dev/sda
+</code></pre>
+<p><strong>Command to measure hard disk cache read speed:</strong></p>
+<pre><code>hdparm -T /dev/vdb
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

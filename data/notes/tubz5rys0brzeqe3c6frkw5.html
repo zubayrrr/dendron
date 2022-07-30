@@ -1,0 +1,18 @@
+<h1 id="nohop"><a aria-hidden="true" class="anchor-heading" href="#nohop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>nohop</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>When you close a terminal, logout or disconnect, any processes running in that terminal will be terminated. [[devlog.SIGHUP] signal is sent to the process and the process will be killed. This can become an issue if you're running a remote server, executing programs over SSH and if the connection drops, the session will be terminated, all the executed processes will stop, to avoid this issue, use <code>nohop</code> command which will make the process ignore all hang up signals.</p>
+<p><a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> will not be available to the user and <code>nohup.out</code> file is used as the default file for <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> and <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a>, it is created in the current working directory or if the user doesn't have the right permissions for the current directory, the file will be created in the user's home dir. If the output of the nohup command is redirected to some other file, nohup.out file is not generated.</p>
+<p>If a process is started and its parent(bash shell) gets terminated, the process will be adopted by <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.init (Private)</a> or <a href="/notes/hbcrmipwwrxrhts4y19eqb8">systemd</a> which runs with the <a href="/notes/v879p2kn7q4pa6g56739q1v">PID</a> <code>1</code> and are the first process run by the system.</p>
+<ul>
+<li><code>nohup sleep 123 &#x26;</code> will begin a <code>sleep</code> process</li>
+</ul>
+<p>Alternatives to nohup are <a href="https://www.gnu.org/software/screen/">GNU Screen</a> and <a href="https://github.com/tmux/tmux">tmux</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+<li><a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a></li>
+</ul>

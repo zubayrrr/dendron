@@ -1,0 +1,25 @@
+<h1 id="cgroups"><a aria-hidden="true" class="anchor-heading" href="#cgroups"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Cgroups</h1>
+<p>cgroups (abbreviated from control groups)</p>
+<p>Cgroup is a linux feature to limit, police, and account the resource usage for a set of processes. It provides mechanism to limit and monitor system resources like CPU time, system memory, disk bandwidth, network bandwidth, etc.</p>
+<p>The cgroups works by dividing resources into groups and then assigning tasks to those groups.</p>
+<p>Docker uses cgroups to limit the system resources.</p>
+<p>When you install Docker binary on a linux box like ubuntu it will install cgroup related packages and create subsystem directories. You can list all the subsystems that you can manage using cgroups via the <code>lscgroup</code> command.</p>
+<pre class="language-bash"><code class="language-bash">$ lscgroup
+cpuset:/
+cpu:/
+cpuacct:/
+memory:/
+devices:/
+freezer:/
+blkio:/
+perf_event:/
+hugetlb:/
+</code></pre>
+<p>If <code>lscgroup</code> is not installed, then you can install it using sudo apt-get install cgroup-bin command.</p>
+<p>Via - <a href="https://shekhargulati.com/2019/01/03/how-docker-uses-cgroups-to-set-resource-limits/">How Docker uses cgroups to set resource limits? – Shekhar Gulati</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>

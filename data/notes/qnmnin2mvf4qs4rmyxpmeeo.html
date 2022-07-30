@@ -1,0 +1,54 @@
+<h1 id="4-essential-linux-productivity-tools-ulauncher-espanso-planner-and-obsidian"><a aria-hidden="true" class="anchor-heading" href="#4-essential-linux-productivity-tools-ulauncher-espanso-planner-and-obsidian"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>4 Essential Linux Productivity Tools Ulauncher, Espanso, Planner, and Obsidian</h1>
+<h1 id="4-essential-linux-productivity-tools-ulauncher-espanso-planner-and-obsidian-1"><a aria-hidden="true" class="anchor-heading" href="#4-essential-linux-productivity-tools-ulauncher-espanso-planner-and-obsidian-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://input.sh/linux-productivity-tools/">4 Essential Linux productivity tools: Ulauncher, Espanso, Planner, and Obsidian</a></h1>
+<p>As a user of a Linux-based operating system, I always envied macOS users for the choice of productivity tools available on their disposal, with tools like <a href="https://www.alfredapp.com/">Alfred</a> , <a href="https://textexpander.com/">TextExpander</a> , <a href="https://bear.app/">Bear</a> , <a href="https://www.keyboardmaestro.com/main/">Keyboard Maestro</a> , <a href="https://www.omnigroup.com/omnifocus/">OmniFocus</a> and so forth. I believe I've achieved comparable results on my <a href="https://elementary.io/">elementary OS</a> install, and I want to share the tools I'm relying on on a daily basis.</p>
+<h2 id="a-better-launcher"><a aria-hidden="true" class="anchor-heading" href="#a-better-launcher"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>A better launcher</h2>
+<p>I have a lot of respect for Slingshot, a default launcher for <strong>elementary OS</strong>. It has some features that I really miss when I'm not behind my favourite desktop environment, most notable of which are:</p>
+<ol>
+<li><strong>Fuzzy search:</strong> Instead of having to type "firefox" precisely, I can (mis)type something that resembles the word Firefox and it will still show it as a result. For example: "ffx", "frf", "ffox". Any combination of letters contained in the word "Firefox" will return it as a result.</li>
+<li><strong>Quick calculations:</strong> When I want to quickly calculate something basic, I don't have to start a dedicated calculator app. I just press the ~start~ meta key and do them straight from my app launcher.</li>
+</ol>
+<p><a href="https://ulauncher.io/">Ulauncher</a> takes it a step further, similarly to how Alfred does it on a macOS. Sure, I can launch applications using it, but I can also install plugins for it that allow me to quickly reach many, <em>many</em> functions. Some examples include:</p>
+<ul>
+<li><a href="https://ext.ulauncher.io/-/github-ulauncher-ulauncher-timer">Starting a timer</a> with something like <code>ti 10m Message goes here</code>, which will show me a desktop notification with a defined message after the specified amount of time.</li>
+<li><a href="https://ext.ulauncher.io/-/github-pywkm-ulauncher-spotify">Control Spotify</a> . Typing <code>sp</code> gives me the ability to pause/play current track, as well as to skip to the next or previous track.</li>
+<li><a href="https://ext.ulauncher.io/-/github-jetbug123-ulauncher-ssh">SSH connection manager</a> allows me to quickly reach SSH connections saved in my <code>~/.ssh/config</code>.</li>
+<li><a href="https://ext.ulauncher.io/-/github-friday-ulauncher-clipboard">Clipboard manager</a> saves anything that's in my clipboard, allowing me to quickly access things I've copied over.</li>
+</ul>
+<p>Depending on your needs, it can do a lot more, like <a href="https://ext.ulauncher.io/-/github-brpaz-ulauncher-vscode-projects">launch VSCode projects</a> , <a href="https://ext.ulauncher.io/-/github-brpaz-ulauncher-docker">manage Docker containers</a> , <a href="https://ext.ulauncher.io/-/github-friday-ulauncher-hash2">calculate hashes</a> , <a href="https://ext.ulauncher.io/-/github-safaariman-ulauncher-jira">search through Jira</a> , <a href="https://ext.ulauncher.io/-/github-munim-ulauncher-ip-lookup">do an IP lookup</a> , <a href="https://ext.ulauncher.io/-/github-noam09-ulauncher-units">convert units</a> , look for a password in <a href="https://ext.ulauncher.io/-/github-kbialek-ulauncher-bitwarden">Bitwarden</a> or <a href="https://ext.ulauncher.io/-/github-brpaz-ulauncher-lastpass">LastPass</a> and on and on and on.</p>
+<p>I use a combination of the two. I use the default launcher for launching apps and doing some calculations, and I use Ulauncher to do so much more.</p>
+<p>Unfortunately, none of these solutions have something similar to <a href="https://www.alfredapp.com/workflows/">Alfred's Workflows</a> , but you can create your own Ulauncher extensiosn or launch scripts written in your preferred scripting language.</p>
+<h2 id="glorified-to-do-list-manager"><a aria-hidden="true" class="anchor-heading" href="#glorified-to-do-list-manager"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Glorified to-do list manager</h2>
+<p>I don't think <em>any</em> to-do app available on Linux comes even close to being as beautiful and feature-packed as Planner. Just look at how pretty it is!</p>
+<p><img src="inbox/assets/Planner&#x27;s%20main%20interface.png" alt="Planner&#x27;s main interface"></p>
+<p>Your projects can be organised into folders, and your tasks can have labels, deadlines, reminders, and so on. Tasks can be organized into projects, sections, and have sub-tasks. You can sync them with Todoist to have them available on more devices, but you don't have to.</p>
+<p>Similarly to Todoist, you can see all the tasks that have a deadline set to today + any overdue tasks, you can see the tasks that are due soon, and you have an inbox as a place where you can store the tasks quickly without having to figure out which project they should go to.</p>
+<p>One killer feature for me is that I can have a keyboard shortcut that toggles the quick add window, allowing me to add a new task pretty effortlessly regardless of which app I'm using.</p>
+<h2 id="expanding-text"><a aria-hidden="true" class="anchor-heading" href="#expanding-text"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Expanding text</h2>
+<p>For text expansion, I use a cross-platform tool written in Rust called <a href="https://espanso.org/">Espanso</a> . Regardless of what I'm typing, I can define shortcuts that convert something easy to write in something that takes more effort. For example, I can type <code>:date</code> in any text field and it will be swapped by today's date when I press the space bar.</p>
+<p>I can define custom text replacements by simply adding two lines inside a YAML file (<code>~/.config/espanso/default.yml</code>):</p>
+<pre><code>matches:
+  - trigger: ":hw"
+    replace: "Hello world"
+</code></pre>
+<p>It can also use a trigger to return an output from a script or a shell command, though I have yet to find a use case for that. You can also configure a shortcut to trigger a <a href="https://espanso.org/docs/passive-mode/">passive mode</a> , which will select everything in the current text field and expand it if it finds any triggers you've defined.</p>
+<p>On the downside, it currently doesn't come with a graphical interface, though a graphical interface is at the top of its <a href="https://github.com/federico-terzi/espanso/issues/255">roadmap</a> .</p>
+<h2 id="a-note-taking-system"><a aria-hidden="true" class="anchor-heading" href="#a-note-taking-system"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>A note-taking system</h2>
+<p>I've tried many solutions for note taking over the years, like keeping my notes in Markdown files, <a href="https://www.notion.so/">Notion</a> , and <a href="https://www.inkdrop.app/">Inkdrop</a> . That all ended when I found out about <a href="https://obsidian.md/">Obsidian</a> . It's my go-to note taking system ever since it launched in public beta and I can't see myself using anything else for the foreseeable future.</p>
+<p>A few months ago I wrote about <a href="https://input.sh/why-i-dont-write-my-notes-in-markdown/">why I do(n't) keep my notes in Markdown</a>. In it, I emphasized a certain set of problems I've experienced whenever I wanted to keep my notes inside of a folder full of Markdown files:</p>
+<ol>
+<li>Linking between notes is hard.</li>
+<li>Dealing with images is hard.</li>
+<li>Editing notes on a phone.</li>
+<li>Clipping articles into my notes.</li>
+</ol>
+<p>The first two are instantly solved by Obsidian out-of-the-box. <a href="https://gitjournal.io/">GitJournal</a> solved my third one, and I've solved the last one by <a href="https://gitjournal.io/">adjusting the script</a> I've outlined in the previous article.</p>
+<p>Now I can truly keep all of my notes in one place and sync them between devices however I want to. I can also generate a handy graph showing various links I've created between my notes:</p>
+<p><img src="inbox/assets/Screenshot-from-2020-08-03-14-44-40.png" alt="Screenshot-from-2020-08-03-14-44-40"></p>
+<h2 id="in-conclusion"><a aria-hidden="true" class="anchor-heading" href="#in-conclusion"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>In conclusion</h2>
+<p>I was able to transform my Linux experience to another level using a combination of awesome productivity tools that work natively on my Linux-based system. Overall, I'm pretty happy with my setup, as I was able to find an alternative to the majority of macOS-specific productivity tools I always wished to have access to.</p>
+<p>If you know of a similarly useful Linux-based productivity tool or are building one, please let me know on Mastodon / Twitter, as I'd love to be one of your first users. I'm not an open source purist and I'm more than willing to pay money for something that will truly improve my daily workflow.</p>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #054907;" href="/notes/j9wop01y5eo30zr168a0g3n">articles</a></li>
+</ol>

@@ -1,0 +1,37 @@
+<h1 id="order-by"><a aria-hidden="true" class="anchor-heading" href="#order-by"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ORDER BY</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p>The <code>ORDER BY</code> keyword is used to sort the result-set in ascending or descending order.</p>
+<p>The <code>ORDER BY</code> keyword sorts the records in ascending order by default. To sort the records in descending order, use the <code>DESC</code> keyword.</p>
+<p>Sort by colum other than default sort column with <code>ORDER BY</code>; in relational databases every table has a primary key column and it uses that for default sort. The values should uniquely identify the other records in the table.</p>
+<pre><code>SELECT *
+FROM customers
+ORDER BY first_name
+
+--or use DESC to sort it in descending order
+ORDER BY first_name DESC
+
+--or
+ORDER BY state, first_name
+
+--or
+
+ORDER BY state DESC, first_name
+</code></pre>
+<p>In <a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a> we can sort data by any columns wether or not it was <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SELECT (Private)</a>ed in the SELECT clause.</p>
+<pre><code>SELECT first_name, last_name
+FROM customers
+ORDER BY birth_date
+</code></pre>
+<p>Data can also be sorted by an alias</p>
+<pre><code>SELECT first_name, last_name, 10 AS points
+FROM customers
+ORDER BY points, first_name
+</code></pre>
+<p>Sort by columns as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SELECT (Private)</a>ed</p>
+<pre><code>SELECT first_name, last_name
+--where first_name is 1 and last_name 2
+ORDER BY 1, 2
+--sorting like this is discouraged
+</code></pre>

@@ -1,0 +1,43 @@
+<h1 id="docker-repository-on-nexus"><a aria-hidden="true" class="anchor-heading" href="#docker-repository-on-nexus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker repository on Nexus</h1>
+<ul>
+<li>Related: <a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a>, <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>
+<hr>
+<p>Let's create a Nexus repository for pushing Docker Images.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657898240/wiki/xtuuz0risepxxvasvtph.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657898250/wiki/qwzgsrveb6nnaw6mjtbv.png"></p>
+<p>Nexus will give you a URL which can be used to push the Docker Images.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657898282/wiki/uzqnzn9ytfxv5v3lepem.png"></p>
+<p>Create User role for Docker repository</p>
+<p>You need this since you’d <code>docker login</code> into the Nexus repository with the credentials provided by Nexus so you can push images to this repository.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657898401/wiki/e3ws3cnkzx3pjugcah5z.png"></p>
+<p>Assign the privilege to the role and assign that role to your Nexus User.</p>
+<p>The endpoint for <code>docker login</code> would be <code>ipAddres:port</code> you’d need the Docker repository’s port(different from the Nexus’s port).</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657898631/wiki/wd2c0lpxian1nawdszqj.png"></p>
+<p>Expose the port the Nexus server’s firewall.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657898733/wiki/sf4hnvqudcdpm1latsq7.png"></p>
+<p>Configure Realm in Nexus</p>
+<p>When you do <code>docker login</code>, you get token of authentication from Nexus Docker Repository for a client, the token will be stored in the machine from where you’re pushing the images. The location of the token will be <code>~/.docker/config.json</code>.</p>
+<p>We configure the issuance of that token.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657899004/wiki/hvl6ifvbatliuxgkq9bi.png"></p>
+<p>Docker by default only allows client request to talk to an HTTPS endpoint of a Docker registry, it won’t allow an HTTP endpoint. We’ve to ask Docker to allow insecure endpoint as an exception.</p>
+<p>Configure insecure registry on Linux by editing <code>/etc/docker/daemon.json</code> and add: Ip address:port of Nexus.</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"insecure-registries"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"ipAddress:8083"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>On Docker Desktop:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657899306/wiki/dnqx8sntzibnnfofspda.png"></p>
+<p>Now you’re set for <code>docker login</code></p>
+<p><code>docker login 167.99.248.163:8083</code></p>
+<p>Build an image from a <code>Dockerfile</code></p>
+<p>Retag or rename the image itself to add the name of the repository where it is needed to be pushed.</p>
+<p><code>docker tag my-image:1.0 167.99.248.163:8083/my-image:1.0</code></p>
+<p><code>docker push 167.99.248.163:8083/my-image:1.0</code></p>
+<p>In the same way, you can pull images from it:</p>
+<p><code>curl -u nexusUser:nexusPw -X GET 'http://167.99.248.163:8081/service/rest/v1/components?repository=docker-hosted</code></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>

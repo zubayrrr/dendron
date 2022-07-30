@@ -1,0 +1,12 @@
+<h1 id="combining-find-and-chmod-commands-together"><a aria-hidden="true" class="anchor-heading" href="#combining-find-and-chmod-commands-together"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Combining Find and Chmod Commands Together</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>To recursively set permissions for all files to a specific value, you should exclude the directories in the path otherwise the directories will have same permissions as the files, see: <a href="/notes/6vzwh1eaj567nroqwy1uf5s">The Effect of Permissions on Directories</a></p>
+<p>To mitigate this, we can combine <a href="/notes/mx4bqwojj5gg8gvl4mdyvoj">find</a> and <a href="/notes/8e78vq83ld131fb43r7xf90">chmod</a> commands together</p>
+<p>Example</p>
+<ul>
+<li><code>find ~ -type f -exec chmod 640 {} \;</code> for all files</li>
+<li><code>find ~ -type d -exec chmod 750 {} \;</code> for all directories</li>
+</ul>

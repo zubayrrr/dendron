@@ -1,0 +1,33 @@
+<h1 id="standard-data-stream"><a aria-hidden="true" class="anchor-heading" href="#standard-data-stream"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Standard Data Stream</h1>
+<ul>
+<li><code>topic</code>: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Each command is a computer program that takes <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a>, process it and gives <a href="/notes/do68y261xeu98bpq3vl5cn9">Redirecting standard output</a>.</li>
+<li>Every Linux command or program we run has three data streams connected to it:
+<ul>
+<li><a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> - Standard Input, denoted with <code>0</code></li>
+<li><a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> - Standard Output, denoted with <code>1</code></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.stderr (Private)</a> - Standard Error, denoted with <code>2</code></li>
+</ul>
+</li>
+<li>Standard Data Stream</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.1upbcz4kmqj.png"></p>
+<ul>
+<li>By default the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> of a command comes out to the terminal via the Output Data Stream, but we can redirect this <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a>.</li>
+<li>Stderr is one of the Outputs of the command Inputted that is not part of the Stdout and is logged separately.</li>
+<li>Stdin is connected to the keyboard to take in a command from the user. Stdin is also a Data Stream, hence it can also be redirected.</li>
+<li>We can pass Stdout of one command to Stdin of another command. This is called Piping. Chaining of this process is called Pipeline.</li>
+<li>Command line argument are the options passed following the command.<br>
+Example: <code>cal 12 2021</code>, where <code>12</code> and <code>2021</code> are the arguments. Command line argument only associate with the command or the option they're dealing with.</li>
+<li>The difference between command line arguments and Data Streams is that Data Streams flow, they can be redirected and piped together but command line arguments are mostly static.</li>
+<li>Not all commands accept Stdin, e.g: <code>echo</code>.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/uua60b3x9in6imfnwfa5f7t">Everything about Linux Terminal</a></li>
+<li><a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a></li>
+</ul>

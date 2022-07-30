@@ -1,0 +1,31 @@
+<h1 id="spark-misc"><a aria-hidden="true" class="anchor-heading" href="#spark-misc"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spark Misc</h1>
+<ul>
+<li>Areas: <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+</ul>
+<hr>
+<p><code>spark.conf.set("spark.sql.legacy.timeParserPolicy","LEGACY")</code></p>
+<p>Ref:</p>
+<ul>
+<li><a href="https://youtu.be/sGkkUpdWfLQ">https://youtu.be/sGkkUpdWfLQ</a></li>
+<li><a href="https://github.com/oliversavio/youtube-vid-code/tree/main/spark-shell">https://github.com/oliversavio/youtube-vid-code/tree/main/spark-shell</a></li>
+</ul>
+<p><code>spark-shell --packages com.databricks:spark-xml_2.12:0.12.0</code></p>
+<pre><code>scala> import com.databricks.spark.xml._
+
+scala> val df = spark.read.option("rowTag", "book").xml("books.xml")
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+import org.apache.spark.sql.types._
+val customSchema = StructType(
+Array(
+StructField("title", StringType, nullable=true),
+StructField("price", DoubleType, nullable=true)
+)
+)
+
+scala> val df = spark.read.option("rowTag","book").schema(customSchema).xml("books.xml")
+
+scala> df.show
+scala> df.printSchema
+</code></pre>

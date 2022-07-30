@@ -1,0 +1,18 @@
+<h1 id="access-denied-for-user-rootlocalhost"><a aria-hidden="true" class="anchor-heading" href="#access-denied-for-user-rootlocalhost"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Access denied for user 'root'@'localhost'</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p><code>sudo mysql</code></p>
+<p>or</p>
+<p>Add switch -p for password based login:</p>
+<p><code>mysql -u root -p</code></p>
+<p><code>SELECT user,authentication_string,plugin,host FROM mysql.user;</code></p>
+<p><code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Current-Root-Password';FLUSH PRIVILEGES;</code></p>
+<h2 id="or"><a aria-hidden="true" class="anchor-heading" href="#or"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>OR</h2>
+<p><code>INSERT INTO mysql.user (Host, User, Password) VALUES ('%', 'root', password('YOURPASSWORD')); GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;</code></p>
+<p><code>sudo mysql -u root -p</code></p>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #6e750e;" href="/notes/u6w0v5tbvga4sby95nixk67">tidbits</a></li>
+</ol>

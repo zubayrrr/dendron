@@ -1,0 +1,57 @@
+<h1 id="add-env-tags-to--ec2-servers-with-boto3"><a aria-hidden="true" class="anchor-heading" href="#add-env-tags-to--ec2-servers-with-boto3"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Add Env Tags to  Ec2 Servers with Boto3</h1>
+<ul>
+<li>Related: <a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a>, <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a></li>
+</ul>
+<hr>
+<p><strong>Premise</strong></p>
+<p>We've a few prod servers in one region and a few dev servers in another region. They were created using Terraform. We want to add corresponding environment "dev", "prod" tags to these servers.</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> boto3
+
+ec2_client_paris <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-west-3"</span><span class="token punctuation">)</span>
+ec2_resource_paris <span class="token operator">=</span> boto3<span class="token punctuation">.</span>resource<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-west-3"</span><span class="token punctuation">)</span>
+
+ec2_client_frankfurt <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-central-1"</span><span class="token punctuation">)</span>
+ec2_resource_frankfurt <span class="token operator">=</span> boto3<span class="token punctuation">.</span>resource<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-central-1"</span><span class="token punctuation">)</span>
+
+instance_ids_paris <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+instance_ids_frankfurt <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+reservations_paris <span class="token operator">=</span> ec2_client_paris<span class="token punctuation">.</span>describe_instances<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'Reservations'</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> res <span class="token keyword">in</span> reservations_paris<span class="token punctuation">:</span>
+    instances <span class="token operator">=</span> res<span class="token punctuation">[</span><span class="token string">'Instances'</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> ins <span class="token keyword">in</span> instances<span class="token punctuation">:</span>
+        instance_ids_paris<span class="token punctuation">.</span>append<span class="token punctuation">(</span>ins<span class="token punctuation">[</span><span class="token string">'InstanceId'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+response <span class="token operator">=</span> ec2_resource_paris<span class="token punctuation">.</span>create_tags<span class="token punctuation">(</span>
+    Resources<span class="token operator">=</span>instance_ids_paris<span class="token punctuation">,</span>
+    Tags<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">'Key'</span><span class="token punctuation">:</span> <span class="token string">'environment'</span><span class="token punctuation">,</span>
+            <span class="token string">'Value'</span><span class="token punctuation">:</span> <span class="token string">'prod'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+reservations_frankfurt <span class="token operator">=</span> ec2_client_frankfurt<span class="token punctuation">.</span>describe_instances<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'Reservations'</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> res <span class="token keyword">in</span> reservations_frankfurt<span class="token punctuation">:</span>
+    instances <span class="token operator">=</span> res<span class="token punctuation">[</span><span class="token string">'Instances'</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> ins <span class="token keyword">in</span> instances<span class="token punctuation">:</span>
+        instance_ids_frankfurt<span class="token punctuation">.</span>append<span class="token punctuation">(</span>ins<span class="token punctuation">[</span><span class="token string">'InstanceId'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+response <span class="token operator">=</span> ec2_resource_frankfurt<span class="token punctuation">.</span>create_tags<span class="token punctuation">(</span>
+    Resources<span class="token operator">=</span>instance_ids_frankfurt<span class="token punctuation">,</span>
+    Tags<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">'Key'</span><span class="token punctuation">:</span> <span class="token string">'environment'</span><span class="token punctuation">,</span>
+            <span class="token string">'Value'</span><span class="token punctuation">:</span> <span class="token string">'dev'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a></li>
+</ul>

@@ -1,0 +1,26 @@
+<h1 id="stdout"><a aria-hidden="true" class="anchor-heading" href="#stdout"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>stdout</h1>
+<ul>
+<li>It is part of <a href="/notes/a0fbh28d1rhy2pb0i9hlylg">Standard Data Stream</a></li>
+<li><a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> is denoted by the number 1 in the <a href="/notes/a0fbh28d1rhy2pb0i9hlylg">Standard Data Stream</a></li>
+<li>Example of changing destination of <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a>: <code>cat 1> output.txt</code></li>
+<li>Where <code>1</code> is the number of data stream <code>></code> is direction and <code>output.txt</code> is destination. (note that we cannot add a space after <code>1</code> or before the <code>></code> sign)</li>
+<li>Alternatively you can skip the <code>1</code> because Linux by default is expecting <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> so just do: <code>cat > output.txt</code></li>
+<li>To avoid truncation (overwriting), you can use <code>>></code> example:<br>
+<code>cat >> output.txt</code> and now whenever you try to redirect <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a>, it'll append instead of truncating.</li>
+<li>Example: <code>date >> date.md</code></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/uua60b3x9in6imfnwfa5f7t">Everything about Linux Terminal</a></li>
+<li><a href="/notes/8emr5u1zw5qr2hntodgzonr">gawk</a></li>
+<li><a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a></li>
+<li><a href="/notes/hmo5i20x0zc85t21ig14vnk">MapReduce in Python</a></li>
+<li><a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a></li>
+<li><a href="/notes/tubz5rys0brzeqe3c6frkw5">nohop</a></li>
+<li><a href="/notes/duu1hv74c23zfwgnsoq22i9">Piping</a></li>
+<li><a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a></li>
+<li><a href="/notes/awaxslvw2mr2x9m3pofswnj">signal</a></li>
+<li><a href="/notes/a0fbh28d1rhy2pb0i9hlylg">Standard Data Stream</a></li>
+<li><a href="/notes/mekmie4q7zrovcr0dmvzuqh">tee</a></li>
+</ul>

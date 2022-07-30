@@ -1,0 +1,93 @@
+<h1 id="piping"><a aria-hidden="true" class="anchor-heading" href="#piping"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Piping</h1>
+<ul>
+<li>The Pipe Symbol <code>|</code></li>
+<li>Redirecting <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> of a command as <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> of another command is known as Piping.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.xa8e0nfb4zr.png"></p>
+<ul>
+<li>Example: passing stdout from date using <code>|</code> symbol as the stdin for the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">cut (Private)</a> command and then outputting (<a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">stdout (Private)</a>) it in a file <code>date.md</code> using <code>></code> symbol.</li>
+</ul>
+<p><code>date | cut --delimiter=" " --fields=1 > date.md</code></p>
+<ul>
+<li>We can also use the short forms</li>
+</ul>
+<p><code>date | cut -d " " -f 1 > date.md</code></p>
+<ul>
+<li>We can also pass the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> as <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> yet again using <code>|</code> symbol like</li>
+</ul>
+<p><code>date | cut -d " " -f 1 | command -opt args ...</code></p>
+<p>so on and so forth</p>
+<p>Examples:</p>
+<ul>
+<li><code>ls -lSh /etc/ | head</code></li>
+<li><code>ls -lSh /etc/ | head -n 20 | tail -n 1</code></li>
+</ul>
+<!-- end list -->
+<ul>
+<li><code>cat -n /var/log/auth.log | grep -a "authentication failure"</code></li>
+<li><code>cat -n /var/log/auth.log | grep -a "authentication failure" | wc -1</code> using <a href="/notes/r3ndxve356r9xbujnl3ysp2">cat</a>, <a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a> and [[devlog.wc]</li>
+</ul>
+<hr>
+<h3 id="the-tee-private-command"><a aria-hidden="true" class="anchor-heading" href="#the-tee-private-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">tee (Private)</a> command</h3>
+<ul>
+<li>Picking up here from <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Piping (Private)</a></li>
+<li>By default redirection of <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> breaks pipelines, unless the <code>tee</code> command is used.</li>
+<li>We use <code>tee</code> command to continue using <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> after redirecting it.</li>
+<li>The <code>tee</code> command helps us with data flow in two directions:</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.mgl2zixejh.png"></p>
+<ul>
+<li>Example:
+<ul>
+<li><code>date | tee date.md | cut -d " " -f 1 > day.md</code>
+<ul>
+<li>Not only are we saving the full date inside <code>date.md</code> using the <code>tee</code> command but we are also saving the day inside <code>day.md</code>.</li>
+<li><code>date | tee date.md | cut -d " " -f 1 | tee day.md | command -opt args ...</code> to keep using <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="another-example-using-ifconfig-private-and-grep"><a aria-hidden="true" class="anchor-heading" href="#another-example-using-ifconfig-private-and-grep"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Another Example using <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ifconfig (Private)</a> and <a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a></h3>
+<ul>
+<li><code>ifconfig | grep ether</code> just prints <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a></li>
+<li><code>ifconfig | grep ether > mac.txt</code> only redirects <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> to <code>mac.txt</code> without printing it out to the screen</li>
+</ul>
+<p>Combining these two using the <code>tee</code> command</p>
+<ul>
+<li><code>ifconfig | grep ether | tee mac.txt</code> now it would both create the file <code>mac.txt</code> and also print out the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a></li>
+</ul>
+<h3 id="append-option"><a aria-hidden="true" class="anchor-heading" href="#append-option"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Append Option</h3>
+<ul>
+<li>Passing the <code>-a</code> option to the <code>tee</code> command would instruct it to append the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> when redirecting it to a file instead of overwriting it.</li>
+<li>Example:
+<ul>
+<li><code>who | tee -a who.txt</code></li>
+<li><code>uname -r | tee -a who.txt kernel.txt</code> would append the kernel version to both <code>who.txt</code> as well as <code>kernel.txt</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="the-xargs-private-command"><a aria-hidden="true" class="anchor-heading" href="#the-xargs-private-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">xargs (Private)</a>\ command</h3>
+<ul>
+<li>Picking up here from <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Piping (Private)</a> and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">tee (Private)</a></li>
+<li>The xargs come into play for commands that don't accept any <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> to be piped, commands that only accept commad arguments.</li>
+<li>Example: <code>echo</code> command doesn't accept any <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a>, it only accepts command args</li>
+<li>To work around this we first need to convert the <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> into command args and then pipe it.</li>
+<li>Demonstration:</li>
+</ul>
+<p><code>date | echo</code> will not work nor will <code>date | echo "hello"</code> work</p>
+<p>What will work is:</p>
+<p><code>date | xargs echo</code></p>
+<p>you can also pass <code>echo</code>'s own command args such as:</p>
+<p><code>date | xargs echo "hello"</code> but here it will run its own arg first</p>
+<p>To see this in action:</p>
+<p><code>date | cut -d " " -f 1 | xargs echo</code></p>
+<hr>
+<ul>
+<li>Using <code>cat</code> to get file names to delete from a file, passing(piping) it as args to <code>rm</code> command.</li>
+<li>Making a file and writing file names to be deleted.</li>
+<li><code>FilesToDelete.txt</code> contains: date.txt day.txt</li>
+<li>Now:</li>
+</ul>
+<p><code>cat FilesToDelete.txt | xargs rm</code></p>

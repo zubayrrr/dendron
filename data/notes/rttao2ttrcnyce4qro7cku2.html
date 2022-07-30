@@ -1,0 +1,86 @@
+<h1 id="mapreduce-examples"><a aria-hidden="true" class="anchor-heading" href="#mapreduce-examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>MapReduce Examples</h1>
+<ul>
+<li>Areas: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Data Engineering (Private)</a></li>
+</ul>
+<hr>
+<h3 id="working-example-of-word-count"><a aria-hidden="true" class="anchor-heading" href="#working-example-of-word-count"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Working Example of Word Count</h3>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar > words.txt</code></p>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar wordcount wordcount/in wordcount/out</code></p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.vkmgyisvvbc.png"></p>
+<p>Check the output that was created</p>
+<p><code>hdfs dfs -cat wordcount/out/part-r-00000</code></p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.8velr6e7whs.png"></p>
+<h3 id="calculate-pi"><a aria-hidden="true" class="anchor-heading" href="#calculate-pi"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Calculate pi</h3>
+<ul>
+<li>Simple MapReduce program to run, good for quick tests.</li>
+<li>The following is run on the 4-node cluster</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar pi 16 100000</code><br>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.ip1wh7ittuc.png">
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.op5t2hnmh7l.png"></p>
+<ul>
+<li>The following is a short test that will run on the LHM-VM (If you increase</li>
+<li>the number of maps (8) or the number of guesses (1000) then the</li>
+<li>application will take longer.</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar pi 8 1000</code></p>
+<h3 id="the-terasort-benchmark"><a aria-hidden="true" class="anchor-heading" href="#the-terasort-benchmark"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Terasort Benchmark</h3>
+<p><strong>IMPORTANT: The test will not run on the LHM-VM. Indeed, as run below,
+the Teragen portion will create a 50GB file (by default the LHM-VM has
+70 GB of file space. The actual Terasort step will create another
+50 GB file. You can try to reduce the file size from 500000000 to
+5000 so the application can finish.</strong>
+Terasort is used to measure the raw sorting power of Hadoop MapReduce, though it is of no practical use, it can provide an indication of how fast your cluster can process data.</p>
+<p>The following steps are for the the 4-node cluster mentioned above, using the HDFS account <code>/user/deadline</code>.</p>
+<p>There are three steps required to run the complete test:</p>
+<ol>
+<li>Generate the table</li>
+<li>Sort the table</li>
+<li>Validate the sort</li>
+</ol>
+<!-- end list -->
+<ul>
+<li>
+<p>rows are 100 bytes long, thus the total amount of data written is 100 times the</p>
+</li>
+<li>
+<p>number of rows (i.e. to write a 100 GBytes of data, use 1000000000 rows). You</p>
+</li>
+<li>
+<p>will also need to specify input and output directories in HDFS.</p>
+</li>
+<li>
+<p>1. Run teragen to generate 500 MB of data, 500,000 rows of random data to sort</p>
+</li>
+</ul>
+<p><code>yarn jar $$EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar teragen 5000000 /user/hands-on/TeraGen-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.dhhwu16cazc.png"> * Check if the data was created; this will be your input for the next step in the terasort benchmark
+<code>hdfs dfs -ls TeraGen-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.brz6odys9hv.png"></p>
+<ul>
+<li>2. Run terasort to sort the database</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar terasort /user/hands-on/TeraGen-500MB /user/hands-on/TeraSort-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.idartp3zxj.png">
+Check the output that was created for <code>TeraSort-500MB</code> (which was the output dir)
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.bohj41tce1a.png"></p>
+<p>A combined single file was created</p>
+<ul>
+<li>3. Run teravalidate to validate the sort Teragen</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar teravalidate /user/hands-on/TeraSort-500MB /user/hands-on/TeraValid-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.m6uaknqoch.png">
+Check the results that was created and the checksum of the file
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.4ch3o9j2lo7.png"> * Interpret the results: * Measure the time it takes to complete the terasort application. Results are * usually reported in Database Size in Seconds (or Minutes).</p>
+<ul>
+<li>The performance can be increased by increasing the number of reducers (default is one)</li>
+<li>add the option -Dmapred.reduce.tasks=NUMBER_OF_REDUCERS</li>
+<li>The command below uses 4 reducers.</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar terasort -Dmapred.reduce.tasks=4 /user/hands-on/TeraGen-500MB /user/hands-on/TeraSort-500MB</code></p>
+<ul>
+<li>Don't for get to delete you files in HDFS before the next run!</li>
+</ul>
+<p><code>hdfs dfs -rm -r -skipTrash Tera*</code></p>
+<h3 id="miscellaneous-notes"><a aria-hidden="true" class="anchor-heading" href="#miscellaneous-notes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Miscellaneous notes</h3>
+<p><a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> and <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a> usually work with "INPUT DIRECTORIES" not files. Note that the argument given to word count in the above example was a directory NOT the "words.txt" file. We can add more files to the input directory and <code>wordcount</code> will ingest all the files in finds.</p>

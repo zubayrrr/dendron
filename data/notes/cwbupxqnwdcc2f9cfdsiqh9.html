@@ -1,0 +1,32 @@
+<h1 id="aws-api-gateway"><a aria-hidden="true" class="anchor-heading" href="#aws-api-gateway"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS API Gateway</h1>
+<p>It is an AWS Service that enables you to create, publish, maintain, monitor and secure your own <a href="/notes/uyh79om67wv7vcvrot3u481">REST API</a> and <a href="/notes/jsjv0dli0y7pxujv32x37go">WebSockets API</a> <a href="/notes/cyugd12d7bw3sghggvn1ttz">API</a>s.</p>
+<p>A typical use case if for API Gateway to be the frontend to a Lambda function. A client can make an API request using HTTP and request triggers the Lambda function.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655708460/wiki/laayf5wg4dgagapwseku.png"></p>
+<p>It is like a service contract. An app gains programmatic access to AWS services or a website on the internet, through 1 or more APIs, which are hosted on API Gateway.</p>
+<p>The app is at the API’s frontend. The integrated AWS services and websites are located at API’s backend.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655708749/wiki/aruym5hykrw93hwi7lte.png"></p>
+<p>Once the app or client gains access to the website or service through API Gateway, they can use <a href="/notes/9j4ykuha11rmbi2q6e3fmm3">HTTP</a> GET or POST methods to access the backend data store.</p>
+<p><a href="/notes/uyh79om67wv7vcvrot3u481">REST API</a> APIs provide one way communicate, applications send request through API Gateway and the service responds back synchronously. Request/Response model.</p>
+<p><a href="/notes/jsjv0dli0y7pxujv32x37go">WebSockets API</a> APIs provide two way communication, the request and response happens but in addition to that - the backend services independently send communications through API Gateway to our frontend app. It can initiate communication(callback messages), not just send response to requests to connected clients. It supports real-time communications(like chat apps).</p>
+<h2 id="users"><a aria-hidden="true" class="anchor-heading" href="#users"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Users</h2>
+<p>API Gateway users/developers are regular <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a> users.</p>
+<p>Application developers are not part of the organization hence don’t need to be IAM users. We can set them up using web identification federation techniques.</p>
+<h2 id="rest-apis-vs-http-apis"><a aria-hidden="true" class="anchor-heading" href="#rest-apis-vs-http-apis"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>REST APIs VS HTTP APIs</h2>
+<ul>
+<li>HTTP APIs are cheaper &#x26; faster than REST APIs.</li>
+<li>HTTP APIs don't have all the functionality of REST APIs.</li>
+</ul>
+<h2 id="api-gateway-with-aws-lambda-proxy-integration"><a aria-hidden="true" class="anchor-heading" href="#api-gateway-with-aws-lambda-proxy-integration"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>API Gateway with <a href="/notes/etxu35hmga4ee3p1w1kxj9o">AWS Lambda</a> Proxy Integration</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655714141/wiki/h1jwimkyzmm7z9k5osi1.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655714282/wiki/k6zm7d4i9uy3jjzxwoal.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655714306/wiki/a0ngtbs5to0zmstgdwcb.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655714325/wiki/om2w7oa4lv7crimstshc.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655714339/wiki/bzyerzsy7aezdtcqtprk.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655714417/wiki/s6wm48k762ksmp7utn4g.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655714565/wiki/mxyqn3fr2bwqd3fhbxll.png"></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/etxu35hmga4ee3p1w1kxj9o">AWS Lambda</a></li>
+</ul>

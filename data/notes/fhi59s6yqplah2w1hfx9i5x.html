@@ -1,0 +1,27 @@
+<h1 id="kops"><a aria-hidden="true" class="anchor-heading" href="#kops"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>kOps</h1>
+<p>Kops is short for <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> Operations (also spelled kops or kOps), a set of tools AWS offers for installing, operating, and deleting Kubernetes clusters.</p>
+<p>You can also use it to roll out an upgrade of an older version of Kubernetes to a new one and manage cluster add-ons. After creating a cluster, you can use the usual kubectl CLI to manage resources.</p>
+<p>To quote the documentation:</p>
+<blockquote>
+<p>kops will not only help you create, destroy, upgrade and maintain production-grade, highly available, Kubernetes cluster, but it will also provision the necessary cloud infrastructure.</p>
+</blockquote>
+<p>Key features of Kops:</p>
+<ul>
+<li>Kops simplifies Kubernetes cluster setup and management, especially in comparison to the amount of effort needed to manually set up master and worker nodes.</li>
+<li>It automates the provisioning of Highly Available Kubernetes clusters.</li>
+<li>The tool manages Route53, AutoScaling Groups, ELBs for many different tasks from master and node bootstrapping to the API server and rolling updates to your cluster.</li>
+<li>It’s multi-architecture ready and supports ARM64.</li>
+<li>It supports multiple cloud platforms, which makes it a better choice if you’re afraid of getting locked into a specific Kubernetes offering.</li>
+<li>It’s an open-source tool, so you can use it for free. However, you still need to pay for and maintain the underlying infrastructure created by Kops to manage your cluster.</li>
+</ul>
+<p>Via - <a href="https://cast.ai/blog/aws-eks-vs-ecs-vs-fargate-where-to-manage-your-kubernetes/">AWS EKS vs. ECS vs. Fargate vs. Kops: Where to Manage Your Kubernetes in 2022? - CAST AI – Kubernetes Automation Platform</a></p>
+<p>Kops does the job much faster. It’s a CLI tool you need to install on your local machine together with kubectl. To get a cluster running, use the Kops create cluster command. The great thing about Kops is that it manages most of the AWS resources you need for your Kubernetes cluster.</p>
+<p>Contrary to EKS, Kops creates master nodes as EC2 instances – you can always access them directly to make modifications around the networking layer, size, etc. You can monitor these nodes directly too.</p>
+<p>Kops lets you create a cluster really fast, but managing it is more complicated. There’s much groundwork to cover for upgrading and replacing master nodes for new Kubernetes versions. Creating a new cluster in a new VPC with Kops might be easier than that.
+When it comes to maintenance tasks like adding, replacing, and upgrading worker nodes, Kops performs quite similarly to <a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a>. AutoScaling Groups come in handy here.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+</ul>

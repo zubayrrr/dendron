@@ -1,0 +1,194 @@
+<h1 id="ethernet"><a aria-hidden="true" class="anchor-heading" href="#ethernet"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ethernet</h1>
+<ul>
+<li>IEEE 802.3 standard</li>
+<li>In early computer networks, there were many different network technologies competing for a portion of the market share</li>
+<li>Ethernet, Token Ring, FDDI and others fought for dominance</li>
+<li>Currently, Ethernet is dominant for Layer 1</li>
+</ul>
+<h3 id="origins-of-ethernet"><a aria-hidden="true" class="anchor-heading" href="#origins-of-ethernet"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Origins of Ethernet</h3>
+<ul>
+<li>Was first run over <a href="/notes/ypv51xf9vfv0r5h66ek30cj">Coax</a> cables (10Base5, 10Base2), using vampire taps, BNC connectors.</li>
+<li>Ethernet has changed to using <a href="/notes/q6rcmbb4k2on7oh9zfm90ba">Twisted Pair</a> cables using <a href="/notes/2xucu5yaqtnegnuf5p40j43">UTP</a>, <a href="/notes/mfu7kh5sjdof5wk03rf0pl0">STP</a></li>
+<li>10BASE-T is <a href="/notes/2xucu5yaqtnegnuf5p40j43">UTP</a> - max speed 10 Mbps and max distance 100 meters, this is clearly not enough</li>
+</ul>
+<h3 id="how-should-devices-access-the-network"><a aria-hidden="true" class="anchor-heading" href="#how-should-devices-access-the-network"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How should devices access the network?</h3>
+<ul>
+<li>Deterministic
+<ul>
+<li>Very organized and orderly</li>
+<li>Need an electronic token to transmit</li>
+<li>For example: Token Ring</li>
+</ul>
+</li>
+<li>Contention-based
+<ul>
+<li>Very chaotic</li>
+<li>Transmit (almost) whenever you want</li>
+<li>For example: <a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="csmacd"><a aria-hidden="true" class="anchor-heading" href="#csmacd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CSMA/CD</h3>
+<ul>
+<li><a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a> devices transmit based on a principle called Carrier Sense Multiple Access/Collision Detect or CSMA/CD</li>
+<li>Carrier Sense
+<ul>
+<li>Listen to the wire, verify it is not busy</li>
+</ul>
+</li>
+<li>Multiple Access
+<ul>
+<li>All devices have access at any time</li>
+</ul>
+</li>
+<li>Collision Detect
+<ul>
+<li>If two deviecs transmit at the same time, a collision occurs</li>
+<li>Back off, wait a random time and try again</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="collision-domains"><a aria-hidden="true" class="anchor-heading" href="#collision-domains"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Collision Domains</h3>
+<ul>
+<li>Comprised of all devices on shared <a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a> segment (everything on same cable or <a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a>)</li>
+<li>Devices operate at half-duplex when connected to a <a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a> (Layer 1 Device)</li>
+<li>Devices must listen before they transmit to avoid collisions when operating as <code>CSMA/CD</code></li>
+<li>The larger the Collision Domain, the more chaos in the network.</li>
+<li>Collision Domains need to broken down into smaller chunks for more efficiency</li>
+</ul>
+<hr>
+<h3 id="collision-domains-on-switches"><a aria-hidden="true" class="anchor-heading" href="#collision-domains-on-switches"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Collision Domains on <a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a>es</h3>
+<ul>
+<li><a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a> <a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a>es increase scalability of the network by creating multiple collision domains</li>
+<li>Each port on a switch is a Collision Domain, no chance of collisions and increases speed</li>
+<li>Switches can operate in full-duplex mode</li>
+</ul>
+<hr>
+<h3 id="collision-domains-on-hubs"><a aria-hidden="true" class="anchor-heading" href="#collision-domains-on-hubs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Collision Domains on <a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a>s</h3>
+<ul>
+<li><a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a>s were used to connect multiple network segments together</li>
+<li>Each <a href="/notes/j5t6dogng1gdpuzlgd34t7g">LAN</a> segment becomes a separate <a href="/notes/uirqzeld6hvqmdshssza5we">Collision Domains</a></li>
+<li>As the network gets larger in which a <a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a> is being utilized to connect all the machines, the network will get more chaotic as <a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a> don't break up <a href="/notes/uirqzeld6hvqmdshssza5we">Collision Domains</a>, it'll be treated as one large collision domain.</li>
+<li>To deal with this issue a <a href="/notes/irv3o7df3ch6a2lte4twi4t">Bridge</a> needs to be introduced to the network.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.cqfqt7rooe6.png"></p>
+<hr>
+<h3 id="speed-limitations"><a aria-hidden="true" class="anchor-heading" href="#speed-limitations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Speed Limitations</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Ethernet Type</th>
+<th style="text-align: center;">Bandwidth Capacity</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Ethernet</td>
+<td style="text-align: center;">10 Mbps</td>
+<td style="text-align: center;">10 million bits per second</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Fast Ethernet</td>
+<td style="text-align: center;">100 Mbps</td>
+<td style="text-align: center;">100 million bits per second</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Gigabit Ethernet</td>
+<td style="text-align: center;">1000 Mbps (I Gbps)</td>
+<td style="text-align: center;">1 billion bits per second</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10-Gigabit Ethernet</td>
+<td style="text-align: center;">10 Gbps</td>
+<td style="text-align: center;">10 billion bits per second</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100-Gigabit Ethernet</td>
+<td style="text-align: center;">100 Gbps</td>
+<td style="text-align: center;">100 billion bits per second</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Bandwidth is the measure of how many bits the network can transmit in 1-second (bps)</li>
+<li>Type of cable determines the bandwidth capacity of the network</li>
+</ul>
+<hr>
+<h3 id="distance-limitations"><a aria-hidden="true" class="anchor-heading" href="#distance-limitations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Distance Limitations</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Ethernet Standard</th>
+<th style="text-align: right;">Media Type</th>
+<th style="text-align: center;">Bandwidth Capacity</th>
+<th style="text-align: center;">Distance Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">10BASE-T</td>
+<td style="text-align: right;">Cat 3 or Higher</td>
+<td style="text-align: center;">10 Mbps</td>
+<td style="text-align: center;">100 m</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">100BASE-TX</td>
+<td style="text-align: right;">Cat 5 or Higher</td>
+<td style="text-align: center;">100 Mbps</td>
+<td style="text-align: center;">100 m</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1000BASE-TX</td>
+<td style="text-align: right;">Cat 6 or Higher</td>
+<td style="text-align: center;">1 Gbps</td>
+<td style="text-align: center;">100 m</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1000BASE-SX</td>
+<td style="text-align: right;"><a href="#MMF" class="tc-tiddlylink tc-tiddlylink-resolves">MMF</a></td>
+<td style="text-align: center;">1 Gbps</td>
+<td style="text-align: center;">220 m</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1000BASE-LX</td>
+<td style="text-align: right;"><a href="#MMF" class="tc-tiddlylink tc-tiddlylink-resolves">MMF</a></td>
+<td style="text-align: center;">1 Gbps</td>
+<td style="text-align: center;">550 m</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1000BASE-LX</td>
+<td style="text-align: right;"><a href="#SMF" class="tc-tiddlylink tc-tiddlylink-resolves">SMF</a></td>
+<td style="text-align: center;">1 Gbps</td>
+<td style="text-align: center;">5 km</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100BASE-ZX</td>
+<td style="text-align: right;"><a href="#SMF" class="tc-tiddlylink tc-tiddlylink-resolves">SMF</a></td>
+<td style="text-align: center;">1 Gbps</td>
+<td style="text-align: center;">70 km</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Type of cable determines the distance limitation of the network</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/ypv51xf9vfv0r5h66ek30cj">Coax</a></li>
+<li><a href="/notes/uirqzeld6hvqmdshssza5we">Collision Domains</a></li>
+<li><a href="/notes/z130icy9h0z0gwz9szs6ngb">CSMA/CD</a></li>
+<li><a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a></li>
+<li><a href="/notes/c9g20eqnpm4oaqey6blx497">GBIC</a></li>
+<li><a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a></li>
+<li><a href="/notes/4lr9cfvrkbkc8ycvmzpgs8p">Media Converters</a></li>
+<li><a href="/notes/xt1xit1xj5isuzst3kxl7o1">Network Geography</a></li>
+<li><a href="/notes/h9fwgm5qmlznj6jloqqqlfl">Network Interface Layer - TCP/IP</a></li>
+<li><a href="/notes/ck6ds17ovyjf6n0sidmat7v">Networking in Linux</a></li>
+<li><a href="/notes/yjeoqhn1zs6blkof49hvacr">Physical Layer - OSI</a></li>
+<li><a href="/notes/tac1mkby814gjgwiw72wyzp">Transceivers</a></li>
+<li><a href="/notes/q6rcmbb4k2on7oh9zfm90ba">Twisted Pair</a></li>
+</ul>

@@ -1,0 +1,19 @@
+<h1 id="umount"><a aria-hidden="true" class="anchor-heading" href="#umount"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>umount</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>umount</code> Un<a href="/notes/9x9tnilgrp5wqa10f8odw8x">mount</a>s a previously mounted file system, directory, or file.</p>
+<pre><code>sudo umount /dev/sdb
+</code></pre>
+<p>You cannot use the <strong>umount</strong> command on a device in use. A device is in use if any file is open for any reason or if a user's current directory is on that device.
+To overcome this use the <code>-l</code> (lazy) option. This causes <code>umount</code> to wait until the file system is able to be safely unmounted.</p>
+<pre><code>sudo umount -l /dev/sdb
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/mx45kfy1ylv6jtvjxsomm0o">dd</a></li>
+<li><a href="/notes/9x9tnilgrp5wqa10f8odw8x">mount</a></li>
+</ul>

@@ -1,0 +1,34 @@
+<h1 id="pulseaudio-bluetooth-module-missing"><a aria-hidden="true" class="anchor-heading" href="#pulseaudio-bluetooth-module-missing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>pulseaudio bluetooth module missing</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> pulseaudio-module-bluetooth
+<span class="token function">sudo</span> <span class="token function">killall</span> pulseaudio
+pulseaudio --start
+<span class="token function">sudo</span> systemctl restart bluetooth
+</code></pre>
+<p>Adding the module-bluez5-discover at the end of the pulseaudio <code>/etc/pulse/default.pa</code> config:
+<code>load-module module-bluez5-discover</code></p>
+<blockquote>
+<p>— via <a href="https://askubuntu.com/questions/1172000/a2dp-sink-profile-connect-failed">bluetooth - a2dp-sink profile connect failed - Ask Ubuntu</a></p>
+</blockquote>
+<hr>
+<p>First, let’s check whether we have all the dependencies installed:
+<code>sudo apt install pulseaudio pulseaudio-utils pavucontrol pulseaudio-module-bluetooth</code>
+When we verify it, we need to create or edit this audio config file:
+<code>sudo gedit /etc/bluetooth/audio.conf</code>
+Include the next lines:
+This section contains general options</p>
+<pre><code>[General]
+Enable=Source,Sink,Media,Socket
+</code></pre>
+<blockquote>
+<p>In most cases the first thing we do after we boot up our system is turning on the Bluetooth headset. Sometimes the system and the device pair up well but no sound. If you use the command journalctl -f you will receive the next message:
+— via <a href="https://dev.to/campbelljones74/common-bluetooth-problems-in-ubuntu-and-how-to-fix-them-18b5">Common Bluetooth Problems in Ubuntu and How to Fix Them - DEV Community</a></p>
+</blockquote>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #6e750e;" href="/notes/u6w0v5tbvga4sby95nixk67">tidbits</a></li>
+</ol>

@@ -1,0 +1,78 @@
+<h1 id="systemd-networkd"><a aria-hidden="true" class="anchor-heading" href="#systemd-networkd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>systemd-networkd</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a>,<a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">systemd-networkd (Private)</a> is a system <a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a> that manages network configurations. It detects and configures network devices as they appear; it can also create virtual network devices. This service can be especially useful to set up complex network configurations for a container managed by systemd-nspawn or for virtual machines. It also works fine on simple connections.</p>
+<blockquote>
+<p>—via <a href="https://wiki.archlinux.org/title/systemd-networkd">systemd-networkd - ArchWiki</a></p>
+</blockquote>
+<p>A network interface can either be managed by <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">NetworkManager (Private)</a> or by <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">systemd-networkd (Private)</a></p>
+<p>Setting up static</p>
+<ul>
+<li>Disable <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">NetworkManager (Private)</a>
+<ul>
+<li><code>sudo systemctl stop NetworkManager</code></li>
+<li><code>sudo systemctl disable NetworkManager</code></li>
+<li>check with <code>sudo systemctl status NetworkManager</code> and <code>sudo systemctl is-enabled NetworkManager</code></li>
+</ul>
+</li>
+<li>Create a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">YAML (Private)</a> in <code>/etc/netplan</code>, before that you might want to remove the existing <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">YAML (Private)</a> file that was created for NetworkManager to avoid interference.</li>
+<li><code>vim /etc/netplan/01-netconfig.yaml</code></li>
+<li>Each netplan <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">YAML (Private)</a> file starts with the <code>network</code> keyword and at least 3 required elements:
+<ul>
+<li><code>version</code> of the network configuration format</li>
+<li><code>renderer</code></li>
+<li>device type (<code>ethernets</code>, <code>wifis</code>,<code>bridges</code>)
+<ul>
+<li>under the devices type you specify one or more network interfaces
+<ul>
+<li><code>dhcp4</code> as false(for static configuration)</li>
+<li><code>addresses</code> (<a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> with <a href="/notes/yaz8aekqoejlmuhhyj4v63y">netmask</a>)</li>
+<li><code>gateway4</code> (default gateway)</li>
+<li><code>nameservers</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Save and exit, to apply <code>netplan apply</code></li>
+<li>Verify changes <code>ifconfig</code> and <code>route -n</code></li>
+<li>Be careful about <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">YAML (Private)</a>'s indentation and syntax (use an online YAML validator)</li>
+</ul>
+<h3 id="examples-for-yaml-file-configurations"><a aria-hidden="true" class="anchor-heading" href="#examples-for-yaml-file-configurations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples for YAML file configurations</h3>
+<p>Configure an ethernet device with networkd, identified by its name, and enable
+DHCP:</p>
+<pre><code>network:
+  version: 2
+  ethernets:
+    eno1:
+      dhcp4: true
+</code></pre>
+<p>This is an example of a static-configured interface with multiple IPv4 addresses
+and multiple gateways with networkd, with equal route metric levels, and static
+DNS nameservers (Google DNS for this example):</p>
+<pre><code>network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno1:
+      addresses:
+      - 10.0.0.10/24
+      - 11.0.0.11/24
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
+      routes:
+      - to: 0.0.0.0/0
+        via: 10.0.0.1
+        metric: 100
+      - to: 0.0.0.0/0
+        via: 11.0.0.1
+        metric: 100
+</code></pre>
+<blockquote>
+<p>—via <a href="https://netplan.io/reference/">Netplan Backend-agnostic network configuration in YAML</a></p>
+</blockquote>

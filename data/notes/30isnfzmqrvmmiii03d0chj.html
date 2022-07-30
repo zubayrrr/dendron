@@ -1,0 +1,56 @@
+<h1 id="hive"><a aria-hidden="true" class="anchor-heading" href="#hive"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Hive</h1>
+<ul>
+<li>Areas: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Data Engineering (Private)</a></li>
+</ul>
+<hr>
+<ul>
+<li>Hive: It is a platform used to develop <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a> type scripts to do MapReduce operations.</li>
+<li>Hive is a data warehouse infrastructure tool to process <span class="underline">structured data</span>(data stored in rows and columns) in Hadoop. It resides on top of Hadoop to summarize Big Data, and makes querying and analyzing easy.
+<ul>
+<li>Initially Hive was developed by Facebook, later the Apache Software Foundation took it up and developed it further as an open source under the name Apache Hive. It is used by different companies. For example, Amazon uses it in Amazon Elastic MapReduce.</li>
+</ul>
+</li>
+<li>It stores schema in a database and processed data into HDFS.</li>
+<li>It is designed for OLAP.</li>
+<li>Good for batch processing.</li>
+<li>It provides SQL type language for querying called HiveQL or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">HQL (Private)</a>.</li>
+<li>It is familiar, fast, scalable, and extensible.</li>
+<li>Parallel computing(since it uses HDFS).</li>
+<li>Supports partitions.</li>
+<li>Supports bucketing.</li>
+</ul>
+<p><a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> = <a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a> + <a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a></p>
+<p><a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a> - where your data gets distributed and <a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a> is where you write transformation jobs using java and MR will do distributed processing by reading the data from HDFS.</p>
+<p>In MR you cannot write any SQL, you'll have to use Java for queries</p>
+<p>A SQL layer was introduced to communicate with MR</p>
+<p>Hive is a query engine, it is not a DB. It doesn't have it's own storage to store data, Hive uses HDFS to store data.</p>
+<p>It runs on Engine MR, often called as an Abstraction of MR.
+Internally it uses MR engine to process queries.</p>
+<p>Hive replaces the Java part that was required to write SQL in MR.</p>
+<p>Hive can also run on Spark Engine not just MapReduce(MR)</p>
+<hr>
+<p>Send a request to Hive Server, create table test. hive stores metadata; all the table information. This metadata is different from what is stored on Master node.</p>
+<p>Hive metadata is stored in an RDBMS(Oracle, MySQL etc) known as Remote meta store , the data is stored in HDFS.</p>
+<p>When you request hive to load or insert data, it'll get the metadata info about the table and based on that schema it'll store data on HDFS.</p>
+<p>When you request hive to select, hive will first query the metadata info and then get the data from HDFS and display's data in tables.</p>
+<p>They decoupled the metadata from hive and use RDBMS for it.</p>
+<p>When there is no RDBMS provided for Hive, it in that case the metadata will be stored on an embedded RDBMS known as <code>Derby</code>, it comes along with Hive, doesn't have to be installed separately. Derby cannot be replaced. Embedded meta store, remote meta store.</p>
+<p>Remote meta store uses separate instance of RDBMS to store data, it is the most common in the real world. The embedded meta store will create problem when you have multiple machines(a cluster) running instances of Hive, multiple embedded meta store on nodes will create synchronization problems. You cannot make a distributed request. Hence a remote meta store is used.</p>
+<p>All the nodes(that are running Hive) will refer to a node that is running an RDBMS. The configuration file(s, on each Hive node), derby will be removed automatically once you select RDBMS on the config file.</p>
+<p>Embedded meta store is good for practicing on a single node,</p>
+<p>a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">JDBC (Private)</a> connection can also be made.</p>
+<p>Hive can also be used with S3.</p>
+<h3 id="limitations"><a aria-hidden="true" class="anchor-heading" href="#limitations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Limitations</h3>
+<ul>
+<li>It is not an OLTP system.</li>
+<li>Not for real-time processing</li>
+<li>Doesn't support full fledged <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a> queries (such as some joins, triggers)</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+<li><a href="/notes/gq0blan4ktw82wrac63bzr5">Hive Installation</a></li>
+<li><a href="/notes/e92qvq2zwoa9wyn0p0187l3">HQL</a></li>
+<li><a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a></li>
+</ul>

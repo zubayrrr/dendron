@@ -1,0 +1,37 @@
+<h1 id="path-variable"><a aria-hidden="true" class="anchor-heading" href="#path-variable"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>PATH Variable</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>When you’re typing a command in the Linux terminal, you’re generally calling a program to do a certain job, for example, <a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a>, <a href="/notes/l3leurtotj9lozm4ewqpwrf">cp</a>, <a href="/notes/7f96pdsdnu2h6rccq6rr4l9">mv</a>, <a href="/notes/90j02txl52nf8d057um848y">rm</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.cd (Private)</a>, <a href="/notes/90j02txl52nf8d057um848y">rm</a>, <a href="/notes/y4xa97imhwpn9zomq23imf2">mkdir</a>, etc. All these programs are located somewhere in the file system, right? How does <a href="/notes/26fd6bw5fsykdus523f40bz">Bash</a> know where these programs are?</p>
+<p>Here come the environment variables into play, especially the PATH variable. This variable is responsible for telling bash where to look for those programs.</p>
+<p>PATH is an <a href="/notes/o729gsazu87le197nswwxtp">Environment Variable</a> that keeps track of certain directories. By default, the PATH variable contains the following locations.</p>
+<ul>
+<li><code>/usr/bin</code></li>
+<li><code>/usr/sbin</code></li>
+<li><code>/usr/local/bin</code></li>
+<li><code>/usr/local/sbin</code></li>
+<li><code>/bin</code></li>
+<li><code>/sbin</code></li>
+<li><code>/snap/bin</code> (if Snap is installed)</li>
+</ul>
+<p>To see what directories are currently registered under PATH, run the following command.</p>
+<p><code>echo $PATH</code></p>
+<p>Here, the $ sign is to denote a variable. The echo command prints the value of the PATH variable.</p>
+<p>The PATH variable stores where executables may be found. Whenever any command is run, the shell looks up the PATH directories for the target executable file and runs it.</p>
+<blockquote>
+<p>— via <a href="https://linuxhint.com/path_in_bash/">How Does PATH Work in Bash</a></p>
+</blockquote>
+<h2 id="add-a-new-path-to-the-path-env-variable"><a aria-hidden="true" class="anchor-heading" href="#add-a-new-path-to-the-path-env-variable"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Add a new path to the $PATH <a href="/notes/o729gsazu87le197nswwxtp">env</a> variable</h2>
+<ul>
+<li>Open your <code>~/.zshrc</code> or <code>~/.bashrc</code></li>
+<li>export PATH=$PATH:/path-to-dir</li>
+<li>Save and reload shell or (<code>source ~/.zshrc</code>)</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/26fd6bw5fsykdus523f40bz">Bash</a></li>
+<li><a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a></li>
+<li><a href="/notes/o729gsazu87le197nswwxtp">Environment Variable</a></li>
+</ul>

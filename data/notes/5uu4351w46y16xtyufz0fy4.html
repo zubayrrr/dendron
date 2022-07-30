@@ -1,0 +1,67 @@
+<h1 id="helm"><a aria-hidden="true" class="anchor-heading" href="#helm"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Helm</h1>
+<p>Helm is a Kubernetes deployment tool for automating creation, packaging, configuration, and deployment of applications and services to Kubernetes clusters.</p>
+<p><a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> is a powerful container-orchestration system for application deployment. There are multiple independent resources to deal with, and each requires a dedicated YAML manifest file.</p>
+<p>Helm deploys packaged applications to Kubernetes and structures them into charts. The charts contain all pre-configured application resources along with all the versions into one easily manageable package.</p>
+<p>Helm streamlines installing, upgrading, fetching dependencies, and configuring deployments on Kubernetes with simple CLI commands. Software packages are found in repositories or are created.</p>
+<p>Unlike Homebrew or Aptitude desktop package managers, or Azure Resource Manager templates (ARMs) / Amazon Machine Images (AMIs) that are run on a single server, Helm charts are built atop Kubernetes and benefit from its cluster architecture. The main benefit of this approach is the ability to consider scalability from the start. The charts of all the images used by Helm are stored in a registry called Helm Workspace, so the DevOps teams can search them and add to their projects with ease.</p>
+<p>Kubernetes objects are challenging to manage. With helpful tools, the Kubernetes learning curve becomes smooth and manageable. Helm automates maintenance of YAML manifests for Kubernetes objects by packaging information into charts and advertises them to a Kubernetes cluster.</p>
+<p>Helm keeps track of the versioned history of every chart installation and change. Rolling back to a previous version or upgrading to a newer version is completed with comprehensible commands.</p>
+<h2 id="helm-chart"><a aria-hidden="true" class="anchor-heading" href="#helm-chart"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Helm Chart</h2>
+<p>Helm charts are Helm packages consisting of YAML files and templates which convert into Kubernetes manifest files. Charts are reusable by anyone for any environment, which reduces complexity and duplicates. Folders have the following structure:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655905668/wiki/f0iewhj44stf8t90qnfr.png"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><strong>Name</strong></th><th><strong>Type</strong></th><th><strong>Function</strong></th></tr></thead><tbody><tr><td><strong>charts/</strong></td><td>Directory</td><td>Directory for manually managed chart dependencies.</td></tr><tr><td><strong>templates/</strong></td><td>Directory</td><td>Template files are written in Golang and combined with configuration values from the values.yaml file to generate Kubernetes manifests.</td></tr><tr><td><strong>Chart.yaml</strong></td><td>File</td><td>Metadata about the chart, such as the version, name, search keywords, etc.</td></tr><tr><td><strong>LICENSE (optional)</strong></td><td>File</td><td>License for the chart in plaintext format.</td></tr><tr><td><strong>README.md (optional)</strong></td><td>File</td><td>Human readable information for the users of the chart.</td></tr><tr><td><strong>requirements.yaml (optional)</strong></td><td>File</td><td>List of chart’s dependencies.</td></tr><tr><td><strong>values.yaml</strong></td><td>File</td><td>Default configuration <a href="https://phoenixnap.com/kb/helm-get-values">values</a> for the chart.</td></tr></tbody></table>
+<p>Via - <a href="https://phoenixnap.com/kb/what-is-helm">What is Helm? Helm and Helm Charts Explained</a></p>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://phoenixnap.com/kb/what-is-helm">What is Helm? Helm and Helm Charts Explained</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+</ul>

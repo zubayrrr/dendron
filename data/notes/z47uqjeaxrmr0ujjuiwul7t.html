@@ -1,0 +1,23 @@
+<h1 id="ppa"><a aria-hidden="true" class="anchor-heading" href="#ppa"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>PPA</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>PPA stands for Personal Package Archive. The PPA allows application developers and Linux users to create their own repositories to distribute software. With PPA, you can easily get newer software version or software that are not available via the official Ubuntu repositories.</p>
+<p>Mind the word ‘Personal’ here. That gives the hint that this is something exclusive to a developer and is not officially endorsed by the distribution.</p>
+<h2 id="why-ppa-why-not-deb-packages"><a aria-hidden="true" class="anchor-heading" href="#why-ppa-why-not-deb-packages"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Why PPA? Why not DEB packages?</h2>
+<p>You may ask why should you use PPA when it involves using command line which might not be preferred by everyone. Why not just distribute a DEB package that can be installed graphically?</p>
+<p>The answer lies in the update procedure. If you install a software using a DEB package, there is no guarantee that the installed software will be updated to a newer version when you run sudo apt update &#x26;&#x26; sudo apt upgrade.</p>
+<p>It’s because the apt upgrade procedure relies on the sources.list. If there is no entry for a software, it doesn’t get the update via the standard software updater.</p>
+<p>So does it mean software installed using DEB never gets an update? No, not really. It depends on how the package was created.</p>
+<p>Some developers automatically add an entry to the sources.list and then it is updated like a regular software. Google Chrome is one such example.</p>
+<p>Some software would notify you of availability of a new version when you try to run it. You’ll have to download the new DEB package and run it again to update the current software to a newer version. Oracle Virtual Box is an example in this case.</p>
+<p>For the rest of the DEB packages, you’ll have to manually look for an update and this is not convenient, especially if your software is meant for beta testers. You need to add more updates frequently. This is where PPA come to the rescue.</p>
+<blockquote>
+<p>via — <a href="https://itsfoss.com/ppa-guide/">What is PPA? Everything You Need to Know About PPA in Linux</a></p>
+</blockquote>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/htsjiw0s9846otcxm6k9v4l">APT</a></li>
+</ul>

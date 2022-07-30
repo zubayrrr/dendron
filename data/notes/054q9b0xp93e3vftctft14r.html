@@ -1,0 +1,31 @@
+<h1 id="aggregate-functions"><a aria-hidden="true" class="anchor-heading" href="#aggregate-functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Aggregate Functions</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<h2 id="aggregate-functions-1"><a aria-hidden="true" class="anchor-heading" href="#aggregate-functions-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Aggregate Functions</h2>
+<p>Function is a piece of code that we can reuse, <a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a> comes with a bunch of functions, some of these functions are called as Aggregate Functions, because they take a series of values and aggregate them to produce a single value.</p>
+<p>They only operate on non-NULL values, NULL values will not be included when passed through a function.</p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li>MAX()</li>
+<li>MIN()</li>
+<li>AVG()</li>
+<li>SUM()</li>
+<li>COUNT()</li>
+</ul>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+        <span class="token function">MAX</span><span class="token punctuation">(</span>invoice_total<span class="token punctuation">)</span> <span class="token keyword">AS</span> highest<span class="token punctuation">,</span>
+    <span class="token comment">-- MAX(payment_date) AS latest_payment,</span>
+        <span class="token function">MIN</span><span class="token punctuation">(</span>invoice_total<span class="token punctuation">)</span> <span class="token keyword">AS</span> lowest<span class="token punctuation">,</span>
+        <span class="token function">AVG</span><span class="token punctuation">(</span>invoice_total<span class="token punctuation">)</span> <span class="token keyword">AS</span> average<span class="token punctuation">,</span>
+    <span class="token comment">-- SUM(invoice_total) AS total,</span>
+        <span class="token function">COUNT</span><span class="token punctuation">(</span>invoice_total<span class="token punctuation">)</span> <span class="token keyword">AS</span> number_of_invoices<span class="token punctuation">,</span>
+        <span class="token function">COUNT</span><span class="token punctuation">(</span>payment_date<span class="token punctuation">)</span> <span class="token keyword">AS</span> count_of_payments<span class="token punctuation">,</span>
+        <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> total_records
+    <span class="token comment">-- COUNT(DISTINCT client_id) AS total_records</span>
+    <span class="token comment">-- the above statement will get all values regardless NULL or not</span>
+    <span class="token comment">-- you can also write expressions</span>
+        <span class="token function">SUM</span><span class="token punctuation">(</span>invoice_total <span class="token operator">*</span> <span class="token number">1.1</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> total<span class="token punctuation">,</span>
+    <span class="token keyword">FROM</span> invoices
+    <span class="token keyword">WHERE</span> invoice_date <span class="token operator">></span> <span class="token string">'2019-07-01'</span>
+</code></pre>

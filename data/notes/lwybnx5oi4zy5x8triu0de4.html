@@ -1,0 +1,24 @@
+<h1 id="and-or-not"><a aria-hidden="true" class="anchor-heading" href="#and-or-not"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AND OR NOT</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<hr>
+<h3 id="and"><a aria-hidden="true" class="anchor-heading" href="#and"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AND</h3>
+<p><code>WHERE birth_date > '1990-01-01' AND points > 1000</code> both the conditions have to be true for the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">WHERE (Private)</a> clause to return</p>
+<h3 id="or"><a aria-hidden="true" class="anchor-heading" href="#or"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>OR</h3>
+<p><code>WHERE birth_date > '1990-01-01' OR points > 1000</code> either of the conditions have to be true for the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">WHERE (Private)</a> clause to return</p>
+<p><code>WHERE birth_date > '1990-01-01' OR points > 1000 AND state = 'VA'</code></p>
+<p>Order of these operators matter</p>
+<p>AND is always evaluated first, OR is evaluated at second priority.
+Use paranthesis to override the precedence</p>
+<p><code>WHERE birth_date > '1990-01-01' OR (points > 1000 AND state = 'VA')</code></p>
+<h3 id="not"><a aria-hidden="true" class="anchor-heading" href="#not"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>NOT</h3>
+<p>NOT is used to negate a condition.</p>
+<p><code>WHERE NOT (birth_date > '1990-01-01' OR points > 1000)</code> basically inverts the condition that was used. OR becomes AND, <code>></code> becomes <code>&#x3C;=</code></p>
+<h3 id="example"><a aria-hidden="true" class="anchor-heading" href="#example"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example</h3>
+<pre><code>USE store
+
+SELECT *
+FROM order_items
+WHERE order_id = 6 unit_price * quantity > 30
+</code></pre>

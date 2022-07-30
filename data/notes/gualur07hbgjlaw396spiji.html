@@ -1,0 +1,58 @@
+<h1 id="aws-codecommit"><a aria-hidden="true" class="anchor-heading" href="#aws-codecommit"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS CodeCommit</h1>
+<p>It is a version control service, which is hosted and fully managed(Unlike Github and Gitlab) by Amazon, which can be used to privately store data (documents, binary files, source code) and manage them in the cloud. It offers high scalability, security and helps manage source control service, which is used to host private Git repositories.</p>
+<p>It eliminates the requirement for the user to know Git and manage their own source control system or worry about scaling up or down their infrastructure. Codecommit supports all the standard functionalities that can be found in Git, which means it works effortlessly with user’s current Git-based tools. — via <a href="https://www.knowledgehut.com/tutorials/aws/aws-codecommit">What is AWS Codecommit?</a></p>
+<p>It integrates well with other services (<a href="/notes/49naltrgmfezkzp9g3fjfaq">AWS CodeDeploy</a>, <a href="/notes/ajojjq9tu40v2rnmzktfyeo">AWS CodeBuild</a>, <a href="/notes/3n1o179sti2wtnjkq48one1">AWS CodePipeline</a>, <a href="/notes/etxu35hmga4ee3p1w1kxj9o">AWS Lambda</a>, <a href="/notes/g9xjnwh096t1rptwv0bol5w">AWS SNS</a>).</p>
+<h2 id="creating-a-repository"><a aria-hidden="true" class="anchor-heading" href="#creating-a-repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating a repository</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655274009/wiki/mkc6bm8oka3kwfrjncen.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655273410/wiki/n419mau6b1vl7llmeq0d.png"></p>
+<ul>
+<li>You’ll need to choose a user on <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a> that you want to give access to AWS CodeCommit.
+<ul>
+<li><strong>Add Permissions</strong> on Permissions tab</li>
+<li><strong>Grant Permissions</strong> choose <strong>Attach existing policies directly</strong></li>
+<li>Select <strong>AWSCodeCommitFullAccess</strong></li>
+</ul>
+</li>
+<li>Select the user from AWS IAM on Security Credentials tab
+<ul>
+<li>Generate <strong>HTTPS Git credentials for AWS CodeCommit</strong></li>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1655273772/wiki/expmhzqs48qypcd0abeg.png"></li>
+<li>Download the credentials</li>
+</ul>
+</li>
+<li>Clone the repository using the URL.</li>
+</ul>
+<h2 id="codecommit-repository-actions-using-devlogaws-cli-private"><a aria-hidden="true" class="anchor-heading" href="#codecommit-repository-actions-using-devlogaws-cli-private"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CodeCommit repository actions using <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.AWS CLI (Private)</a></h2>
+<ul>
+<li>Create - <code>aws codecommit create-repository --repository-name My-repo</code></li>
+<li>View - <code>aws codecommit get-repository --repository-name My-repo</code></li>
+<li>List - <code>aws codecommit list-repositories</code></li>
+<li>Delete - <code>aws codecommit delete-repository --repository-name My-repo</code></li>
+</ul>
+<p>You’ll need Access Key ID, Secret Access Key token to be able to interact with CodeCommit repository.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655446842/wiki/eh6bwxpaa5a4bc4autgb.png"></p>
+<p>As for cloning, committing, pulling, pushing you can use the usual <a href="/notes/qkp5jc6pta8a9f35evsbvod">Git</a> commands.</p>
+<h2 id="codecommit-data-security"><a aria-hidden="true" class="anchor-heading" href="#codecommit-data-security"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CodeCommit Data Security</h2>
+<ul>
+<li>For encryption in transit and at rest it uses <a href="/notes/tgfldoyap0ga4bfj5hpsa81">AWS KMS</a>.
+<ul>
+<li>When you create a CodeCommit repository AWS creates an encrypted key. In <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a>, you can find that key. These are by region keys.</li>
+<li>AWS managed keys.</li>
+</ul>
+</li>
+<li>You can add Deny policies.</li>
+<li>To restrict creation and deletion of repositories:
+<ul>
+<li>Add policy such as <strong>AWS CodeCommit PowerUser</strong> or create an IAM group and add the policy to the group and put all your developers to that group.</li>
+</ul>
+</li>
+<li>For admins you could have <strong>AWS CodeCommit FullAccess</strong> policy</li>
+<li>You could add more granular policies such as limiting push capabilities.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/ajojjq9tu40v2rnmzktfyeo">AWS CodeBuild</a></li>
+<li><a href="/notes/3n1o179sti2wtnjkq48one1">AWS CodePipeline</a></li>
+</ul>

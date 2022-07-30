@@ -1,0 +1,28 @@
+<h1 id="tcp"><a aria-hidden="true" class="anchor-heading" href="#tcp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TCP</h1>
+<ul>
+<li>Transmission Control Protocol is a connection-oriented protocol.</li>
+<li>It is a reliable way to transport segments across the network.
+<ul>
+<li>If segment is dropped, protocol detects it and resends segments.</li>
+</ul>
+</li>
+<li>Acknowledgements are received for successful communications.</li>
+<li>Flow control through <a href="/notes/96793xhkcwxryb0kilyt9i4">Windowing</a></li>
+<li>Used for all network data that needs to be assured to get to its destination.</li>
+<li>A three way handshake</li>
+</ul>
+<p>TCP is a connection-oriented and reliable protocol. In this protocol, firstly the connection is established between the two hosts of the remote end, only then the data is sent over the network for communication. The receiver always sends an acknowledgment of the data received or not received by the sender once the first data packet is transmitted.</p>
+<p>After receiving the acknowledgment from the receiver, the second data packet is sent over the medium. It also checks the order in which the data is to be received otherwise data is re-transmitted. This layer provides an error correction mechanism and flow control. It also supports client/server model for communication.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656560069/wiki/rrevv3mbzgu9ffjnfkqk.png"></p>
+<p>See also: <a href="/notes/fg9c1iu7kore9v72yvr9bji">TCP VS UDP</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/uedjwc3ldf8k1p2l1l7fcxj">AWS ELB</a></li>
+<li><a href="/notes/jgdmbgmoda37pmf3u085az9">IPv4 Packets</a></li>
+<li><a href="/notes/05txufwh4u6s1aop2eky199">netstat</a></li>
+<li><a href="/notes/fg9c1iu7kore9v72yvr9bji">TCP VS UDP</a></li>
+<li><a href="/notes/q92tfbbhyglmyk3jdtx5vm5">TCP⁄IP Model</a></li>
+<li><a href="/notes/nygs97pchi3schragqr6gei">Transport Layer - OSI</a></li>
+<li><a href="/notes/v6g48x2mriiw6z07xifqjd6">Transport Layer - TCP/IP</a></li>
+</ul>

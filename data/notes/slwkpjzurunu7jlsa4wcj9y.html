@@ -1,0 +1,149 @@
+<h1 id="file-permissions"><a aria-hidden="true" class="anchor-heading" href="#file-permissions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>File Permissions</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>File Permissions (file modes) specify who can access, change or execute a file on a Linux System</li>
+<li>It ensures that only authorized users and processes can access files and directories</li>
+<li>Each file or directory has an owner and a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.group (Private)</a>. By default, the owner is the user who creates the file and the group is the primary group of that user</li>
+<li>The ownership of a file or a directory can be changed only by root using the <a href="/notes/wi4hrouup889hj4e5qxj9kx">chown</a> and <code>chgrp</code> commands</li>
+</ul>
+<h3 id="for-each-file-the-permissions-are-assigned-to-three-different-categories-of-users"><a aria-hidden="true" class="anchor-heading" href="#for-each-file-the-permissions-are-assigned-to-three-different-categories-of-users"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>For each file the permissions are assigned to three different categories of users:</h3>
+<ol>
+<li>The File owner</li>
+<li>The Group owner</li>
+<li>Others (anyone else or the whole world)</li>
+</ol>
+<h3 id="there-are-three-file-permissions-types-that-apply-to-each-category"><a aria-hidden="true" class="anchor-heading" href="#there-are-three-file-permissions-types-that-apply-to-each-category"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>There are three file permissions types that apply to each category:</h3>
+<ul>
+<li>The read permission (r)</li>
+<li>The write permission (w)</li>
+<li>The execute permission (x)</li>
+</ul>
+<h3 id="to-view-the-files-permissions-run-ls--l-or-stat"><a aria-hidden="true" class="anchor-heading" href="#to-view-the-files-permissions-run-ls--l-or-stat"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>To view the files permissions run: <a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a> -l or <a href="/notes/0ftwbeeggjp74wm7lxsngll">stat</a></h3>
+<ul>
+<li><code>-</code> indicates the absence of a permission</li>
+<li>The order of permissions is <code>FileType</code> denoted with <code>d</code>, <code>l</code>, <code>-</code> etc followed by permissions for the user in the format <code>rwx</code> followed by permissions for the group followed by permissions for other users</li>
+<li><code>root</code> user can always <code>rwx</code> because permissions are always only for non-privileged users.</li>
+<li><code>x</code> all Linux commands or shell scripts have the <code>x</code> permission set. If a file that represents a command doesn't have <code>x</code> permission it cannot be executed.</li>
+</ul>
+<h3 id="combining-find-and-chmod-commands-together"><a aria-hidden="true" class="anchor-heading" href="#combining-find-and-chmod-commands-together"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Combining Find and Chmod Commands Together</h3>
+<p>To recursively set permissions for all files to a specific value, you should exclude the directories in the path otherwise the directories will have same permissions as the files, see: <a href="/notes/6vzwh1eaj567nroqwy1uf5s">The Effect of Permissions on Directories</a></p>
+<p>To mitigate this, we can combine <a href="/notes/mx4bqwojj5gg8gvl4mdyvoj">find</a> and <a href="/notes/8e78vq83ld131fb43r7xf90">chmod</a> commands together</p>
+<p>Example</p>
+<ul>
+<li><code>find ~ -type f -exec chmod 640 {} \;</code> for all files</li>
+<li><code>find ~ -type d -exec chmod 750 {} \;</code> for all directories</li>
+</ul>
+<h3 id="changing-file-ownership"><a aria-hidden="true" class="anchor-heading" href="#changing-file-ownership"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Changing File Ownership</h3>
+<ul>
+<li>In Linux, all files are associated with an owner and a group owner</li>
+<li>The <a href="/notes/wi4hrouup889hj4e5qxj9kx">chown</a> and <code>chgrp</code> commands are used to change the files owner and group</li>
+<li>Only root can change the file owner</li>
+<li>Normal users can change the group of the file if they own the file and only to a group of which they are member of root can change the group ownership of all files.</li>
+</ul>
+<hr>
+<h3 id="special-permissions"><a aria-hidden="true" class="anchor-heading" href="#special-permissions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Special Permissions</h3>
+<ul>
+<li>Besides <code>r</code>, <code>w</code> and <code>x</code> for the owner, group and others there are 3 extra special permissions for each file or directory:
+<ul>
+<li><a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> or Set User ID</li>
+<li><a href="/notes/51fvmn1jjdv3mqercybkjz9">SGID</a> or Set Group ID</li>
+<li><a href="/notes/zgy59mvs3o3ip3431luuj11">Sticky Bit</a></li>
+</ul>
+</li>
+<li>These special permissions are for the file or directory overall, not just for a user category.</li>
+</ul>
+<h3 id="special-permission---suid"><a aria-hidden="true" class="anchor-heading" href="#special-permission---suid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Special Permission - <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a></h3>
+<ul>
+<li><strong>When an execuatable file with <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> is executed then the resulting process will have the permissions of the owner of the command, not the permissions of the user who executes the command</strong>.</li>
+<li>Sometimes it is necessary for a system to temporarily treat a user as root which is where <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> comes into play.
+<ul>
+<li><a href="/notes/ktm0z46nm4ur05mdk0nesij">passwd</a> command has SUID set by default so that even nonpriviledged users can change their password.</li>
+</ul>
+</li>
+<li>Absolute Mode: <code>chmod 4xxx file</code></li>
+<li>Relative Mode: <code>chmod u+s file</code></li>
+<li><code>ls -l /usr/bin/passwd</code>
+<ul>
+<li><code>-rwsr-xr-x 1 root root 68208 apr 16 15:36</code> /usr/bin/passwd</li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<p><code>cat</code> will only be able to read a file if the user has the permissions to read the file.</p>
+<p><code>ls -l /usr/bin/cat</code> the owner of the executable is <code>root</code> but it'll be run as per the privileges of the user that invokes the command.</p>
+<p>In case of <code>/etc/shadow</code> file, <code>cat</code> will not be able to read the contents because it doesn't yet have the <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> <code>s</code> set for it, so its not able to inherit the permissions of the <code>root</code>, even though <code>root</code> is the owner of the command <code>cat</code> but since <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> is not set, it is inherting the permissions of the nonprivileged user.</p>
+<p>If there is a <code>0</code> before the numeric value for "Access" when you run <a href="/notes/0ftwbeeggjp74wm7lxsngll">stat</a> on a file, it means there are no special permissions set for that file.</p>
+<h3 id="setting-up-suid"><a aria-hidden="true" class="anchor-heading" href="#setting-up-suid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setting up SUID</h3>
+<p><code>sudo chmod 4755 /usr/bin/cat</code> using <a href="/notes/8e78vq83ld131fb43r7xf90">chmod</a> setting the <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> and checking with <code>ls -l /usr/bin/cat</code> will return <code>-rwsr-xr-x</code> with /usr/bin/cat in red(or different) color.</p>
+<p>If you check with <a href="/notes/0ftwbeeggjp74wm7lxsngll">stat</a> command you'll find "Access" with the value: <code>4755</code></p>
+<p>Sometimes you'll find an uppercase <code>S</code> instead of a lowercase <code>s</code> denoting that there are no <code>x</code> executable permissions for that file.</p>
+<h4 id="suid-with-symbolic-mode"><a aria-hidden="true" class="anchor-heading" href="#suid-with-symbolic-mode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SUID with symbolic mode</h4>
+<p><code>sudo chmod u+s /usr/bin/cat</code></p>
+<h3 id="finding-all-the-commands-with-the-suid-set"><a aria-hidden="true" class="anchor-heading" href="#finding-all-the-commands-with-the-suid-set"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Finding all the commands with the SUID set</h3>
+<p><code>find /usr/bin -perm -4000</code> <a href="/notes/mx4bqwojj5gg8gvl4mdyvoj">find</a></p>
+<h3 id="special-permission---sgid"><a aria-hidden="true" class="anchor-heading" href="#special-permission---sgid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Special Permission - <a href="/notes/51fvmn1jjdv3mqercybkjz9">SGID</a></h3>
+<ul>
+<li>SGID or Set Group ID</li>
+<li>SGID is set mainly to directories</li>
+<li>If you set SGID on directories, all files or directories created inside that directory will be owned by the same group owner of the directory where SGID was configured.</li>
+<li>This is useful in creating shared directories, which are directories that are writable at the group level.</li>
+<li>Absolute Mode: <code>chmod 2xxx directory</code></li>
+<li>Relative Mode: <code>chmod g+s directory</code></li>
+<li><code>ls -ld /programming/</code>
+<ul>
+<li><code>drwxrws---2 pr1 programmers 4096 iul 14 13:15 /programming/</code></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><code>sudo su</code></li>
+<li><code>groupadd programmers</code></li>
+<li><code>useradd -s /bin/bash pr1</code></li>
+<li><code>useradd -s /bin/bash pr2</code></li>
+<li><code>usermod -aG programmers pr1</code></li>
+<li><code>usermod -aG programmers pr2</code></li>
+<li><code>mkdir /programming/</code></li>
+<li><code>chown pr1:programmers /programming/</code></li>
+<li><code>chmod 770 /programming/</code></li>
+<li><code>su pr1</code></li>
+<li><code>cd /programming/</code></li>
+<li><code>touch source1.cpp</code></li>
+</ul>
+<p>At this point the <span class="underline">group owner of the file is the primary group of the creator</span> and the other users in the <code>programmers</code> group will not be able to change the file or work on it, we can give individual permissions to the other users but it can be a security issue.</p>
+<h3 id="setting-up-sgid"><a aria-hidden="true" class="anchor-heading" href="#setting-up-sgid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setting up SGID</h3>
+<p><code>chmod 2770 /programming</code> or <code>chmod g+s /programming</code></p>
+<p>Verify with <code>ls -ld /programming</code> or <code>stat /programming</code></p>
+<p>There will be an additional <code>s</code> letter added to the permissions, if there is an uppercase <code>S</code> it means there are not execution permissions set for that directory.</p>
+<ul>
+<li><code>su pr2</code></li>
+<li><code>cd /programming</code></li>
+<li><code>touch source2.cpp</code></li>
+<li><code>mkdir goland python</code>
+<ul>
+<li>Newly created dirs will have similar permissions as the parent directory with the SGID set</li>
+</ul>
+</li>
+<li>The group of the newly created files and dirs will be "programmers" and not "pr1"</li>
+</ul>
+<hr>
+<h3 id="file-attributes"><a aria-hidden="true" class="anchor-heading" href="#file-attributes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>File Attributes</h3>
+<h3 id="file-attributes-1"><a aria-hidden="true" class="anchor-heading" href="#file-attributes-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>File Attributes</h3>
+<ul>
+<li>A part from permissions Linux also has advance access control features such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.ACL (Private)</a>s and attributes.</li>
+<li>The attributes define the properties of the files, they depend on the underlying file system such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.ext4 (Private)</a> where the attribute data must be stored along with other control structures.</li>
+<li>Each file attribute can have one of the two states: <code>set</code> or <code>clear</code></li>
+<li>Attributes is separate from other metadata such as file system permissions, owners, groups, timestamps and so on.</li>
+<li><a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a> doesn't display the file attributes, use <a href="/notes/pdd1ljoj7m3l5k35ixyh4ax">lsattr</a> for that and to change attributes use <a href="/notes/zm7piwt6fbobsmqwd1yt057">chattr</a></li>
+</ul>
+<p>See also:</p>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Octal Notation (Private)</a></li>
+<li><a href="/notes/8e78vq83ld131fb43r7xf90">chmod</a>, <a href="/notes/wi4hrouup889hj4e5qxj9kx">chown</a>, <a href="/notes/8e78vq83ld131fb43r7xf90">chmod</a>, <a href="/notes/tm4p3a1vrsu7vo4ciwandns">chgrp</a></li>
+<li><a href="/notes/vgmdtjl7emz7npfah8ttgsx">umask</a></li>
+<li><a href="/notes/6vzwh1eaj567nroqwy1uf5s">The Effect of Permissions on Directories</a></li>
+<li><a href="/notes/pdd1ljoj7m3l5k35ixyh4ax">lsattr</a>, <a href="/notes/zm7piwt6fbobsmqwd1yt057">chattr</a></li>
+</ul>

@@ -1,0 +1,14 @@
+<h1 id="where"><a aria-hidden="true" class="anchor-heading" href="#where"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>WHERE</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p>WHERE returns only true conditions, it is used to filter data, query execution engine iterates and checks(evaluates) the condition and returns if true.</p>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+    <span class="token keyword">FROM</span> customers
+    <span class="token keyword">WHERE</span> points <span class="token operator">></span> <span class="token number">3000</span><span class="token punctuation">`</span>
+</code></pre>
+<p>We can use <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Relational operators (Private)</a> for comparison</p>
+<p><code>&#x3C;></code> is also a "not equals to" operator</p>
+<p>Enclose your string values inside single or double quotes:</p>
+<p><code>WHERE state = 'VA'</code> - it is not case sensitive</p>
+<p><code>WHERE birth_date > '1990-01-01' that is YYYY-MM-DD, dates are treated as strings in [[devlog.sql]]</code></p>

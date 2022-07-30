@@ -1,0 +1,48 @@
+<h1 id="tidal-cycles"><a aria-hidden="true" class="anchor-heading" href="#tidal-cycles"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tidal Cycles</h1>
+<ul>
+<li>Areas: <a href="/notes/p3u99c0flfwy17kuc39leop">Music</a></li>
+</ul>
+<hr>
+<h3 id="install-haskell"><a aria-hidden="true" class="anchor-heading" href="#install-haskell"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install Haskell</h3>
+<p><a href="https://www.haskell.org/platform/linux.html#linux-ubuntu">https://www.haskell.org/platform/linux.html#linux-ubuntu</a></p>
+<pre><code>sudo apt-get install haskell-platform
+</code></pre>
+<p>check if its installed using <code>ghci</code></p>
+<p>Also run</p>
+<pre><code>sudo apt update
+# for safe measure
+sudo apt install build-essential cabal-install git jackd2
+</code></pre>
+<h3 id="install-supercollider"><a aria-hidden="true" class="anchor-heading" href="#install-supercollider"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install SuperCollider</h3>
+<p>Using this handy script: <a href="https://github.com/lvm/build-supercollider">https://github.com/lvm/build-supercollider</a></p>
+<pre><code>git clone https://github.com/lvm/build-supercollider
+cd build-supercollider
+sh build-supercollider.sh
+sh build-sc3-plugins.sh
+</code></pre>
+<p>Run this inside SuperCollider</p>
+<pre><code>Quarks.checkForUpdates({Quarks.install("SuperDirt", "v1.7.2"); thisProcess.recompile()})
+</code></pre>
+<p>Inside a new file:</p>
+<pre><code>SuperDirt.start;
+s.makeGui;
+</code></pre>
+<p>Start recording for sounds from the <code>s.makeGui</code> window</p>
+<p><code>Shift + Return</code> to run</p>
+<h3 id="install-tidal-cycles"><a aria-hidden="true" class="anchor-heading" href="#install-tidal-cycles"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install Tidal Cycles</h3>
+<pre><code>cabal update
+cabal install tidal --lib
+</code></pre>
+<h3 id="choose-a-text-editor"><a aria-hidden="true" class="anchor-heading" href="#choose-a-text-editor"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Choose a text-editor</h3>
+<p>Let's go with <a href="https://atom.io/">https://atom.io/</a></p>
+<p>Once installed: Packages > TidalCycles > Boot TidalCycles</p>
+<h3 id="useful-links"><a aria-hidden="true" class="anchor-heading" href="#useful-links"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Useful links</h3>
+<p><a href="https://tidalcycles.org/docs/getting-started/linux_install">https://tidalcycles.org/docs/getting-started/linux_install</a></p>
+<hr>
+<pre><code>SuperDirt.start;
+s.makeGui;
+
+MIDIClient.init;
+~midi = MIDIOut.newByName("Midi Through", "Midi Through Port-0");
+~dirt.soundLibrary.addMIDI(\midi, ~midi);
+</code></pre>

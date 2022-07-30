@@ -1,0 +1,34 @@
+<h1 id="dropping-a-list-of-ip-addresses-using-a-for-loop"><a aria-hidden="true" class="anchor-heading" href="#dropping-a-list-of-ip-addresses-using-a-for-loop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Dropping a List of IP addresses Using a For Loop</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Dropping packets from a list of IPs</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">DROPPED_IPS</span><span class="token operator">=</span><span class="token string">"8.8.8.8 1.1.1.1 10.10.10.1"</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">ip</span> <span class="token keyword">in</span> <span class="token variable">$DROPPED_IPS</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Dropping packets from <span class="token variable">$ip</span>"</span>
+  iptables -I INPUT -s <span class="token variable">$ip</span> -j DROP
+<span class="token keyword">done</span>
+</code></pre>
+<p>Supply list of IPs from a txt file</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">ip</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> ips.txt<span class="token variable">)</span></span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Dropping packets from <span class="token variable">$ip</span>"</span>
+  iptables -I INPUT -s <span class="token variable">$ip</span> -j DROP
+<span class="token keyword">done</span>
+</code></pre>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #6e750e;" href="/notes/u6w0v5tbvga4sby95nixk67">tidbits</a></li>
+</ol>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/26fd6bw5fsykdus523f40bz">Bash</a></li>
+</ul>

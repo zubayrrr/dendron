@@ -1,0 +1,39 @@
+<h1 id="touch"><a aria-hidden="true" class="anchor-heading" href="#touch"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>touch</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The touch command is a standard program for Unix/Linux operating systems, that is used to create, change and modify timestamps of a file. Before heading up for touch command examples, please check out the following options:</p>
+<ul>
+<li>-a, change the access time only</li>
+<li>-c, if the file does not exist, do not create it</li>
+<li>-d, update the access and modification times</li>
+<li>-m, change the modification time only</li>
+<li>-r, use the access and modification times of file</li>
+<li>-t, creates a file using a specified time</li>
+</ul>
+<blockquote>
+<p>—via <a href="https://www.tecmint.com/8-pratical-examples-of-linux-touch-command/">8 Practical Examples of Linux "Touch" Command</a></p>
+</blockquote>
+<ul>
+<li>To create a file using <code>touch</code> simply: <code>touch fileName</code></li>
+</ul>
+<hr>
+<ul>
+<li>Set timestamps of one file to the timestamps of another file:</li>
+</ul>
+<p><code>touch fileOne -r fileTwo</code></p>
+<ul>
+<li><code>touch</code>-ing an existing file will update it's timestamps:</li>
+</ul>
+<p><code>touch fileName</code></p>
+<ul>
+<li>It is not possible to modify just the "change" timestamp (the trick is to set the system time to the desired "change" time and <code>touch</code> it and adjust the "access" and "modify" time to the initial values)</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/e26xfb87b3du1j0omk99ko2">Creating Files and Directories</a></li>
+<li><a href="/notes/6jlla2j97qmnmirwouc912w">File Timestamps</a></li>
+<li><a href="/notes/vgmdtjl7emz7npfah8ttgsx">umask</a></li>
+</ul>

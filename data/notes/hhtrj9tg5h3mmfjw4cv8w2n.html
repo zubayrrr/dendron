@@ -1,0 +1,57 @@
+<h1 id="insert-into"><a aria-hidden="true" class="anchor-heading" href="#insert-into"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>INSERT INTO</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p>Using <code>INSERT INTO</code></p>
+<p>Order of the values should correspond columns in the table</p>
+<h3 id="insert-rows-into-a-table"><a aria-hidden="true" class="anchor-heading" href="#insert-rows-into-a-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Insert rows into a table</h3>
+<pre><code>INSERT INTO customers
+VALUES (
+    DEFAULT,
+    "John",
+    "Smith",
+    NULL,
+    DEFAULT,
+    'This house NO.',
+    'This city',
+    'CC',
+    '0'
+)
+-- the first DEFAULT is for the AUTO_INCREMENT
+-- CC stands for state code as our table only accepts 2 VARCHAR for state column
+</code></pre>
+<p>To skip the default values and specify columns that you'd like to add, order doesn't matter in this case.</p>
+<pre><code>INSERT INTO customers (
+    first_name,
+    last_name,
+    address,
+    city,
+    country
+)
+VALUES (
+    "John",
+    "Smith",
+    'This house NO.',
+    'This city',
+    'CC',
+    '0'
+)
+</code></pre>
+<h3 id="insert-multiple-rows-into-a-table"><a aria-hidden="true" class="anchor-heading" href="#insert-multiple-rows-into-a-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Insert multiple rows into a table</h3>
+<pre><code>INSERT INTO shippers (name)
+VALUES
+    ('Shipper1'),
+    ('Shipper2'),
+    ('Shipper3')
+</code></pre>
+<h3 id="insert-data-into-multiple-tables"><a aria-hidden="true" class="anchor-heading" href="#insert-data-into-multiple-tables"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Insert data into multiple tables</h3>
+<pre><code>INSERT INTO orders (customer_id, order_date, status)
+VALUES (
+    1, '2019-01-02', 1
+)
+INSERT INTO order_items
+VALUES
+    (LAST_INSERT_ID(), 1, 1, 2.95),
+    (LAST_INSERT_ID(), 2, 1, 5.5)
+</code></pre>
+<p><code>LAST_INSERT_ID()</code> is a builtin function returns the value of the ID that was last inserted</p>

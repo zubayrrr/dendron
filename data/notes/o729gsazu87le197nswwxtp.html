@@ -1,0 +1,38 @@
+<h1 id="environment-variable"><a aria-hidden="true" class="anchor-heading" href="#environment-variable"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Environment Variable</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>They're defined for the current shell and are inherited by any child shells or processes.</li>
+<li>They're used to pass information to process that are spawned from the current shell.</li>
+<li>Displayed using <code>env</code> or <code>printenv</code></li>
+<li><a href="/notes/iicnw4qgra6rr5f6k4dlw3z">$PATH</a> is such an example</li>
+<li>When assigning multiple values to a variable, its common to separate them using a colon <code>:</code></li>
+<li>By convention - env variables are written in uppercase letters.</li>
+<li>Usually they're not used directly; instead they're referenced by individual applications/services.
+<ul>
+<li><code>$HOME</code> is such an example</li>
+</ul>
+</li>
+<li>Run <code>env | less</code> to list all env variable set on your machine.</li>
+<li>You can also use <code>printenv</code> to print variables
+<ul>
+<li><code>printenv SHELL PWD LC_TIME</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="create-a-new-env-variable"><a aria-hidden="true" class="anchor-heading" href="#create-a-new-env-variable"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create a new env variable</h2>
+<ul>
+<li>Add a line: <code>export VARNAME=VARVAL</code> in your <code>~/.zshrc</code></li>
+<li>To create a system wide variable available for all users; declare the variable in <code>/etc/profile</code> or <code>/etc/bash.bashrc</code></li>
+<li>There is also <code>/etc/environment</code> in which you can set env variables each on a new line</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/26fd6bw5fsykdus523f40bz">Bash</a></li>
+<li><a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a></li>
+<li><a href="/notes/iicnw4qgra6rr5f6k4dlw3z">PATH Variable</a></li>
+<li><a href="/notes/vh22ssk485h0u5nlfme04ic">Shell Variables</a></li>
+</ul>

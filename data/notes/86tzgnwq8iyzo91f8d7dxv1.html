@@ -1,0 +1,430 @@
+<h1 id="java"><a aria-hidden="true" class="anchor-heading" href="#java"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Java</h1>
+<ul>
+<li>Areas: <a href="/notes/0fa919xtp76q3ulhjmvgm1r">Programming</a></li>
+</ul>
+<hr>
+<ul>
+<li>Java is a platform independent language.
+<ul>
+<li>They brought a layer on top of operating systems known as the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">JVM (Private)</a>.</li>
+<li>Java was originally designed to write programs for things like refrigrator, cars etc.</li>
+</ul>
+</li>
+</ul>
+<h3 id="to-print-a-string-out-to-the-console"><a aria-hidden="true" class="anchor-heading" href="#to-print-a-string-out-to-the-console"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>To print a string out to the console</h3>
+<p><code>System.out.println("Hello world!");</code></p>
+<h3 id="declaring-integers"><a aria-hidden="true" class="anchor-heading" href="#declaring-integers"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Declaring integers</h3>
+<p><code>int variableName = value;</code></p>
+<h3 id="adding-variables-and-printing-them-to-the-console"><a aria-hidden="true" class="anchor-heading" href="#adding-variables-and-printing-them-to-the-console"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Adding variables and printing them to the console</h3>
+<pre><code>int x = 5;
+int y = 6;
+int sum = x + y;
+System.out.printlt(sum);
+</code></pre>
+<h3 id="string-concatenation"><a aria-hidden="true" class="anchor-heading" href="#string-concatenation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>String concatenation</h3>
+<pre><code>System.out.println("sum = " + sum)
+</code></pre>
+<h3 id="if-statement"><a aria-hidden="true" class="anchor-heading" href="#if-statement"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>if</code> statement</h3>
+<pre><code>if(y > x){
+    System.out.println("y is greater than x")
+}
+</code></pre>
+<h3 id="else-statement"><a aria-hidden="true" class="anchor-heading" href="#else-statement"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>else</code> statement</h3>
+<pre><code>if(y > x){
+    System.out.println("y is greater than x");
+}else if(y == x){
+    System.out.println("y is equal to x");
+}else{
+    System.out.println("y is less than x");
+}
+</code></pre>
+<h3 id="arithmetic-operators"><a aria-hidden="true" class="anchor-heading" href="#arithmetic-operators"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Arithmetic operators</h3>
+<ul>
+<li><code>+</code>- Addition</li>
+<li><code>-</code> - Subtraction</li>
+<li><code>*</code> - Multiplication</li>
+<li><code>/</code> - Division</li>
+<li><code>%</code> - Modulo Operation (Remainder after division</li>
+<li><code>++</code> - Increment</li>
+<li><code>--</code> - Decrement</li>
+<li><code>+=</code> - Addition Assignment</li>
+<li><code>-=</code> - Subtraction Assignment</li>
+<li><code>*=</code> - Multiplication Assignment</li>
+<li><code>/=</code> - Divison Assignment</li>
+<li><code>%=</code> - Modulus Assignment</li>
+</ul>
+<h3 id="relational-operators"><a aria-hidden="true" class="anchor-heading" href="#relational-operators"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Relational operators</h3>
+<ul>
+<li><code>==</code> - Is Equal To</li>
+<li><code>=</code> - Assignment</li>
+<li><code>!=</code> - Not Equal To</li>
+<li><code>></code> - Greater Than</li>
+<li><code>&#x3C;</code> - Less Than</li>
+<li><code>>=</code> - Greater Than Or Equal To</li>
+<li><code>&#x3C;=</code> - Less Than Or Equal To</li>
+</ul>
+<h3 id="syntactic-rules"><a aria-hidden="true" class="anchor-heading" href="#syntactic-rules"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Syntactic rules</h3>
+<ul>
+<li>Any complete statement will end in a semi colon (<code>;</code>)</li>
+</ul>
+<h3 id="for-loop"><a aria-hidden="true" class="anchor-heading" href="#for-loop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>for</code> loop</h3>
+<pre><code>// for(initial value; condition; increment/decrement), i++ is like writing i=i+1 or i += 1
+for(int i = 0; i &#x3C;= 10; i++){
+    System.out.println("i = " + i);
+}
+</code></pre>
+<h3 id="while-loop"><a aria-hidden="true" class="anchor-heading" href="#while-loop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>while</code> loop</h3>
+<pre><code>int x = -10;
+
+while(x &#x3C;= 0){
+    System.out.println("x = " + x);
+    x++;
+}
+</code></pre>
+<h3 id="do-while-loop"><a aria-hidden="true" class="anchor-heading" href="#do-while-loop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>do</code> <code>while</code> loop</h3>
+<pre><code>// most important difference from the while loop is that a do while loop will run at least once
+
+int x = 10;
+
+do{
+    System.out.println("x = " + x);
+    x--;
+}while(x > 0);
+</code></pre>
+<h3 id="and--or-"><a aria-hidden="true" class="anchor-heading" href="#and--or-"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>And <code>&#x26;&#x26;</code> Or <code>||</code></h3>
+<pre><code>int x, y;
+x = 10;
+y = -10;
+
+if (x > 0 &#x26;&#x26; y > 0){
+    System.out.println("Both integers are +ve");
+}else if (x > 0 || y > 0){
+    System.out.println("At least one integer is +ve");
+}else{
+    System.out.println("Both integers are -ve")
+}
+</code></pre>
+<p><code>&#x26;</code> \&#x3C;– verifies both operands,
+<code>&#x26;&#x26;</code> \&#x3C;– stops evaluating if the first operand evaluates to false since the result will be false, used in <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">bitwise operations (Private)</a></p>
+<h3 id="switch-case-statement"><a aria-hidden="true" class="anchor-heading" href="#switch-case-statement"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>switch</code> <code>case</code> statement</h3>
+<pre><code>int j = 2;
+
+switch(j){
+    case 0:
+        System.out.println("Value is 0");
+        break;
+    case 1:
+        System.out.println("Value is 1")
+        break;
+    case 2:
+        System.out.println("Value is 2")
+        break;
+    case 3:
+        System.out.println("Value is 3")
+        break;
+    default:
+        System.out.println("No Value")
+        break;
+
+}
+</code></pre>
+<ul>
+<li>Wrapper classes such as Integer</li>
+<li>Arrays, empty arrays</li>
+<li>Two Dimensional Arrays, empty two dim arrays</li>
+<li>Enhanced For loop</li>
+<li>String
+<ul>
+<li>Is not a primitive data type. Use String to store text.</li>
+<li>In built methods such as <code>toUpperCase()</code></li>
+</ul>
+</li>
+<li>Primitive Datatypes:
+<ul>
+<li>byte</li>
+<li>short</li>
+<li>int</li>
+<li>long</li>
+<li>float</li>
+<li>double</li>
+<li>char</li>
+<li>boolean</li>
+</ul>
+</li>
+<li>class and objects
+<ul>
+<li>class has data and methods, class are templates</li>
+<li>objects are instances (copy) of classes, objects will inherit data and methods defined in the class, objects can pass in parameters to the methods(of their class),</li>
+<li>When you dont pass any parameters to the object, the constructor will define the default values</li>
+<li>constructors are run when the object is created, they've the same name as a class name, they're used to define default values .
+<ul>
+<li>constructors do not return anything, including void</li>
+</ul>
+</li>
+<li>you can overload a constructor also(by defining another constructor that takes in parameters)</li>
+<li>this keyword is used to refer to the data of the class(class level data) itself(as opposed to the data defined inside a method on a class, method is also called as a function)</li>
+<li><code>void</code> keyword is put infront of a method when that method is not returning anything, if its only using the data right in that function.</li>
+<li>Create objects from a class
+<ul>
+<li><code>objName = new ClassName()</code></li>
+<li><code>ClassName objName = new ClassName()</code></li>
+</ul>
+</li>
+<li>When you want a method to return something, put the name of datatype that the method is returning infront of it, instead of <code>void</code></li>
+<li>passing arguments take precedence over class level data</li>
+</ul>
+</li>
+<li>Object Oriented programming
+<ul>
+<li>Encapsulation
+<ul>
+<li>Data hiding</li>
+</ul>
+</li>
+<li>Polymorphism
+<ul>
+<li>overloading</li>
+<li>overriding</li>
+</ul>
+</li>
+<li>Inheritance
+<ul>
+<li>Abstract classes</li>
+<li>Interfaces</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Overloading:</p>
+<ul>
+<li>having multiple methods named same but the ability of the language to decide which method to use based on the parameters being passed to the method</li>
+</ul>
+<p>Encapsulation: data and methods that act on the data (setters and getters)</p>
+<p>Data hiding:</p>
+<ul>
+<li>Limiting data to class, subclass or project to protect data using <strong>access modifiers</strong></li>
+<li><code>private</code> will limit it to the class</li>
+<li><code>public</code> all access(class, package, subclass, project)</li>
+<li><code>protected</code> class, package, subclass</li>
+<li>default or no value, class, pacakge</li>
+</ul>
+<p>Once a data is <code>private</code> will have to use a setter function to work with that value or a getter function to get that value.(when working outside the class), it will not be "visible" to any other classes</p>
+<p>The setter function will usually be visible(default or public) so you can play with the private value indirectly, making it secure.</p>
+<p>As industry standard, when defining data in classes, they should be made private and their getter and setter methods should be generated(even if they don't do anything with the data), <span class="underline">methods as public and data as private</span></p>
+<p>We can also use constructors for setting values instead of using a setter function.</p>
+<h3 id="oops-project-with-java"><a aria-hidden="true" class="anchor-heading" href="#oops-project-with-java"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://github.com/zubayrrr/java_oops_project">OOPS project with Java</a></h3>
+<hr>
+<ul>
+<li>Inhertitance</li>
+<li>Overriding</li>
+<li>Abstract classes</li>
+<li>Interfaces</li>
+<li><code>super</code> keyword</li>
+<li>static</li>
+</ul>
+<hr>
+<h3 id="inheritance"><a aria-hidden="true" class="anchor-heading" href="#inheritance"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Inheritance</h3>
+<p>When a class(subclass) acquires the properties of another class(called as base class, parent class, super class)</p>
+<pre><code>public class newClass extends oldClass{
+    // all the data except private from oldClass will be made available for newClass when compling(?)
+}
+</code></pre>
+<h3 id="overriding"><a aria-hidden="true" class="anchor-heading" href="#overriding"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Overriding</h3>
+<p>When a method in the subclass has the same signature(signature really means the method name and the passing arguments) as a method in the super class, then the subclass method takes precendece.</p>
+<h3 id="abstract-classes"><a aria-hidden="true" class="anchor-heading" href="#abstract-classes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Abstract classes</h3>
+<p>Class which has empty methods and fully defined methods</p>
+<pre><code>public abstract class Container{
+    public void calculateVolume(int length, int height){
+        double volume = calculateAreaOfBase(length) * height;
+        System.out.println("Volume = " + volume);
+    }
+
+    public abstract double calculateAreaOfBase(int length);
+}
+
+
+// //
+
+public class SquareContainer extends Container{
+    // you'll be prompted to add unimplemented methods
+
+    public double calculateAreaOfBase(int length){
+        // actual code that you will be using to calcuate area of base of a square
+        double area = length * length;
+        System.out.println("square Area = " + area );
+        return area;
+    }
+}
+
+// //
+
+public class circleContainer extends Container{
+
+    public double calculateAreaOfBase(int length){
+        double area = Math.PI * (length/2)*(length/2);
+        System.out.println("Circle Area = " + area );
+        return area;
+    }
+}
+
+// finally, these abstract methods can be used such as
+
+public class TestContainer{
+    public static void main(String[] args) {
+        CircleContainer c1 = new CircleContainer();
+        c1.calculateVolume(10, 5);
+
+        // you can also use super class when initializing objects
+        // superClass obj = new subClass();
+
+        // Container c1 = new CircleContainer();
+        // which can be further used
+        // c1 = new SquareContainer();
+
+        SquareContainer s1 = new SquareContainer();
+        s1.calculateVolume(10, 5);
+    }
+}
+</code></pre>
+<p>Reusing Objects</p>
+<pre><code>class A {
+
+}
+
+class B extends A {
+
+}
+
+A obj = new A();
+B obj = new B();
+A obj = new B();
+B obj = new A(); &#x3C;--- this cannot be done
+</code></pre>
+<h3 id="interface"><a aria-hidden="true" class="anchor-heading" href="#interface"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Interface</h3>
+<p>A class with only empty methods. A class <code>implements</code> an interface. An interface will hold names for methods. which can be implemented further in a class. If a method is unimplemented it can be written (override) inside the class itself. A class can only extend one class but multiple interfaces can be implemented by a class.
+!!! <code>super</code> keyword</p>
+<p>Is used to access a super class's data and methods.
+When using a super class's method inside a sub class, append the <code>super</code> keyword before the method call to access it.</p>
+<h3 id="static-keyword"><a aria-hidden="true" class="anchor-heading" href="#static-keyword"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>static</code> keyword</h3>
+<p>Data that is one per class not one per object, you can also have static blocks of code. static block of code is run even before the constructor runs.
+For every object created, constructor is run but static block of code is only fired once. static methods/data can be called by their class names directly. Non static methods/data cannot be called directly from the class.</p>
+<p>static variables can be called from objects but they are "static", different objects don't have different static variables, only one static variable exists.</p>
+<h3 id="main-method"><a aria-hidden="true" class="anchor-heading" href="#main-method"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>main method</h3>
+<p>Is entry point for execution, it is defined as static and public, it also returns void, because everything will be utilized inside the method itself. main is declared as static to avoid creation of instances of main methods. There can only ever be one <code>main</code>.</p>
+<hr>
+<h2 id="collections"><a aria-hidden="true" class="anchor-heading" href="#collections"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Collections</h2>
+<ul>
+<li>List</li>
+<li>ArrayList</li>
+<li>HashMap</li>
+<li>generics</li>
+</ul>
+<h3 id="arraylist"><a aria-hidden="true" class="anchor-heading" href="#arraylist"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ArrayList</h3>
+<p>Arrays are of fixed length. Array list is one of the collections, brought about to overcome the disadvantage of using Arrays.</p>
+<pre><code>`import java.util.ArrayList;`
+
+`ArrayList list = new ArrayList();`
+// List list = new ArrayList();
+// List is the super class of ArrayList
+
+
+// non generic list, anything can be added
+list.add("zero");
+list.add("one");
+list.add(2);
+list.add(true);
+
+for(Object temp: list){
+    System.out.println(temp);
+}
+
+// generic list, add specific elements
+
+List&#x3C;String> stringList = new ArrayList&#x3C;String>();
+// with java 7, you can new ArrayList&#x3C;>(); using the diamon operator
+// this ArrayList is limited to strings only
+
+stringList.add('wow');
+
+for(String temp: stringList){
+    System.out.println(temp);
+}
+</code></pre>
+<p><span class="underline">All classes extend the Object class</span></p>
+<p>Object obj = new A();
+Object obj2 = new Integer();
+Object obj3 = new String();</p>
+<pre><code>public class ClassName extends Object{
+    // data and methods
+}
+</code></pre>
+<h3 id="hashmap"><a aria-hidden="true" class="anchor-heading" href="#hashmap"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Hashmap</h3>
+<p>Is used to store <code>("key", value)</code> pairs. Since you have a key</p>
+<pre><code>import java.util.HashMap;
+
+HashMap hm = new HashMap();
+
+hm.put("wow", 69);
+
+System.out.println(hm.get("wow"))
+
+// to make it generic
+
+HashMap&#x3C;String, Double> hm2 = new HashMap&#x3C;>();
+</code></pre>
+<ul>
+<li>Linked List</li>
+<li>Sets</li>
+</ul>
+<hr>
+<h3 id="uml-class-diagram"><a aria-hidden="true" class="anchor-heading" href="#uml-class-diagram"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>UML class diagram</h3>
+<p>Unified Modeling Language</p>
+<p>Representing classes that we create using UML</p>
+<p>It must contain three boxes:</p>
+<ul>
+<li>First box will represent class name</li>
+<li>Second box will represent the data of the classes</li>
+</ul>
+<p>Example UML diagram</p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.atut4xg4mxv.png"></p>
+<ul>
+<li><code>-</code> for private</li>
+<li><code>+</code> for public</li>
+<li><code>#</code> for protected</li>
+<li><code>~</code> default</li>
+</ul>
+<hr>
+<h3 id="errorexception-handling"><a aria-hidden="true" class="anchor-heading" href="#errorexception-handling"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Error/Exception Handling</h3>
+<ul>
+<li>try</li>
+<li>catch</li>
+<li>finally</li>
+</ul>
+<p>Whenever you feel like a block of code might break because of input data, use a <code>try</code> <code>catch</code> block and use the exception object to read the error/exception message.</p>
+<p>You can use methods on the exception object to get more info such as <code>e.printStack()</code></p>
+<pre><code>int d[] = new int[3];
+int a = 10;
+int b = 1;
+int c = 0;
+
+try{
+    d[1] = 10;
+    c = a/b;
+}catch(Exception e){
+    System.out.println("Exception occured " + e);
+    e.printStackTrace();
+}
+</code></pre>
+<p>You can also use multiple <code>catch</code> statements for different kind of exceptions.</p>
+<pre class="language-java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    d<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    c <span class="token operator">=</span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArrayIndexOutOfBoundsException</span> <span class="token operator">|</span> <span class="token class-name">ArithmeticException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Defined exceptions occured "</span> <span class="token operator">+</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Generic exceptions "</span> <span class="token operator">+</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Will always run"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token comment">// if there is an exception, the exception will run, if there arent any, finally will run anyway EVEN if there is a return right after the try block. ```!!! throw and throws !!! variable arguments !!!`final`keyword`final`keyword can be applied to data, methods and classes,`final`data s a constant, cannot be changed.`final`methods cannot be overriden,`final`classes cannot be sub classed. !!!`.jar`files is like zipping them, in java world`.jar`files contains bunch of java programs that can be created from IDE. More options can be found on the IDE when exporting. They can also be used for importing them on your IDE.</span>
+</code></pre>

@@ -1,0 +1,21 @@
+<h1 id="between"><a aria-hidden="true" class="anchor-heading" href="#between"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>BETWEEN</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<hr>
+<p>The BETWEEN command is used to select values within a given range. The values can be numbers, text, or dates.</p>
+<p>The BETWEEN command is inclusive: begin and end values are included.</p>
+<pre><code>SELECT *
+FROM customers
+WHERE points >= 1000 AND points &#x3C;= 3000
+</code></pre>
+<p>Can instead be written as</p>
+<pre><code>SELECT *
+FROM customers
+WHERE points BETWEEN 1000 AND 3000
+</code></pre>
+<h3 id="example"><a aria-hidden="true" class="anchor-heading" href="#example"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example</h3>
+<pre><code>SELECT *
+FROM customers
+WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01'
+</code></pre>

@@ -1,0 +1,57 @@
+<h1 id="dd"><a aria-hidden="true" class="anchor-heading" href="#dd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>dd</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><strong>dd</strong> is a command-line utility whose primary purpose is to convert and copy files.</p>
+<p>Compared to the <a href="/notes/l3leurtotj9lozm4ewqpwrf">cp</a> command, <code>dd</code> is used read and write from special device files. <code>dd</code> is a powerful tool with drive erasing capability.</p>
+<blockquote class="quoteback" darkmode="" data-title="How%20to%20use%20dd%20in%20Linux%20without%20destroying%20your%20disk" data-author="" cite="https://opensource.com/article/18/7/how-use-dd-linux">
+                      "<em>dd</em> stands for <em>disk destroyer</em>."
+                      <footer> <cite><a href="https://opensource.com/article/18/7/how-use-dd-linux">https://opensource.com/article/18/7/how-use-dd-linux</a></cite></footer>
+                      </blockquote>
+<p><code>if=</code> defines the source drive (input file) and <code>of=</code> defines the file or location where you want your data saved(output file).</p>
+<pre><code>dd if=/dev/sda of=/dev/sdb
+</code></pre>
+<p>create an .img archive of the <code>/dev/``sda</code> drive and save it to the home directory of your user account</p>
+<pre><code>dd if=/dev/sda of=/home/user/sdadisk.img
+
+# with status
+
+dd if=/dev/sda of=/home/user/sdadisk.img status=progress
+</code></pre>
+<p><code>dd</code> works with blocks and will infact clone the device by coping everything both empty and occupied space.</p>
+<p>If you want to restore a disk with the <code>.img</code> file; just use the <code>.img</code> file as the input (<code>if</code>) and the disk or partition as the destination (<code>of</code>)</p>
+<pre><code>dd if=/home/username/sdadisk.img of=/dev/sda status=progress
+</code></pre>
+<p>You can also use <code>sync</code> option using synchronised input out</p>
+<pre><code>dd if=/home/username/sdadisk.img of=/dev/sda status=progress conv=sync
+</code></pre>
+<h2 id="copying-only-the-mbr-private-block-or-mbrdat-file"><a aria-hidden="true" class="anchor-heading" href="#copying-only-the-mbr-private-block-or-mbrdat-file"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Copying only the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">MBR (Private)</a> block or <code>mbr.dat</code> file</h2>
+<pre><code>sudo dd if=/dev/sda of=/root/mbr.dat bs=512 count=1
+</code></pre>
+<h2 id="restoring-the-mbr-private-using-mbrdat"><a aria-hidden="true" class="anchor-heading" href="#restoring-the-mbr-private-using-mbrdat"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Restoring the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">MBR (Private)</a> using <code>mbr.dat</code></h2>
+<pre><code>sudo dd if=/root/mbr.dat of=/dev/sda bs=512 count=1
+</code></pre>
+<h2 id="create-bootable-usb-stick-using-dd"><a aria-hidden="true" class="anchor-heading" href="#create-bootable-usb-stick-using-dd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create Bootable USB stick using <code>dd</code></h2>
+<ul>
+<li>unmount if its already <a href="/notes/9x9tnilgrp5wqa10f8odw8x">mount</a>ed using <a href="/notes/ixi78tg04g5oavzuk4a8plt">umount</a> command</li>
+</ul>
+<pre><code>umount /media/user/device-name
+</code></pre>
+<ul>
+<li>format the disk using <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">mkfs (Private)</a></li>
+</ul>
+<pre><code>mkfs.vfat /dev/sdb
+</code></pre>
+<ul>
+<li>using <code>dd</code> to copy the <code>.iso</code> file</li>
+</ul>
+<pre><code>sudo dd if=/home/user/Downloads/linuxmint.iso of=/dev/sdb bs=4M status=progress
+</code></pre>
+<h2 id="footnotes"><a aria-hidden="true" class="anchor-heading" href="#footnotes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Footnotes</h2>
+<p>To add fancier progress/status monitor , use <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">pv (Private)</a> or Pipe Viewer</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

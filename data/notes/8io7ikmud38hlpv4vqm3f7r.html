@@ -1,0 +1,29 @@
+<h1 id="aws-fargate"><a aria-hidden="true" class="anchor-heading" href="#aws-fargate"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS Fargate</h1>
+<p>AWS Fargate is a service that provisions serverless compute resources to run AWS ECS and EKS containers. AWS states that Fargate allows you to focus on building your applications when you let Fargate provision and manage the infrastructure required. Think of it as containers on-demand with no underlying manually created infrastructure that are quick to launch and scale, where you manage everything at the container level.</p>
+<p>You specify the resources your application needs to run and Fargate handles the provisioning of compute resources in an isolated and secure instance.</p>
+<p>Fargate determines the correct amount of compute resources required, which means you don’t need to worry about selecting instance types or having to scale the cluster capacity.</p>
+<p>With Fargate you only pay for the resources required to run your containers as they are consumed which means you eliminate over provisioning and paying for servers you don’t need.</p>
+<p>Fargate tasks (pods) run in their own kernels providing a secure and isolated compute environment, which provides an isolated workload and improved security as a consequence.</p>
+<p>Via - <a href="https://www.hava.io/blog/what-is-aws-fargate">What is AWS Fargate?</a></p>
+<h2 id="aws-ecs-with-aws-fargate"><a aria-hidden="true" class="anchor-heading" href="#aws-ecs-with-aws-fargate"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="/notes/y43l1e8ej1au0hfrdkqmdh7">AWS ECS</a> with <a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a></h2>
+<p>What if you want to delegate the management of infrastructure(virtual machines etc) also to AWS?</p>
+<p>Container lifecycle is being managed by AWS ECS but hosting can also be managed by AWS - for which you can use <a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a>.</p>
+<p>It is essentially an alternative to <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> instances. Instead of creating EC2 instances and connecting the two with ECS cluster, you can create Fargate instance and connect that to the ECS cluster.</p>
+<p>It is a serverless way to launch containers. You take a container that you want to deploy on AWS and manage by ECS. You hand over the container to Fargate, you don't need to launch/provision any virtual machines/servers on your AWS account.</p>
+<p>Fargate will take your container and analyze it to check how much resources your container needs to run and it'll provision a server/resources for that specific container and deploy it and run it.</p>
+<p>It is on-demand, you don't need to provision or manage servers; you only have the infrastructure resources needed to run your containers. You only pay for the resources your containers are consuming. It scales very easily as it doesn't have fixed resources cap defined beforehand.</p>
+<p>However, if you need access to the underlying infrastructure for whatever reasons, EC2 offers more flexibility in that domain.</p>
+<p>Since you're using ECS for managing your containers and Fargate for managing your infrastructure needed for those containers, you can integrate your setup with other AWS services like <a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a> for monitoring, <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a> for Users and Permissions, <a href="/notes/uedjwc3ldf8k1p2l1l7fcxj">AWS ELB</a> for <a href="/notes/hjm4wdsz5kubm8h8pm006dd">load balancing</a>, <a href="/notes/3ozxwzvy9lv8t60yjvx45e9">AWS VPC</a> for networking etc.</p>
+<p>You can use Fargate Spot, a new capability that can run interruption-tolerant ECS Tasks at up to a 70% discount off the Fargate price.</p>
+<p><strong>Cons:</strong></p>
+<p>ECS + Fargate supports only one networking mode – <em>awsvpc</em> – which limits your control over the networking layer (and you might need that in some scenarios).</p>
+<p><strong>Cost:</strong> You’re charged based on the CPU and memory you select. The amount of CPU cores and GB determines the cost of running your cluster.</p>
+<p>See: <a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/y43l1e8ej1au0hfrdkqmdh7">AWS ECS</a></li>
+<li><a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a></li>
+<li><a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a></li>
+<li><a href="/notes/4i7qpwtzjjihtv7m1gfnjxw">AWS Step Functions</a></li>
+</ul>

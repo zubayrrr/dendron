@@ -1,0 +1,22 @@
+<h1 id="usermod"><a aria-hidden="true" class="anchor-heading" href="#usermod"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>usermod</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>usermod</code> is a command used to change the properties of an existing user.
+It uses same options as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">useradd (Private)</a>.</p>
+<ul>
+<li>Change comment of an existing user account
+<ul>
+<li><code>sudo usermod -c 'Goland Developer' james</code></li>
+</ul>
+</li>
+<li>Change primary <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.group (Private)</a>
+<ul>
+<li><code>sudo usermod -g daemon james</code></li>
+<li><code>sudo usermod -G group1,group2 james</code> separated with comma with no intervening white space, if we don't mention the option <code>-a</code> for appending, the user will only be assigned to the groups mentioned (group1,group2) and will be removed from all the groups they previously belonged to.</li>
+<li><code>sudo usermod -aG sudo james</code> with this they'll be part of group1,group2 and sudo</li>
+</ul>
+</li>
+</ul>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">groupadd (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">userdel (Private)</a></p>

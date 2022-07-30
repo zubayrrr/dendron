@@ -1,0 +1,120 @@
+<h1 id="ssh"><a aria-hidden="true" class="anchor-heading" href="#ssh"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SSH</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a>,<a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<ul>
+<li>Secure Shell or Secure Socket Shell, operates on <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Port 22 (Private)</a></li>
+<li>Cryptographic network protocol for operating network services securely, even over an unsecured network.</li>
+<li>Best known for remote login to computer systems by users.</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>The SSH protocol is used for:</p>
+<ul>
+<li>Secure Remote Management of Servers, Routers and other Networking Devies.</li>
+<li>Network File Copy: <a href="/notes/dlwsd1h4qr9cqep4z0jw8vd">rsync</a>, <a href="/notes/xcl88vd87rcbnk0jpdkjuxy">SFTP</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.sc (Private)</a> If you suspect a firewall issue then use <a href="/notes/n4i3s9ytrdukiy6xks3uxah">ufw</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">winscp (Private)</a></li>
+<li>Tunneling, SSH Port Forwarding</li>
+</ul>
+</li>
+<li>
+<p><a href="/notes/18r0edfsklpzmjv2acfoous">sshd</a> is the SSH server <a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a>, <code>ssh</code> or <code>putty</code> are the clients</p>
+</li>
+<li>
+<p>To check status of ssh</p>
+<ul>
+<li><code>sudo systemctl status ssh</code></li>
+</ul>
+</li>
+<li>
+<p>Service Stop, Restart, Start: <code>sudo systemctl [start|restart|stop] ssh</code></p>
+</li>
+<li>
+<p>Enable, Disable auto booting: <code>sudo systemctl [enable|disable] ssh</code></p>
+</li>
+<li>
+<p>Server config file: <code>/etc/ssh/sshd_config</code></p>
+</li>
+<li>
+<p>Client Config file: <code>/etc/ssh/ssh_config</code></p>
+</li>
+</ul>
+<h3 id="check-status"><a aria-hidden="true" class="anchor-heading" href="#check-status"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Check status</h3>
+<ul>
+<li><code>systemctl status ssh</code> or <code>systemctl status sshd</code>(for CentOS)</li>
+<li><code>ps -ef | grep sshd</code> can</li>
+<li><code>systemctl is-enabled ssh</code> to start at boot</li>
+</ul>
+<h3 id="troubleshooting-ssh"><a aria-hidden="true" class="anchor-heading" href="#troubleshooting-ssh"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Troubleshooting ssh</h3>
+<h3 id="connecting-to-ssh-server"><a aria-hidden="true" class="anchor-heading" href="#connecting-to-ssh-server"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Connecting to ssh server</h3>
+<ul>
+<li>Using <a href="/notes/5xbq8dqh6wbqd14aqyn863v">ping</a> to test connection between either ssh server or client
+<ul>
+<li><code>ping IPAddr</code> see: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Troubleshooting for connectivity issues (Private)</a></li>
+</ul>
+</li>
+<li>Connecting using a client(OpenSSH)
+<ul>
+<li><code>ssh username@serverIPAddr</code> or <code>ssh -l username IPAddr</code></li>
+<li>The username used should exist on the server, not on the client</li>
+</ul>
+</li>
+<li>The first time whena client is connecting to an ssh server, the client uses a cryptographic fingerprint to identify the server and prevent possible man in the middle attacks in the future.</li>
+<li>The host key is randomly generated when the ssh server is set up and is used to identify the server you're connecting to.</li>
+<li>It will be saved on the client in the file called <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ssh-known_hosts (Private)</a></li>
+<li>You'll be prompted to enter the user's password, press enter to start your connection.</li>
+<li>To exit, run <code>exit</code> or <code>Ctrl + D</code></li>
+</ul>
+<h3 id="options"><a aria-hidden="true" class="anchor-heading" href="#options"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Options</h3>
+<ul>
+<li>To use a port other than the default one(Port 22) use <code>-p</code> followed by the port number.</li>
+<li>ssh client has it's own configuration file under `<code>/etc/ssh/ssh_config</code></li>
+</ul>
+<p>check out: <a href="https://www.putty.org/">putty</a></p>
+<h3 id="securing-ssh-with-key-authentication"><a aria-hidden="true" class="anchor-heading" href="#securing-ssh-with-key-authentication"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Securing SSH with Key Authentication</h3>
+<ul>
+<li>Use <a href="/notes/uero6kfpt6ymlishvgxvhhe">Ssh Keygen</a> to for Public Key Authentication</li>
+<li>Disable password authentication of the remote machine
+<ul>
+<li><code>vim /etc/ssh/sshd_config</code></li>
+<li>Make <code>PasswordAuthentication no</code></li>
+<li><code>systemctl restart ssh</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="troubleshooting-ssh-1"><a aria-hidden="true" class="anchor-heading" href="#troubleshooting-ssh-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Troubleshooting <a href="/notes/o922t6d9q6wur3yve290hir">SSH</a></h3>
+<p>The first to check is that the ssh daemon is running on the server machine:
+<code>systemctl status ssh</code></p>
+<p>If you get a <code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code> message on the client when trying to connect/autheticate ssh server, double check that you're connecting to the right server. This message will be displayed if the <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> or <a href="/notes/96d9arn92ova0u1tdgns8ts">MAC</a> Address have been changed. If it is the right server, you can get rid of the message by removing the server key from the <code>/.ssh/known_host</code> file.</p>
+<p>Check <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Port 22 (Private)</a> on which the server listens is open, from the client scan the Port 22 on the server. Use <a href="/notes/22lssm7x2tdw16jmkt8h4iu">TELNET (Protocol)</a>) or <a href="/notes/b22uf82a31xkdp1cnlx713v">Nmap</a> for this.</p>
+<ul>
+<li><code>telnet IPAddr PortNumber(22)</code></li>
+<li><code>nmap -p 22 IPAddr</code>
+<ul>
+<li>If it returns saying, "Host seems down" add the <code>-Pn</code> options and run again to get if the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Port 22 (Private)</a> is open or not.</li>
+</ul>
+</li>
+</ul>
+<p>Check if there is a <a href="/notes/xqc8lgkkzwz4qcbb6htkgfv">Firewall</a> dropping the packets.
+The Linux firewall is called <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.netfilter (Private)</a> or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.iptables (Private)</a>.
+To check if there are any firewall rules by running; <code>sudo iptables -vnL</code>
+If you suspect a firewall issue then use <a href="/notes/n4i3s9ytrdukiy6xks3uxah">ufw</a>.</p>
+<p>See also: Securing the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.OpenSSH (Private)</a> Server (<a href="/notes/18r0edfsklpzmjv2acfoous">sshd</a>)</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/mwyyxjbpi0gztjd00f39biv">Ansible</a></li>
+<li><a href="/notes/l6mm6spmjonb3zpaca8nldg">Application Layer - OSI</a></li>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+<li><a href="/notes/2mhpxvuofe9lkhtq95k1c7w">RDP</a></li>
+<li><a href="/notes/wosij89dfykieaipt38kees">scp</a></li>
+<li><a href="/notes/xcl88vd87rcbnk0jpdkjuxy">SFTP</a></li>
+<li><a href="/notes/my6skj9hdj9nn7unxwbcudb">SIGHUP</a></li>
+<li><a href="/notes/uero6kfpt6ymlishvgxvhhe">Ssh Keygen</a></li>
+<li><a href="/notes/18r0edfsklpzmjv2acfoous">sshd</a></li>
+<li><a href="/notes/22lssm7x2tdw16jmkt8h4iu">TELNET (Protocol)</a></li>
+<li><a href="/notes/p3r5nty3zw3frslf9lkq0lx">TELNET</a></li>
+</ul>

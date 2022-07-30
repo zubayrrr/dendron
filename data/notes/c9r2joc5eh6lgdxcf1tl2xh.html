@@ -1,0 +1,34 @@
+<h1 id="maven-scala-spark"><a aria-hidden="true" class="anchor-heading" href="#maven-scala-spark"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Maven Scala Spark</h1>
+<ul>
+<li>Areas: <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+</ul>
+<hr>
+<p>Init a Scala project</p>
+<pre><code>mvn archetype:generate -DarchetypeGroupId=net.alchim31.maven -DarchetypeArtifactId=scala-archetype-simple -DdownloadSources=true
+</code></pre>
+<p>ref: <a href="https://mvnrepository.com/artifact/net.alchim31.maven">https://mvnrepository.com/artifact/net.alchim31.maven</a></p>
+<p>Add Spark dependency</p>
+<pre><code>    &#x3C;dependency>
+      &#x3C;groupId>org.apache.spark&#x3C;/groupId>
+      &#x3C;artifactId>spark-sql_2.12&#x3C;/artifactId>
+      &#x3C;version>3.1.1&#x3C;/version>
+    &#x3C;/dependency>
+</code></pre>
+<ul>
+<li>Make sure to select JDK 8</li>
+<li>Make sure to select the right version of Scala (V 2.12.6?)</li>
+<li>Make sure to "Generate Sources and Update Folders" by right clicking inside the <code>pom.xml</code> file and from the Maven options.</li>
+<li>Run your <code>App.scala</code> to check if Scala has been installed properly</li>
+<li>Write your program to check if Spark is working as expected</li>
+</ul>
+<!-- end list -->
+<pre><code>val data = spark.sparkContext.parallelize(Seq("Hello World", "This is some text", "Hello text"))
+val map = data.flatMap(e => e.split(" ")).map(word => (word, 1))
+val counts = map.reduceByKey(_ + _).repartition(1)
+
+counts.saveAsTextFile("wordcount")
+
+mvn clean package # to clean and package the .jar
+</code></pre>
+<p>Using <code>spark-submit</code> to run your application</p>
+<p><code>spark-submit --master "local[*]" --class com.zubayr.App target/spark-setup-1.0-SNAPSHOT.jar</code></p>

@@ -1,0 +1,55 @@
+<h1 id="switch"><a aria-hidden="true" class="anchor-heading" href="#switch"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Switch</h1>
+<p>A switch is a smarter version of the <a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a>, a device that connects network devices together.</p>
+<p>Switches learn which devices are on which ports, a switch knows what port to forward data to.</p>
+<p>It broadcasts data only to the port that needs to receive it.</p>
+<p>Provides more security and effcient bandwith usage than a hub.</p>
+<hr>
+<ul>
+<li>Layer 2 device used to connect multiple network segments together</li>
+<li>Essentially a multiport <a href="/notes/irv3o7df3ch6a2lte4twi4t">Bridge</a></li>
+<li>Switches learn <a href="/notes/96d9arn92ova0u1tdgns8ts">MAC</a> addresses and make forwarding decisions based on them</li>
+<li>Switches analyze <em>source</em> <a href="/notes/96d9arn92ova0u1tdgns8ts">MAC</a> addresses in frames entering the switch and populate an internal MAC address table based on them</li>
+</ul>
+<hr>
+<ul>
+<li>Each port on a switch represents an individual <a href="/notes/uirqzeld6hvqmdshssza5we">Collision Domain</a></li>
+<li>All ports belong to the same <a href="/notes/t3w7c2u9g3w14hu315oj6ma">Broadcast Domain</a></li>
+</ul>
+<hr>
+<h3 id="how-switches-improve-network-performance"><a aria-hidden="true" class="anchor-heading" href="#how-switches-improve-network-performance"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How Switches Improve Network Performance</h3>
+<ul>
+<li>
+<p>Using ARP to discover MAC addresses of devices on the network and storing them in MAC Address table to confirm it back to the original requester. Basically everyone on the network answers to the query for the MAC address.</p>
+</li>
+<li>
+<p>And the next time, when anyone needs to communicate with anyone, they can directly communicate with them since <a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a> has memorized the MAC address of all the devices on the network.</p>
+</li>
+<li>
+<p>In this way, Switches improve performance and security of the network.</p>
+</li>
+</ul>
+<hr>
+<h3 id="can-table"><a aria-hidden="true" class="anchor-heading" href="#can-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CAN table</h3>
+<p>Content Addressable Memory (CAM) table is a system memory construct used by Ethernet switch logic which stores information such as MAC addresses available on physical ports with their associated VLAN Parameters. The CAM table, or content addressable memory table, is present in all switches for layer 2 switching.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/uirqzeld6hvqmdshssza5we">Collision Domains</a></li>
+<li><a href="/notes/5q7qe2w33cqzq3tg0nfxblt">Crossover Cable</a></li>
+<li><a href="/notes/ofmapzoha5kl5i46y1lkc2b">Data Link Layer - OSI</a></li>
+<li><a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a></li>
+<li><a href="/notes/tl2l2ioab7ezjb3y0ek2wrq">Layer 3 Switch</a></li>
+<li><a href="/notes/txhkupatmnyfpbh26k59e6u">MMF</a></li>
+<li><a href="/notes/mqnu3nuizmn3qct5215u9it">Network Components</a></li>
+<li><a href="/notes/zw1gitvx9j99ar0rar3o90b">Network Infrastructure Devices</a></li>
+<li><a href="/notes/2lmaspsqaxrf42wuvmcp02f">Network Layer - OSI</a></li>
+<li><a href="/notes/x7isiac8ilnito56s6gt660">Overview of Networks</a></li>
+<li><a href="/notes/3uiwyph0dokrrnxr5f420z5">Patch Panels - Copper</a></li>
+<li><a href="/notes/7r0uunvdkt9sgw6ajq5vg0x">router</a></li>
+<li><a href="/notes/1py9mwp8nfyok10003rq7nb">SMF</a></li>
+<li><a href="/notes/6hvydsuke9vd4sglh0hcgu5">SNMP</a></li>
+<li><a href="/notes/ebbsmmds8qkj39bw5g14klp">Straight-Through Patch Cable</a></li>
+<li><a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a></li>
+<li><a href="/notes/ay31a1sdstjlypyw2loughn">TFTP</a></li>
+<li><a href="/notes/3tjqysfje7v916n5bbpa8k3">Wired Network Topology</a></li>
+</ul>

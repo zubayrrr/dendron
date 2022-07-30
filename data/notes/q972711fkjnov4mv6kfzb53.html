@@ -1,0 +1,20 @@
+<h1 id="running-a-web-server-in-a-docker-container"><a aria-hidden="true" class="anchor-heading" href="#running-a-web-server-in-a-docker-container"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Running a Web Server in a Docker Container</h1>
+<ul>
+<li>Related: <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>
+<hr>
+<p>Using Ngnix for a web server</p>
+<ul>
+<li>Run <code>docker container run -d -p 8080:80 --name mysite ngnix</code>
+<ul>
+<li><code>-d</code> for detached mode (as a bg process)</li>
+<li><code>-p 8080:80</code> will expose container's port 80 to docker host's port 8080</li>
+<li><code>--name</code> to define a name, otherwise it'll choose one from a predefined list of names(applicabale to all containers not just ngnix)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>

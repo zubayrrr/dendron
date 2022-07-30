@@ -1,0 +1,96 @@
+<h1 id="spotify---code-snippet"><a aria-hidden="true" class="anchor-heading" href="#spotify---code-snippet"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spotify   Code Snippet</h1>
+<h1 id="spotify---code-snippet-1"><a aria-hidden="true" class="anchor-heading" href="#spotify---code-snippet-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://leerob.io/snippets/spotify-top-tracks">Spotify - Code Snippet</a></h1>
+<pre><code>import { getTopTracks } from '../../lib/spotify';
+
+export default async (_, res) => {
+  const response = await getTopTracks();
+  const { items } = await response.json();
+
+  const tracks = items.slice(0, 10).map((track) => ({
+    artist: track.artists.map((_artist) => _artist.name).join(', '),
+    songUrl: track.external_urls.spotify,
+    title: track.name
+  }));
+
+  return res.status(200).json({ tracks });
+};
+</code></pre>
+<pre><code>// lib/spotify.js
+
+import fetch from 'isomorphic-unfetch';
+import querystring from 'querystring';
+
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;
+const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+
+const getAccessToken = async () => {
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: querystring.stringify({
+      grant_type: 'refresh_token',
+      refresh_token
+    })
+  });
+
+  return response.json();
+};
+
+export const getTopTracks = async () => {
+  const { access_token } = await getAccessToken();
+
+  return fetch(TOP_TRACKS_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`
+    }
+  });
+};
+</code></pre>
+<h2 id="usage"><a aria-hidden="true" class="anchor-heading" href="#usage"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://leerob.io/#usage"></a>Usage</h2>
+<p>1</p>
+<h3 id="create-spotify-application"><a aria-hidden="true" class="anchor-heading" href="#create-spotify-application"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create Spotify Application</h3>
+<p>First, we need to create a Spotify application to give us credentials to authenticate with the API.</p>
+<ul>
+<li>Go to your <a href="https://developer.spotify.com/dashboard/">Spotify Developer Dashboard</a> and log in.</li>
+<li>Click <strong>Create an App</strong>.</li>
+<li>Fill out the name and description and click <strong>create</strong>.</li>
+<li>Click <strong>Show Client Secret</strong>.</li>
+<li>Save your Client ID and Secret. You'll need these soon.</li>
+<li>Click <strong>Edit Settings</strong>.</li>
+<li>Add <code>http://localhost:3000</code> as a redirect URI.</li>
+</ul>
+<p>All done! You now have a properly configured Spotify application and the correct credentials to make requests.</p>
+<p>2</p>
+<h3 id="authentication"><a aria-hidden="true" class="anchor-heading" href="#authentication"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Authentication</h3>
+<p>There are a variety of ways to authenticate with the Spotify API, depending on your application. Since we only need permission granted <em>once</em>, we'll use the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>.</p>
+<p>First, we'll have our application request authorization by logging in with whatever <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes">scopes</a> we need. Here's an example of what the URL might look like. Swap out the <code>client_id</code> and scopes for your own.</p>
+<pre><code>https://accounts.spotify.com/authorize?client_id=8e94bde7dd
+b84a1f7a0e51bf3bc95be8&#x26;response_type=code&#x26;redirect_uri=http
+%3A%2F%2Flocalhost:3000&#x26;scope=user-read-currently-playing%20
+user-top-read
+</code></pre>
+<p>After authorizing, you'll be redirected back to your <code>redirect_uri</code>. In the URL, there's a <code>code</code> query parameter. Save this value.</p>
+<pre><code>http://localhost:3000/callback?code=NApCCg..BkWtQ
+</code></pre>
+<p>Next, we'll need to retrieve the refresh token. You'll need to generate a Base 64 encoded string containing the client ID and secret from earlier. You can use <a href="https://www.base64encode.org/">this tool</a> to encode it online. The format should be <code>client_id:client_secret</code>.</p>
+<pre><code>curl -H "Authorization: Basic &#x3C;base64 encoded client_id:client_secret>"
+-d grant_type=authorization_code -d code=&#x3C;code> -d redirect_uri=http%3A
+%2F%2Flocalhost:3000 https://accounts.spotify.com/api/token
+</code></pre>
+<p>This will return a JSON response containing a <code>refresh_token</code>. This token is <a href="https://github.com/spotify/web-api/issues/374">valid indefinitely</a> unless you revoke access, so we'll want to save this in an environment variable.</p>
+<p>3</p>
+<h3 id="add-environment-variables"><a aria-hidden="true" class="anchor-heading" href="#add-environment-variables"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Add Environment Variables</h3>
+<p>To securely access the API, we need to include the secret with each request. We also <em>do not</em> want to commit secrets to git. Thus, we should use an environment variable. Learn how to add <a href="https://vercel.com/docs/environment-variables">environment variables in Vercel</a>.</p>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #054907;" href="/notes/j9wop01y5eo30zr168a0g3n">articles</a></li>
+</ol>

@@ -1,0 +1,87 @@
+<h1 id="aws-codedeploy"><a aria-hidden="true" class="anchor-heading" href="#aws-codedeploy"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS CodeDeploy</h1>
+<p>It is a service offered by Amazon that is used for the purpose of deployment. It helps in the automation of the application deployment of Amazon EC2 instances, on premise instances, <a href="/notes/0dhybuldv4znj0j1ivmevhe">Serverless</a> Lambda functions, and <a href="/notes/y43l1e8ej1au0hfrdkqmdh7">AWS ECS</a> services.</p>
+<p>You can also deploy to hundreds to <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> instances across multiple regions(EC2 Placement Group).</p>
+<h2 id="get-started"><a aria-hidden="true" class="anchor-heading" href="#get-started"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Get started</h2>
+<p>Provision an IAM user with access to CodeDeploy, attach CodeDeploy policy to the user or to the group or create a role for your <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655276802/wiki/wzyhpfgy8jpfirpdnbsx.png"></p>
+<p>Also create a role for AWS CodeDeploy</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655276831/wiki/kr76xkzjndcvvdrkrzjx.png"></p>
+<p>Make sure your roles have necessary policies attached.</p>
+<p>Before creating any instances, make sure you create a <a href="/notes/hjm4wdsz5kubm8h8pm006dd">Load Balancer</a> for your EC2 Instances.</p>
+<ul>
+<li>We deploy <strong>Revisions</strong></li>
+<li>How to deploy and rate of deployment is informed by <strong>Deployment Configuration</strong></li>
+<li>We deploy to a <strong>Deployment Group</strong>(one or more EC2 Instances)</li>
+</ul>
+<p>Also create an <a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a> <strong>instance profile</strong> to allow EC2 to access your repositories.</p>
+<p>Create an IAM service role that will grant CodeDeploy access to other AWS resources.</p>
+<h3 id="application-on-codedeploy"><a aria-hidden="true" class="anchor-heading" href="#application-on-codedeploy"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Application on CodeDeploy</h3>
+<p>It is simply a name identifier used to reference your deployment settings.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655279039/wiki/hxyajjgibg8e0p40uyjp.png"></p>
+<h3 id="deployment-group"><a aria-hidden="true" class="anchor-heading" href="#deployment-group"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Deployment group</h3>
+<p>It is the instance or instances where you want to target and deploy your code(these can be anything like <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a>, <a href="/notes/etxu35hmga4ee3p1w1kxj9o">AWS Lambda</a>, On-prem)</p>
+<p>Set of individual instances targeted for a deployment.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655279075/wiki/wniwxneyipowixraaycf.png"></p>
+<p>Use <a href="/notes/uhujff6xbqdreffq1szccj6">AWS Route53</a> to point your domain to the load balancer.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655279389/wiki/mccbiihnndd3o8uhi9fs.png"></p>
+<h3 id="deployment-configuration"><a aria-hidden="true" class="anchor-heading" href="#deployment-configuration"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Deployment Configuration</h3>
+<p>It is a set of rules, success and failure conditions used by CodeDeploy for deployment.</p>
+<p>It uses minimum healthy host value to determine what percentage of instances need to be up all the time from the configuration file.</p>
+<p>To add automation we can bring in:</p>
+<ul>
+<li><a href="/notes/rw9ychwellnc28mzcx61xcb">AWS EventBridge</a> - monitor deployment</li>
+<li><a href="/notes/g9xjnwh096t1rptwv0bol5w">AWS SNS</a> - subscribe to SNS topic for notifications(email)</li>
+<li><a href="/notes/etxu35hmga4ee3p1w1kxj9o">AWS Lambda</a> - to get instant/immediate updates on deployment (Slack)</li>
+</ul>
+<p>We can automate redeployment or rollback based on the result of our deployment.</p>
+<p>Default deployment options are:</p>
+<ul>
+<li>One at a time</li>
+<li>All at once</li>
+<li>Half at a time</li>
+</ul>
+<h3 id="appspecyml-file"><a aria-hidden="true" class="anchor-heading" href="#appspecyml-file"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>appspec.yml</code> file</h3>
+<p><code>appspec.yml</code> is the file that has all the instructions for the deployment process.</p>
+<p>It is used to manage each deployment as a series of lifecycle event hooks (much like <a href="/notes/520xdfstn930e413i3byvxs">AWS Auto Scaling Group</a>). These event hooks are defined in the file.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token comment"># appspecstub.yaml</span>
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">0.0</span>
+<span class="token key atrule">os</span><span class="token punctuation">:</span> linux
+<span class="token key atrule">files</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">source</span><span class="token punctuation">:</span> /
+    <span class="token key atrule">destination</span><span class="token punctuation">:</span> /var/www/html/WordPress
+<span class="token key atrule">hooks</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BeforeInstall</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">location</span><span class="token punctuation">:</span> scripts/install_dependencies.sh
+      <span class="token key atrule">timeout</span><span class="token punctuation">:</span> <span class="token number">300</span>
+      <span class="token key atrule">runas</span><span class="token punctuation">:</span> root
+  <span class="token key atrule">AfterInstall</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">location</span><span class="token punctuation">:</span> scripts/change_permissions.sh
+      <span class="token key atrule">timeout</span><span class="token punctuation">:</span> <span class="token number">300</span>
+      <span class="token key atrule">runas</span><span class="token punctuation">:</span> root
+  <span class="token key atrule">ApplicationStart</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">location</span><span class="token punctuation">:</span> scripts/start_server.sh
+    <span class="token punctuation">-</span> <span class="token key atrule">location</span><span class="token punctuation">:</span> scripts/create_test_db.sh
+      <span class="token key atrule">timeout</span><span class="token punctuation">:</span> <span class="token number">300</span>
+      <span class="token key atrule">runas</span><span class="token punctuation">:</span> root
+  <span class="token key atrule">ApplicationStop</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">location</span><span class="token punctuation">:</span> scripts/stop_server.sh
+      <span class="token key atrule">timeout</span><span class="token punctuation">:</span> <span class="token number">300</span>
+      <span class="token key atrule">runas</span><span class="token punctuation">:</span> root
+</code></pre>
+<h3 id="revision"><a aria-hidden="true" class="anchor-heading" href="#revision"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Revision</h3>
+<p>A revision refers to the bundle (zip, tar files) containing the current group of files you want to deploy. It could be an update, bug fixes, deployment for the first time.</p>
+<h3 id="lifecycle-event-hooks"><a aria-hidden="true" class="anchor-heading" href="#lifecycle-event-hooks"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Lifecycle Event Hooks</h3>
+<p>The hooks allow you to run custom code at various time during deployment(BeforeInstall, AfterInstall).</p>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html">Working with deployment configurations in CodeDeploy - AWS CodeDeploy</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/ajojjq9tu40v2rnmzktfyeo">AWS CodeBuild</a></li>
+<li><a href="/notes/gualur07hbgjlaw396spiji">AWS CodeCommit</a></li>
+<li><a href="/notes/3n1o179sti2wtnjkq48one1">AWS CodePipeline</a></li>
+<li><a href="/notes/rslamxyhwny92aooavg497t">Jenkins with-on AWS</a></li>
+</ul>

@@ -1,0 +1,37 @@
+<h1 id="ec2-server-status-check-using-boto3"><a aria-hidden="true" class="anchor-heading" href="#ec2-server-status-check-using-boto3"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ec2 Server Status Check using Boto3</h1>
+<ul>
+<li>Related: <a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a>, <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a></li>
+</ul>
+<hr>
+<p><strong>Premise</strong></p>
+<p>We have a lot of <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> instances created with <a href="/notes/mkwoo3ek4y6bnddpy1iteb9">Terraform</a> with Autoscaling configured. Instances get created and deleted all the time. Since, EC2 instances need some time to initialize, we want to know what is the status of our EC2 instances.</p>
+<p>Instances are grouped as "Reservations"</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> boto3
+<span class="token keyword">import</span> schedule
+
+ec2_client <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-central-1"</span><span class="token punctuation">)</span>
+ec2_resource <span class="token operator">=</span> boto3<span class="token punctuation">.</span>resource<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-central-1"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">check_instance_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    statuses <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>describe_instance_status<span class="token punctuation">(</span>
+        IncludeAllInstances<span class="token operator">=</span><span class="token boolean">True</span> <span class="token comment"># by default only returns status for instances in "running" state</span>
+    <span class="token punctuation">)</span>
+    <span class="token keyword">for</span> status <span class="token keyword">in</span> statuses<span class="token punctuation">[</span><span class="token string">'InstanceStatuses'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        ins_status <span class="token operator">=</span> status<span class="token punctuation">[</span><span class="token string">'InstanceStatus'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'Status'</span><span class="token punctuation">]</span>
+        sys_status <span class="token operator">=</span> status<span class="token punctuation">[</span><span class="token string">'SystemStatus'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'Status'</span><span class="token punctuation">]</span>
+        state <span class="token operator">=</span> status<span class="token punctuation">[</span><span class="token string">'InstanceState'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'Name'</span><span class="token punctuation">]</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Instance </span><span class="token interpolation"><span class="token punctuation">{</span>status<span class="token punctuation">[</span><span class="token string">'InstanceId'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string"> is </span><span class="token interpolation"><span class="token punctuation">{</span>state<span class="token punctuation">}</span></span><span class="token string"> with instance status </span><span class="token interpolation"><span class="token punctuation">{</span>ins_status<span class="token punctuation">}</span></span><span class="token string"> and system status </span><span class="token interpolation"><span class="token punctuation">{</span>sys_status<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"#############################\n"</span><span class="token punctuation">)</span>
+
+
+schedule<span class="token punctuation">.</span>every<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>seconds<span class="token punctuation">.</span>do<span class="token punctuation">(</span>check_instance_status<span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    schedule<span class="token punctuation">.</span>run_pending<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a></li>
+</ul>

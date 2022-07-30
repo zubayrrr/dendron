@@ -1,0 +1,150 @@
+<h1 id="aws-cloudformation"><a aria-hidden="true" class="anchor-heading" href="#aws-cloudformation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS CloudFormation</h1>
+<p>It is an <a href="/notes/ogswllwu9h5oqeiteyhrtd6">IaC</a> service that encourages collaboration and utilizes version control and automation. It can use a single template or multiple templates to create an environment and it can interact with other tools such as <a href="/notes/zbj9fmibk0nj56jkxz7jpzg">Puppet</a>. You create a stack from a template. These templates can be stored on <a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a></p>
+<p>CloudFormation creates instances and Puppet puts those instances in a specific state.</p>
+<p><strong>Updating stack examples:</strong></p>
+<ul>
+<li>Changing the AMI of our instances.</li>
+<li>Updating a <a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a> alarm.</li>
+<li>Updating <a href="/notes/520xdfstn930e413i3byvxs">AWS Auto Scaling Group</a> groups</li>
+</ul>
+<p><strong>Updating stack steps:</strong></p>
+<ul>
+<li>Update the template.</li>
+<li>Update the stack with the new template.</li>
+</ul>
+<p><strong>Stack policies:</strong></p>
+<ul>
+<li>Can be used to prevent resource updates
+<ul>
+<li>JSON Documents.</li>
+<li>Similar to IAM and Bucket policies.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Rollbacks:</strong></p>
+<p>If a stack fails and it attempts to rollback, it may get stuck on a single resource and often the troubleshooting of that is to manually delete that resource and then the stack will roll-the-wholeway-back.</p>
+<p><strong>Rollback failure:</strong></p>
+<p>Rollbacks can fail, there are dependencies in a stack and there is a certain order in which the resources have to be deleted.</p>
+<ul>
+<li>Nested Stacks: Dependencies between resources; a resource was modified outside of the template.</li>
+</ul>
+<p><strong>Update considerations:</strong></p>
+<ul>
+<li>How will the update affect the resource?</li>
+<li>Is the change mutable or immutable?</li>
+</ul>
+<h2 id="cloudformation-template"><a aria-hidden="true" class="anchor-heading" href="#cloudformation-template"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CloudFormation Template</h2>
+<p>A CloudFormation template is a declaration of AWS resources that make up a stack. Resources are declared in a template.</p>
+<ul>
+<li>Resource map to a stack.</li>
+<li>Declare an object as name-value pair or a pairing of a name with a set of objects enclosed.</li>
+<li>The resources object is the only required object in a template.</li>
+</ul>
+<p><strong>Template Skeleton</strong></p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"AWSTemplateFormatVersion"</span> <span class="token operator">:</span> <span class="token string">"version date"</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Description"</span> <span class="token operator">:</span> <span class="token string">"JSON string"</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Metadata"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    template metadata
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Parameters"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    set of parameters
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Rules"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    set of rules
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Mappings"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    set of mappings
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Conditions"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    set of conditions
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Transform"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    set of transforms
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Resources"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    set of resources
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token property">"Outputs"</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+    set of outputs
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Maintain the integrity of templates using version control and drift detection. It is vital that a template stored in another Region matches the template it would be replacing. CloudFormation templates are a valuable disaster recovery tool. Storing templates in a second Region is a common disaster recovery practice.</p>
+<h2 id="cloudformation-intrinsic-functions"><a aria-hidden="true" class="anchor-heading" href="#cloudformation-intrinsic-functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CloudFormation Intrinsic Functions</h2>
+<p>They're built in CloudFormation functions which allow you to dynamically assign values to properties at run time.
+Eg: A function to retrieve public IP Address of an EC2 instance <strong>at runtime</strong> in the same stack. It allows us to reuse our templates.</p>
+<h3 id="key-intrinsic-functions"><a aria-hidden="true" class="anchor-heading" href="#key-intrinsic-functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Key Intrinsic functions</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-base64.html">Fn::Base64</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-cidr.html">Fn::Cidr</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-conditions.html">Condition functions</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-findinmap.html">Fn::FindInMap</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-getatt.html">Fn::GetAtt</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-getavailabilityzones.html">Fn::GetAZs</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-importvalue.html">Fn::ImportValue</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-join.html">Fn::Join</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-select.html">Fn::Select</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-split.html">Fn::Split</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-sub.html">Fn::Sub</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-transform.html">Fn::Transform</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html./intrinsic-function-reference-ref.html">Ref</a></li>
+</ul>
+<p><strong>They can only be used in specific parts of our template:</strong></p>
+<ul>
+<li>Resource properties</li>
+<li>Outputs</li>
+<li>Metadata attributes</li>
+<li>Update policy attributes</li>
+</ul>
+<p>It can also be used to conditionally create stacks.</p>
+<h2 id="cloudformation-wait-conditions-and-creation-policies"><a aria-hidden="true" class="anchor-heading" href="#cloudformation-wait-conditions-and-creation-policies"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CloudFormation Wait Conditions and Creation Policies</h2>
+<p>They pause the execution of a stack creation and wait for a number of success signals(for a specified time period) before continuing stack creation. If it timesout, the stack creation will fail.</p>
+<ul>
+<li>Timing mechanism, ensuring stack resource creation  with configuration actions that  are external to the stack creation.</li>
+<li>Wait on the provisioning of resources.</li>
+<li>Wait for an RDS database to be configured.</li>
+<li>Wait for NAT instance to be configured before private instances attempt to access the internet.</li>
+<li>Hybrid environment - AWS resources with On-prem resources.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655820410/wiki/vburerhncybkmthmejtr.png"></p>
+<p><strong>Wait condition properties:</strong></p>
+<ul>
+<li>Count: Number of signals that CloudFormation must receive before it continues the stack creation process.</li>
+<li>Handle: A reference to the wait condition handle used to signal this wait condition.</li>
+<li>Timeout: A length of time (in seconds) to wait for the number of signals that the count property specifies.</li>
+</ul>
+<p><strong>Creation policy:</strong></p>
+<p>Pauses the creation of a resource until a requisite number of success signals are received. </p>
+<p>A Wait Condition  is itself a CloudFormation resource. </p>
+<p>Creation Policy is an attribute associated with the resources. An EC2 instance could have an attribute of Creation Policy.</p>
+<p>For EC2 and Auto Scaling, it is recommended to use a Creation Policy.</p>
+<p><strong>CloudFormation helper scripts:</strong></p>
+<p>They’re a set of <a href="/notes/wa4wthnhw54hd5wfyocyvqa">Python</a> scripts to install software and start services on EC2 instances. They’re called directly from CloudFormation template. They also work with resource metadata defined in the template.</p>
+<p>Eg: Like sending signals back to the stack, update instances etc.</p>
+<p><code>cfn-init</code>  </p>
+<p>Retrieves and interprets the resource metadata to install packages, create files and start services. (Eg: Running LAMPStack)</p>
+<p><code>cfn-signal</code></p>
+<p>A simple wraper to signal an AWS CloudFormation Wait Condition for synchronizing other resources in the stack when the application is ready. It is also used the same way with Creation Policy</p>
+<p><code>cfn-hup</code></p>
+<p>A daemon that checks for updates to metadata and executes custom hooks when changes are detected.</p>
+<p><code>cfn-get-metadata</code></p>
+<p>A wrapper script that retrieves either all metadata that is defined for a resource or path to a specific key or a subtree of the resource metadata.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/002tn8rmi02kqtdd6xzllg2">AWS CloudTrail</a></li>
+<li><a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a></li>
+<li><a href="/notes/9nmlp83ktbytu4zbkdl7o0d">AWS Elastic Beanstalk</a></li>
+<li><a href="/notes/etxu35hmga4ee3p1w1kxj9o">AWS Lambda</a></li>
+</ul>

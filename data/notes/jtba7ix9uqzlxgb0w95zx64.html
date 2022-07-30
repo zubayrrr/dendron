@@ -1,0 +1,18 @@
+<h1 id="lspci"><a aria-hidden="true" class="anchor-heading" href="#lspci"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>lspci</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+<li>Related: <a href="/notes/5euazqrat5ldhoospe3xh87">lsusb</a></li>
+</ul>
+<hr>
+<p><strong>lspci</strong> command is a utility on linux systems used to find out information about the PCI busses and devices connected to the PCI subsystem. You can understand the meaning of the command by considering the word <strong>lspci</strong> in two parts.  The first part ls, is the standard utility used on linux for listing information about the files in the filesystem.  Pci is the second part of the command, so you can see naturally the command <strong>lspci</strong> will list information about PCI subsystem the same way that <strong>ls</strong> will list information about the file system.</p>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<pre><code>lspci -vmm
+</code></pre>
+<pre><code>lspci | grep -i wireless
+lspci | grep -i vga
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

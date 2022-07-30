@@ -1,0 +1,663 @@
+<h1 id="jenkins"><a aria-hidden="true" class="anchor-heading" href="#jenkins"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Jenkins</h1>
+<p>Jenkins is a continuous integration tool that allows continuous development, test and deployment of newly created code. Its a <a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a> tool.</p>
+<ul>
+<li>
+<p><strong>Easy Installation</strong> - Jenkins is a self contained java based program ready to run with packages for Windows, macOS and Linux operating systems.</p>
+</li>
+<li>
+<p><strong>Easy Configuration</strong> - Easy setup and configured via a web interface which includes error checks and built in help.</p>
+</li>
+<li>
+<p><strong>Plugins</strong> - Lots of plugins available in the Update Centre and integrates with many tools in the <a href="/notes/eoy9t426lmr0wo5rpxm8g69">CI / CD</a> toolchain.</p>
+</li>
+<li>
+<p><strong>Extensible</strong> - In addition to the plugins, Jenkins can be extended by that plugin architecture which provides nearly infinite options for what it can be used for.</p>
+</li>
+<li>
+<p><strong>Distributed</strong> - Jenkins easily distributes work across multiple machines, helping to speed up builds, tests and deployments across multiple platforms.</p>
+</li>
+</ul>
+<p>Jenkins is sort of acting as a middleman between many other tools. Such as <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a>, build tools, repositories(<a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a>), deployment servers etc. Hence its needed to be integrated with all these tools, which is where it’s plugins come into the picture. For example:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654710271/wiki/slqynckdvxzbvnqpgz0c.png"></p>
+<p>Jenkins can be used to run tests, build artifacts, publish artifacts, deploy artifacts, send notifications etc.</p>
+<h2 id="how-do-you-make-jenkins-work"><a aria-hidden="true" class="anchor-heading" href="#how-do-you-make-jenkins-work"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How do you make Jenkins work?</h2>
+<p>Jenkins User needs to have all the relevant permissions and tools available to it for it to be able to do it’s job.</p>
+<ul>
+<li>Run tests
+<ul>
+<li>Make build tools available to execute test commands. Tools like <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.npm (Private)</a>, <a href="/notes/482tfc3v73o3d4p8yi3b4z7">Maven</a>, <a href="/notes/saz485w50o682scob9knhp1">Gradle</a></li>
+</ul>
+</li>
+<li>Configure test environment
+<ul>
+<li>Such as a test database</li>
+</ul>
+</li>
+<li>To build application
+<ul>
+<li>Build tools or <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>
+</li>
+<li>To publish docker image
+<ul>
+<li>You need to store credentials in Jenkins so it can access docker repository</li>
+</ul>
+</li>
+</ul>
+<h2 id="installing-jenkins"><a aria-hidden="true" class="anchor-heading" href="#installing-jenkins"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Installing Jenkins</h2>
+<h3 id="1-install-jenkins-directly-on-the-os"><a aria-hidden="true" class="anchor-heading" href="#1-install-jenkins-directly-on-the-os"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>1. Install Jenkins directly on the OS</h3>
+<ul>
+<li>Download package and install it</li>
+<li>Create a new user for Jenkins on the server</li>
+</ul>
+<h3 id="2-run-jenkins-as-docker-container"><a aria-hidden="true" class="anchor-heading" href="#2-run-jenkins-as-docker-container"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>2. Run Jenkins as Docker Container</h3>
+<ul>
+<li><code>docker run -p 8080:8080 -p 50000:50000 -d \ -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts</code></li>
+</ul>
+<h2 id="initialize-jenkins"><a aria-hidden="true" class="anchor-heading" href="#initialize-jenkins"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Initialize Jenkins</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654758628/wiki/i7bxryvhzmeh9wcuhoz8.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654758825/wiki/kgoeo4x9vbx2bao7wjso.png"></p>
+<h3 id="jenkins-roles"><a aria-hidden="true" class="anchor-heading" href="#jenkins-roles"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Jenkins Roles</h3>
+<ol>
+<li>
+<p>Jenkins Administrator</p>
+<ul>
+<li>Operations or DevOps team</li>
+<li>Administers and manages Jenkins</li>
+<li>Sets up Jenkins cluster</li>
+<li>Installs plugins</li>
+<li>Backs up Jenkins data</li>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654759517/wiki/lskadoodou7btzzjecwj.png"></li>
+</ul>
+</li>
+<li>
+<p>Jenkins User</p>
+<ul>
+<li>Developer or DevOps team</li>
+<li>Creating the actual jobs for run workflows</li>
+</ul>
+</li>
+</ol>
+<h2 id="installing-build-tools"><a aria-hidden="true" class="anchor-heading" href="#installing-build-tools"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Installing build tools</h2>
+<p>Depending on what application(programming language used) you’re building, you need to have different tools installed and configured on Jenkins.</p>
+<ol>
+<li>
+<p>Install required plugin on Jenkins</p>
+<ul>
+<li>This approach can be limited to the input fields provided</li>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762016/wiki/yoxzochqrzziu0oxoisw.png"></li>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762087/wiki/war7fpncaxvvo0mooc8k.png"></li>
+<li>If a plugin is not available on “Global Tool Configuration” page it can be installed from “Manage Plugins” page</li>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762206/wiki/mjbfwr6itejojmx7hbs6.png"></li>
+</ul>
+</li>
+<li>
+<p>Install those tools directly on the server(where Jenkins is running)</p>
+<ul>
+<li>This approach is more flexible (scripting is easier)</li>
+<li>If your Jenkins is running as a <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a> container</li>
+<li><code>docker exec -u 0 -it container-id bash</code></li>
+<li>Install the tool inside the container based on the distro you’re using(<code>cat /etc/issue</code>)</li>
+</ul>
+</li>
+</ol>
+<h2 id="create-a-freestyle-job"><a aria-hidden="true" class="anchor-heading" href="#create-a-freestyle-job"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create a freestyle job</h2>
+<p>Note: Freestyle jobs can be limiting because it can result in chaining freestyle jobs. The configuration is based on UI not scripting. It is not suitable for complex workflows. Plugins are limiting because of input field provided.
+Using freestyle jobs for multiple tasks can create chaining of freestyle jobs and its bad. They're for one singular step. You'll need multiple plugins managing them can be tedious.</p>
+<p>Select your type of job from “New Item” page
+Note: In prod, you’ll usually be dealing with a “Pipeline” job type</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762490/wiki/okcheuvfts7fmczc1lzf.png"></p>
+<p>Configure your freestyle job</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762596/wiki/y8a6hducx3kizheoeqov.png"></p>
+<p>On “Build” tab, write your shell commands to be executed.
+Note: You cannot use commands of plugins you’ve installed, only the programs you’ve installed directly on the server where Jenkins is running.
+<strong>You can however “Invoke” the said plugin as a “Build step”</strong></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762838/wiki/t541ooixskhpr6xr6pbg.png"></p>
+<p>On Jenkins main view, you’ll find your list of jobs.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762908/wiki/tevepvm7fv4ewkdfhxfj.png"></p>
+<p>You can also preview a build.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654762944/wiki/cpktacrn5nmocouewzza.png"></p>
+<h2 id="configuring-a-git-repository"><a aria-hidden="true" class="anchor-heading" href="#configuring-a-git-repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Configuring a <a href="/notes/qkp5jc6pta8a9f35evsbvod">Git</a> repository</h2>
+<p>Under “Source Code Management” tab</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654763672/wiki/wpg46yorlqlkp1isdzyc.png"></p>
+<p>Use “Jenkins Credentials Provider“ to add credentials</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654763750/wiki/nsidkaihilnbheepedbp.png"></p>
+<p>Whenever you run a job, Jenkins will checkout the code locally for latest commits and then it’ll run the job(test, build) against it.</p>
+<h2 id="docker-in-jenkins"><a aria-hidden="true" class="anchor-heading" href="#docker-in-jenkins"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker in Jenkins</h2>
+<p>Making Docker available inside Jenkins</p>
+<p>Attaching a volume to Jenkins from the host. Currently our Jenkins is running on a server(where Docker commands are available), we can mount Docker runtime directory from the host into the container as a volume.</p>
+<p>Stop and start Jenkins docker container with additional volumes.</p>
+<ul>
+<li><code>docker stop container-id</code></li>
+<li>Move the old Jenkins config to the new container using the existing volume (<code>jenkins_home</code>)</li>
+</ul>
+<pre><code>docker run -p 8080:8080 -p 50000:50000 -d \
+-v jenkins_home:/var/jenkins_home \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v $(which docker):/usr/bin/docker jenkins/jenkins:lts
+</code></pre>
+<ul>
+<li><code>docker exec -it container-id bash</code></li>
+<li>Run <code>docker</code> to check if it’s available</li>
+<li>However, you’ll not be allowed to pull any images, because the Jenkins service user doesn’t have permissions for the docker file(which was mounted from host)
+<ul>
+<li><code>ls -l /var/run/docker.sock</code></li>
+<li>Add permissions for the Jenkins user by logging in as root user on the container</li>
+<li><code>docker exec -u 0 -it container-id bash</code></li>
+<li><code>chmod 666 /var/run/docker.sock</code></li>
+<li>Once done, you’ll be able to use docker commands inside the the Jenkins container while as the Jenkins service user.</li>
+</ul>
+</li>
+</ul>
+<p>As part of our freestyle job, you can add shell commands to make an image out of the generated <code>.jar</code> and you can also push it to a docker repository(DockerHub).</p>
+<p>For pushing the image to the DockerHub repository, you will need to add credentials to Jenkins.</p>
+<p>And to use the credentials(insecure):</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654765785/wiki/wcul2oihla4vtmu0mido.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654765883/wiki/zwd5847ew0gf4mhffq5v.png"></p>
+<p>Tag the image using the repository name.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654765934/wiki/oklywlv24wee6ytbcbvv.png"></p>
+<p>If you were using a private repository other than DockerHub, you’d have to specify repository host name as an additional parameter for the <code>docker login</code> command</p>
+<p>A more secure way of passing the password is using standard input</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654766232/wiki/ktmvbbujpr4c8hj0h9on.png"></p>
+<h2 id="push-docker-image-to-nexus-repository"><a aria-hidden="true" class="anchor-heading" href="#push-docker-image-to-nexus-repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Push Docker image to <a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a> repository</h2>
+<ul>
+<li>Before you can do this, you’ll need to register the Nexus repository’s IP and port explicitly by running <code>vim /etc/docker/daemon.conf</code> on the Nexus host.</li>
+</ul>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"insecure-registries"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"nexus-docker-repo-ip-address:port"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>Restart docker `systemctl restart docker</li>
+<li>Start Jenkins container</li>
+<li>Add the permissions for the Jenkins user to use docker commands(scroll up to “Docker in Jenkins”)</li>
+<li>Create credentials for Nexus Docker repository</li>
+<li>Putting it all together will look something like</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654768504/wiki/yxpknd7sgvmkbysemwjj.png"></p>
+<p>Notice the Nexus <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> and port substituted for repository location/name and for <code>docker login</code> the host is mentioned.</p>
+<h2 id="pipeline-jobs"><a aria-hidden="true" class="anchor-heading" href="#pipeline-jobs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pipeline jobs</h2>
+<ul>
+<li>Pipeline jobs are more suited for <a href="/notes/eoy9t426lmr0wo5rpxm8g69">CI/CD</a>, you can do scripting - pipeline as code.</li>
+<li>To write a new script, go to the “Pipeline” tab after selecting “New item” → “Pipeline job”</li>
+<li>
+<ul>
+<li>A pipeline job is recommended when you want to execute 2 tasks in parallel, or when you need user input if you want to programmatically use conditional statements in your pipeline script or even setting variables.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654774358/wiki/jvj6p0ekwiv96sauhtte.png"></p>
+<ul>
+<li>Scripting is done in <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.groovy (Private)</a></li>
+<li>Groovy sandbox means you can execute a limited no. of Groovy functions, for which you don’t need approval from a Jenkins admin.</li>
+<li>Inline pipleline scripts are fine for small pipelines but best practice is having the pipeline script in a git repository.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654775265/wiki/fg0pusq07odw4l2etqbw.png"></p>
+<ul>
+<li>The script should be written inside “Jenkinsfile” as the standard.</li>
+</ul>
+<h2 id="pipeline-syntax"><a aria-hidden="true" class="anchor-heading" href="#pipeline-syntax"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pipeline Syntax</h2>
+<ul>
+<li>Scripted
+<ul>
+<li>First syntax, allows usage of Groovy.</li>
+<li>Advanced scripting capabilities, high flexibility.</li>
+<li>Difficult to start.</li>
+</ul>
+</li>
+<li>Declarative
+<ul>
+<li>Was added recently, make it easier to get started</li>
+<li>Predefined structure</li>
+</ul>
+</li>
+<li>Required fields (for declarative )
+<ul>
+<li>“pipeline” must be top level</li>
+<li>“agent” where to execute(relevant for Jenkins cluster)</li>
+<li>“stages” where the “work” happens</li>
+<li>You can have multiple stages within which you will have “steps” which is where the actual commands go.</li>
+</ul>
+</li>
+<li>Required field (for scripted)
+<ul>
+<li>You simply need “node”</li>
+</ul>
+</li>
+</ul>
+<p>An example script after running will look something like</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654776281/wiki/nawyrptgirflydj5n0ij.png"></p>
+<h2 id="jenkinsfile-syntax"><a aria-hidden="true" class="anchor-heading" href="#jenkinsfile-syntax"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Jenkinsfile Syntax</h2>
+<p><code>#!/usr/bin/env groovy</code> is at the top of the file to let your editor know that you're working with a Groovy script.
+Whenever there is a variable inside a string, it has to use double quotes <code>""</code>.</p>
+<h3 id="post-attribute"><a aria-hidden="true" class="anchor-heading" href="#post-attribute"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>post</code> attribute</h3>
+<p>Executes some logic after all the stages have been executed. It can have conditions with keywords like, <code>always</code> that will run regardless of the outcome of the stages. <code>success</code> will only run if all the stages have succeeded. <code>failure</code> will only run if any of the stages have failed. It basically defines build status or build state changes.</p>
+<pre class="language-groovy"><code class="language-groovy">post <span class="token punctuation">{</span>
+  always <span class="token punctuation">{</span>
+    echo <span class="token string gstring">"This will always run"</span>
+  <span class="token punctuation">}</span>
+  success <span class="token punctuation">{</span>
+    echo <span class="token string gstring">"This will only run if all the stages have succeeded"</span>
+  <span class="token punctuation">}</span>
+  failure <span class="token punctuation">{</span>
+    echo <span class="token string gstring">"This will only run if any of the stages have failed"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In Jenkinsfile, you can define conditionals for each stage.</p>
+<pre class="language-groovy"><code class="language-groovy">pipeline <span class="token punctuation">{</span>
+  agent any
+  stages <span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Stage 1'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      when <span class="token punctuation">{</span>
+        expression <span class="token punctuation">{</span>
+          BRANCH_NAME <span class="token operator">==</span> <span class="token string gstring">"dev"</span> <span class="token operator">||</span> BRANCH_NAME <span class="token operator">==</span> <span class="token string gstring">"master"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      steps <span class="token punctuation">{</span>
+        echo <span class="token string gstring">"Will only run if branch is dev or master"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Stage 2'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      steps <span class="token punctuation">{</span>
+        echo <span class="token string gstring">"Stage 2"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="environmental-variables"><a aria-hidden="true" class="anchor-heading" href="#environmental-variables"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Environmental variables</h3>
+<p>You can use environmental variables in your Jenkinsfile which Jenkins has provided out of the box such as <code>BRANCH_NAME</code>. To find the list of available environmental variables, you can see <code>/env-vars.html</code>.</p>
+<p>You can define your own environmental variables in Jenkinsfile. They will be available for all the stages.</p>
+<pre class="language-groovy"><code class="language-groovy">pipeline <span class="token punctuation">{</span>
+  agent any
+  environment <span class="token punctuation">{</span>
+    NEW_VERSION <span class="token operator">=</span> <span class="token string gstring">"1.0.0"</span>
+  <span class="token punctuation">}</span>
+
+  stages <span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Build'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      steps <span class="token punctuation">{</span>
+        echo <span class="token string gstring">"Building new version: <span class="token expression"><span class="token punctuation">$</span><span class="token punctuation">{</span>NEW_VERSION<span class="token punctuation">}</span></span>"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Using credentials in Jenkinsfile. You will first have to define them in Jenkins GUI and then bind them to the env variable. For which you'll need "Credentials Binding" plugin.</p>
+<pre class="language-groovy"><code class="language-groovy">pipeline <span class="token punctuation">{</span>
+  agent any
+  environment <span class="token punctuation">{</span>
+    SERVER_CREDENTIALS <span class="token operator">=</span> <span class="token function">credentials</span><span class="token punctuation">(</span><span class="token string">'server-credentials'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  stages <span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Deploy'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      steps <span class="token punctuation">{</span>
+        sh <span class="token string gstring">"<span class="token expression"><span class="token punctuation">$</span><span class="token punctuation">{</span>SERVER_CREDENTIALS<span class="token punctuation">}</span></span>"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  stages <span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Deploy'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      steps <span class="token punctuation">{</span>
+        echo <span class="token string gstring">"deploying the application"</span>
+        <span class="token function">withCredentials</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token function">usernamePassword</span><span class="token punctuation">(</span>credentials<span class="token punctuation">:</span> <span class="token string">'server-credentials'</span><span class="token punctuation">,</span> usernameVariable<span class="token punctuation">:</span> USER<span class="token punctuation">,</span> passwordVariable<span class="token punctuation">:</span> PWD<span class="token punctuation">)</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          sh <span class="token string gstring">"echo <span class="token expression"><span class="token punctuation">$</span><span class="token punctuation">{</span>USER<span class="token punctuation">}</span></span> <span class="token expression"><span class="token punctuation">$</span><span class="token punctuation">{</span>PWD<span class="token punctuation">}</span></span>"</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>If you need the credentials only for one stage you can use a wrapper and define it inside the stage.</p>
+<h3 id="tools-attribute"><a aria-hidden="true" class="anchor-heading" href="#tools-attribute"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>tools</code> attribute</h3>
+<p>Basically provides you build tools for your pipeline to build you project. It has to be preconfigured in Jenkins.</p>
+<pre class="language-groovy"><code class="language-groovy">pipeline <span class="token punctuation">{</span>
+  agent any
+  tools <span class="token punctuation">{</span>
+    maven <span class="token string">'Maven'</span>
+  <span class="token punctuation">}</span>
+
+  stages <span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Build'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      steps <span class="token punctuation">{</span>
+        echo <span class="token string gstring">"Building..."</span>
+        sh <span class="token string">'mvn install'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="parameters-attribute"><a aria-hidden="true" class="anchor-heading" href="#parameters-attribute"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>parameters</code> attribute</h3>
+<p>To parameterize your build.</p>
+<p>Type of parameters:</p>
+<ul>
+<li>string (name, defaultvalue, description)</li>
+<li>choice (name, choice, description)</li>
+<li>booleanParam (name, defaultvalue, description)</li>
+</ul>
+<pre class="language-groovy"><code class="language-groovy">pipeline <span class="token punctuation">{</span>
+  agent any
+  parameters <span class="token punctuation">{</span>
+   <span class="token comment">// string(name: 'VERSION', defaultValue: '', description: 'Version to be deployed on production')</span>
+    <span class="token function">choices</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">'VERSION'</span><span class="token punctuation">,</span> choice<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'1.1.0'</span><span class="token punctuation">,</span> <span class="token string">'1.2.0'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> description<span class="token punctuation">:</span> <span class="token string">'Version to be deployed on production'</span><span class="token punctuation">)</span>
+    <span class="token function">booleanParam</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">'executeTests'</span><span class="token punctuation">,</span> defaultValue<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> description<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  stages <span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      when <span class="token punctuation">{</span>
+        expression<span class="token punctuation">{</span>
+          params<span class="token punctuation">.</span>executeTests
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      steps <span class="token punctuation">{</span>
+        echo <span class="token string gstring">"testing..."</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Deploy'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      steps <span class="token punctuation">{</span>
+          echo <span class="token string gstring">"Deploying application...."</span>
+          echo <span class="token string gstring">"Version number: <span class="token expression"><span class="token punctuation">$</span><span class="token punctuation">{</span>params<span class="token punctuation">.</span>VERSION<span class="token punctuation">}</span></span>"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Next time you run the job, it'll pull the latest changes from the Jenkinsfile and you'll be able to "Build with Parameters".</p>
+<p>You can use external scripts inside your groovy script. You can also write groovy code inside <code>script</code> attribute in your <code>steps</code>.</p>
+<pre class="language-groovy"><code class="language-groovy"><span class="token comment">// groovy script</span>
+<span class="token keyword">def</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  echo <span class="token string gstring">"building application"</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  echo <span class="token string gstring">"testing application"</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">deploy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  echo <span class="token string gstring">"deploying application"</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">return</span> <span class="token keyword">this</span>
+</code></pre>
+<pre class="language-groovy"><code class="language-groovy"><span class="token keyword">def</span> gv
+<span class="token comment">// making gv global</span>
+pipeline <span class="token punctuation">{</span>
+  agent any
+  stages <span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'init'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      steps <span class="token punctuation">{</span>
+        script <span class="token punctuation">{</span>
+          gv <span class="token operator">=</span> load <span class="token string gstring">"external-script.groovy"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  stage <span class="token punctuation">(</span><span class="token string">'build'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    steps <span class="token punctuation">{</span>
+      script <span class="token punctuation">{</span>
+        gv<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  stage <span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    steps <span class="token punctuation">{</span>
+      script <span class="token punctuation">{</span>
+        gv<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  stage <span class="token punctuation">(</span><span class="token string">'deploy'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    steps <span class="token punctuation">{</span>
+      script <span class="token punctuation">{</span>
+        gv<span class="token punctuation">.</span><span class="token function">deploy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>All environment variables from Jenkinsfile are available in the groovy script.</p>
+<h3 id="input-parameters-in-jenkinsfile"><a aria-hidden="true" class="anchor-heading" href="#input-parameters-in-jenkinsfile"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Input Parameters in Jenkinsfile</h3>
+<p>User can input values for the parameters while running the job.</p>
+<pre class="language-groovy"><code class="language-groovy">pipeline <span class="token punctuation">{</span>
+  agent any
+  stages<span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'Deploy'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      input <span class="token punctuation">{</span>
+        message<span class="token punctuation">:</span> <span class="token string gstring">"Select the environment to deploy to"</span>
+        ok <span class="token string gstring">"Done"</span>
+        parameters <span class="token punctuation">{</span>
+            <span class="token function">choices</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">'ENV'</span><span class="token punctuation">,</span> choice<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dev'</span><span class="token punctuation">,</span> <span class="token string">'staging'</span><span class="token punctuation">,</span> <span class="token string">'production'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> description<span class="token punctuation">:</span> <span class="token string">'Version to be deployed on production'</span><span class="token punctuation">)</span>
+            <span class="token comment">// this is a scoped parameter, it is not global</span>
+            <span class="token comment">// you can also use script block but the syntax for input differs</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      steps <span class="token punctuation">{</span>
+        echo <span class="token string gstring">"Deploying application...."</span>
+        echo <span class="token string gstring">"Deploying to <span class="token expression"><span class="token punctuation">$</span><span class="token punctuation">{</span>ENV<span class="token punctuation">}</span></span>"</span>
+        script <span class="token punctuation">{</span>
+          env<span class="token punctuation">.</span>ENV <span class="token operator">=</span> input message<span class="token punctuation">:</span> <span class="token string gstring">"Select environment to deploy to"</span><span class="token punctuation">,</span> ok<span class="token punctuation">:</span> <span class="token string gstring">"Done"</span><span class="token punctuation">,</span> parameters<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token function">choices</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">'ENV'</span><span class="token punctuation">,</span> choice<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'dev'</span><span class="token punctuation">,</span> <span class="token string">'staging'</span><span class="token punctuation">,</span> <span class="token string">'production'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> description<span class="token punctuation">:</span> <span class="token string">'Version to be deployed on production'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="multibranch-pipeline"><a aria-hidden="true" class="anchor-heading" href="#multibranch-pipeline"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Multibranch Pipeline</h3>
+<p>Single branch pipeline would look something like:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654854298/wiki/nsj9vutzvbdblniztxus.png"></p>
+<p>Typically, you’ll run tests on all the branches but you’d execute deployment only on Master branch. Other branches are merged into the Master branch and then the build, deploy jobs are triggered.</p>
+<p>Why do you need pipelines for all the branches? So that we can run tests to see everything is working properly on non-Master branches before merge.
+We also need different behaviour based on branch. For example: “If branch is master, run test, build and deploy” and “if branch isn’t master, run test and build skip deploy” etc.</p>
+<p>Pipelines need to be created dynamically in a Multibranch Pipeline.</p>
+<p>Select “Multibranch Pipeline” from the “New Item” page</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654854883/wiki/qbxeuoaytkq6wprkwais.png"></p>
+<p>Here, we can use regular expression to filter what branches to include. In this jobs, we’re choosing all the branches on the given repository. The rest of the build configuration will be made in the Jenkinsfile.</p>
+<h2 id="jenkins-credentials"><a aria-hidden="true" class="anchor-heading" href="#jenkins-credentials"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Jenkins credentials</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654858019/wiki/s6tnlznggh5akynpvajl.png"></p>
+<p>The credentials feature is thanks to a plugin. There are different credentials plugins that add more options(kinds of credentials).</p>
+<p>There are three scopes for credentials, System and Global credentials can be added on “Manage Credentials” view and Project specific credentials can be added from inside the job. System wide credentials will not be accessible inside the project.</p>
+<h2 id="jenkins-shared-library"><a aria-hidden="true" class="anchor-heading" href="#jenkins-shared-library"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Jenkins Shared Library</h2>
+<p>Lets say we're working with a lot of micro services that contribute to one whole application. In Jenkins we'd use multi branch pipelines for each of that microservice. We'd build each of the microservice as a separate application; meaning you'd have multiple projects with multiple Jenkinsfiles for building those pipelines. Most of the logic in the Jenkinsfile would be same for all the applications in this case. Building <code>.jar</code>, building Docker images, pushing to Nexus repository...all these steps will be same for all the applications. To keep this aligned with DRY and to make this process efficient we use <strong>Jenkins Shared Library</strong>.</p>
+<ul>
+<li>
+<p>It is an extension to Pipelines.</p>
+</li>
+<li>
+<p>It is it's own repository written in Groovy(just like Jenkinsfile).</p>
+</li>
+<li>
+<p>We can write all the logic that is going to be shared across many different applications in a Shared Library and reference that logic in the Jenkinsfile in each project. (Basically, function calls in the Jenkinsfile).</p>
+</li>
+<li>
+<p>It can also be used with different projects(with different teams).</p>
+</li>
+<li>
+<p>If not all the steps are same in the Jenkinsfile across those different projects, whatever logic is common among those projects can be referenced from Shared Library instead of repeating the logic across multiple Jenkinsfile. E.g.</p>
+<ul>
+<li>Company wide Nexus repository.</li>
+<li>Company wide slack channel.</li>
+</ul>
+</li>
+</ul>
+<h3 id="create-a-shared-library"><a aria-hidden="true" class="anchor-heading" href="#create-a-shared-library"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create a Shared Library</h3>
+<ol>
+<li>Init a git repository.</li>
+<li>Create a Groovy project in Maven and write the functions.</li>
+<li>Make the Shared Library available throughout Jenkins/or specific pipeline.</li>
+<li>Use the Shared Library in Jenkinsfile to extend the Pipeline.</li>
+</ol>
+<h3 id="structure-of-shared-library"><a aria-hidden="true" class="anchor-heading" href="#structure-of-shared-library"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Structure of Shared Library</h3>
+<ul>
+<li>Create a Groovy project in Maven.</li>
+<li>Main folder <code>vars</code> contains all the functions that we're going to call from a Jenkinsfile.</li>
+<li>Each function/execution step will be in its own Groovy script(inside <code>vars</code>).</li>
+<li><code>src</code> folder contains helper logic(utility code etc).</li>
+<li><code>resources</code> folder is where you'll keep your non-Groovy code(SQL scripts, external libraries, Powershell scripts, JSON files etc).</li>
+</ul>
+<pre class="language-groovy"><code class="language-groovy"><span class="token shebang comment">#!/usr/bin/env groovy</span>
+
+<span class="token comment">// vars/buildJar.groovy; functions(execution steps) are referenced by their filename</span>
+
+<span class="token keyword">def</span> <span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// here is where the logic goes</span>
+  echo <span class="token string gstring">"Building the application"</span>
+  sh <span class="token string gstring">"mvn package"</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<ul>
+<li>Commit and push the code the git repository.</li>
+<li>Make shared library available globally.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1658158197/wiki/h0ffz078kfggwfsddytc.png"></p>
+<p>Default version can either be a branch name, a commit hash or a tag. Having a fixed version is a good idea(to avoid breaking changes stopping a pipeline).</p>
+<ul>
+<li>To use Shared Library in your Jenkinsfile:
+<ul>
+<li>You'll need to import the Library in your Jenkinsfile.</li>
+<li><code>@Library("jenkins-shared-library")_</code> you'll need to add an underscore at the end of the <code>@Library</code> call if you don't have any variable/function definitions/calls and have <code>pipeline{}</code> directly after.</li>
+</ul>
+</li>
+</ul>
+<pre class="language-groovy"><code class="language-groovy"><span class="token shebang comment">#!/usr/bin/env groovy</span>
+<span class="token annotation punctuation">@Library</span><span class="token punctuation">(</span><span class="token string gstring">"jenkins-shared-library"</span><span class="token punctuation">)</span> <span class="token comment">// defined in Global Pipeline Libraries</span>
+
+<span class="token keyword">def</span> gv
+
+pipeline<span class="token punctuation">{</span>
+  agent any
+  tools<span class="token punctuation">{</span>
+    maven <span class="token string">'Maven'</span>
+  <span class="token punctuation">}</span>
+  stages<span class="token punctuation">{</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string gstring">"init"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">...</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string gstring">"build jar"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      steps<span class="token punctuation">{</span>
+        script<span class="token punctuation">{</span>
+          <span class="token function">buildJar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token string gstring">"build images"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      steps<span class="token punctuation">{</span>
+        script<span class="token punctuation">{</span>
+          <span class="token function">buildImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>Commit/push the changes to remote repo of the Jenkinsfile.</li>
+</ul>
+<h3 id="passing-parameters-to-methods"><a aria-hidden="true" class="anchor-heading" href="#passing-parameters-to-methods"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Passing Parameters to Methods</h3>
+<pre class="language-groovy"><code class="language-groovy"><span class="token shebang comment">#!/usr/bin/env groovy</span>
+
+<span class="token keyword">def</span> <span class="token function">call</span><span class="token punctuation">(</span>String imageName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  sh <span class="token string gstring">"docker build -t <span class="token expression"><span class="token punctuation">$</span>imageName</span> ."</span>
+  sh <span class="token string gstring">"docker push <span class="token expression"><span class="token punctuation">$</span>imageName</span>"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>We can access global variables. We've all the environmental variables available in the Jenkinsfile also available in the Shared Library.</p>
+<p><strong>To extract logic into Groovy classes</strong>:</p>
+<p>We can add a function's logic to a standalone file inside the <code>src</code> folder inside a class in a <code>package</code>.</p>
+<p>However, unlike the Shared Library, we do NOT have access to the global/environmental variables when we use separate classes. To make pipeline syntax available we use <code>script</code> keyword as parameter to the class's function.</p>
+<pre class="language-groovy"><code class="language-groovy"><span class="token comment">// Docker.groovy</span>
+<span class="token shebang comment">#!/usr/bin/env groovy</span>
+
+<span class="token keyword">package</span> com<span class="token punctuation">.</span>example
+
+<span class="token keyword">class</span> <span class="token class-name">Docker</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span><span class="token punctuation">{</span>
+  <span class="token comment">// `implements Serializable` to support saving the state of the execution if the pipeline is paused and then resumed.</span>
+  <span class="token keyword">def</span> script
+
+  <span class="token function">Docker</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>script <span class="token operator">=</span> script
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">def</span> <span class="token function">buildDockerImage</span><span class="token punctuation">(</span>String imageName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        script<span class="token punctuation">.</span>echo <span class="token string gstring">"building the docker image..."</span>
+        script<span class="token punctuation">.</span>sh <span class="token string gstring">"docker build -t <span class="token expression"><span class="token punctuation">$</span>imageName</span> ."</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">def</span> <span class="token function">dockerLogin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        script<span class="token punctuation">.</span><span class="token function">withCredentials</span><span class="token punctuation">(</span><span class="token punctuation">[</span>script<span class="token punctuation">.</span><span class="token function">usernamePassword</span><span class="token punctuation">(</span>credentialsId<span class="token punctuation">:</span> <span class="token string">'docker-hub-repo'</span><span class="token punctuation">,</span> passwordVariable<span class="token punctuation">:</span> <span class="token string">'PASS'</span><span class="token punctuation">,</span> usernameVariable<span class="token punctuation">:</span> <span class="token string">'USER'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            script<span class="token punctuation">.</span>sh <span class="token string gstring">"echo <span class="token expression"><span class="token punctuation">$</span>script<span class="token punctuation">.</span>PASS</span> | docker login -u <span class="token expression"><span class="token punctuation">$</span>script<span class="token punctuation">.</span>USER</span> --password-stdin"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">def</span> <span class="token function">dockerPush</span><span class="token punctuation">(</span>String imageName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        script<span class="token punctuation">.</span>sh <span class="token string gstring">"docker push <span class="token expression"><span class="token punctuation">$</span>imageName</span>"</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>To call this function inside the <code>vars</code>'s groovy scripts</p>
+<p><strong>Note</strong>: You can actually just call these class function directly to your Jenkinsfile instead of calling it in <code>vars</code> folder. But it is a best practice to call them in <code>vars</code> folder as an interface.</p>
+<p>These are just making calls to different function in a single class.</p>
+<pre class="language-groovy"><code class="language-groovy"><span class="token comment">// buildImage.groovy</span>
+<span class="token shebang comment">#!/usr/bin/env groovy</span>
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>Docker
+<span class="token keyword">def</span> call <span class="token punctuation">(</span>String imageName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// passing context from this function to the Docker class using `this` keyword</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Docker</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">buildDockerImage</span><span class="token punctuation">(</span>imageName<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-groovy"><code class="language-groovy"><span class="token comment">// dockerLogin.groovy</span>
+<span class="token shebang comment">#!/usr/bin/env groovy</span>
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>Docker
+
+<span class="token keyword">def</span> <span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Docker</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">dockerLogin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-groovy"><code class="language-groovy"><span class="token comment">// dockerPush.groovy</span>
+<span class="token shebang comment">#!/usr/bin/env groovy</span>
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>Docker
+
+<span class="token keyword">def</span> <span class="token function">call</span><span class="token punctuation">(</span>String imageName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Docker</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">dockerPush</span><span class="token punctuation">(</span>imageName<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>You will call these function in your <code>Jenkinsfile</code></p>
+<p>An alternative to having a Globally imported Shared Library, we can reference the library directly in the Jenkinsfile.</p>
+<p>Instead of using <code>@Library(jenkins-shared-library@master)...</code> use:</p>
+<pre><code>library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+    remote: 'https://gitlab.com/user/shared-library.git',
+    credentialsID: 'gitlab-credentials'
+    ]
+  )
+</code></pre>
+<h2 id="webhooks"><a aria-hidden="true" class="anchor-heading" href="#webhooks"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Webhooks</h2>
+<h2 id="code-source"><a aria-hidden="true" class="anchor-heading" href="#code-source"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Code source</h2>
+<ul>
+<li><a href="https://gitlab.com/nanuchi/jenkins-shared-library">nanuchi/jenkins-shared-library · GitLab</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/ajojjq9tu40v2rnmzktfyeo">AWS CodeBuild</a></li>
+<li><a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a></li>
+<li><a href="/notes/5151o31s5jmalwws5joksse">DevOps Best Practices</a></li>
+<li><a href="/notes/rslamxyhwny92aooavg497t">Jenkins with-on AWS</a></li>
+<li><a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+<li><a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a></li>
+</ul>

@@ -1,0 +1,42 @@
+<h1 id="aliases"><a aria-hidden="true" class="anchor-heading" href="#aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Aliases</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Aliases for commands</li>
+<li>Nicknames for your pipelines</li>
+<li>To get started you need a file in your user's <code>Home</code> dir named <code>.bash_aliases</code></li>
+<li>Write the command inside the <code>.bash_aliases</code> file after writing <code>alias aliasName='command1 -opt args | command2 -opt args ...'</code> or alias for command that don't accept <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> can be acheived by <code>alias aliasName='xargs command -opt args...'</code></li>
+<li>Example:</li>
+</ul>
+<p><code>alias getdates='date | tee /home/user/date.txt | cut -d " " -f 1 | tee /home/user/day.txt | xargs echo hello'</code></p>
+<ul>
+<li>You can also build piplines using multiple aliases, the first command in an alias should accept <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a></li>
+<li>Terminal will have to be rebooted after creating an alias.</li>
+</ul>
+<h2 id="list-all-aliases"><a aria-hidden="true" class="anchor-heading" href="#list-all-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>List all aliases</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">alias</span>
+</code></pre>
+<h2 id="escape-an-alias--run-the-original-command"><a aria-hidden="true" class="anchor-heading" href="#escape-an-alias--run-the-original-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Escape an alias / run the original command</h2>
+<p>Use <code>\</code> to escape an alias</p>
+<pre class="language-bash"><code class="language-bash"><span class="token punctuation">\</span>ls
+</code></pre>
+<h2 id="create-an-alias"><a aria-hidden="true" class="anchor-heading" href="#create-an-alias"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create an alias</h2>
+<p>This will create an alias for the existing session. To make aliases persist in all of your user session, create them inside in your <code>~/.zshrc</code>, <code>~/.bashrc</code>, <code>~/.bash_profile</code> (and reload the shell or run <code>source ~/.zshrc</code>).</p>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">alias</span> <span class="token assign-left variable">ls</span><span class="token operator">=</span><span class="token string">"ls -ltr"</span>
+</code></pre>
+<h2 id="remove-an-alias"><a aria-hidden="true" class="anchor-heading" href="#remove-an-alias"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Remove an alias</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">unalias</span> <span class="token function">ls</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/26fd6bw5fsykdus523f40bz">Bash</a></li>
+<li><a href="/notes/uua60b3x9in6imfnwfa5f7t">Everything about Linux Terminal</a></li>
+<li><a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a></li>
+<li><a href="/notes/hy62pxdr1mo1pamj5uggb2r">Navigating the Linux File System</a></li>
+<li><a href="/notes/90j02txl52nf8d057um848y">rm</a></li>
+<li><a href="/notes/6vzwh1eaj567nroqwy1uf5s">The Effect of Permissions on Directories</a></li>
+<li><a href="/notes/guawfkvsbkg1eo8o36sdqxh">vim</a></li>
+</ul>

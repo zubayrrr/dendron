@@ -1,0 +1,31 @@
+<h1 id="data-link-layer---osi"><a aria-hidden="true" class="anchor-heading" href="#data-link-layer---osi"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Data Link Layer - OSI</h1>
+<h1 id="layer-2--data-link-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-2--data-link-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 2 – Data-link Layer</h1>
+<p>In the Data Link Layer, we'll package up the <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a>s we received from the Layer 1 (<a href="/notes/yjeoqhn1zs6blkof49hvacr">Physical Layer - OSI</a>) and put them in <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Frames (Private)</a> and take those frames and transmit them throughout the network while performing error detection/correction, uniquely identifying network devices with an address (<a href="/notes/96d9arn92ova0u1tdgns8ts">MAC</a>), and a providing flow control.</p>
+<h3 id="llc"><a aria-hidden="true" class="anchor-heading" href="#llc"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>LLC</h3>
+<p><strong>Logical Link Control</strong> provides connection services and allows acknowledgement of the receipt of messages.</p>
+<p>It is the most basic form of flow control. It also provides basic error control functions, such as, informed the sender if they received a corrupted frame, it does this using a checksum.</p>
+<p>LLC allows a device to make a request for either less information at a time or to replay that information.</p>
+<h3 id="how-is-communication-synchronized"><a aria-hidden="true" class="anchor-heading" href="#how-is-communication-synchronized"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How is communication synchronized?</h3>
+<p> <strong>Isochronous</strong></p>
+<ul>
+<li>Similar to Synchronous in <a href="/notes/yjeoqhn1zs6blkof49hvacr">Physical Layer - OSI</a> but they also create time slots for transmission.</li>
+<li>They use a common reference clock source and create time slots for transmission with less overhead than synchronous or asynchronous methods.
+<strong>Synchronous</strong></li>
+<li>Network devices agree on clocking method to indicate beginning and end of frames and can use control characters or separate timing channels.
+<strong>Asynchronous</strong></li>
+<li>Network devices reference their own internal clocks and use start/stop <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a>s.</li>
+</ul>
+<hr>
+<h3 id="layer-2-examples"><a aria-hidden="true" class="anchor-heading" href="#layer-2-examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 2 Examples</h3>
+<ul>
+<li><a href="/notes/f2vfjq2cuyv8kh1gjs917ht">NIC</a></li>
+<li><a href="/notes/irv3o7df3ch6a2lte4twi4t">Bridge</a>s</li>
+<li><a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a>es</li>
+<li><a href="/notes/96d9arn92ova0u1tdgns8ts">MAC</a> Addresses</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/2lmaspsqaxrf42wuvmcp02f">Network Layer - OSI</a></li>
+<li><a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a></li>
+</ul>

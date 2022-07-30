@@ -1,0 +1,27 @@
+<h1 id="etcpasswd"><a aria-hidden="true" class="anchor-heading" href="#etcpasswd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>/etc/passwd</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Contains basic information about each user account on the system.</li>
+<li><code>less /etc/passwd</code></li>
+<li>Each line of the file represents a single account
+<ul>
+<li>Type, normal or system user</li>
+<li>There are seven fields on each line</li>
+</ul>
+</li>
+<li>Fields</li>
+</ul>
+<!-- end list -->
+<ol>
+<li>User's login</li>
+<li><code>X</code> during Unix days it used to contain an encrypted password but these days it represents that a password has been assigned but is stored inside <code>/etc/shadow</code>, if this field is blank the user doesn't need to enter a password to login</li>
+<li>User ID - a positive integer assigned to the user followed by:</li>
+<li>Group ID</li>
+<li>Comment, sometimes left blank</li>
+<li>User's home dir</li>
+<li>Default shell, usually set to <code>/bin/bash</code> if you see <code>/usr/sbin/nologin</code> or <code>/bin/false</code> it means its a system user. In Linux every process or service should be run a specific user and its recommended it should never be root, for security reasons. To have such a user that can never login, you set it's shell as <code>/usr/sbin/nologin</code> or <code>/bin/false</code></li>
+</ol>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">useradd (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">groups (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">usermod (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">userdel (Private)</a></p>

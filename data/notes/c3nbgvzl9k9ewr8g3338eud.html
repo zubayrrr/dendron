@@ -1,0 +1,26 @@
+<h1 id="in"><a aria-hidden="true" class="anchor-heading" href="#in"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IN</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p>The IN command allows you to specify multiple values in a WHERE clause.
+The IN operator is a shorthand for multiple OR conditions.</p>
+<p>Compare an attribute with a list of values</p>
+<pre><code>SELECT *
+FROM customers
+WHERE state = 'VA' OR state = 'GA' OR state = 'FL'
+</code></pre>
+<p>Can be written instead as</p>
+<pre><code>SELECT *
+FROM customers
+WHERE state IN ('VA', 'FL', 'GA')2
+
+-- the order doesn't matter
+-- NOT can also be used  such as
+
+WHERE state NOT IN ('VA', 'FL', 'GA')
+</code></pre>
+<h3 id="example"><a aria-hidden="true" class="anchor-heading" href="#example"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example</h3>
+<pre><code>SELECT *
+FROM products
+WHERE quantity_in_stock IN (49, 38, 72)
+</code></pre>

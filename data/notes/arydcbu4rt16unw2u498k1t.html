@@ -1,0 +1,16 @@
+<h1 id="ffmpeg-for-video-compression"><a aria-hidden="true" class="anchor-heading" href="#ffmpeg-for-video-compression"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ffmpeg for Video Compression</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Note that it seems that ffmpeg already performs some optimization when ran without options, so before trying to use settings you don't understand or deciding to explicitly lose information, give a try to a default conversion :</p>
+<p><code>ffmpeg -i input.mp4 output.mp4</code></p>
+<p>In my case it reduced the bitrate of both the video and audio (you can check and compare the input and output file by running ffprobe on them), transforming a 700 Mb video into a 60 Mb one of seemingly similar quality.</p>
+<blockquote>
+<p>—via <a href="https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg">How can I reduce a video's size with ffmpeg? - Unix &#x26; Linux Stack Exchange</a></p>
+</blockquote>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #6e750e;" href="/notes/u6w0v5tbvga4sby95nixk67">tidbits</a></li>
+</ol>

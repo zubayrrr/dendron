@@ -1,0 +1,36 @@
+<h1 id="proc"><a aria-hidden="true" class="anchor-heading" href="#proc"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>/proc</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Proc file system (procfs) is virtual file system created on fly when system boots and is dissolved at time of system shut down.</p>
+<p>It contains useful information about the processes that are currently running, it is regarded as control and information center for kernel.</p>
+<p>The proc file system also provides communication medium between kernel space and user space.</p>
+<p>The <strong>/proc</strong> directory is present on all <strong>Linux</strong> systems, regardless of flavor or architecture.</p>
+<p><strong>/proc</strong> directory is <strong>NOT</strong> a real <strong>File System</strong>, in the sense of the term. It is a <strong>Virtual File System</strong>. Contained within the <strong>procfs</strong> are information about processes and other system information. It is mapped to <strong>/proc</strong> and mounted at <strong>boot</strong> time.</p>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<pre><code>ls -l /proc
+</code></pre>
+<pre><code>cat /proc/meminfo
+</code></pre>
+<pre><code># directories only
+ls -l /proc | grep '^d'
+</code></pre>
+<p><a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a>es have entries created in the /proc file system with their PIDs</p>
+<pre><code>ps -aux
+</code></pre>
+<pre><code>ls -ltr /proc/7494
+</code></pre>
+<blockquote>
+<p>— via <a href="https://www.geeksforgeeks.org/proc-file-system-linux/">proc file system in Linux - GeeksforGeeks</a>
+— via <a href="https://www.tecmint.com/exploring-proc-file-system-in-linux/">Exploring /proc File System in Linux</a></p>
+</blockquote>
+<p>See also: <a href="/notes/b3424uszw3e3l9htw309zer">/sys</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/psmspnhje8fsk8atyi2dmyt">acpi</a></li>
+<li><a href="/notes/9x9tnilgrp5wqa10f8odw8x">mount</a></li>
+<li><a href="/notes/b3424uszw3e3l9htw309zer">/sys</a></li>
+</ul>

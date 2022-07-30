@@ -1,0 +1,560 @@
+<h1 id="bash"><a aria-hidden="true" class="anchor-heading" href="#bash"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Bash</h1>
+<p>Bash is a Unix shell and command language written by Brian Fox for the GNU Project as a free software replacement for the Bourne shell. First released in 1989, it has been used as the default login shell for most Linux distributions. Bash was one of the first programs <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">resources.people.Linus Torvalds (Private)</a> ported to Linux, alongside GCC.</p>
+<h2 id="bash-aliases"><a aria-hidden="true" class="anchor-heading" href="#bash-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Bash Aliases</h2>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Aliases</span></div>
+<a href="/notes/qj2j8vs4rumzknty271dz04" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Aliases for commands</li>
+<li>Nicknames for your pipelines</li>
+<li>To get started you need a file in your user's <code>Home</code> dir named <code>.bash_aliases</code></li>
+<li>Write the command inside the <code>.bash_aliases</code> file after writing <code>alias aliasName='command1 -opt args | command2 -opt args ...'</code> or alias for command that don't accept <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> can be acheived by <code>alias aliasName='xargs command -opt args...'</code></li>
+<li>Example:</li>
+</ul>
+<p><code>alias getdates='date | tee /home/user/date.txt | cut -d " " -f 1 | tee /home/user/day.txt | xargs echo hello'</code></p>
+<ul>
+<li>You can also build piplines using multiple aliases, the first command in an alias should accept <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a></li>
+<li>Terminal will have to be rebooted after creating an alias.</li>
+</ul>
+<h2 id="list-all-aliases"><a aria-hidden="true" class="anchor-heading" href="#list-all-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>List all aliases</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">alias</span>
+</code></pre>
+<h2 id="escape-an-alias--run-the-original-command"><a aria-hidden="true" class="anchor-heading" href="#escape-an-alias--run-the-original-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Escape an alias / run the original command</h2>
+<p>Use <code>\</code> to escape an alias</p>
+<pre class="language-bash"><code class="language-bash"><span class="token punctuation">\</span>ls
+</code></pre>
+<h2 id="create-an-alias"><a aria-hidden="true" class="anchor-heading" href="#create-an-alias"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create an alias</h2>
+<p>This will create an alias for the existing session. To make aliases persist in all of your user session, create them inside in your <code>~/.zshrc</code>, <code>~/.bashrc</code>, <code>~/.bash_profile</code> (and reload the shell or run <code>source ~/.zshrc</code>).</p>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">alias</span> <span class="token assign-left variable">ls</span><span class="token operator">=</span><span class="token string">"ls -ltr"</span>
+</code></pre>
+<h2 id="remove-an-alias"><a aria-hidden="true" class="anchor-heading" href="#remove-an-alias"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Remove an alias</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">unalias</span> <span class="token function">ls</span>
+</code></pre></div></div><p></p><p></p>
+<hr>
+<h2 id="introduction"><a aria-hidden="true" class="anchor-heading" href="#introduction"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Introduction</h2>
+<ul>
+<li>To check what shell was started use <code>echo $0</code></li>
+<li>List all installed shells <code>cat /etc/shells</code></li>
+<li>Check each user's default shell <code>cat /etc/passwd</code> last column</li>
+</ul>
+<p>A shell script is an executable text file that contains commands, variables, functions, loops and so on that are executed sequentially.</p>
+<p>It is widely used for automating repetitive tasks, customize administrative tasks, create your own powertools or small applications. Other examples of scripting can be found in: monitoring the system, data backup/restore, email based alert system, security auditing.</p>
+<h2 id="the-shebang"><a aria-hidden="true" class="anchor-heading" href="#the-shebang"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Shebang</h2>
+<p>The Shebang is made of <code>#!</code> is followed by the path of the interpreter.</p>
+<p><code>#!/bin/bash</code></p>
+<p>For executable scripts the system expects The Shebang in the first line of the script that indicates which program to run as the interpreter with the script file as the argument.
+Basically, to indicate what program will run the file whether bash, python, php or other interpreters.</p>
+<p>If you execute a script without the shebang the interpreter will use the default shell.</p>
+<p>Run <code>which bash</code> <code>which -a bash</code> to find the location of the interpreter.</p>
+<p>When using Python as the interpreter for a script</p>
+<p><code>#!/usr/bin/python3</code> will be the first line of the script(with the python code)</p>
+<h2 id="comments"><a aria-hidden="true" class="anchor-heading" href="#comments"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Comments</h2>
+<p>Bash will ignore everything written after the <code>#</code> symbol. The only exception being The Shebang
+Bash doesn't support multi line commenting. See <a href="/notes/97g4jykiuew2z1su0fhxz0l">Here Document</a></p>
+<h2 id="running-bash-scripts"><a aria-hidden="true" class="anchor-heading" href="#running-bash-scripts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Running Bash Scripts</h2>
+<ul>
+<li>
+<p>Make it executable</p>
+<ul>
+<li><code>chmod +x script.sh</code></li>
+</ul>
+</li>
+<li>
+<p>Run it with its relative path using <code>./script.sh</code></p>
+</li>
+<li>
+<p>Or run it with its absolute path</p>
+<ul>
+<li>The script will run in a sub shell</li>
+</ul>
+</li>
+<li>
+<p>You can also pass the name of the interpreter before the script(this will make the script work even if you don't explicity give it execution permission) such as:</p>
+<ul>
+<li><code>bash script.sh</code></li>
+<li><code>python3 script.py</code></li>
+</ul>
+</li>
+<li>
+<p><code>source script.sh</code> or <code>. script.sh</code></p>
+<ul>
+<li>Will make the script run in the current shell.</li>
+</ul>
+</li>
+</ul>
+<h2 id="variables"><a aria-hidden="true" class="anchor-heading" href="#variables"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Variables</h2>
+<p>Variable is a name of a memory location where a value which can be manipulated is stored.</p>
+<ul>
+<li><code>foo=bar</code> space before and after <code>=</code> assignment operator is not allowed.</li>
+<li>If the value of the variable is a string that contains spaces, enclose it with <code>" "</code> double quotes.</li>
+<li>Bash is a weakly typed langauge and doesn't require you to define any data type at variable declaration.</li>
+<li>There are no floating point numbers in bash. Only integers.</li>
+<li>Variable names cannot start with a number nor can they have special characters in them.</li>
+<li>It can contain an underscore or different case.</li>
+<li>Giving a value to a variable is called assigning variable a value.</li>
+<li>Retrieving a value stored in a variable is called referencing.</li>
+<li>Preceed a variable with <code>$</code> to access it's value.</li>
+<li>Variable name is not referenced if single quotes are used (such as in an echo statement).</li>
+<li>Use backslash to escape a reserved character's role such as <code>\$PATH</code>.</li>
+<li>A variable can reference value from an existing variable <code>newVar="$oldVar"</code></li>
+</ul>
+<p>Use <code>set</code> command to retrieve value to get all shell variables and functions.</p>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Environment Variable</span></div>
+<a href="/notes/o729gsazu87le197nswwxtp" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>They're defined for the current shell and are inherited by any child shells or processes.</li>
+<li>They're used to pass information to process that are spawned from the current shell.</li>
+<li>Displayed using <code>env</code> or <code>printenv</code></li>
+<li><a href="/notes/iicnw4qgra6rr5f6k4dlw3z">$PATH</a> is such an example</li>
+<li>When assigning multiple values to a variable, its common to separate them using a colon <code>:</code></li>
+<li>By convention - env variables are written in uppercase letters.</li>
+<li>Usually they're not used directly; instead they're referenced by individual applications/services.
+<ul>
+<li><code>$HOME</code> is such an example</li>
+</ul>
+</li>
+<li>Run <code>env | less</code> to list all env variable set on your machine.</li>
+<li>You can also use <code>printenv</code> to print variables
+<ul>
+<li><code>printenv SHELL PWD LC_TIME</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="create-a-new-env-variable"><a aria-hidden="true" class="anchor-heading" href="#create-a-new-env-variable"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create a new env variable</h2>
+<ul>
+<li>Add a line: <code>export VARNAME=VARVAL</code> in your <code>~/.zshrc</code></li>
+<li>To create a system wide variable available for all users; declare the variable in <code>/etc/profile</code> or <code>/etc/bash.bashrc</code></li>
+<li>There is also <code>/etc/environment</code> in which you can set env variables each on a new line</li>
+</ul>
+</div></div><p></p><p></p>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Shell Variables</span></div>
+<a href="/notes/vh22ssk485h0u5nlfme04ic" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>They're contained exclusively within the shell in which they were set or defined.</li>
+<li>Displayed using <code>set</code></li>
+<li>Running <code>set</code> command will display shell functions as well as to display all available variables.</li>
+<li>To display only shell and <a href="/notes/o729gsazu87le197nswwxtp">Environment Variable</a> - specify set to operate in <a href="/notes/ru54kuj1p2c7rpvy2ngv0sp">POSIX</a> mode
+<ul>
+<li><code>set -o posix</code></li>
+</ul>
+</li>
+</ul>
+</div></div><p></p><p></p>
+<h2 id="constants"><a aria-hidden="true" class="anchor-heading" href="#constants"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Constants</h2>
+<p>Declare constants(variables whose values doesn't change) using <code>declare -r constName="constVal"</code></p>
+<p>You cannnot <code>unset</code> or delete a read-only variable.</p>
+<h2 id="create-your-first-bash-script"><a aria-hidden="true" class="anchor-heading" href="#create-your-first-bash-script"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create Your First Bash Script</h2>
+<ol>
+<li><code>vim first_script.sh</code>
+<ul>
+<li>some people consider giving extensions to an executable as a bad practice.</li>
+</ul>
+</li>
+<li>complete the script</li>
+</ol>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> -p new_dir
+<span class="token builtin class-name">echo</span> <span class="token string">"yay! first script"</span> <span class="token operator">></span> new_dir/file.txt
+<span class="token function">ls</span> -l new_dir
+<span class="token function">cat</span> new_dir/file.txt
+</code></pre>
+<ol start="3">
+<li>Save and exit</li>
+<li>Give permissions for execution</li>
+</ol>
+<p><code>chmod 700 first_script.sh</code></p>
+<ol start="5">
+<li>Execute it using relative path</li>
+</ol>
+<p><code>./first_script.sh</code></p>
+<p>If you don't use relative path, shell will throw an error because it would be looking for commands and scripts from the <a href="/notes/iicnw4qgra6rr5f6k4dlw3z">$PATH</a> variable.</p>
+<h2 id="user-input"><a aria-hidden="true" class="anchor-heading" href="#user-input"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>User Input</h2>
+<ul>
+<li>
+<p><code>read</code> is responsible for collecting user input - it'll stop a program until the user has given an input and has returned the input with the RETURN or ENTER Key</p>
+</li>
+<li>
+<p>Create a new variable with some prompt</p>
+</li>
+</ul>
+<p><code>read -p "some prompt for user: " $varName</code></p>
+<ul>
+<li>Create a new variable that doesn't display the input (like entering password)</li>
+</ul>
+<p><code>read -s -p "safely enter value: " $varName</code></p>
+<h2 id="special-variables-and-positional-arguments"><a aria-hidden="true" class="anchor-heading" href="#special-variables-and-positional-arguments"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Special Variables and Positional Arguments</h2>
+<p>Lets take the following command for example</p>
+<p><code>./script filename1 dir1 10.0.0.1</code></p>
+<p>There are predefined variables available such:</p>
+<p><code>$0</code> is the name of the script itself (<code>./script.sh</code>)
+<code>$1</code> is the first positional argument (<code>filename</code>)
+<code>$2</code> is the second positional argument (<code>dir1</code>)
+<code>$3</code> is the third positional argument (<code>10.0.0.1</code>)
+<code>$9</code> would be the ninth and after it arguments must be enclosed in <code>{}</code> curly braces such as <code>${10}</code> for the tenth</p>
+<p><code>$#</code> is the number of the positional arguments
+<code>"$*"</code> is the string representation of all positional arguments: <code>$1</code> <code>$2</code> <code>$3</code> ...
+<code>$?</code> is the most recent foreground command exit status</p>
+<h2 id="if-elif-and-else-statements"><a aria-hidden="true" class="anchor-heading" href="#if-elif-and-else-statements"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>If, Elif and Else Statements</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token punctuation">[</span>some condition is true<span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    // execute this code
+<span class="token keyword">elif</span> <span class="token punctuation">[</span>some other condition is true<span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    // execute this code
+<span class="token keyword">else</span>
+    // execute this code
+<span class="token keyword">fi</span>
+</code></pre>
+<h2 id="-vs-"><a aria-hidden="true" class="anchor-heading" href="#-vs-"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>[]</code> vs <code>[[]]</code></h2>
+<p><code>[]</code> is the old way used for testing conditions.</p>
+<p><code>[[]]</code> is the new way of testing conditions and is considered to be safer. Double square brackets prevent word splitting or string variables that contain spaces, you don't need to double qoute string variables even though its a good practice. It also have features like <a href="/notes/wefzur43lxsejxhpzya0oz1">regular expression</a> matching.</p>
+<h2 id="testing-conditions-for-numbers"><a aria-hidden="true" class="anchor-heading" href="#testing-conditions-for-numbers"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Testing Conditions For Numbers</h2>
+<p>Run <code>man test</code> to list all available testing (comparison operators for integer comparison)</p>
+<h2 id="multiple-conditions-and-nested-if-statements"><a aria-hidden="true" class="anchor-heading" href="#multiple-conditions-and-nested-if-statements"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Multiple Conditions and Nested If Statements</h2>
+<p>Using local operators allow you to use multiple conditions in the if statement.</p>
+<p><code>&#x26;&#x26;</code> is the AND operator
+<code>||</code> is the OR operator</p>
+<h2 id="command-subsitution"><a aria-hidden="true" class="anchor-heading" href="#command-subsitution"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Command Subsitution</h2>
+<p>In the following example, the <code>date</code> command was executed and the output is stored inside the variable <code>now</code>.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token assign-left variable">now</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span><span class="token variable">`</span></span>
+</code></pre>
+<p>If the output is going to be a string, it is recommended to enclose it inside double quotes.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token assign-left variable">now</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">`</span><span class="token function">date</span><span class="token variable">`</span></span>"</span>
+</code></pre>
+<p>The other way of doing command subsitution is:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token assign-left variable">user</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token variable">$(</span><span class="token function">who</span><span class="token punctuation">)</span><span class="token variable">`</span></span>
+
+<span class="token comment"># this is same as:</span>
+
+<span class="token assign-left variable">user</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">`</span><span class="token function">who</span><span class="token variable">`</span></span>"</span>
+</code></pre>
+<p>You can substitute the entire command line, which can be multiple commands piped together.</p>
+<p><code>ps -ef | grep bash</code></p>
+<p><code>output="$(ps -ef | grep bash)"</code></p>
+<h2 id="comparing-strings-in-if-statements"><a aria-hidden="true" class="anchor-heading" href="#comparing-strings-in-if-statements"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Comparing Strings in If Statements</h2>
+<p>Two strings are equal if their length is same and contains the same sequence of characters in the same order.</p>
+<ul>
+<li>
+<p>The comparsion operator is a single <code>=</code> sign when using if statement with <code>[]</code> single square brackets and its <code>==</code> when using double square brackets <code>[[]]</code></p>
+</li>
+<li>
+<p>The inequality operator is <code>!=</code></p>
+</li>
+</ul>
+<p>One of the approach to check for substring inside a string is to surround the substring with asterisk <code>*</code> to make it match all the characters.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token assign-left variable">str1</span><span class="token operator">=</span><span class="token string">"Linux is amazing"</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">"str1"</span> <span class="token operator">==</span> *<span class="token string">"Linux"</span>*<span class="token punctuation">]</span><span class="token punctuation">]</span>
+</code></pre>
+<ul>
+<li><code>-n</code> returns true if the string length is NON zero and <code>-z</code> returns true if the string length is zero.</li>
+</ul>
+<h2 id="for-loop"><a aria-hidden="true" class="anchor-heading" href="#for-loop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>For Loop</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">for</span> <span class="token for-or-select variable">item</span> <span class="token keyword">in</span> LIST
+<span class="token keyword">do</span>
+  commands
+<span class="token keyword">done</span>
+</code></pre>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">os</span> <span class="token keyword">in</span> Ubuntu CentOS <span class="token string">"MX Linux"</span> Kali Manjaro
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"os is <span class="token variable">$os</span>"</span>
+<span class="token keyword">done</span>
+</code></pre>
+<hr>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">num</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">..</span><span class="token number">7</span><span class="token punctuation">}</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"num is <span class="token variable">$num</span>"</span>
+<span class="token keyword">done</span>
+</code></pre>
+<hr>
+<p>Defining increment for a range</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">num</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">..</span><span class="token number">100</span><span class="token punctuation">..</span><span class="token number">5</span><span class="token punctuation">}</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"num is <span class="token variable">$num</span>"</span>
+<span class="token keyword">done</span>
+</code></pre>
+<hr>
+<p>Going through the current directory, displaying the contents of the files</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">item</span> <span class="token keyword">in</span> ./*
+<span class="token keyword">do</span>
+  <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> -f <span class="token string">"<span class="token variable">$item</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">"Displaying the contents of <span class="token variable">$item</span>"</span>
+      <span class="token function">sleep</span> <span class="token number">1</span>
+      <span class="token function">cat</span> <span class="token variable">$item</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">"##########"</span>
+  <span class="token keyword">fi</span>
+<span class="token keyword">done</span>
+</code></pre>
+<hr>
+<p>Rename all files in the current directory ending in <code>.txt</code> extension by adding a string at the start of the file name</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">file</span> <span class="token keyword">in</span> *.txt
+<span class="token keyword">do</span>
+  <span class="token function">mv</span> <span class="token string">"<span class="token variable">$file</span>"</span> <span class="token string">"renamed_<span class="token variable">$file</span>"</span>
+<span class="token keyword">done</span>
+</code></pre>
+<h3 id="for-loops-like-in-programming-langauges"><a aria-hidden="true" class="anchor-heading" href="#for-loops-like-in-programming-langauges"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>For Loops Like In Programming Langauges</h3>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token variable"><span class="token punctuation">((</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&#x3C;=</span><span class="token number">50</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">))</span></span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"i = <span class="token variable">$i</span>"</span>
+<span class="token keyword">done</span>
+</code></pre>
+<h2 id="while-loops"><a aria-hidden="true" class="anchor-heading" href="#while-loops"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>While Loops</h2>
+<p>It is used to execute a set of commands as long as the given condition evaluates to true.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">while</span> CONDITION
+<span class="token keyword">do</span>
+  COMMANDS
+<span class="token keyword">done</span>
+</code></pre>
+<p>Use <code>:</code> to always return true</p>
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">while</span> <span class="token builtin class-name">:</span>
+<span class="token keyword">do</span>
+  <span class="token assign-left variable">output</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span>pgrep -l $1<span class="token variable">)</span></span>"</span>
+  <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> -n <span class="token string">"<span class="token variable">$output</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+  <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">"The process  <span class="token entity" title="\&#x22;">\"</span><span class="token variable">$1</span>"</span><span class="token punctuation">\</span> is running.
+  <span class="token keyword">else</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">"The process  <span class="token entity" title="\&#x22;">\"</span><span class="token variable">$1</span>"</span><span class="token punctuation">\</span> is NOT running.
+  <span class="token keyword">fi</span>
+  <span class="token function">sleep</span> <span class="token number">3</span>
+<span class="token keyword">done</span>
+</code></pre>
+<h3 id="examples-1"><a aria-hidden="true" class="anchor-heading" href="#examples-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">i</span><span class="token operator">=</span><span class="token number">0</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$i</span> -lt <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"i: <span class="token variable">$i</span>"</span>
+  <span class="token variable"><span class="token punctuation">((</span>i<span class="token operator">++</span><span class="token punctuation">))</span></span> <span class="token comment"># let i = i++</span>
+<span class="token keyword">done</span>
+</code></pre>
+<h2 id="case-statements"><a aria-hidden="true" class="anchor-heading" href="#case-statements"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Case Statements</h2>
+<p>The case construct allows us to test string and numbers and is infact a simpler form of bash if, elif, else statement.</p>
+<p>Case is similar to Switch statements in other programming languages.</p>
+<p>It is not a loop, it doesn't execute a block of code <code>n</code> number of times. Instead, bash shell checks the conditions and controls the flow of the program.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">case</span> EXPRESSION <span class="token keyword">in</span>
+  PATTERN_1<span class="token punctuation">)</span>
+    STATEMENTS
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+  PATTERN_2<span class="token punctuation">)</span>
+   STATEMENTS
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+  PATTERN_3<span class="token punctuation">)</span>
+    STATEMENTS
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+  PATTERN_N<span class="token punctuation">)</span>
+    STATEMENTS
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    *<span class="token punctuation">)</span>
+    STATEMENTS
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span>
+</code></pre>
+<h3 id="examples-2"><a aria-hidden="true" class="anchor-heading" href="#examples-2"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token builtin class-name">echo</span> -n <span class="token string">"Enter your favourite pet: "</span>
+<span class="token builtin class-name">read</span> PET
+
+<span class="token keyword">case</span> <span class="token string">"<span class="token variable">$PET</span>"</span> <span class="token keyword">in</span>
+    dog<span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Your favourite pet is dog"</span>
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token function">cat</span><span class="token operator">||</span>CAT<span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"You like cats"</span>
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    fist<span class="token operator">||</span><span class="token string">"African turtle"</span><span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Fish or turtles are great"</span>
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    *<span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Your favourite pet is unknown"</span>
+<span class="token keyword">esac</span>
+</code></pre>
+<hr>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$#</span> -ne <span class="token number">2</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Run the script with 2 arguments: Signal and PID"</span>
+    <span class="token builtin class-name">exit</span>
+<span class="token keyword">fi</span>
+<span class="token keyword">case</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token keyword">in</span>
+      <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Sending the SIGHUP signal to <span class="token variable">$2</span>"</span>
+        <span class="token function">kill</span> -SIGHUP <span class="token variable">$2</span>
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+      <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Sending the SIGINT signal to <span class="token variable">$2</span>"</span>
+        <span class="token function">kill</span> -SIGINT <span class="token variable">$2</span>
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+      <span class="token number">15</span><span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Sending the SIGTERM signal to <span class="token variable">$2</span>"</span>
+        <span class="token function">kill</span> -15 <span class="token variable">$2</span>
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+      *<span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Signal number <span class="token variable">$1</span> will not be delivered"</span>
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span>
+</code></pre>
+<h2 id="functions"><a aria-hidden="true" class="anchor-heading" href="#functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Functions</h2>
+<p>There are two different formats for declaring a function.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">print_something</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"I am a function"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function-name function">display_something</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Hello world!"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>To call a function just write it's name without any paranethesis <code>display_something</code></p>
+<h3 id="arguments"><a aria-hidden="true" class="anchor-heading" href="#arguments"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Arguments</h3>
+<p>In bash you cannot pass arguments through the paranthesis, they're only for decoration.
+To pass any information to the function use arguments like they're passed to a command.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token function-name function">create_files</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Creating <span class="token variable">$1</span>"</span>
+  <span class="token function">touch</span> <span class="token variable">$1</span>
+  <span class="token function">chmod</span> <span class="token number">400</span> <span class="token variable">$1</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Creating <span class="token variable">$2</span>"</span>
+  <span class="token function">touch</span> <span class="token variable">$2</span>
+  <span class="token function">chmod</span> <span class="token number">600</span> <span class="token variable">$2</span>
+<span class="token punctuation">}</span>
+
+create_files file1.txt file2.txt
+</code></pre>
+<h3 id="returns"><a aria-hidden="true" class="anchor-heading" href="#returns"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Returns</h3>
+<p>Bash doesn't allow you to return a value of a function, doing so using the return keyword, we're setting the status of the command executed or of the function. $? contains the status of previously run command or function.</p>
+<p>Typically, a value of <code>0</code> means everything went successfully and a non zero value means something did not went succesfully.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token function-name function">create_files</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Creating <span class="token variable">$1</span>"</span>
+  <span class="token function">touch</span> <span class="token variable">$1</span>
+  <span class="token function">chmod</span> <span class="token number">400</span> <span class="token variable">$1</span>
+  <span class="token builtin class-name">return</span> <span class="token number">10</span>
+<span class="token punctuation">}</span>
+
+create_files file1.txt
+</code></pre>
+<p>To get a real "return" value like in other programming languages, you can try command substitution.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">lines_in_file</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">grep</span> -c <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token string">"<span class="token variable">$2</span>"</span>
+<span class="token punctuation">}</span>
+
+<span class="token assign-left variable">n</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>lines_in_file <span class="token string">"usb"</span> <span class="token string">"/var/log/dmesg"</span><span class="token variable">)</span></span>
+<span class="token builtin class-name">echo</span> <span class="token variable">$n</span>
+</code></pre>
+<h2 id="variable-scope-in-functions"><a aria-hidden="true" class="anchor-heading" href="#variable-scope-in-functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Variable Scope in Functions</h2>
+<p>Scope refers to which part of a script the variable is "visible". In bash, all variables by default are global; they're visible everywhere inside a script.</p>
+<p>If you want to define a local variable within the function body, use the <code>local</code> keyword before declaring variable.
+It is considered a good practice to use local variables in order to contain everything inside a function.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">var1</span><span class="token operator">=</span><span class="token string">"AA"</span>
+<span class="token assign-left variable">var2</span><span class="token operator">=</span><span class="token string">"BB"</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">func1</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token assign-left variable">var1</span><span class="token operator">=</span><span class="token string">"XX"</span>
+  <span class="token builtin class-name">local</span> <span class="token assign-left variable">var2</span><span class="token operator">=</span><span class="token string">"YY"</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Inside func1: var1=<span class="token variable">$var1</span> and var2=v<span class="token variable">$var2</span>"</span>
+<span class="token punctuation">}</span>
+func1
+<span class="token builtin class-name">echo</span> <span class="token string">"After calling func1: var1=<span class="token variable">$var1</span> and var2=v<span class="token variable">$var2</span>"</span>
+</code></pre>
+<h2 id="select"><a aria-hidden="true" class="anchor-heading" href="#select"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Select</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token keyword">select</span> <span class="token for-or-select variable">ITEM</span> <span class="token keyword">in</span> LIST
+<span class="token keyword">do</span>
+  commands
+<span class="token keyword">done</span>
+</code></pre>
+<ul>
+<li>ITEM is a user defined variable and the LIST is a series of strings, numbers or output of commands.</li>
+</ul>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">select</span> <span class="token for-or-select variable">COUNTRY</span> <span class="token keyword">in</span> Germany India <span class="token string">"United Kingdom"</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Country is <span class="token variable">$COUNTRY</span>"</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Your choice is <span class="token environment constant">$REPLY</span>"</span>
+<span class="token keyword">done</span>
+</code></pre>
+<p>Use <code>PS3</code> to define a prompt</p>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable"><span class="token environment constant">PS3</span></span><span class="token operator">=</span><span class="token string">"Choose your country: "</span>
+<span class="token keyword">select</span> <span class="token for-or-select variable">COUNTRY</span> <span class="token keyword">in</span> Germany India <span class="token string">"United Kingdom"</span>
+<span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Country is <span class="token variable">$COUNTRY</span>"</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Your choice is <span class="token environment constant">$REPLY</span>"</span>
+<span class="token keyword">done</span>
+</code></pre>
+<ul>
+<li>You can use <code>select</code> with <code>case</code> and <code>if</code> statements</li>
+</ul>
+<h2 id="examples-3"><a aria-hidden="true" class="anchor-heading" href="#examples-3"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<ul>
+<li><a href="/notes/kw0o7kw0m2y89681r3nv66d">Connection Testing</a></li>
+<li><a href="/notes/h2nd1ugulcavl8zrn3d054x">Dropping a List of IP addresses Using a For Loop</a></li>
+<li><a href="/notes/o0ecer01zc0czhdzo6o8o5b">System Administration Script using Menus</a></li>
+</ul>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://www.linuxjournal.com/content/developing-console-applications-bash">Developing Console Applications with Bash | Linux Journal</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/uua60b3x9in6imfnwfa5f7t">Everything about Linux Terminal</a></li>
+<li><a href="/notes/oteklwrg0wgbzwqyjey8ijy">jobs</a></li>
+<li><a href="/notes/iicnw4qgra6rr5f6k4dlw3z">PATH Variable</a></li>
+</ul>

@@ -1,0 +1,26 @@
+<h1 id="conways-game-of-life"><a aria-hidden="true" class="anchor-heading" href="#conways-game-of-life"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Conway's Game of Life</h1>
+<ul>
+<li>Areas: <a href="/notes/8jf35sh8mrw543sc6a6iwq9">Maths</a></li>
+</ul>
+<hr>
+<p>The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine.</p>
+<h2 id="rules"><a aria-hidden="true" class="anchor-heading" href="#rules"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Rules</h2>
+<p>The universe of the Game of Life is <a href="/wiki/Square_tiling">an infinite, two-dimensional orthogonal grid of square</a> <em>cells</em>, each of which is in one of two possible states, <em>live</em> or <em>dead</em> (or <em>populated</em> and <em>unpopulated</em>, respectively). Every cell interacts with its eight <em><a href="/wiki/Moore_neighborhood">neighbours</a></em>, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:</p>
+<ol>
+<li>Any live cell with fewer than two live neighbours dies, as if by underpopulation.</li>
+<li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+<li>Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
+<li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+</ol>
+<p>These rules, which compare the behavior of the automaton to real life, can be condensed into the following:</p>
+<ol>
+<li>Any live cell with two or three live neighbours survives.</li>
+<li>Any dead cell with three live neighbours becomes a live cell.</li>
+<li>All other live cells die in the next generation. Similarly, all other dead cells stay dead.</li>
+</ol>
+<p>The initial pattern constitutes the <em>seed</em> of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed, live or dead; births and deaths occur simultaneously, and the discrete moment at which this happens is sometimes called a <em>tick</em>. Each generation is a <em><a href="/wiki/Pure_function">pure function</a></em> of the preceding one. The rules continue to be applied repeatedly to create further generations.</p>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #ada587;" href="/notes/1wjvtxr8npkthvindfqkxcc">TIL</a></li>
+</ol>

@@ -1,0 +1,23 @@
+<h1 id="troubleshooting-for-connectivity-issues"><a aria-hidden="true" class="anchor-heading" href="#troubleshooting-for-connectivity-issues"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Troubleshooting for connectivity issues</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<h3 id="troubleshooting-for-connectivity-issues-1"><a aria-hidden="true" class="anchor-heading" href="#troubleshooting-for-connectivity-issues-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Troubleshooting for connectivity issues</h3>
+<ul>
+<li><code>route -n</code> to get default gateway</li>
+<li><code>ping defaultGW</code> if the ping doesn't work, theres a problem with LAN, maybe unauthenticated to the wireless access point or you don't have the right IP Address set.</li>
+<li>ping a public IP Address on the internet, something stable like public DNS Server of Google (8.8.8.8) or public DNS Server of Cloudflare (1.1.1.1)
+<ul>
+<li>ping 8.8.8.8</li>
+<li>ping 1.1.1.1</li>
+<li>If this doesn't work, theres an internet connectivity issue, check router configuration or check with <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.ISP (Private)</a>.</li>
+</ul>
+</li>
+<li>ping an inter domain, something like google.com
+<ul>
+<li>If this doesn't work, you've a DNS issue, check that you're correct <a href="/notes/pjbeze05otspq0j7j48beqp">DNS</a> and theres nothing filtering the packets, probably a configuration error related to DNs on your side or the DNS server is down.</li>
+<li>change the DNS Server to 8.8.8.8 and try again.</li>
+</ul>
+</li>
+</ul>

@@ -1,0 +1,54 @@
+<h1 id="hive-installation"><a aria-hidden="true" class="anchor-heading" href="#hive-installation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Hive Installation</h1>
+<h3 id="installing-hive"><a aria-hidden="true" class="anchor-heading" href="#installing-hive"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Installing <a href="/notes/30isnfzmqrvmmiii03d0chj">Hive</a></h3>
+<p>Taken from:
+<a href="https://drive.google.com/drive/folders/1XdPbyAc9iWml0fPPNX91Yq3BRwkZAG2M">https://drive.google.com/drive/folders/1XdPbyAc9iWml0fPPNX91Yq3BRwkZAG2M</a></p>
+<pre><code>Steps for hive installation
+Download and Unzip Hive
+Edit .bashrc file
+Edit hive-config.sh file
+Create Hive directories in HDFS
+Initiate Derby database
+Configure hive-site.xml file
+
+download and unzip Hive
+=============================
+wget https://downloads.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
+tar xzf apache-hive-3.1.2-bin.tar.gz
+
+Edit .bashrc file
+========================
+sudo nano .bashrc
+export HIVE_HOME= /home/hdoop/apache-hive-3.1.2-bin
+
+export PATH=$PATH:$HIVE_HOME/bin
+source ~/.bashrc
+Edit hive-config.sh file
+====================================
+sudo nano $HIVE_HOME/bin/hive-config.sh
+export HADOOP_HOME=/home/hdoop/hadoop-3.2.1
+Create Hive directories in HDFS
+===================================
+hdfs dfs -mkdir /tmp
+hdfs dfs -chmod g+w /tmp
+hdfs dfs -mkdir -p /user/hive/warehouse
+hdfs dfs -chmod g+w /user/hive/warehouse
+
+Fixing guava problem – Additional step
+=================
+
+rm $HIVE_HOME/lib/guava-19.0.jar
+cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-27.0-jre.jar $HIVE_HOME/lib/
+
+Initialize Derby and hive
+============================
+schematool -initSchema -dbType derby
+
+
+hive
+
+optional Step – Edit hive-site.xml
+===========
+cd $HIVE_HOME/conf
+cp hive-default.xml.template hive-site.xml
+sudo nano hive-site.xml – change metastore location to above created hdfs path(/user/hive/warehouse)
+</code></pre>

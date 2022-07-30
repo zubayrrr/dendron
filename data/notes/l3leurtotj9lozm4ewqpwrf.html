@@ -1,0 +1,40 @@
+<h1 id="cp"><a aria-hidden="true" class="anchor-heading" href="#cp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>cp</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>cp</code> is a command-line utility for copying files and directories on Unix and Linux systems.</p>
+<p>Syntax:</p>
+<p><code>cp [OPTIONS] SOURCE... DESTINATION</code></p>
+<ul>
+<li>When the SOURCE and DESTINATION arguments are both files, the cp command copies the first file to the second one. If the file doesn’t exist, the command creates it.</li>
+<li>When the SOURCE has multiple files or directories as arguments, the DESTINATION argument must be a directory. In this situation, the SOURCE files and directories are moved to the DESTINATION directory.</li>
+<li>When the SOURCE and DESTINATION arguments are both directories, the cp command copies the first directory into the second one.</li>
+</ul>
+<p>To copy files and directories, you must have at least read permissions on the source file and write permission on the destination directory. Otherwise, a permission denied error is shown.</p>
+<blockquote>
+<p>—via <a href="#%20Linuxize%7Chttps%3A%2F%2Flinuxize.com%2Fpost%2Fcp-command-in-linux%2F">Cp Command in Linux (Copy Files)</a></p>
+</blockquote>
+<p>Examples:</p>
+<ul>
+<li><code>cp /etc/passwd ./users.txt</code> - since users.txt doesn't exist, <code>cp</code> will create it.</li>
+<li><code>cp /etc/groups ./users.txt</code> - since users.txt already exists, cp will overwrite the contents of <code>/etc/groups</code> to users.txt</li>
+<li>pass the <code>-v</code> flag for <code>cp</code> to be verbose about the files that are being copied</li>
+<li>pass the <code>-i</code> flag to make <code>cp</code> prompt before copying/overwriting.</li>
+<li>pass the <code>-r</code> flag to recursively copy directories and the subdirectories.
+<ul>
+<li><code>sudo cp -r /etc/ ~/Desktop/</code></li>
+</ul>
+</li>
+<li>The user that runs <code>cp</code> on a file/dir, that user will become the owner of the copied file/dir, file attributes(permissions, ownership, timestamps) are not preserved by default.
+<ul>
+<li>pass the <code>-p</code> flag to make <code>cp</code> preserve the file attributes.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/mx45kfy1ylv6jtvjxsomm0o">dd</a></li>
+<li><a href="/notes/iicnw4qgra6rr5f6k4dlw3z">PATH Variable</a></li>
+</ul>

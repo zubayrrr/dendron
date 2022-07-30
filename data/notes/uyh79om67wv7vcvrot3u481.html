@@ -1,0 +1,49 @@
+<h1 id="rest-api"><a aria-hidden="true" class="anchor-heading" href="#rest-api"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>REST API</h1>
+<p>REST APIs (Representational State Transfer Application Programming Interface) is a data source’s frontend that allows users to create, retrieve, update, and delete data items. An API is frequently a portal to the rest of the world for developer teams.</p>
+<p>A REST API is a set of HTTP-based standards that control how different applications communicate with one another. There are 4 basic methods, which are also referred to as CRUD operations:</p>
+<ul>
+<li>POST: Create a record.</li>
+<li>GET: Read a record.</li>
+<li>PUT: Update a record.</li>
+<li>DELETE: Delete a record.</li>
+</ul>
+<p>REST APIs add no new capability to <a href="/notes/qmtwsju7ptkvc9h8zv8du8l">HTTP API</a>s. But it is an architectural style that was created in tandem with HTTP and most typically employs HTTP as its application layer protocol. However, REST isn’t always linked to HTTP. You can use other transfer protocols, such as FTP, SMTP, etc. and your API can still be RESTful.</p>
+<p>The majority of HTTP APIs are on the verge of becoming completely RESTful. But not all HTTP APIs are REST APIs. To be termed a REST API, the API must meet the following architectural requirements:</p>
+<ul>
+<li>
+<p><strong>Client-Server:</strong> A server oversees the application’s data and state in REST applications. The server connects with a client, which is responsible for handling user interactions. The two components are separated by a clear separation of responsibilities. As a result, you’ll be able to update and upgrade them in separate tracks.</p>
+</li>
+<li>
+<p><strong>Stateless:</strong> Client state is not maintained by servers; instead, clients handle their own application state. All of the information needed to process the client’s requests are contained in the requests to the server.</p>
+</li>
+<li>
+<p><strong>Cacheable:</strong> Servers must indicate whether or not their responses are cacheable. To boost performance, systems and clients might cache replies when it is convenient. They also get rid of non-cacheable data, so no client has to deal with stale data.</p>
+</li>
+<li>
+<p><strong>Uniform Interface:</strong> REST’s most well-known characteristics are that the emphasis on a uniform interface between components is the primary aspect that distinguishes the REST architectural style from other network-based approaches. Data is provided as resources through REST services, which have a consistent namespace.</p>
+</li>
+<li>
+<p><strong>Layered System:</strong> The system’s components can’t look beyond their own layer. This limited scope makes it simple to add load-balancers and proxies to increase authentication security and performance.</p>
+</li>
+</ul>
+<p>Via - <a href="https://hevodata.com/learn/http-api-vs-rest-api/">HTTP API vs REST API: 3 Critical Differentiators - Learn | Hevo</a></p>
+<pre class="language-json"><code class="language-json"><span class="token comment">//request</span>
+GET api/customers/<span class="token number">10</span>
+
+<span class="token comment">//response</span>
+            <span class="token punctuation">{</span>
+           <span class="token property">"customer"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+              <span class="token property">"id"</span><span class="token operator">:</span><span class="token string">"10"</span><span class="token punctuation">,</span>
+              <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"customer name"</span><span class="token punctuation">,</span>
+              <span class="token property">"age"</span><span class="token operator">:</span> <span class="token string">"28"</span>
+           <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/cyugd12d7bw3sghggvn1ttz">API</a></li>
+<li><a href="/notes/cwbupxqnwdcc2f9cfdsiqh9">AWS API Gateway</a></li>
+<li><a href="/notes/pj9hjv8un4c3f0si7fnmvu3">Microservices</a></li>
+</ul>

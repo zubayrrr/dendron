@@ -1,0 +1,27 @@
+<h1 id="aws-ecr"><a aria-hidden="true" class="anchor-heading" href="#aws-ecr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS ECR</h1>
+<p>It is simply a repository for container images. It is an alternative to Nexus, DockerHub</p>
+<p>Integrates well with other AWS services
+Eg: EKS with EC2 - easier to connect your cluster with ECR to fetch instances), Automatically update whenever a new version is published to registry.</p>
+<p>You basically create private repositories your application/docker images and you can start pushing different versions/tags of that images to the registries.</p>
+<p>And use the endpoint to download the images to the cluster.</p>
+<h2 id="create-a-repository"><a aria-hidden="true" class="anchor-heading" href="#create-a-repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create a repository</h2>
+<ol>
+<li>Create a repository on ECR</li>
+</ol>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657837712/wiki/ltcqb9ivijzbe6ztxx5m.png"></p>
+<ol start="2">
+<li>
+<p>Authenticate yourself with <code>docker login</code> in AWS ECR’s case, it’ll give you an <code>aws</code> cli command that uses <code>docker login</code> in the background.</p>
+</li>
+<li>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657837868/wiki/imnm6ysoqpfjh9xli9xv.png"></p>
+</li>
+</ol>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a></li>
+<li><a href="/notes/gvpkbgglehtr9ej5e0uj44j">AWS</a></li>
+<li><a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>

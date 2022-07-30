@@ -1,0 +1,21 @@
+<h1 id="creating-files-and-directories"><a aria-hidden="true" class="anchor-heading" href="#creating-files-and-directories"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating Files and Directories</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="/notes/a25t7tco2lrqbkbppyp43ow">touch</a> can be used to create files if they don't already exist.</li>
+<li>Simply: <code>touch fileName</code> or <code>touch "file name"</code> to create a file, Linux doesn't recommend file names that contains spaces use an underscore instead.</li>
+<li>The user should also have the permissions to create files in that directory.</li>
+</ul>
+<h2 id="creating-files-using-mkdir-private"><a aria-hidden="true" class="anchor-heading" href="#creating-files-using-mkdir-private"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating files using <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">mkdir (Private)</a></h2>
+<p><code>mkdir</code> command in Linux allows the user to create directories (also referred to as folders in some operating systems ). This command can create multiple directories at once as well as set the permissions for the directories. It is important to note that the user executing this command must have enough permissions to create a directory in the parent directory, or he/she may receive a ‘permission denied’ error.</p>
+<p>Syntax:</p>
+<p><code>mkdir [options...] [directories ...]</code></p>
+<blockquote>
+<p>—via <a href="https://www.geeksforgeeks.org/mkdir-command-in-linux-with-examples/">mkdir command in Linux with Examples - GeeksforGeeks</a></p>
+</blockquote>
+<p>Example:</p>
+<p><code>mkdir dirName</code> or <code>mkdir -v dirName</code> to make mkdir be verbose about the dir creation</p>
+<p><code>mkdir dir1 dir/dir2</code> to create multiple dirs or dirs inside of dirs(dir2 will be created inside dir, dir should already exist in order for dir2 to be created)</p>
+<p><code>mkdir -p first/second/third</code> to make mkdir create the parent dirs too along with the child dirs</p>

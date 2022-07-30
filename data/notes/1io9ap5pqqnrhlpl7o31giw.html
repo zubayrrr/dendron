@@ -1,0 +1,11 @@
+<h1 id="natural-join"><a aria-hidden="true" class="anchor-heading" href="#natural-join"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>NATURAL JOIN</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p>We don't need to explicity define what column names to compare, the engine will look at the tables and join them based on the common columns</p>
+<pre><code>SELECT
+        o.order_id,
+        c.first_name
+FROM orders o
+NATURAL JOIN customers c
+</code></pre>

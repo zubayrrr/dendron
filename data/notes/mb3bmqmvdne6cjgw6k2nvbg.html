@@ -1,0 +1,34 @@
+<h1 id="limit"><a aria-hidden="true" class="anchor-heading" href="#limit"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>LIMIT</h1>
+<ul>
+<li>
+<p>The LIMIT clause is used to set an upper limit on the number of <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">tuple (Private)</a>s or results returned by SQL.</p>
+</li>
+<li>
+<p>It is important to note that this clause is not supported by all SQL versions.</p>
+</li>
+<li>
+<p>The LIMIT clause can also be specified using the SQL 2008 <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">OFFSET (Private)</a>/<a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">FETCH (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">FIRST (Private)</a> clauses.</p>
+</li>
+<li>
+<p>The limit/offset expressions must be a non-negative integer.</p>
+<p>SELECT *
+FROM customers
+LIMIT 3
+--will output only first 3 customers(rows?)</p>
+<p>LIMIT 300
+--if there are 300 customers in the table that will be returned, otherwise only the existing columns will be returned</p>
+</li>
+</ul>
+<p>To use offset (in case of building pagination etc)</p>
+<pre><code>SELECT *
+FROM customers
+LIMIT 6, 3
+--will output columns after 6 rows and then return 3 columns
+</code></pre>
+<h3 id="example"><a aria-hidden="true" class="anchor-heading" href="#example"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example</h3>
+<pre><code>SELECT *
+FROM customers
+ORDER BY points DESC
+LIMIT 3
+</code></pre>
+<p>The order of clauses written matters.</p>

@@ -1,0 +1,19 @@
+<h1 id="watch"><a aria-hidden="true" class="anchor-heading" href="#watch"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>watch</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li><code>watch</code> is used to run any arbitrary command at regular intervals and displays the output of the command on the terminal window.</li>
+<li>It is useful when you have to execute a command repeatedly and watch the command output change over time. For example, you can use the watch command to monitor the system uptime or disk usage.</li>
+<li>The watch utility is a part of the procps (or procps-ng) package which is pre-installed on nearly all Linux distributions.</li>
+<li>You can use <code>-d</code> flag to view difference between two successive updates, <code>-n</code> option to change the update interval time.</li>
+<li>Examples:
+<ul>
+<li><code>watch -n 3 -d ls -l</code></li>
+<li><code>watch date</code></li>
+<li><code>watch ls</code></li>
+<li><code>watch -n 1 -d ifconfig</code> to keep track of network traffic</li>
+</ul>
+</li>
+</ul>

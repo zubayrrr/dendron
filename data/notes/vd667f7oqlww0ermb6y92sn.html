@@ -1,0 +1,38 @@
+<h1 id="linux-terminal-history"><a aria-hidden="true" class="anchor-heading" href="#linux-terminal-history"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Linux Terminal History</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>The Linux Terminal command history is saved in <code>.bash_history</code> by default.</li>
+<li>The number of commands saved in the history is controlled by an Environment Variable called $HISTFILESIZE</li>
+<li>To check $HISTFILESIZE: <code>echo $HISTFILESIZE</code></li>
+<li>To get the list of commands in history, run <code>history</code> in terminal, it'll return a list of commands stored in the memory, determined by the environment variable $HISTSIZE, which is the amount of commands stored in the memory, different from $HISTFILESIZE is the variable that controls the commands saved in <code>.bash_history</code>.</li>
+<li>History file (<code>.bash_history</code>) only gets updated when the user logs out.</li>
+<li>Use <code>!</code> followed by the number (<code>#</code>) of the command returned from <code>history</code> to run the command or <code>!-#</code> to run command from the bottom.</li>
+<li>To search and run a command that was last run in the history: <code>!commandName</code></li>
+<li>To search and print the command that was last run in the history: <code>!commandName:p</code></li>
+<li>To navigate through the command history, use Arrow keys or <code>Ctrl + n</code> or <code>Ctrl + p</code></li>
+<li><code>Ctrl + r</code> to so search the history, <code>Ctrl+ g</code> to quit and clear the line.</li>
+<li>To delete something from the history: <code>history -d #</code> where # is the number of command to be deleted from the history.</li>
+<li>To clear everything from the history: <code>history -c</code> and to permanently delete it<br>
+<code>history -c; history -w</code></li>
+</ul>
+<hr>
+<h3 id="run-a-command-without-saving-it-in-the-history"><a aria-hidden="true" class="anchor-heading" href="#run-a-command-without-saving-it-in-the-history"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Run a command without saving it in the history</h3>
+<ul>
+<li>Add a white space before your command to avoid it from being saved in the history. (this behaviour can differ from distro to distro).</li>
+<li>$HISTCONTROL is the environment variable that controls if we want to avoid saving a command to the history if it encounters a space before the command.</li>
+<li><code>HISTCONTROL=ignorespace</code> needs to be set to achieve this funtionality.</li>
+<li>Existing configuration for $HISTCONTROL can be checked with: <code>echo $HISTCONTROL</code></li>
+<li>HISTCONTROL can be set to <code>ignoredups</code> to avoid duplicate commands from being logged to history or it can be set to <code>ignoreboth</code> to utilize both <code>ignoredups</code> and <code>ignorespace</code>.</li>
+<li>These variables will only persists for the current session and will be lost if the session is restarted.</li>
+<li>To append it to the .bashrc file: <code>echo "HISTCONTROL=ignoreboth" >> .bashrc</code></li>
+<li>set the env variable <code>HISTTIMEFORMAT="%/d/%m/%y %T"</code> to get date/time stamp for the <code>history</code> command</li>
+<li>To make these settings persist, they need to be added to the <code>.bashrc</code> file.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>

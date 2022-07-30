@@ -1,0 +1,66 @@
+<h1 id="grep"><a aria-hidden="true" class="anchor-heading" href="#grep"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>grep</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>grep</code> stands for Globally Search For Regular Expression and Print out. It is a command line tool used in UNIX and Linux systems to search a specified pattern in a file or group of files.</p>
+<p>Syntax:</p>
+<ul>
+<li>grep 'word' filename</li>
+<li>fgrep 'word-to-search' file.txt</li>
+<li>grep 'word' file1 file2 file3</li>
+<li>grep 'string1 string2' filename</li>
+<li>cat otherfile | grep 'something'</li>
+<li>command | grep 'something'</li>
+<li>command option1 | grep 'data'</li>
+<li>grep –color 'data' fileName</li>
+<li>grep [-options] pattern filename</li>
+<li>fgrep [-options] words file</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li><code>grep user /etc/ssh/ssh_config</code> displays all the lines that contains the string "user" inside the file <code>ssh_config</code></li>
+<li><code>grep "command line" /etc/ssh/ssh_config</code> the string will have to be wrapped in <code>" "</code> if it contains multiple words</li>
+<li><code>grep -i "SSH" /etc/ssh/ssh_config</code> to search case-insensitively</li>
+<li><code>grep -i -n "SSH" /etc/ssh/ssh_config</code> -n to print the line number of the searched results, you can also group the options such as <code>-in</code></li>
+<li><code>grep -w body /etc/passwd</code> -w to search for whole word</li>
+<li><code>grep -v kernel /var/log/dmesg</code> -v to invert the match, will return all the lines that do not contain the string "kernel"</li>
+<li><code>grep -a root /var/log/auth.log</code> -a to search a binary file (data) as if it were a regular text file.</li>
+<li><code>sudo grep -R 127.0.0.1 /etc</code> -R to search recursively in all the files inside the <code>/etc</code> dir</li>
+<li>Use <code>-s</code> to suppress error messages such as <code>"Permission denied"</code></li>
+<li>Use <code>-c</code> to get just the count for the matched pattern: <code>grep -c error /var/log/syslog</code> or<br>
+<code>grep error /var/log/syslog | wc -l</code></li>
+</ul>
+<hr>
+<h3 id="filtering-stdout-of-other-commands-using-grep"><a aria-hidden="true" class="anchor-heading" href="#filtering-stdout-of-other-commands-using-grep"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Filtering <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> of other commands using <code>grep</code></h3>
+<ul>
+<li><code>dmesg | grep error</code></li>
+<li><code>dmesg | grep -A 3 -B 4 error</code> will print (-A) 3 lines after and (-B) 4 lines before the string "error"</li>
+<li><code>dmesg | grep -C 3 error</code> will print (-C) 3 lines before and after the string "error"</li>
+</ul>
+<!-- end list -->
+<ul>
+<li><code>sudo netstat -tupan | grep portNumber</code></li>
+</ul>
+<p>using <a href="/notes/05txufwh4u6s1aop2eky199">netstat</a>, <a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a></p>
+<ul>
+<li><code>ls -RF /etc | grep /</code> to filter the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> of <a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a> for dirs or<br>
+inverse it using -v option <code>ls -RF /etc | grep -v /</code> to print all files that are not dirs</li>
+<li>Using <a href="/notes/wefzur43lxsejxhpzya0oz1">regular expression</a> to exclude empty lines:<br>
+<code>ls -Rf /etc | grep -v / | grep -v "^$"</code> the <a href="/notes/wefzur43lxsejxhpzya0oz1">regular expression</a> for a space is <code>^$</code>, carrot sign for beginning and dollar sign for the end of the line, so exclude anything that has a character in the beginning and the end of a line</li>
+<li><code>sudo ls -RF /etc | grep -v / | grep -v "^$" | sort -r | less</code> sorted by name in reverse alphabetical order, remove <code>-r</code> to sort in the alphabetical order</li>
+</ul>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">strings (Private)</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/4w41i16jw8ybk0trp8xd3le">Checking for Listening Ports</a></li>
+<li><a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+<li><a href="/notes/43phw5fod5oq1gnkgfgplsf">Failed Authentications</a></li>
+<li><a href="/notes/en7wdmf7rc8a7l3s8940klv">Get MAC Address from ifconfig</a></li>
+<li><a href="/notes/jk679m664x5iqeq1uchums6">Grep to filter out listening ports</a></li>
+<li><a href="/notes/duu1hv74c23zfwgnsoq22i9">Piping</a></li>
+<li><a href="/notes/ei7r1wwxflu59yd7m0tx6j5">ps</a></li>
+<li><a href="/notes/mekmie4q7zrovcr0dmvzuqh">tee</a></li>
+</ul>

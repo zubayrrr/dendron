@@ -1,0 +1,45 @@
+<h1 id="automate-cleanup-of-old-snapshots"><a aria-hidden="true" class="anchor-heading" href="#automate-cleanup-of-old-snapshots"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Automate cleanup of old Snapshots</h1>
+<ul>
+<li>Related: <a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a>, <a href="/notes/pr716orm61uub9wy1ksco8h">Automate Data Backup of EC2 instances</a>, <a href="/notes/fsmsti0qns6uixhjwtqk7p6">AWS EBS</a></li>
+</ul>
+<hr>
+<p><strong>Premise</strong></p>
+<p>If we have a scheduler creating a lot of snapshots everyday, we need a way of cleaning up those old snapshots. We can schedule a new job for cleaning old snapshots every week/month.</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> boto3
+<span class="token keyword">from</span> operator <span class="token keyword">import</span> itemgetter
+
+ec2_client <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'ec2'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-west-3"</span><span class="token punctuation">)</span>
+
+volumes <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>describe_volumes<span class="token punctuation">(</span>
+    Filters<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">'Name'</span><span class="token punctuation">:</span> <span class="token string">'tag:Name'</span><span class="token punctuation">,</span>
+            <span class="token string">'Values'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'prod'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> volume <span class="token keyword">in</span> volumes<span class="token punctuation">[</span><span class="token string">'Volumes'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+    snapshots <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>describe_snapshots<span class="token punctuation">(</span>
+        OwnerIds<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'self'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        Filters<span class="token operator">=</span><span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token string">'Name'</span><span class="token punctuation">:</span> <span class="token string">'volume-id'</span><span class="token punctuation">,</span>
+                <span class="token string">'Values'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>volume<span class="token punctuation">[</span><span class="token string">'VolumeId'</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+
+    sorted_by_date <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>snapshots<span class="token punctuation">[</span><span class="token string">'Snapshots'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> key<span class="token operator">=</span>itemgetter<span class="token punctuation">(</span><span class="token string">'StartTime'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> snap <span class="token keyword">in</span> sorted_by_date<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        response <span class="token operator">=</span> ec2_client<span class="token punctuation">.</span>delete_snapshot<span class="token punctuation">(</span>
+            SnapshotId<span class="token operator">=</span>snap<span class="token punctuation">[</span><span class="token string">'SnapshotId'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a></li>
+</ul>

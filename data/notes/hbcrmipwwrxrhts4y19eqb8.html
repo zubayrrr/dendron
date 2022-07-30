@@ -1,0 +1,113 @@
+<h1 id="systemd"><a aria-hidden="true" class="anchor-heading" href="#systemd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>systemd</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system.</p>
+<p>systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic. systemd supports <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SysV (Private)</a> and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">LSB (Private)</a> init scripts and works as a replacement for <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">sysvinit (Private)</a>.</p>
+<p>Other parts include a logging daemon, utilities to control basic system configuration like the hostname, date, locale, maintain a list of logged-in users and running containers and virtual machines, system accounts, runtime directories and settings, and daemons to manage simple network configuration, network time synchronization, log forwarding, and name resolution.</p>
+<blockquote>
+<p>— via <a href="https://systemd.io/">systemd</a></p>
+</blockquote>
+<ul>
+<li>It’s name comes from System Management Daemon.</li>
+<li>systemd is the Linux initialisation system during Linux boot and startup process.</li>
+<li>The Linux boot process has the following phases:
+<ul>
+<li>First, the system powers up</li>
+<li>Then, the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">bootloader (Private)</a> such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">grub (Private)</a> loads the kernel.</li>
+<li>Then, the kernel loads up initial RAM disk, which loads the system drives and looks for the root file system.  (traditionally known as “userland” components)</li>
+<li>Once the kernel is setup - it begins the systemd init system.</li>
+<li>systemd starts with PID 1 and takes over and continues to mount the filesystem and starts services.</li>
+</ul>
+</li>
+</ul>
+<p>The first service is <code>systemd</code>, in the process list it called as <code>init</code> for backwards compatibility.</p>
+<pre><code>ps -ef | less
+</code></pre>
+<ul>
+<li>systemd starts services in parallel unlike <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">sysvinit (Private)</a> which initialises services sequentially.</li>
+</ul>
+<p>To display how long boot process took</p>
+<pre><code>systemd-analyze
+</code></pre>
+<p>To print all running units by the time it took for them to initialise</p>
+<pre><code>systemd-analyze blame
+</code></pre>
+<h2 id="serviceunit"><a aria-hidden="true" class="anchor-heading" href="#serviceunit"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>service/unit</h2>
+<p>In <code>systemd</code>, the target of most actions are “units”, which are resources that <code>systemd</code> knows how to manage. Units are categorized by the type of resource they represent and they are defined with files known as unit files. The type of each unit can be inferred from the suffix on the end of the file.</p>
+<p>Although it is technically correct to classify a unit as a service, in systemd, units tend to be more abstract and often comprised of resource pools, filesystem mounts, network protocols, devices, and native Linux services.</p>
+<p>Units are defined in a file known as a Unit file. Systemd can manage unit files from any location, but their main location is <code>/etc/systemd/system</code> directory. Unit files in this directory are mainly user-provided. Compared to other locations, the systemd manager will assign higher precedence to unit files within the above directory.</p>
+<pre><code>sudo systemctl list-units
+
+# or
+
+sudo systemctl list-units --all
+
+# to show all installed unit files
+
+sudo systemctl list-unit-files
+</code></pre>
+<p>The following are the unit files found in systemd.</p>
+<ul>
+<li><strong>.service</strong> – Service unit files define how systemd manages a service. They typically end in .service extension. Service unit files describe how to start, stop, reload and restart a service and the dependencies required to manage the service.</li>
+<li><strong>.target</strong> – Target units provide synchronization points to other services during startup.</li>
+<li><strong>.slice</strong> – slice unit files encode information about systemd slice units. Slice units are part of the Linux control group tree that allows resource allocation and restriction to processes associated with a slice. You can learn more about systemd resource control <a href="https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html">here</a>.</li>
+<li><strong>.socket</strong> – A socket unit file encodes information about network socket, IPC, or a file system FIFO buffer controlled and managed for systemd, which systemd uses for socket-based activation.</li>
+<li><strong>.device</strong> – Device unit configurations define a device unit as exposed in the sysfs/udev device tree.</li>
+<li><strong>.timer</strong> – Timer units define a timer managed and controlled by systemd for scheduled activation.</li>
+<li><strong>.snapshot</strong> – Snapshot unit files allow rollback of the current state of the system after making changes. We create them using the systemd snapshot command.</li>
+<li><strong>.swap</strong> – Swap units encode information about swap space, such as the device name or path of the swap space.</li>
+<li><strong>.mount</strong> – mount unit files encode information about mount points in the system managed by systemd.</li>
+<li><strong>.automount</strong> – these are unit files that define mount points that are automatically mounted.</li>
+</ul>
+<h2 id="systemctl"><a aria-hidden="true" class="anchor-heading" href="#systemctl"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>systemctl</h2>
+<p><code>systemctl</code> is a Linux command-line utility used to control and manage systemd and services. You can think of Systemctl as a control interface for Systemd init service, allowing you to communicate with systemd and perform operations.</p>
+<p>Systemctl is a successor of Init.d system; it contains libraries, daemons, and utilities you can use to manage services in the Linux system.</p>
+<p>To start a <code>systemd</code> service, executing instructions in the service’s unit file, use the <code>start</code> command. If you are running as a non-root user, you will have to use <code>sudo</code> since this will affect the state of the operating system:</p>
+<pre><code>sudo systemctl start application.service
+
+# or you can skip .service
+
+sudo systemctl start application
+</code></pre>
+<p>To stop/restart</p>
+<pre><code>sudo systemctl stop application
+sudo systemctl restart application
+</code></pre>
+<p>restart vs reload</p>
+<p><code>restart</code> will terminate the service in question and restart it; <code>reload</code> will only reload the configuration file of the service. Not all services might support <code>reload</code> in which case you can use <code>reload-or-restart</code></p>
+<p>To check status</p>
+<pre><code>sudo systemctl status application
+</code></pre>
+<p>To enable or disable</p>
+<p><code>enable</code> will enable a service to start automatically at boot time vice versa for <code>disable</code>
+check with <code>is-enabled</code> (these settings only take place at boot time and won’t effect current session)</p>
+<pre><code>sudo systemctl enable application
+</code></pre>
+<p>To see a unit’s dependency tree</p>
+<pre><code>systemctl list-dependencies sshd.service
+</code></pre>
+<p>Masking</p>
+<p><code>systemd</code> also has the ability to mark a unit as <em>completely</em> unstartable, automatically or manually, by linking it to <code>/dev/null</code>. This is called masking the unit, and is possible with the <code>mask</code> command:</p>
+<p>This will prevent the Nginx service from being started, automatically or manually, for as long as it is masked.</p>
+<pre><code>sudo systemctl mask nginx.service
+
+# to unmask
+
+sudo systemctl unmask nginx.service
+</code></pre>
+<h2 id="references"><a aria-hidden="true" class="anchor-heading" href="#references"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>References</h2>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units">How To Use Systemctl to Manage Systemd Services and Units | DigitalOcean</a></li>
+<li><a href="https://linuxhint.com/systemctl-utility-linux/">How to Use Systemctl Utility in Linux</a></li>
+<li><a href="https://www.computernetworkingnotes.com/linux-tutorials/systemd-units-explained-with-types-and-states.html">Systemd Units Explained with Types and States</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/tubz5rys0brzeqe3c6frkw5">nohop</a></li>
+<li><a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a></li>
+<li><a href="/notes/85wfonu33weha94nf7wyxcc">RUID and EUID</a></li>
+</ul>

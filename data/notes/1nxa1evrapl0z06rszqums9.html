@@ -1,0 +1,52 @@
+<h1 id="session-layer---osi"><a aria-hidden="true" class="anchor-heading" href="#session-layer---osi"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Session Layer - OSI</h1>
+<h1 id="layer-5--session-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-5--session-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 5 – Session Layer</h1>
+<p>Think of a session as a conversation that must be kept separate from others to prevent intermingling of the data.</p>
+<p>This layer permits the users of different platforms to set up an active communication session between themselves.</p>
+<p>The main function of this layer is to provide sync in the dialogue between the two distinctive applications. The synchronization is necessary for efficient delivery of data without any loss at the receiver end.</p>
+<p><strong>Example.</strong></p>
+<p>Assume that a sender is sending a big data file of more than 2000 pages. This layer will add some checkpoints while sending the big data file. After sending a small sequence of 40 pages, it ensures the sequence &#x26; successful acknowledgment of data.</p>
+<p>If verification is OK, it will keep repeating it further till the end otherwise it will re-synchronize and re-transmit.</p>
+<p>This will help in keeping the data safe and the whole data host will never completely get lost if some crash happens. Also, token management, will not allow two networks of heavy data and of the same type to transmit at the same time.</p>
+<h3 id="setting-up-a-session"><a aria-hidden="true" class="anchor-heading" href="#setting-up-a-session"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setting up a Session</h3>
+<ul>
+<li>Check user credentials</li>
+<li>Assign numbers to session to identify them</li>
+<li>Negotiate services needed for session</li>
+<li>Negotiate who begins sending data</li>
+</ul>
+<hr>
+<h3 id="maintaining-session"><a aria-hidden="true" class="anchor-heading" href="#maintaining-session"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Maintaining Session</h3>
+<ul>
+<li>Transfer the data</li>
+<li>Reestablish a disconnected session</li>
+<li>Acknowledging receipt of data</li>
+</ul>
+<hr>
+<h3 id="tearing-down-a-session"><a aria-hidden="true" class="anchor-heading" href="#tearing-down-a-session"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tearing Down a Session</h3>
+<ul>
+<li>Due to mutual agreement
+<ul>
+<li>After the transfer is done</li>
+</ul>
+</li>
+<li>Due to other party disconnecting</li>
+</ul>
+<hr>
+<h3 id="layer-5-examples"><a aria-hidden="true" class="anchor-heading" href="#layer-5-examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 5 Examples</h3>
+<ul>
+<li><a href="/notes/hpafiuwhvr1px06pf2jeabw">H.323</a>
+<ul>
+<li>Used to setup, maintain, and tear down a voice/video connection.</li>
+</ul>
+</li>
+<li><a href="/notes/ltq808rubuo02srzllvbth0">NetBIOS</a>
+<ul>
+<li>Used by computers to share files over a network.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a></li>
+</ul>

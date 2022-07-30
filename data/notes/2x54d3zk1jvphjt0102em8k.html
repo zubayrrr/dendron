@@ -1,0 +1,21 @@
+<h1 id="pgrep"><a aria-hidden="true" class="anchor-heading" href="#pgrep"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>pgrep</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>pgrep</code> looks through the currently running processes and lists the process IDs which match the selection criteria to stdout(to the terminal). All the criteria have to match.</p>
+<p>For example</p>
+<p><code>pgrep -u root sshd</code> will only list the processes called sshd AND owned by root. On the other hand, <code>pgrep -u root,daemon</code> will list the processes owned by root OR daemon.</p>
+<ul>
+<li><code>pgrep -l sshd</code> to get both <a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a> IDs and names</li>
+<li><code>pgrep -l cups</code> its not looking for the whole name but also partial names</li>
+</ul>
+<p>See also: <a href="/notes/w31t92yckdu68yntiofqbzu">pstree</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+<li><a href="/notes/ungvanr0fogsuwsbfof5c4x">pkill</a></li>
+<li><a href="/notes/ei7r1wwxflu59yd7m0tx6j5">ps</a></li>
+<li><a href="/notes/my6skj9hdj9nn7unxwbcudb">SIGHUP</a></li>
+</ul>

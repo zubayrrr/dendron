@@ -1,0 +1,29 @@
+<h1 id="lscpu"><a aria-hidden="true" class="anchor-heading" href="#lscpu"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>lscpu</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>lscpu is a command-line utility to display information about the CPU architecture. It reads the CPU architecture information from <strong>sysfs</strong> and <strong>/proc/cpuinfo</strong> files and prints in the terminal. The information includes the number of CPUs, threads, cores, sockets, and Non-Uniform Memory Access (NUMA) nodes. It also displays CPU caches and cache sharing, family, model, bogoMIPS, byte order, and stepping.</p>
+<pre><code>lscpu -[options]
+</code></pre>
+<p>Some available options in lscpu command are:</p>
+<ul>
+<li><strong>-a</strong>: print both online and offline CPUs</li>
+<li><strong>-b</strong>: print online CPUs only</li>
+<li><strong>-c</strong>: print offline CPUs only</li>
+<li><strong>-e</strong>: print in an extended readable format</li>
+<li><strong>-p</strong>: print CPU information in parsable format</li>
+</ul>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<pre><code>lscpu | grep -i mhz
+</code></pre>
+<pre><code>lscpu -J
+</code></pre>
+<p>You can use <code>-e</code> or <code>--extended</code> option to print the CPU information in an extended human-readable format.</p>
+<pre><code>lscpu -e
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

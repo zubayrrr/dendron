@@ -1,0 +1,41 @@
+<h1 id="sticky-bit"><a aria-hidden="true" class="anchor-heading" href="#sticky-bit"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Sticky Bit</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<h3 id="special-permission---sticky-bit"><a aria-hidden="true" class="anchor-heading" href="#special-permission---sticky-bit"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>special Permission - Sticky Bit</h3>
+<ul>
+<li>The Sticky Bit is applied to directories</li>
+<li>A user may only delete files that he owns or for which he has explicit write permission granted, even when he has write access to the directory</li>
+<li>The sticky bit allows you to create a directory that everyone can use as a shared file storage. The files are protected because, no one can delete anyone else's files.</li>
+<li>Absolute Mode: <code>chmod 1xxx directory</code></li>
+<li>Relative Mode: <code>chmod o+t directory</code></li>
+<li><code>ls -ld /temp/</code>
+<ul>
+<li><code>drwxrwxrwxt 2 root root 4096 iul 14 13:45 /temp/</code></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><code>sudo su</code></li>
+<li><code>mkdir /temp</code></li>
+<li><code>chmod 777 /temp</code></li>
+</ul>
+<p>A nonprivileged user(inside <code>/temp</code>):</p>
+<ul>
+<li><code>touch file1 file2</code></li>
+<li><code>chmod 600 file*</code></li>
+</ul>
+<p>Now as per the parent directory's permissions, any user should be able to delete the files that the nonprivileged user created. To mitigate this issue</p>
+<ul>
+<li><code>sudo su</code></li>
+<li><code>chmod 1777 /temp</code> or <code>chmod o+t /temp</code></li>
+</ul>
+<p>To verify <code>ls -ld /temp</code> or <code>stat /temp</code> you should be able to find a <code>t</code> appended to the existing permissions. If you see an uppercase <code>T</code> instead, it means the dir doesn't have [x] executable permissions(uncommon).</p>
+<p><code>/var/tmp</code> and <code>/tmp/</code> are also dirs with Sticky Bit set.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+</ul>

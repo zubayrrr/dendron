@@ -1,0 +1,11 @@
+<h1 id="dag"><a aria-hidden="true" class="anchor-heading" href="#dag"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>DAG</h1>
+<ul>
+<li>Areas: <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+</ul>
+<hr>
+<p>Directed Acyclic Graph</p>
+<p>Spark has a DAG scheduler in the background which is tracking the transformations and steps which is part of your applications.</p>
+<p>It is the scheduling layer of the Spark Architecture that implements stage-oriented scheduling and eliminates that hadoop <a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a> multistage execution model.</p>
+<p>If you're processing data using Spark applications in a Spark platform(whether standalone or in a hadoop cluster), for every step you do as part of your application, it creates an <a href="/notes/2vn2g9mhmi624b83rl5se0k">RDD</a>, it becomes part of your DAG. The DAG scheduler is already aware of what steps are involved in DAG hence it comes up with a plan for executing the all the steps within the DAG. <span class="underline">If only and only if an action is invoked.</span></p>
+<p>Check <a href="https://data-flair.training/blogs/dag-in-apache-spark/">https://data-flair.training/blogs/dag-in-apache-spark/</a></p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.muzlc82nhqb.png"></p>

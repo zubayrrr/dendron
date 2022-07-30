@@ -1,0 +1,39 @@
+<h1 id="getting-root-access"><a aria-hidden="true" class="anchor-heading" href="#getting-root-access"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Getting root Access</h1>
+<ul>
+<li>on Linux there are 2 main categories of users:
+<ul>
+<li>Non-privileged users - have no special rights on the system</li>
+<li>The root user (superuser or the administrator)</li>
+</ul>
+</li>
+<li>root privileges are the powers taht the root account has on the system. the root account is the most privileged on the system and has absolute power over it.</li>
+<li>Only one root exists on any Linux system.</li>
+<li>It is not recommend to use root for ordinary tasks. When root permissions are needed you simply become root only to performt hat particular administrative task.</li>
+</ul>
+<hr>
+<ul>
+<li>Become root temporarily(for as long as the terminal session is open):<br>
+<code>sudo su</code> will prompt user to enter their password (NOT the root password), you also do that same using <code>sudo -i</code></li>
+<li><a href="/notes/jqyxvlopjrxj27o648plyk9">sudo</a> stands for "substitute user do" and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.su (Private)</a> stands for "substitute user".</li>
+<li><code>sudo</code> will only let you use <code>su</code> if you're part of the <code>group sudo</code> (<code>group wheel</code> on CentOS).</li>
+<li>Run the <code>id</code> command to check what user you're currently logged in as.</li>
+</ul>
+<hr>
+<ul>
+<li>To login in to the root environment, <code>sudo su -</code>, the current working directory will be <code>/root</code>.</li>
+<li>root user prompt ends in <code>#</code> as compared to other users whose prompt ends in <code>$</code>.</li>
+</ul>
+<hr>
+<ul>
+<li>To enter a command as root user without changing user, just append <code>sudo</code> before the command you want to enter (again, this will only work if the user is part of the <code>group sudo</code>).</li>
+<li><code>sudo</code> is cached in the terminal for 5 mins from the time password was entered.</li>
+<li>By running <code>sudo -v</code> the user can add 5 more mins to the cached credentials without running a command.</li>
+<li>To invalidated cached credentials, run <code>sudo -k</code></li>
+</ul>
+<hr>
+<ul>
+<li>In certain distros (such as Ubuntu), root password is not defined by default(you cannot login as root at all(using <code>su</code> command) unless you set a password for the root user).</li>
+<li>To set password for the root user: <code>sudo passwd root</code></li>
+<li>To temporarily logging in as root: <code>su</code> and enter the root user's password.</li>
+</ul>
+<p>See also: <a href="/notes/ktm0z46nm4ur05mdk0nesij">passwd</a></p>

@@ -1,0 +1,20 @@
+<h1 id="lsattr"><a aria-hidden="true" class="anchor-heading" href="#lsattr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>lsattr</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>lsattr</code> is used to display the file attributes for the subdirectories of the current directory.</p>
+<p><code>-</code> indicates attribute is cleared and alphabets represent different attributes such as:</p>
+<ul>
+<li>The <code>e</code> attribute indicates that the file is using extents for mapping the blocks on disk. It may not be removed using <a href="/notes/zm7piwt6fbobsmqwd1yt057">chattr</a>.</li>
+<li>The <code>I</code> attribute is used by the htree code to indicate that a directory is being indexed using hashed trees. It may not be set or reset using <a href="/notes/zm7piwt6fbobsmqwd1yt057">chattr</a>, although it can be displayed by <code>lsattr</code>.</li>
+</ul>
+<p><code>lsattr -R dirName</code> to list attributes recursively(of the subdirectories)</p>
+<p>For more: man <a href="/notes/zm7piwt6fbobsmqwd1yt057">chattr</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/zm7piwt6fbobsmqwd1yt057">chattr</a></li>
+<li><a href="/notes/qfc3k99hj61yzdpez1zbfg4">File Attributes</a></li>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+</ul>

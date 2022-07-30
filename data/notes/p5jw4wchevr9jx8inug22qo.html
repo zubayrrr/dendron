@@ -1,0 +1,13 @@
+<h1 id="delete-from"><a aria-hidden="true" class="anchor-heading" href="#delete-from"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>DELETE FROM</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p>We use <code>DELETE FROM</code> statement to delete records from a table</p>
+<pre><code>DELETE FROM invoices
+-- WHERE can be optionally used to search and filter out results to delete
+WHERE client_id =
+-- using subquery
+(SELECT *
+FROM clients
+WHERE name = 'Myworks')
+</code></pre>

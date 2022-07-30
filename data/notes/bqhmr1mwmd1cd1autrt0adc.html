@@ -1,0 +1,87 @@
+<h1 id="tar"><a aria-hidden="true" class="anchor-heading" href="#tar"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>tar</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>tar</code> stands for tape archive, it is used to create compressed or uncompressed Archive files and also maintain and modify them. <code>tar</code> doesn't do compression by default but by passing specific options we can have it compress our files.</p>
+<p>An Archive file is a file that is composed of one or more files along with metadata. Archive files are used to collect multiple data files together into a single file for easier portability and storage, or simply to compress files to use less storage space.</p>
+<p>Archiving and Compressing are two different processes, for example:</p>
+<ul>
+<li>If you take 10 files of 100KB and archive them, the resulting single file would be 1000KB</li>
+<li>on the other hand, compressing those 10 files 100KB would result in a single file of varying size(close to the original fle), depending on the type of file. In general, text files have higher compression ratio.</li>
+</ul>
+<h3 id="options"><a aria-hidden="true" class="anchor-heading" href="#options"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Options</h3>
+<ul>
+<li>-c : Creates Archive</li>
+<li>-x : Extract the archive</li>
+<li>-f : creates archive with given filename</li>
+<li>-t : displays or lists files in archived file</li>
+<li>-u : archives and adds to an existing archive file</li>
+<li>-v : Displays Verbose Information</li>
+<li>-A : Concatenates the archive files</li>
+<li>-z : zip, tells tar command that creates tar file using gzip</li>
+<li>-j : filter archive tar file using tbzip</li>
+<li>-W : Verify a archive file</li>
+<li>-r : update or add file or directory in already existed .tar file</li>
+</ul>
+<hr>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li><code>sudo tar -czvf /tmp/etc.tar.gz /etc</code>
+<ul>
+<li><code>c</code> to create an archive</li>
+<li><code>z</code> to use <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">gzip (Private)</a> for compression</li>
+<li><code>v</code> to make the process verbose</li>
+<li><code>f</code> to use the given filename for the generated <code>tarball</code> (the order of the option followed by the name of the file matters)</li>
+</ul>
+</li>
+<li><code>sudo tar -cjvf /tmp/etc.tar.bz2 /etc</code>
+<ul>
+<li><code>j</code> to use <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">bzip2 (Private)</a> for compression</li>
+</ul>
+</li>
+<li><code>sudo tar -czvf archive.tar.gz /etc/passwd /etc/group /var/log/dmesg /etc/ssh</code>
+<ul>
+<li>To compress and archive multiple files/dirs</li>
+</ul>
+</li>
+<li><code>tar --exclude='*.mkv --exclude='.config' --exclude='.cache' -czvf myHome.tar.gz ~</code>
+<ul>
+<li>To exclude any files from archival</li>
+</ul>
+</li>
+<li><code>tar -xzvf etc.tar.gz</code>
+<ul>
+<li>To extract (<code>x</code>) an archive</li>
+</ul>
+</li>
+<li><code>tar -xjvf etc.tar.baz2 -C /path-to-dir/</code>
+<ul>
+<li><code>-C</code> followed by path, to extract to a specific dir</li>
+</ul>
+</li>
+<li><code>tar -tf etc.tar.bz2 | grep sshd_config</code>
+<ul>
+<li>To search if a specific file is part of an archive</li>
+</ul>
+</li>
+<li><code>sudo tar -cjvf etc-$(date + %F).tar.bz2 /etc</code>
+<ul>
+<li>To dynamically add current date to the filename using substitution($<a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">date (Private)</a> +%f)</li>
+</ul>
+</li>
+<li><code>tar -xvf coreutils.tar.xz</code>
+<ul>
+<li>Files with <code>.xz</code> extension are compressed with <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">LZMA (Private)</a></li>
+<li><code>tar</code> will autodetect the compression type and extract the file if you don't pass any compression type options (<code>z</code> or <code>j</code>)</li>
+</ul>
+</li>
+</ul>
+<h3 id="misc-notes"><a aria-hidden="true" class="anchor-heading" href="#misc-notes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Misc Notes</h3>
+<ul>
+<li><code>tar</code> works recursively by default</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">bzip2 (Private)</a> does better compression</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">gzip (Private)</a>) and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">bzip2 (Private)</a> are incompatiable with each other</li>
+<li>Do not pass any option(<code>z</code> or <code>j</code> ) to have <code>tar</code> autodetect the type of compression and uncompress accordingly.</li>
+</ul>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">gunzip (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">gzip (Private)</a>), <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">bzip2 (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">bunzip2 (Private)</a></p>

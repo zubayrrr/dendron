@@ -1,0 +1,130 @@
+<h1 id="sql"><a aria-hidden="true" class="anchor-heading" href="#sql"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SQL</h1>
+<h3 id="sql-stands-for-structured-query-language-mysql-is-a-relational-database-everycolumn-row-is-related-to-each-other"><a aria-hidden="true" class="anchor-heading" href="#sql-stands-for-structured-query-language-mysql-is-a-relational-database-everycolumn-row-is-related-to-each-other"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SQL stands for Structured Query Language, MySQL is a relational database, every(column, row) is related to each other.</h3>
+<p>SQL is not case sensitive but as an industry standard practice, use uppercase for SQL keywords and lowercase for all the other things when writing queries.</p>
+<p>Order of the clauses matter</p>
+<ol>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SELECT (Private)</a></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">FROM (Private)</a></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">WHERE (Private)</a></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ORDER BY (Private)</a></li>
+</ol>
+<p>Line breaks, whitespaces, tabs are ignored when executing SQL code, each clause are written on a new line for better readability.</p>
+<ul>
+<li>Composite primary key contains more than one column</li>
+</ul>
+<h2 id="getting-started"><a aria-hidden="true" class="anchor-heading" href="#getting-started"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Getting started</h2>
+<p>To get started, install:</p>
+<ul>
+<li><code>sudo apt-get install mysql-server mysql-client libmysqlclient-dev</code></li>
+<li>Also install <a href="https://www.mysql.com/products/workbench/">Mysql Workbench</a></li>
+<li>See <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Access denied for user 'root'@'localhost' (Private)</a></li>
+</ul>
+<h2 id="retrieving-data-from-a-single-table"><a aria-hidden="true" class="anchor-heading" href="#retrieving-data-from-a-single-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Retrieving Data From a Single Table</h2>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SELECT (Private)</a> clause</li>
+</ul>
+<h3 id="combine-multiple-multiple-search-conditions-when-filtering-data"><a aria-hidden="true" class="anchor-heading" href="#combine-multiple-multiple-search-conditions-when-filtering-data"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Combine multiple multiple search conditions when filtering data</h3>
+<ul>
+<li>The AND, OR and NOT operators</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">IN (Private)</a> operator</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">BETWEEN (Private)</a> operator</li>
+<li><a href="/notes/d7h99jjn2d17ybx1f4pj57c">LIKE</a>command</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">REGEXP (Private)</a> command</li>
+<li><a href="/notes/q93upvd18jszt7x1jl8odp8">NULL</a> value</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ORDER BY (Private)</a> clause</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">LIMIT (Private)</a> clause</li>
+</ul>
+<hr>
+<h2 id="retrieving-data-from-multiple-tables"><a aria-hidden="true" class="anchor-heading" href="#retrieving-data-from-multiple-tables"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Retrieving Data From Multiple Tables</h2>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">JOIN (Private)</a> operator</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">USING (Private)</a> clause</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">NATURAL JOIN (Private)</a> - not recommend, can produce unexpected results</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">CROSS JOIN (Private)</a></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">UNION (Private)</a> - combine rows from multiple tables and queries</li>
+</ul>
+<hr>
+<h2 id="inserting-updating-and-deleting-data"><a aria-hidden="true" class="anchor-heading" href="#inserting-updating-and-deleting-data"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Inserting, Updating, and Deleting Data</h2>
+<h3 id="column-attributes"><a aria-hidden="true" class="anchor-heading" href="#column-attributes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Column attributes</h3>
+<ul>
+<li>Column name</li>
+<li>Datatype:
+<ul>
+<li><code>INT</code> (whole numbers, no decimals)</li>
+<li><code>VARCHAR</code> (variable-characters used for strings, textual values, max length can be assigned inside paranthesis)</li>
+<li><code>DATE</code></li>
+<li><code>CHAR</code> (unlike VARCHAR, max length assigned to CHAR is not variable and will be assigned indefinitely no matter the input size of the string)</li>
+</ul>
+</li>
+<li>Primary Key</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">NOT NULL (Private)</a></li>
+<li><code>AUTO_INCREMENT</code> (often used with primary key columns, mysql or other engines will auto assign a value)</li>
+<li>Default values/Expression (can be specified in this column)</li>
+</ul>
+<h2 id="inserting"><a aria-hidden="true" class="anchor-heading" href="#inserting"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Inserting</h2>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">INSERT INTO (Private)</a></li>
+</ul>
+<h2 id="creating"><a aria-hidden="true" class="anchor-heading" href="#creating"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating</h2>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">CREATE TABLE (Private)</a></li>
+</ul>
+<p>The SELECT clause on the above query is known as a <code>Subquery</code>, another example of Subquery:</p>
+<pre><code>-- right click on orders_archived table and truncate to delete all records
+INSERT INTO orders_archived
+SELECT *
+FROM orders
+WHERE order_date &#x3C; '2019-01-01'
+</code></pre>
+<h2 id="updating"><a aria-hidden="true" class="anchor-heading" href="#updating"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Updating</h2>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">UPDATE (Private)</a></li>
+</ul>
+<h2 id="deleting-rows"><a aria-hidden="true" class="anchor-heading" href="#deleting-rows"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Deleting Rows</h2>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">DELETE FROM (Private)</a></li>
+</ul>
+<hr>
+<h2 id="summarizing-data"><a aria-hidden="true" class="anchor-heading" href="#summarizing-data"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Summarizing Data</h2>
+<ul>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Aggregate Functions (Private)</a></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">GROUP BY (Private)</a> clause</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">HAVING (Private)</a> clause</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ROLLUP (Private)</a> operator</li>
+</ul>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #b79400;" href="/notes/e2nal5eqj2mu8d029dnoi5c">areas</a></li>
+</ol>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/z6st1cdnl60ecoyrkrw06ng">Access denied for user 'root'@'localhost'</a></li>
+<li><a href="/notes/054q9b0xp93e3vftctft14r">Aggregate Functions</a></li>
+<li><a href="/notes/lwybnx5oi4zy5x8triu0de4">AND OR NOT</a></li>
+<li><a href="/notes/59unjworqzssqywyrxvn2mk">BETWEEN</a></li>
+<li><a href="/notes/pnf9swwp18sfso3vhamq4zo">CREATE TABLE</a></li>
+<li><a href="/notes/a72fnt5xrlvy9dg40val25v">CROSS JOIN</a></li>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+<li><a href="/notes/p5jw4wchevr9jx8inug22qo">DELETE FROM</a></li>
+<li><a href="/notes/6ktby3ifxx6ns75mu5j5cda">GROUP BY</a></li>
+<li><a href="/notes/f2w5t0oh2wmhvcvsh7benha">HAVING</a></li>
+<li><a href="/notes/30isnfzmqrvmmiii03d0chj">Hive</a></li>
+<li><a href="/notes/c3nbgvzl9k9ewr8g3338eud">IN</a></li>
+<li><a href="/notes/hhtrj9tg5h3mmfjw4cv8w2n">INSERT INTO</a></li>
+<li><a href="/notes/gt8pcjl3aqwp5i47caqt2lq">IS NULL</a></li>
+<li><a href="/notes/5eirdrb3hei9f1u2tiqphf4">JOIN</a></li>
+<li><a href="/notes/d7h99jjn2d17ybx1f4pj57c">LIKE</a></li>
+<li><a href="/notes/1io9ap5pqqnrhlpl7o31giw">NATURAL JOIN</a></li>
+<li><a href="/notes/5srijb872ypa6l442azah1m">NOT NULL</a></li>
+<li><a href="/notes/q93upvd18jszt7x1jl8odp8">NULL</a></li>
+<li><a href="/notes/ebdna3cjeqhx91iheag3edr">ORDER BY</a></li>
+<li><a href="/notes/8ja424y2w26yowahv1gdr14">REGEXP</a></li>
+<li><a href="/notes/pigpzevf0vcchcposa44jf6">ROLLUP</a></li>
+<li><a href="/notes/s7192pva5ewna1wqsaglkqn">SELECT</a></li>
+<li><a href="/notes/zlqqdzm6i9fcy8j4ua5u575">UNION</a></li>
+<li><a href="/notes/fwqpd8xjwd2enq3xbu37dmp">UPDATE</a></li>
+<li><a href="/notes/xwraugdlo1ydb128xtit8gy">USING</a></li>
+<li><a href="/notes/9yss2lq8hxniiu82ai30yvl">WHERE</a></li>
+</ul>

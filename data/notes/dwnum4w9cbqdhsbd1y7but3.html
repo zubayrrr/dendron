@@ -1,0 +1,27 @@
+<h1 id="inode"><a aria-hidden="true" class="anchor-heading" href="#inode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>inode</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Each inode is uniquely identified by an integer number called inode number (<code>ls -i</code>).</li>
+<li>inode structure has pointers to the data blocks where the file contents are saved.</li>
+<li>The file name doesn't belong to the file strcture, its just a string(a pointer) between file strcture, the connection happens with the data structure through the directory that contains the file. This association between the file structure and file name is called a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">hard link (Private)</a></li>
+<li>A file can have multiple names and can be accessed through same directory or different ones.</li>
+<li><code>ln a.txt b.txt</code> using the <code>ln</code> command you can create a new <code>hard link</code> to one file, essentially giving it multiple names. The information on the disk is saved only once both files(names) point to the same data. If you edit one the other will be effected (obviously).</li>
+<li><code>ln b.txt /path-to-dir/c.txt</code> - <code>hard link</code> in a different dir.</li>
+<li><code>rm a.txt</code> will only depreciate the <code>hard link</code> associated with it in the inode structure, both <code>b.txt</code> and <code>c.txt</code> still exist and the space will only be availble once the <code>hard link</code> is <code>0</code> for those files.</li>
+<li>To find the other <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">hard link (Private)</a>s using inode number <code>find . -inum inodeNumber</code></li>
+<li>A hard link cannot cross the file system boundaries, you cannot make a hard link for a file in a different partition or a disk.</li>
+<li><code>ls -la /etc/ | less</code></li>
+<li><code>find /usr/ -type f -links +1</code> files with hard links greater than 1</li>
+</ul>
+<p>See also: <a href="/notes/ztyk0cbpfcvz4h2czvm3tp4">symlink</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/nomou0zpru770377wzxr6rp">hard link</a></li>
+<li><a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a></li>
+<li><a href="/notes/hy62pxdr1mo1pamj5uggb2r">Navigating the Linux File System</a></li>
+<li><a href="/notes/ztyk0cbpfcvz4h2czvm3tp4">symlink</a></li>
+</ul>

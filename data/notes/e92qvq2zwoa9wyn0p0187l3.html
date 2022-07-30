@@ -1,0 +1,59 @@
+<h1 id="hql"><a aria-hidden="true" class="anchor-heading" href="#hql"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>HQL</h1>
+<p><a href="/notes/30isnfzmqrvmmiii03d0chj">Hive</a> Query Language</p>
+<p><a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> needs to be running to use hive.</p>
+<p>Check if hadoop is running with <code>jps</code> or <code>./start-all.sh</code> from the <code>$HADOOP_HOME/sbin</code> dir.</p>
+<h3 id="managed-vs-external-table"><a aria-hidden="true" class="anchor-heading" href="#managed-vs-external-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Managed vs External table</h3>
+<ul>
+<li>Managed table is totally managed by Hive.
+<ul>
+<li>If you drop a managed table, the data in the able will also be dropped (<span class="underline">deleted</span>), unlike an <strong>external table</strong> where the data <span class="underline">would remain</span>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="creating-a-managed-table"><a aria-hidden="true" class="anchor-heading" href="#creating-a-managed-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating a managed table</h3>
+<pre><code>CREATE TABLE table_name(data dataType);
+</code></pre>
+<h3 id="creating-an-external-table"><a aria-hidden="true" class="anchor-heading" href="#creating-an-external-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating an external table</h3>
+<pre><code>CREATE EXTERNAL TABLE table_name(data dataType);
+</code></pre>
+<h3 id="loading-data-into-a-table-locally"><a aria-hidden="true" class="anchor-heading" href="#loading-data-into-a-table-locally"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Loading data into a table (locally)</h3>
+<pre><code>LOAD DATA LOCAL INPATH '/path/to/file.csv' INTO TABLE table_name;
+</code></pre>
+<h3 id="partitioning"><a aria-hidden="true" class="anchor-heading" href="#partitioning"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Partitioning</h3>
+<p>Dividing the table into some parts based on the values of a particular column like date, course, city or country. The advantage of partitioning is that since the data is stored in slices, the query response time becomes faster.</p>
+<h3 id="creating-partitioned-tables"><a aria-hidden="true" class="anchor-heading" href="#creating-partitioned-tables"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating partitioned tables</h3>
+<p>First set these</p>
+<pre><code>set hive.exec.dynamic.partition=True;
+set hive.exec.dynamic.partition.mode=nonstrict;
+</code></pre>
+<p>Create tables</p>
+<pre><code>create table table_name_partitioned(data dataType)
+partitioned by (name_of_col string)
+row format delimited
+fields terminated by ",";
+</code></pre>
+<p>Loading data into a partitioned table using a csv or other format files or push data</p>
+<pre><code>load data local inpath '/path/to/file.csv' into table_name_partitioned;
+</code></pre>
+<p>Pushing data into a partitioned table</p>
+<pre><code>insert into table_name_partitioned(name_of_col)
+select data from table_name_managed;
+</code></pre>
+<p>This would execute a <a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a> job and when the job ends, it would create folders corresponding to the name of the columns by which the table was partitioned.</p>
+<h3 id="bucketing"><a aria-hidden="true" class="anchor-heading" href="#bucketing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Bucketing</h3>
+<p>Bucketing in hive is the concept of breaking data down into ranges, which are known as buckets, to give extra structure to the data so it may be used for more efficient queries. The range for a bucket is determined by the hash value of one or more columns in the dataset (or Hive metastore table). These columns are referred to as <code>bucketing</code> or <code>clustered by</code> columns.</p>
+<p><code>set.hive.enforce.bucketing=True;</code></p>
+<p>Creating a bucketed table</p>
+<pre><code>create table table_name_bucketed(data dataType)
+clustered by (name_of_col string)
+row format delimited
+fields terminated by ','
+</code></pre>
+<h3 id="partitioning-vs-bucketing"><a aria-hidden="true" class="anchor-heading" href="#partitioning-vs-bucketing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Partitioning vs. Bucketing</h3>
+<p>Bucketing is similar to partitioning – in both cases, data is segregated and stored – but there are a few key differences. Partitioning is based on a column that is repeated in the dataset and involves grouping data by a particular value of the partition column. While bucketing organizes data by a range of values, mainly involving primary key or non-repeated values in a dataset.</p>
+<p>Partitioning is most effective for low volume data, as it carries the possibility of too many small partition creations and too many directories. And since bucketing results in equal volumes of data in each partition, joins at Map side will be quicker.</p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.8a2a68hilaj.png"></p>
+<p>A table can have both partitions and bucketing info in it; in that case, the files within each partition will have bucketed files in it. For example, if the above example is modified to include partitioning on a column, and that results in 100 partitioned folders, each partition would have the same exact number of bucket files – 20 in this case – resulting in a total of 2,000 files across all partitions.</p>
+<blockquote>
+<p>via - <a href="https://www.okera.com/blogs/using-apache-hive-bucketing-with-okera/">https://www.okera.com/blogs/using-apache-hive-bucketing-with-okera/</a></p>
+</blockquote>

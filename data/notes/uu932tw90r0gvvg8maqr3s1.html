@@ -1,0 +1,63 @@
+<h1 id="aws-iam"><a aria-hidden="true" class="anchor-heading" href="#aws-iam"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS IAM</h1>
+<ul>
+<li>AWS Identity and Access Management (IAM), is a service that allows AWS customers to manage user access and permissions for their accounts, and available APIs/services within AWS. IAM can manage users, security credentials (such as API access keys), and allow users to access AWS resources.</li>
+<li>You can create users and groups and set permissions on both of them to either allow or deny access to AWS resources via use of policies.</li>
+<li>IAM is free and included in every AWS account.</li>
+<li>2 main features of IAM are Users and Roles.</li>
+</ul>
+<p>IAM components are <strong>Global</strong>, they are not created in a particular region but are specified for a whole account.</p>
+<h3 id="iam-users"><a aria-hidden="true" class="anchor-heading" href="#iam-users"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IAM Users</h3>
+<ul>
+<li>Once you create an AWS account you're given Root user access, this is the main account you log into your AWS resources with. It has unlimited privileges.</li>
+<li>With Root user you can create an IAM user, another name for a username and password that can log into your AWS account, but you decide who gets access to what.</li>
+<li>With IAM you can create specific policies to define what a user can access, you can also add users to a group, to which policies can be applied making it easier.</li>
+<li>You can create a group that has access to your development servers and then add all the developers to that group.</li>
+<li>In addition to human users, you can also have system users on AWS. For example, you can have <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a> that deploys <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a> container on <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> instance or <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a> that pushes Docker images to AWS Docker Repo called <a href="/notes/edoa8rey418xum7jh6iyo0l">AWS ECR</a>.</li>
+<li>It is a good practice to assign permissions/policies to a group and then add the user to the group.</li>
+</ul>
+<h3 id="iam-policy-example-admin-user"><a aria-hidden="true" class="anchor-heading" href="#iam-policy-example-admin-user"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IAM Policy Example: Admin User</h3>
+<p>IAM has both, a visual editor and a JSON editor.</p>
+<p>Example of Admin policy in JSON editor:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"Version"</span><span class="token operator">:</span> <span class="token string">"2012-01-17"</span><span class="token punctuation">,</span>
+  <span class="token property">"Statement"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"Effect"</span><span class="token operator">:</span> <span class="token string">"Allow"</span><span class="token punctuation">,</span>
+      <span class="token property">"Action"</span><span class="token operator">:</span> <span class="token string">"*"</span><span class="token punctuation">,</span>
+      <span class="token property">"Resource"</span><span class="token operator">:</span> <span class="token string">"*"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="iam-roles"><a aria-hidden="true" class="anchor-heading" href="#iam-roles"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IAM Roles</h3>
+<ul>
+<li>They allow you to delegate access to a user or a service, roles differ from users in a way that not only users can assume a role but also services can assume a role as well.</li>
+<li>Basically delegating AWS Services to other AWS Services.</li>
+<li>Its an extra layer of security above just the usual username, password and firewalls.</li>
+<li>Example of a role: a website can assume a role that has access to your Database.</li>
+<li>Roles can also allow other users from different AWS accounts to use a resource in your AWS account.</li>
+</ul>
+<h3 id="iam-users-vs-iam-roles"><a aria-hidden="true" class="anchor-heading" href="#iam-users-vs-iam-roles"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>IAM Users VS IAM Roles</h3>
+<ul>
+<li>Users are assigned to human users or system users.</li>
+<li>Policies cannot be assigned to AWS Services directly. Instead, you can assign a role to a service and then assign a policy to that role.</li>
+<li>There are roles for each service. Roles have permissions/policy attached to it.</li>
+<li>Whenever you create a role:
+<ul>
+<li>Assign that role to an AWS Service.</li>
+<li>Attach policies to that role.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/cwbupxqnwdcc2f9cfdsiqh9">AWS API Gateway</a></li>
+<li><a href="/notes/gualur07hbgjlaw396spiji">AWS CodeCommit</a></li>
+<li><a href="/notes/49naltrgmfezkzp9g3fjfaq">AWS CodeDeploy</a></li>
+<li><a href="/notes/3n1o179sti2wtnjkq48one1">AWS CodePipeline</a></li>
+<li><a href="/notes/y43l1e8ej1au0hfrdkqmdh7">AWS ECS</a></li>
+<li><a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a></li>
+<li><a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a></li>
+<li><a href="/notes/gvpkbgglehtr9ej5e0uj44j">AWS</a></li>
+</ul>

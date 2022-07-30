@@ -1,0 +1,70 @@
+<h1 id="tcp-vs-udp"><a aria-hidden="true" class="anchor-heading" href="#tcp-vs-udp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TCP VS UDP</h1>
+<p><a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a> has a lot more overhead than <a href="/notes/k57h8hxtsubu8fdb61aahxc">UDP</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>TCP</th><th>UDP</th></tr></thead><tbody><tr><td>Connection status</td><td>Requires an established connection to transmit data (connection should be closed once transmission is complete)</td><td>Connectionless protocol with no requirements for opening, maintaining, or terminating a connection</td></tr><tr><td>Data sequencing</td><td>Able to sequence</td><td>Unable to sequence</td></tr><tr><td>Guaranteed delivery</td><td>Can guarantee delivery of data to the destination router</td><td>Cannot guarantee delivery of data to the destination</td></tr><tr><td>Handshaking Techniques</td><td>Uses handshakes such as SYN, ACK, SYN-ACK</td><td>It’s a connectionless protocol i.e. No handshake</td></tr><tr><td>Retransmission of data</td><td>Retransmission of lost packets is possible</td><td>No retransmission of lost packets</td></tr><tr><td>Error checking</td><td>Extensive error checking and acknowledgment of data</td><td>Basic error checking mechanism using checksums</td></tr><tr><td>Method of transfer</td><td>Data is read as a byte stream; messages are transmitted to segment boundaries</td><td>UDP packets with defined boundaries; sent individually and checked for integrity on arrival</td></tr><tr><td>Speed</td><td>Slower than UDP</td><td>Faster than TCP</td></tr><tr><td>Broadcasting</td><td>Does not support Broadcasting</td><td>Does support Broadcasting</td></tr><tr><td>Optimal use</td><td>Used by HTTPS, HTTP, SMTP, POP, FTP, etc</td><td>Video conferencing, streaming, DNS, VoIP, etc</td></tr></tbody></table>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a></li>
+<li><a href="/notes/nygs97pchi3schragqr6gei">Transport Layer - OSI</a></li>
+<li><a href="/notes/k57h8hxtsubu8fdb61aahxc">UDP</a></li>
+</ul>

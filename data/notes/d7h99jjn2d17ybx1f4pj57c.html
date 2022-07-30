@@ -1,0 +1,35 @@
+<h1 id="like"><a aria-hidden="true" class="anchor-heading" href="#like"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>LIKE</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<hr>
+<p>The LIKE command is used in a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">WHERE (Private)</a> clause to search for a specified pattern in a column.</p>
+<p>You can use two wildcards with LIKE:</p>
+<ul>
+<li><code>%</code> - Represents zero, one, or multiple characters</li>
+<li><code>_</code> - Represents a single character (MS Access uses a question mark (?) instead)</li>
+</ul>
+<p>Retrive rows that match a specific string pattern.</p>
+<p><code>WHERE last_name LIKE 'b%'</code> will return all customers whose last name starts with <code>b</code>; doesn't matter if it's an uppercase or a lowercase. <code>%</code> can be at the beginning or at the end or like <code>%b%</code></p>
+<p><code>_</code> matches a single character, <code>_y</code> would check for something thats exactly 2 characters long, the first character is irrelevant but the second character should be <code>y</code></p>
+<p><code>_____y</code> to search for something that is six characters long and ends in y</p>
+<p>LIKE is older, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">REGEXP (Private)</a> is newer.</p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<pre><code>SELECT *
+FROM customers
+WHERE address LIKE '%trail%' OR
+            address LIKE '%avenue%'
+
+SELECT *
+FROM customers
+WHERE phone LIKE '%9'
+-- these can also be combined with NOT operator
+
+WHERE phone NOT LIKE '%9'
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/8ja424y2w26yowahv1gdr14">REGEXP</a></li>
+<li><a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>

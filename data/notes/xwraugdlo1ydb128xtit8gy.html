@@ -1,0 +1,44 @@
+<h1 id="using"><a aria-hidden="true" class="anchor-heading" href="#using"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>USING</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<p>As our queries get more complex, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">JOIN (Private)</a> statements can get in the way of readability, to avoid this, we can use <code>USING</code></p>
+<p>If the <span class="underline">column name is exactly the same</span> on the <code>JOIN</code> (<code>ON</code>) statement across two tables, they can be replaced with <code>USING</code> such as</p>
+<pre><code>SELECT
+    o.order_id,
+    c.first_name,
+    sh.name AS shipper
+FROM orders o
+JOIN customers c
+--ON o.customer_id = c.customer_id can be replaced with
+        USING (customer_id)
+LEFT JOIN shippers sh
+        USING (shipper_id)
+</code></pre>
+<p>For joining tables with composite primary key and with multiple columns to be compared such as:</p>
+<pre><code>SELECT *
+FROM order_items oi
+JOIN order_item_notes oin
+        ON oi.order_id = oin.order_id AND
+             oi.product_iid = oin.product_id
+</code></pre>
+<p>Can be simplified using <code>USING</code></p>
+<pre><code>SELECT *
+FROM order_items oi
+JOIN order_item_notes oin
+        USING (order_id, product_id)
+</code></pre>
+<h3 id="exercise"><a aria-hidden="true" class="anchor-heading" href="#exercise"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Exercise</h3>
+<pre><code>USE sql_invoicing;
+
+SELECT
+        p.date,
+        c.name AS client,
+        p.amount,
+        pm.name AS payment_method
+FROM payments p
+JOIN clients c
+        USING (client_id)
+JOIN payment_methods pm
+        ON p.payment_method = pm.payment_method_id
+</code></pre>

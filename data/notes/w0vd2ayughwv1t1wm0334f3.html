@@ -1,0 +1,24 @@
+<h1 id="background-process"><a aria-hidden="true" class="anchor-heading" href="#background-process"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>background process</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Background processes are non interactive and are started by the system services or by the users. While they're running you can start other processes within the same terminal, unlike <a href="/notes/3dz4uwat5h6zuz2tt5xluoe">foreground process</a>es.</p>
+<p>To start a background service append <code>&#x26;</code> at the end of the command. Simulate this using <code>sleep 20 &#x26;</code></p>
+<p>Even though it runs in the background, all the errors or outputs to the terminal it was started from.</p>
+<p>Since background processes are non interactive, its common to redirect the output or errors to a file.</p>
+<p>If you're not interested in a command's output or errors you can redirect it to <code>/dev/null</code>. Known as Null device or colloquially known as Blackhole.<br>
+<code>ping -c 1 google.com > /dev/null 2>&#x26;1 &#x26;</code></p>
+<hr>
+<ul>
+<li>When starting a process in the background, you'll see two numbers in the terminal. Each background process is identified by a Job ID and the <a href="/notes/v879p2kn7q4pa6g56739q1v">PID</a>.</li>
+<li>If you press enter and if the process has completed successfully, you'll get the Job ID and the text <code>Done</code> in place of <a href="/notes/v879p2kn7q4pa6g56739q1v">PID</a>.</li>
+<li>You can list the started from the terminal using the <a href="/notes/oteklwrg0wgbzwqyjey8ijy">jobs</a> commands.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/2w9ck78j0wq1b1sphw0wvsi">bg</a></li>
+<li><a href="/notes/oteklwrg0wgbzwqyjey8ijy">jobs</a></li>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+</ul>

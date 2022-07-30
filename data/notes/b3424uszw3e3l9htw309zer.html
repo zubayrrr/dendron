@@ -1,0 +1,26 @@
+<h1 id="sys"><a aria-hidden="true" class="anchor-heading" href="#sys"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>/sys</h1>
+<ul>
+<li>Related: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>In addition to /<a href="/notes/4cmnu8nf5qp9o17i5ecn6xx">/proc</a>, the kernel also exports information to another virtual file system called sysfs. sysfs is used by programs such as udev to access device and device driver information. The creation of sysfs helped clean up the proc file system because much of the hardware information has been moved from proc to sysfs.</p>
+<p>Procfs and sysfs do the same, but sysfs is newer and a little bit more structured.</p>
+<p>The sysfs file system is mounted on /sys. The top-level directories are shown. Following is a brief description of some of these directories:</p>
+<ul>
+<li><code>/sys/block</code></li>
+<li><code>/sys/bus</code></li>
+<li><code>/sys/class</code></li>
+<li><code>/sys/devices</code></li>
+<li><code>/sys/firmware</code></li>
+<li><code>/sys/module</code></li>
+<li><code>/sys/power</code></li>
+</ul>
+<h2 id="the-sysctl-utility"><a aria-hidden="true" class="anchor-heading" href="#the-sysctl-utility"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The <code>sysctl</code> Utility</h2>
+<p>The sysctl utility can also be used to view or modify values to writable files in the <code>/proc</code> <code>/sys</code> directory. To view the current kernel settings, enter:</p>
+<p><code>sysctl -a</code></p>
+<p>Via - <a href="https://www.thegeekdiary.com/understanding-the-sysfs-file-system-in-linux/">Understanding The sysfs File System (/sys) in Linux – The Geek Diary</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/4cmnu8nf5qp9o17i5ecn6xx">/proc</a></li>
+</ul>

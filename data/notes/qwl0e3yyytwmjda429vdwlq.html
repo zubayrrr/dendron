@@ -1,0 +1,27 @@
+<h1 id="route"><a aria-hidden="true" class="anchor-heading" href="#route"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>route</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<p><code>route</code> is use to work with the IP/kernel routing table. It is mainly used to set up static routes to specific hosts or networks via an interface. It is used for showing or update the IP/kernel routing table.</p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li>To display routing table/names numeric form:
+<ul>
+<li><code>route -n</code></li>
+<li>A capital <code>G</code> in the <code>Flags</code> column, indicates the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.default gateway (Private)</a></li>
+</ul>
+</li>
+<li>To change default gateway:
+<ul>
+<li>Removing existing default gateway: <code>route del default gw 192.168.0.1</code></li>
+<li>Add a new default gateway: <code>route add default gw 192.168.0.2</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/osajilt9rsnrz5ng14pmy8x">ifconfig</a></li>
+<li><a href="/notes/ck6ds17ovyjf6n0sidmat7v">Networking in Linux</a></li>
+</ul>

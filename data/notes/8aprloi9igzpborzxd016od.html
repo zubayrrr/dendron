@@ -1,0 +1,41 @@
+<h1 id="dpkg"><a aria-hidden="true" class="anchor-heading" href="#dpkg"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>dpkg</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+<li>Related: [[devlog.APT]</li>
+</ul>
+<hr>
+<p>dpkg is software at the package management base within the free OS Debian and its several derivatives. This software is used for installing, removing, and providing details of <strong>.deb packages</strong>.</p>
+<p>Debian comes from Debra Lynn, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Ian Murdock (Private)</a>’s spouse; deb+ian = debian</p>
+<p>dpkg is a low-level mechanism. A higher level mechanism, i.e., <strong>[[devlog.APT]</strong> is more widely used as compared to the dpkg tool because it can retrieve packages by remote locations and negotiate with typical package relations like dependency resolution.</p>
+<p>The database of dpkg is located in the <strong>/var/lib/dpkg</strong> file. This <strong>"status"</strong> file includes the installed software list on our current system. Also, there are no details about repositories within this database.</p>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<p>Install a package</p>
+<p><code>dpkg -i zip_2.31-3_i386.deb</code></p>
+<p>Install all packages recursively from directory
+<code>dpkg -R /tmp/downloads</code></p>
+<p>Remove/Delete everything including configuration files
+<code>dpkg -P apache-perl</code></p>
+<p>List all installed packages, along with package version and short description</p>
+<pre><code>dpkg -l
+dokg -l | less
+</code></pre>
+<blockquote>
+<p>via — <a href="https://www.cyberciti.biz/howto/question/linux/dpkg-cheat-sheet.php">https://www.cyberciti.biz/howto/question/linux/dpkg-cheat-sheet.php</a></p>
+</blockquote>
+<p>Check all the programs from a package</p>
+<pre><code>dpkg -L coreutils
+</code></pre>
+<p>Find to which package a program belongs</p>
+<pre><code>which -a ls
+dpkg -S /bin/ls
+</code></pre>
+<p>List all installed packages</p>
+<pre><code>sudo dpkg --get-selections
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/htsjiw0s9846otcxm6k9v4l">APT</a></li>
+<li><a href="/notes/yu5rvn9k0ozwlbojj5a6huf">Ian Murdock</a></li>
+</ul>

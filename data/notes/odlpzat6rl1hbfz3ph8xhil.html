@@ -1,0 +1,110 @@
+<h1 id="crontab"><a aria-hidden="true" class="anchor-heading" href="#crontab"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>crontab</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>crontab</code> has three different meanings:</p>
+<ol>
+<li>The text file that contains the users cron jobs can be called as user’s <code>crontabs</code>
+<ul>
+<li>It is located at <code>/var/spool/cron/crontabs</code></li>
+</ul>
+</li>
+<li>The command <code>crontab</code> is used to manage the user’s crontabs files.</li>
+<li>It can also refer to the configuration file for the system-wide cron jobs called crontab located at <code>/etc/crontab</code></li>
+</ol>
+<p>There are two types of cron jobs.</p>
+<ul>
+<li>System-wide</li>
+<li>Individual user cron jobs</li>
+</ul>
+<h2 id="individual-user-cron-jobs"><a aria-hidden="true" class="anchor-heading" href="#individual-user-cron-jobs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Individual user cron jobs</h2>
+<p>Each user has a crontab file which is short for crontable, where all scheduled cron jobs for that user are specified. These files are located at <code>/var/spool/cron/crontabs</code> (the exact location can differ from distros to distros).</p>
+<p>You edit these directly with a text editor or using the <code>crontab</code> command (recommended).</p>
+<p>To display the contents of the crontab file of the current user.</p>
+<pre><code>crontab -l
+</code></pre>
+<p>To edit the current user’s crontab file</p>
+<pre><code>crontab -e
+</code></pre>
+<p>To task to run has to be defined through a single line that consists of six fields separated by white space. The first five fields will define when the task will run and the last field will define the command or script to be run.</p>
+<pre><code>m h dom mon dow command
+</code></pre>
+<p>If you use an <code>*</code> for a field it will represent “always” or “any value” for that field.</p>
+<p>Minimum time limit used is minute. If you want to run a task for every 15 seconds, cron cannot be used for such a job.</p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li>Run a backup script everyday at 6 AM (use 24 hours format)</li>
+</ul>
+<pre><code>0 6 * * * /root/backup.sh
+
+# specify dow as sunday
+
+0 6 * * 0 /root/backup.sh
+</code></pre>
+<ul>
+<li>Runs a script that monitors free disk space every minute.</li>
+</ul>
+<pre><code>* * * * * /root/check_space.sh
+</code></pre>
+<p>If you want to specify a list of discreet values in a field use comma operator to separate.</p>
+<ul>
+<li>Run a task at 4,6,10 AM</li>
+</ul>
+<pre><code>0 4,6,10 * * * /root/check_space.sh
+</code></pre>
+<p>If you want to specify a range of values use hyphen operator.</p>
+<ul>
+<li>Run a task on weekdays between 9 and 5 PM, once per hour. (during working days and hours)</li>
+</ul>
+<pre><code>0 9-17 * * 1-5 /root/script.sh
+</code></pre>
+<p>You can use the slash operator to specify values that will be repeated over a certain interval.</p>
+<ul>
+<li>Run a task every 3 days at 4 and 21 hours at 10 minutes</li>
+</ul>
+<pre><code>10 4,21 */3 * * /root/script.sh
+</code></pre>
+<p>Common cron macros</p>
+<ul>
+<li><code>@yearly</code> - will run the task every year at 1st January midnight</li>
+<li><code>@monthly</code> - will run the task first day of every month</li>
+<li><code>@week</code> - will run the task weekly at midnight on the Sunday</li>
+<li><code>@daily</code> - will run the task once a day at midnight</li>
+<li><code>@hourly</code> - will run the task once every hour at the beginning of the hour</li>
+<li><code>@reboot</code> - will run the task at boot time</li>
+</ul>
+<pre><code>*/2 * * * * date >> /tmp/date_and_time.txt
+</code></pre>
+<p>Monitor cron jobs via the cron log</p>
+<pre><code>tail -f /var/log/syslog
+</code></pre>
+<p>To remove crontab file</p>
+<pre><code>crontab -r
+</code></pre>
+<p>Edit/remove other user’s crontab</p>
+<pre><code>sudo crontab -e -u userName
+sudo crontab -r -u userName
+</code></pre>
+<h3 id="footnotes"><a aria-hidden="true" class="anchor-heading" href="#footnotes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Footnotes</h3>
+<ul>
+<li>Use absolute path of the script in the crontab</li>
+<li><code>/etc/cron.allow</code> and <code>/etc/cron.deny</code> will decide which user is allowed to use crontab command.</li>
+<li><a href="https://crontab.guru/">Crontab.guru - The cron schedule expression editor</a></li>
+<li><a href="https://crontab-generator.org/">Crontab Generator - Generate crontab syntax</a></li>
+</ul>
+<h2 id="system-wide-cron-jobs"><a aria-hidden="true" class="anchor-heading" href="#system-wide-cron-jobs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>System-wide cron jobs</h2>
+<ul>
+<li>Simple move your scripts inside <code>/etc/cron.daily</code> <code>cron.hourly</code> <code>cron.monthly</code> <code>cron.weekly</code></li>
+</ul>
+<h3 id="footnotes-1"><a aria-hidden="true" class="anchor-heading" href="#footnotes-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Footnotes</h3>
+<ul>
+<li>cronjobs are intended for machines and servers that run continuously, if the system is down when the cronjob is scheduled to run the task is lost. It will not be run when the machine runs.</li>
+<li><a href="/notes/rlcdhrpciu8t7lesnwerjw7">anacron</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/rlcdhrpciu8t7lesnwerjw7">anacron</a></li>
+</ul>

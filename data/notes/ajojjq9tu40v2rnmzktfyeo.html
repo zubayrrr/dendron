@@ -1,0 +1,152 @@
+<h1 id="aws-codebuild"><a aria-hidden="true" class="anchor-heading" href="#aws-codebuild"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS CodeBuild</h1>
+<p>AWS CodeBuild is a fully managed continuous integration service/build service that provides the similar capability that <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a> can offer you.</p>
+<ul>
+<li>Compiles your code</li>
+<li>Runs unit tests</li>
+<li>Produces artifacts that are ready to be deployed</li>
+<li>Eliminates the need for provision/management of your infrastructure(build servers)</li>
+<li>Provides pre-packaged build environments</li>
+<li>Allows you to build your own customized build environments</li>
+<li>Scales automatically to meet your build requirements</li>
+<li>Charged only for the build time, based on operations performed</li>
+<li>Output artifacts are stored in a secure <a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a> bucket</li>
+<li>The next service you will need is <a href="/notes/49naltrgmfezkzp9g3fjfaq">AWS CodeDeploy</a> to complete the <a href="/notes/eoy9t426lmr0wo5rpxm8g69">CI⁄CD Pipeline</a></li>
+</ul>
+<h2 id="build-project"><a aria-hidden="true" class="anchor-heading" href="#build-project"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Build Project</h2>
+<p>A build project includes information about how to run a build, where to get the source code from, which build environment to use, which build commands to run and where to store the build output.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655274942/wiki/wtcdnu1dd0et00ge2hoz.png"></p>
+<ul>
+<li>Under build specifications, you can choose either to use a <code>buildspec.yml</code> file with your instructions or you can choose to input commands for your build.</li>
+<li>And of course, the <code>buildspec.yml</code> file needs to be part of your source code.</li>
+<li>After successfully building your source code, the artifacts can be found on the chosen <a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a> bucket.</li>
+<li>Under “Build triggers” tab, you can schedule builds.</li>
+<li>You can also setup notifications using <a href="/notes/g9xjnwh096t1rptwv0bol5w">AWS SNS</a></li>
+<li>You can keep an eye on this whole process using <a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a></li>
+</ul>
+<p>You can setup <a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a> events to monitor the <a href="/notes/gualur07hbgjlaw396spiji">AWS CodeCommit</a> repository so that whenever there is a successful merge, CloudWatch will trigger a build.</p>
+<p>You can automate it further to keep an eye on the logs.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655461536/wiki/s5r31bu4nzwwkayxsgox.png"></p>
+<h2 id="buildspec-file"><a aria-hidden="true" class="anchor-heading" href="#buildspec-file"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>buildspec</code> file</h2>
+<ul>
+<li>A buildspec file is a collection of build commands related settings in YAML format, that CodeBuild uses to run builds.</li>
+<li>You can include a buildspec as part of the source code or you can define buildspec when you create a build project.</li>
+<li>It must be named <code>buildspec.yml</code> and is located at the root of the source code.</li>
+</ul>
+<pre class="language-yaml"><code class="language-yaml"><span class="token comment"># buildspecstub.yaml</span>
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">0.2</span>
+
+<span class="token key atrule">run-as</span><span class="token punctuation">:</span> Linux<span class="token punctuation">-</span>user<span class="token punctuation">-</span>name
+
+<span class="token key atrule">env</span><span class="token punctuation">:</span>
+  <span class="token key atrule">shell</span><span class="token punctuation">:</span> shell<span class="token punctuation">-</span>tag
+  <span class="token key atrule">variables</span><span class="token punctuation">:</span>
+    <span class="token key atrule">AWS_ACCESS_KEY</span><span class="token punctuation">:</span> <span class="token string">"value"</span>
+    <span class="token key atrule">AWS_SECRET_ACCESS_KEY</span><span class="token punctuation">:</span> <span class="token string">"value"</span>
+    <span class="token key atrule">AWS_DEFAULT_REGION</span><span class="token punctuation">:</span> us<span class="token punctuation">-</span>east<span class="token punctuation">-</span><span class="token number">1</span>
+    <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"value"</span>
+  <span class="token key atrule">parameter-store</span><span class="token punctuation">:</span>
+    <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"value"</span>
+    <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"value"</span>
+  <span class="token key atrule">exported-variables</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> variable
+    <span class="token punctuation">-</span> variable
+  <span class="token key atrule">secrets-manager</span><span class="token punctuation">:</span>
+    <span class="token key atrule">key</span><span class="token punctuation">:</span> secret<span class="token punctuation">-</span>id<span class="token punctuation">:</span>json<span class="token punctuation">-</span>key<span class="token punctuation">:</span>version<span class="token punctuation">-</span>stage<span class="token punctuation">:</span>version<span class="token punctuation">-</span>id
+  <span class="token key atrule">git-credential-helper</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+
+<span class="token key atrule">proxy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">upload-artifacts</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+  <span class="token key atrule">logs</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+
+<span class="token key atrule">batch</span><span class="token punctuation">:</span>
+  <span class="token key atrule">fast-fail</span><span class="token punctuation">:</span> false <span class="token punctuation">|</span> true
+  <span class="token comment"># build-list:</span>
+  <span class="token comment"># build-matrix:</span>
+  <span class="token comment"># build-graph:</span>
+        
+<span class="token key atrule">phases</span><span class="token punctuation">:</span>
+  <span class="token key atrule">install</span><span class="token punctuation">:</span>
+    <span class="token key atrule">run-as</span><span class="token punctuation">:</span> Linux<span class="token punctuation">-</span>user<span class="token punctuation">-</span>name
+    <span class="token key atrule">on-failure</span><span class="token punctuation">:</span> ABORT <span class="token punctuation">|</span> CONTINUE
+    <span class="token key atrule">runtime-versions</span><span class="token punctuation">:</span>
+      <span class="token key atrule">runtime</span><span class="token punctuation">:</span> version
+      java<span class="token punctuation">:</span>corretto11
+    <span class="token key atrule">commands</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+    <span class="token key atrule">finally</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+  <span class="token key atrule">pre_build</span><span class="token punctuation">:</span>
+    <span class="token key atrule">run-as</span><span class="token punctuation">:</span> Linux<span class="token punctuation">-</span>user<span class="token punctuation">-</span>name
+    <span class="token key atrule">on-failure</span><span class="token punctuation">:</span> ABORT <span class="token punctuation">|</span> CONTINUE
+    <span class="token key atrule">commands</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+    <span class="token key atrule">finally</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+  <span class="token key atrule">build</span><span class="token punctuation">:</span>
+    <span class="token key atrule">run-as</span><span class="token punctuation">:</span> Linux<span class="token punctuation">-</span>user<span class="token punctuation">-</span>name
+    <span class="token key atrule">on-failure</span><span class="token punctuation">:</span> ABORT <span class="token punctuation">|</span> CONTINUE
+    <span class="token key atrule">commands</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+    <span class="token key atrule">finally</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+  <span class="token key atrule">post_build</span><span class="token punctuation">:</span>
+    <span class="token key atrule">run-as</span><span class="token punctuation">:</span> Linux<span class="token punctuation">-</span>user<span class="token punctuation">-</span>name
+    <span class="token key atrule">on-failure</span><span class="token punctuation">:</span> ABORT <span class="token punctuation">|</span> CONTINUE
+    <span class="token key atrule">commands</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+    <span class="token key atrule">finally</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> command
+      <span class="token punctuation">-</span> command
+<span class="token key atrule">reports</span><span class="token punctuation">:</span>
+  <span class="token key atrule">report-group-name-or-arn</span><span class="token punctuation">:</span>
+    <span class="token key atrule">files</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> location
+      <span class="token punctuation">-</span> location
+    <span class="token key atrule">base-directory</span><span class="token punctuation">:</span> location
+    <span class="token key atrule">discard-paths</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+    <span class="token key atrule">file-format</span><span class="token punctuation">:</span> report<span class="token punctuation">-</span>format
+<span class="token key atrule">artifacts</span><span class="token punctuation">:</span>
+  <span class="token key atrule">files</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> location
+    <span class="token punctuation">-</span> location
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> artifact<span class="token punctuation">-</span>name
+  <span class="token key atrule">discard-paths</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+  <span class="token key atrule">base-directory</span><span class="token punctuation">:</span> location
+  <span class="token key atrule">exclude-paths</span><span class="token punctuation">:</span> excluded paths
+  <span class="token key atrule">enable-symlinks</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+  <span class="token key atrule">s3-prefix</span><span class="token punctuation">:</span> prefix
+  <span class="token key atrule">secondary-artifacts</span><span class="token punctuation">:</span>
+    <span class="token key atrule">artifactIdentifier</span><span class="token punctuation">:</span>
+      <span class="token key atrule">files</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> location
+        <span class="token punctuation">-</span> location
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> secondary<span class="token punctuation">-</span>artifact<span class="token punctuation">-</span>name
+      <span class="token key atrule">discard-paths</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+      <span class="token key atrule">base-directory</span><span class="token punctuation">:</span> location
+    <span class="token key atrule">artifactIdentifier</span><span class="token punctuation">:</span>
+      <span class="token key atrule">files</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> location
+        <span class="token punctuation">-</span> location
+      <span class="token key atrule">discard-paths</span><span class="token punctuation">:</span> no <span class="token punctuation">|</span> yes
+      <span class="token key atrule">base-directory</span><span class="token punctuation">:</span> location
+<span class="token key atrule">cache</span><span class="token punctuation">:</span>
+  <span class="token key atrule">paths</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> path
+    <span class="token punctuation">-</span> path
+</code></pre>
+<p>— via <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html">Build specification reference for CodeBuild - AWS CodeBuild</a>****</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/gualur07hbgjlaw396spiji">AWS CodeCommit</a></li>
+<li><a href="/notes/3n1o179sti2wtnjkq48one1">AWS CodePipeline</a></li>
+<li><a href="/notes/rslamxyhwny92aooavg497t">Jenkins with-on AWS</a></li>
+</ul>

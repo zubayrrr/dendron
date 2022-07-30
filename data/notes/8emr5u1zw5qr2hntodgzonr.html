@@ -1,0 +1,10 @@
+<h1 id="gawk"><a aria-hidden="true" class="anchor-heading" href="#gawk"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>gawk</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>gawk</code> or <code>awk</code> is a very powerful text processing tool.</p>
+<h3 id="example"><a aria-hidden="true" class="anchor-heading" href="#example"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example</h3>
+<p>gawk can parse the results of the "uptime" command (uptime provides length of time a Linux server has been running and some other system load data).</p>
+<p>Getting the eigth field from the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> of <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">uptime (Private)</a></p>
+<p><code>uptime|sed 's/min,\ //' |sed 's/,//g'|awk '{print $8}'</code></p>

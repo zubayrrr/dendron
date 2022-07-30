@@ -1,0 +1,30 @@
+<h1 id="sha256sum"><a aria-hidden="true" class="anchor-heading" href="#sha256sum"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>sha256sum</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The <code>sha256sum</code> command displays or checks <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">sha256sum (Private)</a> (256-bit) checksums. With no FILE, or when FILE is - (a dash), it reads the digest from standard input.</p>
+<ul>
+<li>-b, –binary Read in binary mode.</li>
+<li>-c, –check Read SHA256 sums from the FILEs and check them.</li>
+<li>–tag Create a BSD-style checksum.</li>
+<li>-t, –text Read in text mode (default).</li>
+<li>–quiet Don't print OK for each successfully verified file.</li>
+<li>–status Don't output anything, status code shows success.</li>
+<li>–strict Exit non-zero for improperly formatted checksum lines.</li>
+<li>-w, –warn Warn about improperly formatted checksum lines.</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li><code>cp /usr/bin/ls .</code> - copying the <a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a> binary to current working dir
+<ul>
+<li><code>sha256sum /usr/bin/ls ./ls</code> - if the hashes are same, it means both the files are identical</li>
+</ul>
+</li>
+<li>Modifying the <a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a> binary that was previously copied: <code>echo "a" > ls</code>
+<ul>
+<li>check again <code>sha256sum /usr/bin/ls ./ls</code> and the hashes return will be different</li>
+</ul>
+</li>
+</ul>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">cmp (Private)</a>, <a href="/notes/8jubll0iaagwha7xjx7kozh">diff</a></p>

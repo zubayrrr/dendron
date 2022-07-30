@@ -1,0 +1,54 @@
+<h1 id="find"><a aria-hidden="true" class="anchor-heading" href="#find"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>find</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>find</code> has more options than its counterpart <a href="/notes/tu91wbow964diy55l84cku2">locate</a> command. It can be used to find files and directories and perform subsequent operations on them. It supports searching by file, folder, name, creation date, modification date, owner and permissions.By using the <code>-exec</code> option other UNIX commands can be executed on files or folders found. Unlike <a href="/notes/tu91wbow964diy55l84cku2">locate</a> it does real time search on the file system.</p>
+<h3 id="syntax"><a aria-hidden="true" class="anchor-heading" href="#syntax"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Syntax</h3>
+<p><code>find [where to start searching from] [expression determines what to find] [options] [what to find]</code></p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li><code>find . -name todo.txt</code> - <code>.</code> to search in current directory, searches for a <code>-name</code> that is <code>todo.txt</code></li>
+<li>Use <code>-iname</code> to make it search case insensitively</li>
+<li><code>find . -name "todo*"</code> - to look for anything that starts with the string <code>todo</code>, its recommended to wrap them inside <code>" "</code></li>
+<li><code>find . -name "*rep*"</code> - to look for anything that contains the string <code>"rep"</code></li>
+<li><code>find . -name todo.txt -delete</code> - to find a file and delete it.</li>
+<li><code>find /etc/ -name passwd</code> - permission denied <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.stderr (Private)</a> if the user doesn't have permissions</li>
+<li>You can run a command after it has found the files, <code>sudo find /etc/ -name passwd -ls</code></li>
+<li><code>find /etc/ -type d</code> to list all dirs and subdirs recursively</li>
+<li><code>find /etc/ -type d -maxdepth 2</code> to specify depth of directory traversal</li>
+<li><code>find /etc/ -type d -maxdepth 3 -perm 755 | wc -l</code> to search by those exact permissions(<code>-perm 755</code>) and will also run [[devlog.wc] on it.</li>
+<li><code>find /var -type f -size 100k -ls</code> will look for files(<code>f</code>) with size (<code>100k</code>) and will run <code>ls</code> on the discovered files.</li>
+<li><code>sudo find /var -type f -size +10M -ls</code> will look for files with size greater than <code>10M</code></li>
+<li><code>sudo find /var -type f -size -10k -ls</code> will look for files with size less than <code>10k</code></li>
+<li>Finding files in a range of size: <code>sudo find /var -type f -size +5M -size -10M</code></li>
+<li>To search by timestamp: <code>find /var -type f -mtime 0 -ls</code> files modified in the last 24 hours, <code>0</code> since fractional parts are ignore, it really means <code>0 days ago</code></li>
+<li><code>find /var -type f -mtime 1 -ls</code> files modified <code>1-2 days ago</code></li>
+<li><code>find /var -type f -atime +1 -ls</code> files last accessed <code>2 day ago</code>, <code>+1</code> signifies the next number after <code>1</code></li>
+<li>Use <code>-amin</code>, <code>-mmin</code>, <code>-cmin</code> to search by minutes</li>
+<li><code>find /var -type f -mmin -60</code> files modified less than 60 mins ago</li>
+<li>Use <code>-user</code>, <code>-group</code> to search by owner, group</li>
+<li><code>sudo find /var -type f -user gdm -ls</code></li>
+<li><code>sudo find /var -type f -not -group root -ls</code> to negate an option use <code>-not</code>, will find all the files that do not belong to the root group</li>
+</ul>
+<h3 id="execute-a-command-discovered-by-the-find-command-using--exec-option"><a aria-hidden="true" class="anchor-heading" href="#execute-a-command-discovered-by-the-find-command-using--exec-option"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Execute a command discovered by the <code>find</code> command using <code>-exec</code> option</h3>
+<p><code>sudo find /etc -type f -mtime 0 -exec cat {} \;</code></p>
+<ul>
+<li>will run <code>cat</code> on each file found by <code>find</code>, <code>{}</code> will store the files found <code>\;</code> signifies the end of the command.</li>
+</ul>
+<p><code>sudo find /etc -mtime -7 -type f -exec cp {} /root/backup \;</code></p>
+<ul>
+<li>Backup all files in <code>/etc</code> modified in the last week: <code>-7</code> means in the last 7 days, note that the dir <code>/root/backup</code> will have to be created first</li>
+<li>Delete files that were modified 10 mins ago:</li>
+</ul>
+<p><code>sudo find . -type f -mtime -10 -exec rm {} \; </code></p>
+<ul>
+<li>Use <code>-ok</code> instead of <code>-exec</code> to do the same interactively</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/8f7fkugnclgo7744xnma2d2">Combining Find and Chmod Commands Together</a></li>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+<li><a href="/notes/29n92e4t22kpncwz11elghh">SUID</a></li>
+</ul>

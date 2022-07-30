@@ -1,0 +1,60 @@
+<h1 id="runlevel"><a aria-hidden="true" class="anchor-heading" href="#runlevel"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Runlevel</h1>
+<ul>
+<li>Related: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>A runlevel is one of the modes that a Unix-based, dedicated server or a VPS server OS will run on. Each runlevel has a certain number of services stopped or started, giving the user control over the behavior of the machine. Conventionally, seven runlevels exist, numbered from zero to six.</p>
+<p>After the Linux kernel has booted, the init program reads the /etc/inittab file to determine the behavior for each runlevel. Unless the user specifies another value as a kernel boot parameter, the system will attempt to enter (start) the default runlevel.</p>
+<p>Most Linux servers lack a graphical user interface and therefore start in runlevel 3. Servers with a GUI and desktop Unix systems start runlevel 5. When a server is issued a reboot command, it enters runlevel 6.</p>
+<p>The important thing to note here is that there are differences in the runlevels according to the operating system. The standard LINUX kernel supports these seven different runlevels :</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Run Level</th><th>Mode</th><th>Action</th></tr></thead><tbody><tr><td>0</td><td>Halt</td><td>Shuts down system</td></tr><tr><td>1</td><td>Single-User Mode</td><td>Does not configure network interfaces, start daemons, or allow non-root logins</td></tr><tr><td>2</td><td>Multi-User Mode  with no NFS(network file system)</td><td>Does not configure network interfaces or start daemons.</td></tr><tr><td>3</td><td>Multi-User Mode with Networking  under the command line interface and not under the graphical user interface.</td><td>Starts the system normally.</td></tr><tr><td>4</td><td>Undefined</td><td>Not used/User-definable</td></tr><tr><td>5</td><td>X11</td><td>As runlevel 3 + display manager(X)   With GUI (graphical user interface) and this is the standard runlevel for most of the LINUX based systems.</td></tr><tr><td>6</td><td>Reboot</td><td>Reboots the system</td></tr></tbody></table>
+<p>Sources:</p>
+<ul>
+<li><a href="https://www.liquidweb.com/kb/linux-runlevels-explained/">Linux Runlevels Explained | Liquid Web</a>,</li>
+<li><a href="https://www.geeksforgeeks.org/run-levels-linux/">Run Levels in Linux - GeeksforGeeks</a></li>
+</ul>

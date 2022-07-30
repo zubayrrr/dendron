@@ -1,0 +1,916 @@
+<h1 id="devops-interview-questions"><a aria-hidden="true" class="anchor-heading" href="#devops-interview-questions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Devops Interview Questions</h1>
+<ol>
+<li><strong>EC2 instance is running out of disk space. What actions will you take to mitigate the issue?</strong></li>
+</ol>
+<ul>
+<li><a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> disk space typically refers to <a href="/notes/fsmsti0qns6uixhjwtqk7p6">AWS EBS</a> volume.</li>
+<li>We'll first check if its a root volume or any other volume
+<ul>
+<li>/root - OS</li>
+<li>/application - for all our applications</li>
+</ul>
+</li>
+<li>If its root volume then we'll first try to check logs(<code>/var/logs</code>) and clear some space if not the instance might shut down.</li>
+<li>If its the application volume(learn the reason of high disk usage), then we'll use EBS feature to take the snapshot and increase disk space for the EC2 instance.</li>
+</ul>
+<ol start="2">
+<li><strong>Explain different ways in which</strong> <a href="/notes/9fa6uf6xbnv00fv944o1y1o">Prometheus</a> <strong>can get metrics?</strong></li>
+</ol>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Prometheus</span></div>
+<a href="/notes/9fa6uf6xbnv00fv944o1y1o" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h2 id="getting-metrics"><a aria-hidden="true" class="anchor-heading" href="#getting-metrics"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Getting metrics</h2>
+<p>How does Prometheus collect metrics from the targets?</p>
+<p><strong>Pulling</strong></p>
+<p>Your application(regardless of technology) will have to expose a metrics HTTP endpoint and Prometheus will scrape from the endpoint. By default is is: <code>hostaddress/metrics</code>.</p>
+<p>Data available in the <code>/metrics</code> endpoint should be in the correct format that Prometheus understands.</p>
+<p>Some servers expose Prometheus endpoints by default so you don't really have to do extra work for it. But many services don't have native Prometheus endpoints in which case you'd need an <strong>Exporter</strong></p>
+<p><strong>Exporter</strong></p>
+<p>It basically a script/service that fetches metrics from your target and converts them in format Prometheus understands and exposes it's converted data at it's own <code>/metrics</code> endpoint where Prometheus can scrape them.</p>
+<p>Prometheus has a list of exporters for different services like <a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a>, <a href="/notes/boyz5i8gtwc9aoj4zfz556y">Elasticsearch</a>, <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a> servers, <a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Tools</a>, Cloud Platforms and so on.</p>
+<p>If you want to monitor a Linux server, see: <a href="https://prometheus.io/docs/guides/node-exporter/">Monitoring Linux host metrics with the Node Exporter | Prometheus</a></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656150261/wiki/xfe8c37gmzogdoin3wtx.png"></p>
+<p>Exporters are also available as Docker images. SO</p>
+<p>If you want to monitor <a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a> container in a <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> cluster, you can deploy  a sidecar container of MySQL exporter that will run inside the pod with MySQL container, connect to it and start sending MySQL metrics for Prometheus and making them available at it’s own <code>/metrics</code> endpoint.</p>
+<p><strong>Monitoring  your own applications?</strong></p>
+<ul>
+<li>
+<p>How many requests your applications are receiving.</p>
+</li>
+<li>
+<p>How many exceptions are occurring.</p>
+</li>
+<li>
+<p>How many server resources your application is using.</p>
+<p> For this you can use Client Libraries for different languages using which you can expose <code>/metrics</code> endpoint for metrics that are relevant to you.
+<a href="https://prometheus.io/docs/instrumenting/clientlibs/">Client libraries | Prometheus</a></p>
+</li>
+</ul>
+<h2 id="push-based-vs-pull-based"><a aria-hidden="true" class="anchor-heading" href="#push-based-vs-pull-based"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Push based VS Pull based</h2>
+<p>Most monitoring systems like <a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a> or <a href="/notes/g8txkrlv8lggex7u6372sd1">New Relic</a> etc use a Push system. Applications and servers are responsible for pushing their metric data to a centralized collection platform of that monitoring tool.</p>
+<p>In large microservices based system this approach can create a bottleneck for your infrastructure as all of these microservices constantly make push request to your monitoring tool thus flooding your system.</p>
+<p>Plus, you’ll also need to install additional software(daemons) on each of your targets to push the metrics to the monitoring server. In contrast with Prometheus which only requires a scraping endpoint.</p>
+<p>Multiple Prometheus instances can collect/pull metrics. Using pull, Prometheus can easily detect whether a service is up and running or not.</p>
+<p>Pushing can be ambiguous when checking if the service is up or not when compared to pull mechanism. Because there can be many reasons for a push request to fail. </p>
+<p><strong>Pushing</strong></p>
+<p>Pushgateway can be utilized when a target only runs for a short time.
+Eg: A batch job, scheduled job etc. For such jobs, Prometheus offers Pushgateway component. So these services can push metrics directly to Prometheus DB.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655885235/wiki/yguspabejdgcr4qbzegm.png"></p>
+<h2 id="configuring-prometheus"><a aria-hidden="true" class="anchor-heading" href="#configuring-prometheus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Configuring Prometheus</h2>
+<p><code>prometheus.yaml</code> file contains all the info needed for Prometheus to know what(targets) to scrape and when(intervals). </p>
+<p>Prometheus then uses <strong>Service Discovery</strong>  mechanism to find those target endpoints.</p>
+<p>You can find the sample config files with default values which comes with your first Prometheus installation.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656153062/wiki/p2l9ubydx8h1viv4pafn.png"></p>
+<p>Under <code>global:</code> you define how often Prometheus will scrape it’s targets.</p>
+<p>Rules are for aggregating metric values or creating alerts when conditions
+are met.</p>
+<p><code>scrape_configs:</code> define what resources Prometheus monitors; essentially targets. You can define your own jobs and default values for each job(overwrite global interval values).</p>
+<p>Since Prometheus has it’s own <code>/metrics</code> endpoint, it can monitor it’s own health.</p>
+<h2 id="alertmanager"><a aria-hidden="true" class="anchor-heading" href="#alertmanager"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AlertManager</h2>
+<p>How does Prometheus trigger alerts that are defined by rules in <code>prometheus.yaml</code> and who receives these alerts?</p>
+<p>Prometheus has a component called AlertManger that is responsible for firing alerts via different channels (Emails, Slack channel or other notification clients).</p>
+<p>Prometheus server will read alert rules and if the conditions under rules is met an alert is fired. </p>
+<h2 id="prometheus-data-storage"><a aria-hidden="true" class="anchor-heading" href="#prometheus-data-storage"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus Data Storage</h2>
+<p>Where does Prometheus store all the data that it collects/aggregates? How can other systems use this data?</p>
+<p>Prometheus stores metric data on disks, includes Local on disk <strong>Time Series DB</strong> but also optionally integrates with remote storage system. It is stored in custom Time Series format. Because of this you cannot directly write this data on a relational DB or something else.</p>
+<p>Once collected, Prometheus lets you query the data through it’s server API using it’s query language called <strong>PromQL</strong>.</p>
+<h2 id="promql"><a aria-hidden="true" class="anchor-heading" href="#promql"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>PromQL</h2>
+<p>You can use Prometheus dashboard UI to ask Prometheus server via PromQL to for example show the status of a target right now.</p>
+<p>Or use more powerful data visualization tools like <strong>Grafana</strong> to display the data which uses PromQL under the hood to get data out of Prometheus .</p>
+<p>Example PromQL query to:</p>
+<p>Query all HTTP status codes except <code>4xx</code> ones</p>
+<pre class="language-sql"><code class="language-sql">http_requests_total{<span class="token keyword">status</span><span class="token operator">!</span><span class="token operator">~</span><span class="token string">"4.."</span>}
+</code></pre>
+<p>This query does some subquery:</p>
+<p>Returns the 5 minute rate of the <em>http_requests_total</em> metric for the past 30 minutes.</p>
+<pre class="language-sql"><code class="language-sql">rate<span class="token punctuation">(</span>http_requests_total<span class="token punctuation">[</span><span class="token number">5</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">30</span>m:<span class="token punctuation">]</span>
+</code></pre>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656153983/wiki/qu5c4x2hrwuozqeqebxy.png"></p>
+<h2 id="sailent-characteristics-of-prometheus"><a aria-hidden="true" class="anchor-heading" href="#sailent-characteristics-of-prometheus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Sailent Characteristics of Prometheus</h2>
+<p>It is designed to be reliable even when other systems have an outage so you can diagnose the problems and fix them.</p>
+<p>Each Prometheus server is standalone and self-contained. It doesn’t depend on network storage or other remote services. It is meant to be still working when other parts of the infrastructure are broken.</p>
+<p>It doesn’t require extensive setup needed.</p>
+<p><strong>Drawbacks:</strong></p>
+<p>It can be difficult to scale, when you have hundreds of servers that you want to use multiple Prometheus instances for aggregation of metrics setting them up can get complicated.</p>
+<p>A workaround this would be to increase the capacity of your Prometheus server, limit the number of metrics Prometheus collects from applications.</p>
+<h2 id="prometheus-federation"><a aria-hidden="true" class="anchor-heading" href="#prometheus-federation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus Federation</h2>
+<p>To scale monitoring with scalable cloud apps.</p>
+<p>Prometheus Federation allows one Prometheus server to scrape data from another Prometheus server. This will allow you to scale your Prometheus setup with your multi-node applications.</p>
+<h2 id="prometheus-with-docker--kubernetes"><a aria-hidden="true" class="anchor-heading" href="#prometheus-with-docker--kubernetes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus with Docker &#x26; Kubernetes</h2>
+<p>It is fully compatible with both.</p>
+<p>Prometheus components are available as Docker images and therefore can be deployed on Kubernetes or other container environments.</p>
+<p>It provides monitoring of K8s Cluster Node Resource out of the box! Once deployed on K8s, it starts gather metrics data on each Kubernetes node server without any extra configuration.</p></div></div><p></p><p></p>
+<ol start="3">
+<li><strong>What is Kubernetes kOps?</strong></li>
+</ol>
+<p><a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> <a href="/notes/fhi59s6yqplah2w1hfx9i5x">kOps</a> is an automation tool used to setup Kubernetes cluster. It is an alternative to <code>kubeadmin</code>.</p>
+<p>kOps can help you spin a test cluster or a small dev cluster quickly. It is not something that will help you setup managed Kubernetes cluster(<a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a>). It can create, destroy, upgrade, maintain production-grade, high availability clusters and also provision necessary cloud infrastructure(only recommended if you cannot afford managed service).</p>
+<p>It supports many cloud providers.</p>
+<ol start="4">
+<li><strong>What is instance fleet in AWS?</strong></li>
+</ol>
+<p>Instance fleet in <a href="/notes/gvpkbgglehtr9ej5e0uj44j">AWS</a> refers to a configuration - information to launch a fleet or a group of <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> instances, in a single API call. A fleet can launch multiple instance(mixed set) types across multiple Availability Zones using On-Demand Instance, Reserved Instance and Spot Instance purchasing options together.</p>
+<p>In the configuration you can define:</p>
+<ul>
+<li>Separate capacity targets and maximum amount you're willing to pay per hour for On-Demand, Spot instances.</li>
+<li>Specify the instance types that work best for your applications.</li>
+<li>Specify how EC2 should distribute your fleet capacity within each purchasing options.</li>
+</ul>
+<p>The instance fleet configuration for <a href="/notes/w0ukvte4c5p8inzz5kf7zf6">AWS EMR</a> lets you select wide variety of provisioning options for Amazon EC2 instances and helps you develop a flexible and elastic resourcing strategy for each node type in your cluster.</p>
+<ol start="5">
+<li><strong>How do you pass “message” for your git commit</strong></li>
+</ol>
+<p>Use the flag <code>-m [message]</code> for your <a href="/notes/qkp5jc6pta8a9f35evsbvod">Git</a> commit. Although you can commit without passing a message.</p>
+<p><code>git commit -m "🔥 commit message"</code></p>
+<ol start="6">
+<li><strong>What application server are you familiar with?</strong></li>
+</ol>
+<p><a href="/notes/jew452yotysgzsmcmgmzj6j">Web Server &#x26; Application Server</a></p>
+<p>For Java applications, we have <a href="/notes/w2frd082bpmiik2nqaxf8wc">Tomcat</a> but there are different application servers for applications based on different technologies.</p>
+<ol start="7">
+<li><strong>How to check logs of a Docker container/filter last 200 lines from the logs.</strong></li>
+</ol>
+<p><code>docker container logs &#x3C;container_name></code>
+<code>docker container logs --tail 200 &#x3C;container_name></code></p>
+<ol start="8">
+<li><strong>What happens to container logs if it is restarted?</strong></li>
+</ol>
+<p>You won’t lose any logs for restarting a container but since containers are stateless, you will lose the logs if a container is <strong>deleted</strong>. If you want to persist logs you can use external persistent storage. You can also push the container logs to something like <a href="/notes/002tn8rmi02kqtdd6xzllg2">AWS CloudTrail</a> or <a href="/notes/rem6mv7lebiuf5ajcmm2acd">Splunk</a></p>
+<ol start="9">
+<li><strong>Horizontal Scaling VS Vertical Scaling</strong></li>
+</ol>
+<p><strong>Horizontal scaling</strong> means scaling by adding more machines to your pool of resources (also described as “scaling out”); something like <a href="/notes/520xdfstn930e413i3byvxs">AWS Auto Scaling Group</a>, creating replicas(think <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a>). If you are hosting an application on a server and find that it no longer has the capacity or capabilities to handle traffic, adding a server may be your solution.</p>
+<p>Whereas <strong>vertical scaling</strong> refers to scaling by adding more power (e.g. CPU, RAM) to an existing machine (also described as “scaling up”). For instance, if your server requires more processing power, vertical scaling would mean upgrading the CPUs. You can also vertically scale the memory, storage, or network speed.</p>
+<p>See: <a href="https://www.cloudzero.com/blog/horizontal-vs-vertical-scaling">Horizontal Vs. Vertical Scaling: How Do They Compare?</a></p>
+<ol start="10">
+<li><strong>ReplicationController in Kubernetes</strong></li>
+</ol>
+<p>A ReplicationController is responsible for running the specified number of pod copies(replicas) across the cluster.</p>
+<p>ReplicationController is not auto scale.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ReplicationController
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+          <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+          <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+</code></pre>
+<ol start="11">
+<li><strong>What is helm?</strong></li>
+</ol>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Helm</span></div>
+<a href="/notes/5uu4351w46y16xtyufz0fy4" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p>Helm is a Kubernetes deployment tool for automating creation, packaging, configuration, and deployment of applications and services to Kubernetes clusters.</p>
+<p><a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> is a powerful container-orchestration system for application deployment. There are multiple independent resources to deal with, and each requires a dedicated YAML manifest file.</p>
+<p>Helm deploys packaged applications to Kubernetes and structures them into charts. The charts contain all pre-configured application resources along with all the versions into one easily manageable package.</p>
+<p>Helm streamlines installing, upgrading, fetching dependencies, and configuring deployments on Kubernetes with simple CLI commands. Software packages are found in repositories or are created.</p>
+<p>Unlike Homebrew or Aptitude desktop package managers, or Azure Resource Manager templates (ARMs) / Amazon Machine Images (AMIs) that are run on a single server, Helm charts are built atop Kubernetes and benefit from its cluster architecture. The main benefit of this approach is the ability to consider scalability from the start. The charts of all the images used by Helm are stored in a registry called Helm Workspace, so the DevOps teams can search them and add to their projects with ease.</p>
+<p>Kubernetes objects are challenging to manage. With helpful tools, the Kubernetes learning curve becomes smooth and manageable. Helm automates maintenance of YAML manifests for Kubernetes objects by packaging information into charts and advertises them to a Kubernetes cluster.</p>
+<p>Helm keeps track of the versioned history of every chart installation and change. Rolling back to a previous version or upgrading to a newer version is completed with comprehensible commands.</p>
+<h2 id="helm-chart"><a aria-hidden="true" class="anchor-heading" href="#helm-chart"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Helm Chart</h2>
+<p>Helm charts are Helm packages consisting of YAML files and templates which convert into Kubernetes manifest files. Charts are reusable by anyone for any environment, which reduces complexity and duplicates. Folders have the following structure:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655905668/wiki/f0iewhj44stf8t90qnfr.png"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><strong>Name</strong></th><th><strong>Type</strong></th><th><strong>Function</strong></th></tr></thead><tbody><tr><td><strong>charts/</strong></td><td>Directory</td><td>Directory for manually managed chart dependencies.</td></tr><tr><td><strong>templates/</strong></td><td>Directory</td><td>Template files are written in Golang and combined with configuration values from the values.yaml file to generate Kubernetes manifests.</td></tr><tr><td><strong>Chart.yaml</strong></td><td>File</td><td>Metadata about the chart, such as the version, name, search keywords, etc.</td></tr><tr><td><strong>LICENSE (optional)</strong></td><td>File</td><td>License for the chart in plaintext format.</td></tr><tr><td><strong>README.md (optional)</strong></td><td>File</td><td>Human readable information for the users of the chart.</td></tr><tr><td><strong>requirements.yaml (optional)</strong></td><td>File</td><td>List of chart’s dependencies.</td></tr><tr><td><strong>values.yaml</strong></td><td>File</td><td>Default configuration <a href="https://phoenixnap.com/kb/helm-get-values">values</a> for the chart.</td></tr></tbody></table>
+<p>Via - <a href="https://phoenixnap.com/kb/what-is-helm">What is Helm? Helm and Helm Charts Explained</a></p>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://phoenixnap.com/kb/what-is-helm">What is Helm? Helm and Helm Charts Explained</a></li>
+</ul>
+</div></div><p></p><p></p>
+<ol start="12">
+<li><strong>Which Python module would you use to write a simple program to test API code?</strong></li>
+</ol>
+<p>The code should just check if the API endpoint is working or not.</p>
+<p><strong>Answer:</strong></p>
+<p>I would use the <strong>request</strong> module in <a href="/notes/wa4wthnhw54hd5wfyocyvqa">Python</a>. It has the <code>get()</code> function wherein you'd pass pass the API endpoint and fetch status/http code <code>.status_code</code>.</p>
+<p>If it returns <code>200</code> - API endpoint is working fine.</p>
+<ol start="13">
+<li><strong>Which HTTP responses would you monitor and for which would you trigger alerts?</strong></li>
+</ol>
+<p>Example of API endpoints:</p>
+<pre><code>/this-is-an-endpoint
+/another/endpoint
+/some/other/endpoint
+/login
+/accounts
+/cart/items
+</code></pre>
+<p>HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Responses are grouped in five classes:</p>
+<ul>
+<li>
+<p>Informational responses (100–199)</p>
+</li>
+<li>
+<p>Successful responses (200–299)</p>
+</li>
+<li>
+<p>Redirection messages (300–399)</p>
+</li>
+<li>
+<p>Client error responses (400–499)</p>
+</li>
+<li>
+<p>Server error responses (500–599)</p>
+</li>
+<li>
+<p>If HTTP response is in the 400 or 500 range we'll trigger an alert by writing a script of setting up a monitoring service.</p>
+</li>
+</ul>
+<ol start="14">
+<li><strong>Can we run a Jenkins agent inside a docker container along with our test?</strong></li>
+</ol>
+<ul>
+<li>Running Jenkins agent inside a <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a> container is (one of) the standard way of implementing pipelines.</li>
+<li>This question is focusing on isolation of pipeline steps.</li>
+<li>Here the code is expected to run inside a docker container which can use a custom test image if required.</li>
+<li>This is the best way to perform testing without having every <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a> agent needing to have packages installed.</li>
+<li>To use any kind of Docker containers, I'd add it as a part of the agent. We can call any kind of images(from DockerHub or Custom), whatever stages and test steps we mention as part of our pipeline will run inside that docker container. Multi node Jenkins setup.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655971387/wiki/m9mcgppau59fyaewl0uw.png"></p>
+<ol start="15">
+<li><strong>What are some of the ways of setting up alerts?</strong></li>
+</ol>
+<p>It is not feasible to have multiple alerting methods in one org. Alerts notifications can be Emails, Phone calls, Slack messages, etc. This ties into the <a href="/notes/01rcytslgl5ysbgp9kzekoj">On Call</a> management.</p>
+<p>Some of the open source methods:</p>
+<ul>
+<li><a href="/notes/9fa6uf6xbnv00fv944o1y1o">Prometheus</a> -> Alertmanager</li>
+<li><a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a> -> SNS</li>
+<li>Nagios -> Alerting</li>
+</ul>
+<ol start="16">
+<li><strong>Help repository to store/access helm charts</strong></li>
+</ol>
+<p>Helm repositories are a common practice to store helm charts, which can be access by our <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> cluster as part of a deployment. This helps with versioning our helm charts, rollbacks, upgrade etc.</p>
+<ul>
+<li>Cloudsmith</li>
+<li>Jfrog Artifactory</li>
+<li><a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a></li>
+<li>Google Cloud Storage</li>
+<li>Artifact Hub(Open Source)</li>
+</ul>
+<ol start="17">
+<li><strong>Jenkins multi-node setup, how to add new slave/follower to master?</strong></li>
+</ol>
+<p>Having only one node is usually not enough(availability) for any organization so a multi-node setup is required for scaling. You can add a slave/follower for a master on "Manage <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Jekins (Private)</a>" page and the option "Manage Nodes and Clouds". You will provide node info such as the IP Address, username, password etc and get it registered. We can also add slaves dynamically, you'd need an auto scaling group by your Cloud Provider.</p>
+<ol start="18">
+<li><strong>How do you block an IAM user from accessing a specific S3 bucket?</strong></li>
+</ol>
+<p>It is difficult to manage bucket level policies using IAM policy. We can achieve this using <a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a> bucket policy, you'd use the IAM user's ARN and “deny” the user.</p>
+<ol start="19">
+<li><strong>Is a large docker image a cause of concern? How would you tackle it?</strong></li>
+</ol>
+<p>Applications can be large if they're complex and do a lot of things but if it is a simple application...large size is not warranted and can be mitigated.</p>
+<ul>
+<li>Bigger docker image would result in longer build time.</li>
+<li>Docker image downloaded(from DockerHub) may throw errors or cause API rate limit issues.</li>
+<li>Application will be bulkier and harder to debug and scale.</li>
+</ul>
+<p>To resolve this:</p>
+<ul>
+<li>Smaller Base Image(Alpine images).</li>
+<li>Introduce Multi-stage build - from the Base image you build up your image and discard your previous image builds.</li>
+<li>Remove package binaries after installing and don't install packages that are not necessary.</li>
+<li>Lock your package/dependencies versions.</li>
+</ul>
+<ol start="20">
+<li><strong>Are you aware of AWS IAM policies/can you read them?</strong></li>
+</ol>
+<p>Policy evaluation logic</p>
+<p>Example</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"Version"</span><span class="token operator">:</span> <span class="token string">"2012-10-17"</span><span class="token punctuation">,</span> <span class="token comment">// version is fixed</span>
+  <span class="token property">"Statement"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"Sid"</span><span class="token operator">:</span> <span class="token string">"AllowS3ListRead"</span><span class="token punctuation">,</span> <span class="token comment">// high level ALLOW action</span>
+      <span class="token property">"Effect"</span><span class="token operator">:</span> <span class="token string">"Allow"</span><span class="token punctuation">,</span>
+      <span class="token property">"Action"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"s3:GetBucketLocation"</span><span class="token punctuation">,</span> <span class="token comment">// explicitly defining what actions are allowed</span>
+        <span class="token string">"s3:GetAccountPublicAccessBlock"</span><span class="token punctuation">,</span>
+        <span class="token string">"s3:ListAccessPoints"</span><span class="token punctuation">,</span>
+        <span class="token string">"s3:ListAllMyBuckets"</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"Resource"</span><span class="token operator">:</span> <span class="token string">"arn:aws:s3:::*"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"Sid"</span><span class="token operator">:</span> <span class="token string">"AllowS3Self"</span><span class="token punctuation">,</span> <span class="token comment">// high level ALLOW action</span>
+      <span class="token property">"Effect"</span><span class="token operator">:</span> <span class="token string">"Allow"</span><span class="token punctuation">,</span>
+      <span class="token property">"Action"</span><span class="token operator">:</span> <span class="token string">"s3:*"</span><span class="token punctuation">,</span> <span class="token comment">// everything is allowed but only limited to the below two buckets</span>
+      <span class="token property">"Resource"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"arn:aws:s3:::carlossalazar/*"</span><span class="token punctuation">,</span> <span class="token string">"arn:aws:s3:::carlossalazar"</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"Sid"</span><span class="token operator">:</span> <span class="token string">"DenyS3Logs"</span><span class="token punctuation">,</span> <span class="token comment">// high level DENY action</span>
+      <span class="token property">"Effect"</span><span class="token operator">:</span> <span class="token string">"Deny"</span><span class="token punctuation">,</span>
+      <span class="token property">"Action"</span><span class="token operator">:</span> <span class="token string">"s3:*"</span><span class="token punctuation">,</span> <span class="token comment">// everything is denied for any bucket with the suffix "logs"</span>
+      <span class="token property">"Resource"</span><span class="token operator">:</span> <span class="token string">"arn:aws:s3:::*log*"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Example via - <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html">Policy evaluation logic - AWS Identity and Access Management</a></p>
+<ol start="21">
+<li><strong>What role does <code>pv</code> and <code>pvc</code> play in Kubernetes?</strong></li>
+</ol>
+<p>PV stands for PersistentVolume
+PVC stands for PersistentVolumeClaim</p>
+<p>Pod gets it's storage using PVC which would in turn get hold of PV which will utilize an NFS or <a href="/notes/fsmsti0qns6uixhjwtqk7p6">AWS EBS</a> volume.</p>
+<p>PVC will define what kind of volume and the storage amount it needs and it will search of PVs(which you'd have provisioned) and choose from those.</p>
+<p>PV can exist independently from a Pod, you don't need to have a Pod for a PV to be created.</p>
+<ol start="22">
+<li><strong>When creating RDS using Terraform, how do you save DB username and password securely?</strong></li>
+</ol>
+<p>Since DB username and password are considered secrets, they cannot be saved in plaintext on a repository along with the Terraform code.</p>
+<p>You can use Hashicorp's Vault, store your secrets on your Vault.</p>
+<p>Integrate it with Terraform. In your <code>main.tf</code> you can reference it as a Data Block. Mention Vault provider in the Provider section.</p>
+<p>You can also use other secret stores/managers like <a href="/notes/3rpt3gh5gtw0qr6qs8f4qkq">AWS Secrets Manager</a> etc. Or you can also use environment variables.</p>
+<ol start="23">
+<li><strong>Have you support any DBs?</strong></li>
+</ol>
+<p>You don't need to be a DB expert but you have to have clear understanding of different kinds of DBs used, their use cases and pick one based on your experience and profile.</p>
+<ul>
+<li>Key-value DB
+<ul>
+<li><a href="/notes/1kiomlco81afa6al0dp14lh">Redis</a>, etcd</li>
+</ul>
+</li>
+<li>Column DB
+<ul>
+<li>Cassandra</li>
+</ul>
+</li>
+<li>NoSQL/Document/Schemaless DB
+<ul>
+<li><a href="/notes/lh0h2j2j55l3xcy3v5np9m2">mongoDB</a></li>
+<li><a href="/notes/tczgjqm691xi6olmcy78ckc">AWS DynamoDB</a></li>
+</ul>
+</li>
+<li>Relational DB
+<ul>
+<li><a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a></li>
+<li><a href="/notes/dxfqif7isp6w1p8xoohln8b">AWS Aurora</a></li>
+<li><a href="/notes/l5a3o2n7ud6bypkz8jh688u">PostgreSQL</a></li>
+</ul>
+</li>
+</ul>
+<ol start="24">
+<li><strong>How do you ensure certain packages are installed on all your EC2 instances and are persisted?</strong></li>
+</ol>
+<p>HashiCorp's <a href="/notes/kxbhnz5oxpmort5y94uvqc9">Packer</a> is the solution. Packer is an open source tool that enables you to create identical machine images for multiple platforms from a single source template which can be written in JSON. You can use it in your multi-cloud setup or On-prem infra too.</p>
+<p>A common use case is creating "Golden Images" that teams across an organization can use in cloud infrastructure.</p>
+<p>We could also use custom <a href="/notes/38n6krgljsgboencwqjmb5j">AWS AMI</a> images too but is limited to Cloud.</p>
+<ol start="25">
+<li><strong>Differentiate Managed, Customer Managed and Inline IAM policies.</strong></li>
+</ol>
+<ul>
+<li>Managed: Created and maintained by AWS.</li>
+<li>Customer Managed: Created and maintained by customer. Custom policies created by an organization using <a href="/notes/mkwoo3ek4y6bnddpy1iteb9">Terraform</a>. It can be attached to multiple users or groups.</li>
+<li>Inline: Created and attached directly to IAM User, Group or Role. It is created for that specific Role, User, Group ...if the Role, User or Group is destroyed, the policy is also deleted.</li>
+</ul>
+<ol start="26">
+<li><strong>What build tools are you familiar with?</strong></li>
+</ol>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Build Automation</span></div>
+<a href="/notes/qcaw5ht4vcnucydq104gh7v" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h2 id="building-java-applications"><a aria-hidden="true" class="anchor-heading" href="#building-java-applications"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Building Java Applications</h2>
+<ul>
+<li>
+<p>Install IntelliJ IDEA.</p>
+</li>
+<li>
+<p>Install Java(or use IDEA to Download SDK).</p>
+</li>
+<li>
+<p>Setup JDK, SDK (make sure Java executable is added to <a href="/notes/iicnw4qgra6rr5f6k4dlw3z">$PATH</a> or <code>%PATH%</code>, respectively.)</p>
+</li>
+<li>
+<p>Set <code>JAVA_HOME</code> as an <a href="/notes/o729gsazu87le197nswwxtp">environment variable</a> (Maven prerequisite).</p>
+</li>
+<li>
+<p>Use SCM to clone(<code>git clone</code>) your Java application's repository.</p>
+</li>
+<li>
+<p>Build a <a href="/notes/482tfc3v73o3d4p8yi3b4z7">Maven</a> project.</p>
+<ul>
+<li>Open source code of your Java application in IntelliJ IDEA.</li>
+<li>Wait for IDEA to index the source code.</li>
+<li>IDEA will automatically detect the <code>pom.xml</code> and resolve all the dependencies.</li>
+<li>Run the application(preview in the "Run" tab).</li>
+<li>Download <a href="https://maven.apache.org">Maven</a> and add it's <code>/bin</code>'s path to <code>$PATH</code> or <code>%PATH%</code>.</li>
+<li>Use <code>mvn</code> commands and profit!</li>
+<li>After building, <code>.jar</code> or <code>.war</code> files can be found in the <code>./target</code> folder.</li>
+</ul>
+</li>
+<li>
+<p>Build a <a href="/notes/saz485w50o682scob9knhp1">Gradle</a> project.</p>
+<ul>
+<li>Open source code of your Java application in IntelliJ IDEA</li>
+<li>If it has a gradle wrapper(folder) inside the repo, you don't need to install gradle</li>
+<li>Make sure the JVM configured is compatible with gradle wrapper's version.(<code>JAVA_HOME</code>)</li>
+<li>Run the application to check if everything is working fine</li>
+<li>Build with <code>./gradlew build</code></li>
+<li>After building, <code>.jar</code> or <code>.war</code> files can be found in the <code>./build</code> folder.</li>
+</ul>
+</li>
+</ul>
+<p>To run a <code>.jar</code>: <code>java -jar name-of-the-app-SNAPSHOT.jar</code></p>
+<h2 id="managing-java-dependencies"><a aria-hidden="true" class="anchor-heading" href="#managing-java-dependencies"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Managing Java dependencies</h2>
+<ul>
+<li>Build tools(Maven, Gradle, NPM) are required even for local development of the application.</li>
+<li>Dependencies file is what keeps track of all the dependencies used in the application. Refer to <code>pom.xml</code> for a Maven project and <code>build.gradle</code> for a Gradle project.</li>
+<li>All the dependencies for both kind of projects are fetched from <a href="https://mvnrepository.com">mvnrepository.com</a>, they're downloaded locally from the remote repository.</li>
+</ul>
+<h2 id="building-javascript--devlognodejs-private-project"><a aria-hidden="true" class="anchor-heading" href="#building-javascript--devlognodejs-private-project"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Building <a href="/notes/cxjsfosx0onyz5nt07qna7w">Javascript</a> / <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.nodejs (Private)</a> project.</h2>
+<ul>
+<li>
+<p>Install Node.js, run <code>npm</code> to check if everything is working correctly.</p>
+</li>
+<li>
+<p>Alternatively to <code>npm</code> you can also use <code>yarn</code> to manage dependencies and to run build commands.</p>
+</li>
+<li>
+<p>Use the build commands from <code>package.json</code> to build it.</p>
+</li>
+<li>
+<p>Unlike Java applications, after building a JavaScript will result in <code>.zip</code> or <code>.tgz</code> file.</p>
+</li>
+<li>
+<p>Both <code>npm</code> and <code>yarn</code> are <strong>package managers not build tools</strong>, they're used for managing dependencies not for transpiling JS code.</p>
+</li>
+<li>
+<p>Use <code>npm pack</code> to pack.</p>
+</li>
+<li>
+<p>The resulting zip or tar doesn't contain dependencies; only the application code.</p>
+</li>
+<li>
+<p>To run the application, you first need to install the dependencies.</p>
+</li>
+<li>
+<p>Unpack the zip/tar.</p>
+</li>
+<li>
+<p>Run the app.</p>
+</li>
+<li>
+<p>Package frontend JS code.</p>
+<ul>
+<li>Separate <code>package.json</code> for frontend and backend.</li>
+<li>or have a common <code>package.json</code> for both frontend and backend.</li>
+<li>React code needs to be transpiled since it uses <code>jsx</code> syntax.</li>
+<li>Compress and minify.</li>
+</ul>
+</li>
+<li>
+<p>Build tools in the JavaScript world as also known as Bundlers.</p>
+</li>
+<li>
+<p>Most popular bundler is <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.webpack (Private)</a></p>
+</li>
+<li>
+<p>Webpack will transpile, minify, bundles, compresses(removes whitespaces etc).</p>
+</li>
+</ul>
+</div></div><p></p><p></p>
+<ol start="26">
+<li><strong>Ingress and Egress</strong></li>
+</ol>
+<p><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">archive.ingress (Private)</a> and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">archive.egress (Private)</a></p>
+<p>In IT they refer to:</p>
+<p>Ingress: Incoming/Inbound traffic
+Egress: Outgoing/Outbound traffic</p>
+<p>They're mostly associated with security groups(<a href="/notes/xqc8lgkkzwz4qcbb6htkgfv">Firewall</a>). They're also associated with VPCs and subnets where we control the incoming traffic from the internet and routing the traffic between subnets.</p>
+<p>Eg: Allowing or denying ports for certain traffic(<a href="/notes/o922t6d9q6wur3yve290hir">SSH</a>, <a href="/notes/9j4ykuha11rmbi2q6e3fmm3">HTTP</a>). In prod, you'd usually lock it in the VPC IP Range.</p>
+<ol start="27">
+<li><strong>Differentiate Docker Image and Docker Layer.</strong></li>
+</ol>
+<ul>
+<li>Docker Layers are not separate components, you cannot have a single Docker Layer and use it. They're a subcomponent of a Docker Image.</li>
+<li>But an Image can consist of a single Layer(that's often the case when running <code>squash</code> command)</li>
+<li>Each Layer is an Image by itself.</li>
+<li>They're generated when you run <code>docker container</code> commands.</li>
+<li>Each Layer stores the changes compared to the image it's based on <code>docker history</code> can fetch you info on it's Layers.</li>
+<li>Each instruction in a Dockerfile results in a layer.</li>
+</ul>
+<ol start="28">
+<li><strong>What is bastion host or gateway server and what roles do they play?</strong></li>
+</ol>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Bastion Host</span></div>
+<a href="/notes/9zyk7wwcwwwx1bi9pxy7e82" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p>A Bastion Host/Server is used to manage access to an internal or private network from an external network. It is also known as a Gateway Server or a Jump Box or a Jump Server.</p>
+<p>It basically helps with security - monitoring incoming and outgoing traffic. Bastion Host has clear user rules defined; who can access what.</p>
+<p>User will first sign into Bastion Host and get validated and proceed with SSHing into other machines. If we want to cut off all the external access to our internal servers, all we'd have to do is destroy the Bastion Host.</p>
+</div></div><p></p><p></p>
+<ol start="29">
+<li><strong>How do you troubleshoot an Auto Scaling Group that is facing issues provisioning new nodes(it is using spot instances)?</strong></li>
+</ol>
+<p>Having an <a href="/notes/520xdfstn930e413i3byvxs">AWS Auto Scaling Group</a> full of only spot instances is not a good idea unless the application can bear a little bit of downtime or have a back up ASG.</p>
+<p>There could be two of many causes for this:</p>
+<ul>
+<li>Increase in spot price</li>
+<li>EC2 quota limit</li>
+</ul>
+<p>Spot instances an be taken away from you if there is a change in bid price. Bidding high doesn't guarantee yous spot instances.</p>
+<p>There is a soft limit set of every account on how many EC2 instances you can spin up. It can be mitigated by going to AWS Support and raise a ticket for increasing quota limit.</p>
+<ol start="30">
+<li><strong>Troubleshoot a Pod that is unable to access a volume due to access error.</strong></li>
+</ol>
+<p>Volumes are handled/provisioned in Kubernetes as a part of PVs.</p>
+<p>AccessMode of volume - see that your PVC or your volume supports <code>ReadWriteMany</code> permission for multi-pod access.</p>
+<p>The access modes are:</p>
+<ul>
+<li>
+<p><code>ReadWriteOnce</code> the volume can be mounted as read-write by a single node. ReadWriteOnce access mode can still allow multiple pods to access the volume when the pods are running on the same node.</p>
+</li>
+<li>
+<p><code>ReadOnlyMany</code> the volume can be mounted as read-only by many nodes.</p>
+</li>
+<li>
+<p><code>ReadWriteMany</code> the volume can be mounted as read-write by many nodes.</p>
+</li>
+<li>
+<p><code>ReadWriteOncePod</code> the volume can be mounted as read-write by a single Pod. Use ReadWriteOncePod access mode if you want to ensure that only one pod across whole cluster can read that PVC or write to it. This is only supported for CSI volumes and Kubernetes version 1.22+.</p>
+</li>
+<li>
+<p><a href="/notes/i6etf4qol4i62as5pcjfphu">NFS</a> allows <code>ReadWriteMany</code>.</p>
+</li>
+<li>
+<p><a href="/notes/fsmsti0qns6uixhjwtqk7p6">AWS EBS</a> only allows <code>ReadWriteOnce</code>.</p>
+</li>
+</ul>
+<ol start="31">
+<li><strong>How to setup K8s in AWS?</strong></li>
+</ol>
+<p>You can set them up directly on <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a>. Using either <code>kops</code> commands or <code>kubeadmin</code>. Or you can go with <a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a>.</p>
+<p>If you want to set it up locally you'd go for <code>minicube</code>.</p>
+<p>In prod we look for stability of our environment, hence the safest bet would be to go with a managed service such as EKS. For development you can go with <a href="https://github.com/kubernetes/kops">kOps</a> clusters.</p>
+<p>Code deployment should be taken care by <a href="/notes/5uu4351w46y16xtyufz0fy4">Helm</a>.</p>
+<ol start="32">
+<li><strong>Explain Load Balancers in AWS.</strong></li>
+</ol>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Load Balancer</span></div>
+<a href="/notes/hjm4wdsz5kubm8h8pm006dd" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p>What is a Load Balancer? A load balancer acts as the “traffic cop” sitting in front of your servers and routing client requests across all servers capable of fulfilling those requests in a manner that maximizes speed and capacity utilization and ensures that no one server is overworked, which could degrade performance.</p>
+<p>If a single server goes down, the load balancer redirects traffic to the remaining online servers. When a new server is added to the server group, the load balancer automatically starts to send requests to it.</p>
+<h2 id="types-of-load-balancers--based-on-functions"><a aria-hidden="true" class="anchor-heading" href="#types-of-load-balancers--based-on-functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Types of Load Balancers – Based on Functions</h2>
+<p>Several load balancing techniques are there for addressing the specific network issues:</p>
+<p><strong>Network Load Balancer / Layer 4 (L4) Load Balancer:</strong></p>
+<p>Based on the network variables like <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> and destination ports, Network Load balancing is the distribution of traffic at the transport level through the routing decisions. Such load balancing is TCP i.e. level 4, and does not consider any parameter at the application level like the type of content, cookie data, headers, locations, application behavior etc. Performing network addressing translations without inspecting the content of discrete packets, Network Load Balancing cares only about the network layer information and directs the traffic on this basis only.</p>
+<p><strong>Application Load Balancer / Layer 7 (L7) Load Balancer:</strong></p>
+<p>Ranking highest in the <a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a>, Layer 7 load balancer distributes the requests based on multiple parameters at the application level. A much wider range of data is evaluated by the L7 load balancer including the HTTP headers and SSL sessions and distributes the server load based on the decision arising from a combination of several variables. This way application load balancers control the server traffic based on the individual usage and behavior.</p>
+<p><strong>Global Server Load Balancer/Multi-site Load Balancer:</strong></p>
+<p>With the increasing number of applications being hosted in cloud data centers, located at varied geographies, the GSLB extends the capabilities of general L4 and L7 across various data centers facilitating the efficient global load distribution, without degrading the experience for end users. In addition to the efficient traffic balancing, multi-site load balancers also help in quick recovery and seamless business operations, in case of server disaster or disaster at any data center, as other data centers at any part of the world can be used for business continuity.</p>
+<h2 id="types-of-load-balancers--based-on-configurations"><a aria-hidden="true" class="anchor-heading" href="#types-of-load-balancers--based-on-configurations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Types of Load Balancers – Based on Configurations</h2>
+<p>Load Balancers are also classified as:</p>
+<p><strong>Hardware Load Balancers:</strong></p>
+<p>As the name suggests, this is a physical, on-premise, hardware equipment to distribute the traffic on various servers. Though they are capable of handling a huge volume of traffic but are limited in terms of flexibility, and are also fairly high in prices.</p>
+<p><strong>Software Load Balancers:</strong></p>
+<p>They are the computer applications that need to be installed in the system and function similarly to the hardware load balancers. They are of two kinds- Commercial and Open Source and are a cost-effective alternative to the hardware counterparts.</p>
+<p><strong>Virtual Load Balancers:</strong></p>
+<p>This load balancer is different from both the software and hardware load balancers as it is the combination of the program of a hardware load balancer working on a virtual machine.</p>
+<p>Through virtualization, this kind of load balancer imitates the software driven infrastructure. The program application of hardware equipment is executed on a virtual machine to get the traffic redirected accordingly. But such load balancers have similar challenges as of the physical on-premise balancers viz. lack of central management, lesser scalability and much limited automation.</p>
+<h2 id="load-balancing-methods"><a aria-hidden="true" class="anchor-heading" href="#load-balancing-methods"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Load Balancing Methods</h2>
+<p>All kinds of Load Balancers receive the balancing requests, which are processed in accordance with a pre-configured algorithm.</p>
+<p><strong>Industry Standard Algorithms</strong></p>
+<p>The most common load balancing methodologies include:</p>
+<ul>
+<li>
+<p>Round Robin Algorithm:
+It relies on a rotation system to sort the traffic when working with servers of equal value. The request is transferred to the first available server and then that server is placed at the bottom of the line.</p>
+</li>
+<li>
+<p>Weighted Round Robin Algorithm:
+This algorithm is deployed to balance loads of different servers with different characteristics.</p>
+</li>
+<li>
+<p>Least Connections Algorithm:
+In this algorithm, traffic is directed to the server having the least traffic. This helps maintain the optimized performance, especially at peak hours by maintaining a uniform load at all the servers.</p>
+</li>
+<li>
+<p>Least Response Time Algorithm:
+This algorithm, like the least connection one, directs traffic to the server with a lower number of active connections and also considers the server having the least response time as its top priority.</p>
+</li>
+<li>
+<p>IP Hash Algorithm:
+A fairly simple balancing technique assigns the client’s IP address to a fixed server for optimal performance.</p>
+</li>
+</ul>
+<p>Via - <a href="https://www.appviewx.com/education-center/load-balancer-and-types/">Load Balancer | Types of Load Balancers | Benefits of Load balancer</a></p>
+</div></div><p></p><p></p>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">AWS ELB</span></div>
+<a href="/notes/uedjwc3ldf8k1p2l1l7fcxj" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p>Elastic Load Balancing supports the following types of load balancers: Application Load Balancers, Network Load Balancers, and Classic Load Balancers. Amazon ECS services can use these types of load balancer. Application Load Balancers are used to route HTTP/HTTPS (or Layer 7) traffic. Network Load Balancers and Classic Load Balancers are used to route <a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a> (or Layer 4) traffic.</p>
+<p><strong>Classic Load Balancer</strong></p>
+<ul>
+<li>Uses Round Robin traffic routing</li>
+<li>Will be deprecated from Aug 2022</li>
+</ul>
+<p><strong>Application Load Balancer</strong></p>
+<ul>
+<li>Path based routing - if you have path <code>/home</code> or <code>/mobile</code> serving different pages from different ASGs.</li>
+<li>Multiple ASG balancing.</li>
+</ul>
+<p><strong>Network Load Balancer</strong></p>
+<ul>
+<li>Streaming service(packet transmission)</li>
+<li>Uses network layer (TCP protocol) (makes this LB faster)</li>
+</ul>
+<p><strong>Gateway Load Balancer</strong></p>
+<ul>
+<li>GWLB Target groups support the Generic Networking Virtualization Encapsulation(<strong>GENEVE</strong>) on port: 6081.</li>
+<li>Runs within one Availability Zone.</li>
+</ul>
+</div></div><p></p><p></p>
+<ol start="33">
+<li><strong>Have you used sonarqube?</strong></li>
+</ol>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">SonarQube</span></div>
+<a href="/notes/llkndm159erk2w16us6q24k" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p>SonarQube® is an automatic code review tool to detect bugs, vulnerabilities, and code smells in your code. It can integrate with your existing workflow to enable continuous code inspection across your project branches and pull requests.</p>
+<ul>
+<li><a href="https://www.sonarlint.org/">SonarLint</a> – SonarLint is a companion product that works in your editor giving immediate feedback so you can catch and fix issues before they get to the repository.</li>
+<li><a href="https://docs.sonarqube.org/latest/user-guide/quality-gates/">Quality Gate</a> – The Quality Gate lets you know if your project is ready for production.</li>
+<li><a href="https://docs.sonarqube.org/latest/user-guide/clean-as-you-code/">Clean as You Code</a> – Clean as You Code is an approach to code quality that eliminates a lot of the challenges that come with traditional approaches. As a developer, you focus on maintaining high standards and taking responsibility specifically in the New Code you're working on.</li>
+<li><a href="https://docs.sonarqube.org/latest/user-guide/issues/">Issues</a> – SonarQube raises issues whenever a piece of your code breaks a coding rule, whether it's an error that will break your code (bug), a point in your code open to attack (vulnerability), or a maintainability issue (code smell).</li>
+<li><a href="https://docs.sonarqube.org/latest/user-guide/security-hotspots/">Security Hotspots</a> – SonarQube highlights security-sensitive pieces of code that need to be reviewed. Upon review, you'll either find there is no threat or you need to apply a fix to secure the code.</li>
+</ul>
+<p>Via - <a href="https://docs.sonarqube.org/latest/">SonarQube Docs</a></p>
+</div></div><p></p><p></p>
+<ol start="34">
+<li><strong>Best practices for Incident Management.</strong></li>
+</ol>
+<p>Applications expose metrics, metrics are collected using monitoring system, we have alert rules to trigger a phone call, Slack notification or email to the <a href="/notes/01rcytslgl5ysbgp9kzekoj">On Call</a> engineer.</p>
+<p>The organization should have a proper:</p>
+<ul>
+<li>Monitoring system
+<ul>
+<li><a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a></li>
+<li><a href="/notes/9fa6uf6xbnv00fv944o1y1o">Prometheus</a></li>
+</ul>
+</li>
+<li>Alerting system
+<ul>
+<li>SNS</li>
+<li>AlertManager</li>
+</ul>
+</li>
+</ul>
+<p>Postmortem: Understand what went wrong and how to mitigate in the future.</p>
+<ol start="35">
+<li><strong>How to validate variables during terraform plan time, for example format of the variable?</strong></li>
+</ol>
+<p>In <a href="/notes/mkwoo3ek4y6bnddpy1iteb9">Terraform</a> you can define a <code>validation</code> block and specify a condition for the variable.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656067537/wiki/heqtzp8ccvxdlfsaqsbx.png"></p>
+<p>Scenario: String may not contain a /.</p>
+<pre class="language-json"><code class="language-json">variable <span class="token string">"string_may_not_contain"</span> <span class="token punctuation">{</span>
+  type = string
+  default = <span class="token string">"test"</span>
+
+  validation <span class="token punctuation">{</span>
+    error_message = <span class="token string">"Value cannot contain a \"/\"."</span>
+    condition = !can(regex(<span class="token string">"/"</span><span class="token punctuation">,</span> var.string_may_not_contain))
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Example via - <a href="https://dev.to/drewmullen/terraform-variable-validation-with-samples-1ank">Terraform: Variable validation with samples</a></p>
+<ol start="36">
+<li><strong>Explain/Differentiate <code>CMD</code> and <code>ENTRYPOINT</code> in Docker.</strong></li>
+</ol>
+<p>The CMD command​ specifies the instruction that is to be executed when a Docker container starts. This CMD command is not really necessary for the container to work, as the echo command can be called in a RUN statement as well. The main purpose of the CMD command is to launch the software required in a container.</p>
+<p>CMD commands are ignored by Daemon when there are parameters stated within the docker run command.</p>
+<p>CMD. Sets default parameters that can be overridden from the Docker Command Line Interface (CLI) when a container is running.</p>
+<p>You can pass input from CMD to ENTRYPOINT.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># CMD</span>
+FROM ubuntu:latest
+CMD<span class="token punctuation">[</span><span class="token string">"echo"</span>, <span class="token string">"Hello World!"</span><span class="token punctuation">]</span>
+</code></pre>
+<p>ENTRYPOINT</p>
+<p>It is a directive or instruction that is used to specify the executable which should run when a container is started from a Docker image. It has two forms, the first one is the ‘exec’ form and the second one is the ‘shell’ form. If there is no entrypoint or CMD specified in the Docker image, it starts and exits at the same time that means container stops automatically so, we must have to specify entrypoint or CMD so that when we will start the container it should execute or it'll stop.</p>
+<p>We can override the ENTRYPOINT instruction while starting the container using the ‘–entrypoint’ flag. Also if we have multiple ENTRYPOINT instructions mentioned in Dockerfile then the last ENTRYPOINT will have an effect.</p>
+<p>You can run shell scripts using ENTRYPOINT and pass it's output to CMD</p>
+<pre class="language-bash"><code class="language-bash">FROM ubuntu
+RUN <span class="token function">apt-get</span> update <span class="token operator">&#x26;&#x26;</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y nginx
+ENTRYPOINT <span class="token punctuation">[</span><span class="token string">"nginx"</span>, <span class="token string">"-g"</span>, <span class="token string">"daemon off;"</span><span class="token punctuation">]</span>
+</code></pre>
+<p>Both run during docker container runtime. Using either one of them is best practice but they can be combined too.</p>
+<ol start="37">
+<li><strong>Troubleshoot EC2 instance in an ASG that are getting terminated.</strong></li>
+</ol>
+<p>If EC2 quota and pricing is not the issue:</p>
+<p>EC2 instances get terminated if they're unhealthy.EC2 instances can become unhealthy if:</p>
+<ul>
+<li>Disk space being full.</li>
+<li>High CPU usage.</li>
+<li>No memory left.</li>
+</ul>
+<p>To debug</p>
+<ul>
+<li>Run <a href="/notes/laeri4eob3q0wi2i0d71atn">top</a> command to see CPU utilization, check what process/application is using up the resources. Take this up with your developer.</li>
+<li>Disk space EBS volume could be full and and OS might be running out of all disk space.</li>
+<li>Run <a href="/notes/hatou0atny4e6tj2yapy1zc">Free</a> command to check if any swap memory is left or not, you might want to increase it.</li>
+</ul>
+<p>See: <a href="/notes/zbxml2z2zzzsjj8eiagfzex">Create and Use Swap File on Linux</a></p>
+<ol start="38">
+<li><strong>How to control of deployment of pods on nodes that are going to be used explicitly for those pods?</strong></li>
+</ol>
+<ul>
+<li>We can achieve this by using <strong>Taints and Tolerance</strong> in K8's.</li>
+<li>A taint when attached to a node, will ripple pods from getting provisioned or getting accepted.</li>
+<li>We can add a taint to a pod <code>kubectl taint nodes nodex key=value:Effect</code></li>
+<li>Taints are properties of nodes that push pods away if they don't tolerate this taint.</li>
+<li>Like labels, one or more Taints can be applied to a node. The node must not accept any pod that doesn't tolerate all of these taints.</li>
+</ul>
+<ol start="40">
+<li><strong>You've 2 different servers with different ports and usernames, how do you use ansible runbook/playbook on both of the servers?</strong></li>
+</ol>
+<p>In our <code>ansible.conf</code> we can define different <code>ansible_user</code> and <code>ansible_port</code> in the hostfile.</p>
+<pre class="language-conf"><code class="language-conf">[webservers]
+10.4.20.90 ansible_port=4000 ansible_user=roger
+39.12.3.23 ansible_port=8001 ansible_user=liam
+</code></pre>
+<ol start="41">
+<li><strong>What is Terraform state lock?</strong></li>
+</ol>
+<p>If supported by your backend, <a href="/notes/mkwoo3ek4y6bnddpy1iteb9">Terraform</a> will lock your state for all operations that could write state. This prevents others from acquiring the lock and potentially corrupting your state. State locking happens automatically on all operations that could write state.</p>
+<p>You won't see any logs of when/as this happens. If state locking fails, Terraform will continue.</p>
+<p>You can disable state locking for most commands with the <code>-lock</code> flag but it is not recommended. If acquiring the lock is taking longer than expected, Terraform will output a status message. If Terraform doesn't output a message, state locking is still occurring if your backend supports it.</p>
+<ol start="42">
+<li><strong>How do you setup slack notifications on Jekins?</strong></li>
+</ol>
+<p>You can leverage Jenkins plugins, you can use the Jenkins - Slack plugin and use Slack webhook URL.
+Whenever a pipeline job fails:
+`slackSend color: "failure", message: "Pipeline failed, critical."</p>
+<ol start="43">
+<li><strong>How do you see your trajectory as a DevOps Engineer?</strong></li>
+</ol>
+<p>There is always something to learn. You could mention some of the tools/technologies that you want to learn - some you want to better understand. Show them that you are someone who is looking to constantly improve himself/herself(themselves).</p>
+<p>You'd want to collaborate with your senior engineers to learn from them directly. Maybe you want to take up more responsibility in the organization etc.</p>
+<ol start="44">
+<li><strong>How to ignore a certain part of our ansible playbook that might fail and cause our playbook to exit?</strong></li>
+</ol>
+<p>We can achieve this using <code>ignore_errors</code> sub arguments.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Do not count this as a failure
+  <span class="token key atrule">ansible.builtin.command</span><span class="token punctuation">:</span> /bin/false
+    <span class="token key atrule">ignore_errors</span><span class="token punctuation">:</span> yes
+</code></pre>
+<ol start="45">
+<li><strong>When making a change to existing code what is a <code>git</code> best practice?</strong></li>
+</ol>
+<p>Git clone the repo, checkout the respective branch. Make your change and commit your changes. To understand the motivation behind the change and the history, you can use <code>git blame</code>.</p>
+<p>The git blame command is used to examine the contents of a file line by line and see when each line was last modified and who the author of the modifications was. Basically gives you the history and the author of the file.</p>
+<ol start="46">
+<li><strong>At a high level, create an shell script to automatically push certain logs to S3 at a particular time.</strong></li>
+</ol>
+<p>This is a Whiteboard design question.</p>
+<ul>
+<li>Firstly, we'd make sure what we're using, IAM role or access keys.</li>
+</ul>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># assign path-to-logs to a variable</span>
+
+<span class="token comment"># use aws CLI commands to copy files to S3</span>
+
+<span class="token comment"># aws s3 cp &#x3C;path-to-logs> &#x3C;s3-bucket></span>
+
+<span class="token comment"># use cron job to execute the script at a particular time</span>
+</code></pre>
+<ol start="47">
+<li><strong>What is a package in Python?</strong></li>
+</ol>
+<p>The module is a simple Python file that contains collections of functions and global variables and with having a .py extension file. It is an executable file.To organize modules we have <strong>Packages</strong> in Python.</p>
+<p>Modules can have other modules inside them.</p>
+<p>Package(1) -> Modules(x) -> Fns(x)</p>
+<p>Example module:</p>
+<pre class="language-py"><code class="language-py"><span class="token comment">#the os module provides an operating system interface from Python</span>
+<span class="token keyword">import</span> os
+<span class="token comment">#prints the name of the operating system</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token comment">#prints the absolute path for the module</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<ol start="48">
+<li><strong>What are your day to day responsibilities as a DevOps engineer?</strong></li>
+</ol>
+<p>Paint a brief picture of what your day to day work looks like.</p>
+<ul>
+<li>A DevOps engineer works in collaboration other engineers(devs, testers, SRE, sales).</li>
+<li>9:00 AM -> 10:00 AM check Slack, update <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Jira (Private)</a> with your tasks.</li>
+<li>10:00 AM -> 10:30 AM daily standup, share progress with your team on the work you've done previous day and what you'll do today.</li>
+<li>10:30 AM -> 1:00 PM work on your Jira ticket.</li>
+<li>1:00 PM -> 2:00 PM lunch.</li>
+<li>2:00 PM -> 4:00 PM pair program with other engineers or meetings, design discussions.</li>
+<li>4:00 PM -> 5:00 PM learning new stuff that can benefit the org, share knowledge with other team members.</li>
+</ul>
+<h2 id="credits"><a aria-hidden="true" class="anchor-heading" href="#credits"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Credits</h2>
+<ul>
+<li><a href="https://www.udemy.com/course/50-devops-interview-questions-answers/">50 DevOps Interview Questions &#x26; Answers - 2022 | Udemy</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

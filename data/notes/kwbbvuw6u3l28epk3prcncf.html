@@ -1,0 +1,35 @@
+<h1 id="nexus-as-docker-container"><a aria-hidden="true" class="anchor-heading" href="#nexus-as-docker-container"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Nexus as Docker container</h1>
+<ul>
+<li>Related: <a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a>, <a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>
+<hr>
+<p>You can deploy Nexus on a standalone server like DigitalOcean Droplet or you can deploy it as a Docker container which is much faster and easier.</p>
+<ol>
+<li>Create a droplet (or a server) and ssh into it.</li>
+<li>Install only Docker (you don't need Java or anything else).</li>
+<li>Create persistent storage(volume).</li>
+</ol>
+<p><code>docker volume create --name nexus-data</code></p>
+<ol start="4">
+<li>Start Nexus.</li>
+</ol>
+<p><code>docker run -d -p 8081:8081 --name -v nexus-data:/nexus-data sonatype/nexus3</code></p>
+<ol start="5">
+<li>Check if Nexus(port) has started</li>
+</ol>
+<p><code>netstat -lnpt</code> and <code>docker ps</code></p>
+<p>Once port is open, you'll be able to send requests to the port, which'll forward it to the container.</p>
+<ol start="6">
+<li>
+<p>Open <code>http://serverIpAddress:port</code> on your browser to use Nexus, a new user would have been created inside the container; a service user.</p>
+</li>
+<li>
+<p><code>docker inspect nexus-data</code> for information about the volume, you'll need this for checking password, backup etc. Alternatively you can check the container's FS.</p>
+</li>
+</ol>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+<li><a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a></li>
+</ul>

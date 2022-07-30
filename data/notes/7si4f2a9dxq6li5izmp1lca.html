@@ -1,0 +1,105 @@
+<h1 id="man-pages"><a aria-hidden="true" class="anchor-heading" href="#man-pages"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Man Pages</h1>
+<ul>
+<li><code>topic</code>: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>man</code> command can be used to look for documentation on specific Linux commands.</p>
+<h3 id="manual-structure"><a aria-hidden="true" class="anchor-heading" href="#manual-structure"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Manual Structure</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Contains</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>User Commands</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>System Calls</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>C Library Functions</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Devices and Special Files</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>File Formats and Conventions</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Games</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Miscellaneous</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>System Administration</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<ul>
+<li>Search the man pages for a specific by passing the option <code>-k</code> followed by search keyword, it'll return all the relevant man pages for the searched term.</li>
+<li>Example: <code>man -k which</code> or <code>man -k "copy files"</code></li>
+<li>You can also use the command <code>apropos</code> to search just like <code>man -k</code></li>
+</ul>
+<hr>
+<ul>
+<li>Search a specific section for a command.</li>
+<li>Example: <code>man 1 which</code></li>
+</ul>
+<hr>
+<ul>
+<li>When an option is inside square brackets it means that option is optional.</li>
+<li>Example: <code>which [-a] filename ...</code></li>
+<li><code>...</code> (Ellipsis) indicates that the command can take more than one input or options.</li>
+</ul>
+<hr>
+<ul>
+<li>Anything inside angle brackets is a mandatory argument to pass onto the command.</li>
+<li>Example: <code>command &#x3C;something></code></li>
+</ul>
+<hr>
+<ul>
+<li>Inside a Man Page <strong>bold</strong> text means you're supposed to type it exactly as described.</li>
+<li><span class="underline">Underlined</span> or <em>Italic</em> text means you're supposed to substitute it with your requirement appropriately.</li>
+<li><code>Ctrl + F</code>, to move forward one window, <code>Ctrl + B</code>, to move backward one window, Arrow keys for going up or down.</li>
+<li><code>g</code> to go to the very beginning.</li>
+<li><code>G</code> to go to the very end.</li>
+<li>To search for specific text inside a Man Page, press <code>/</code> and type the string you want to search for and hit enter.</li>
+<li>Any matches found will be highlighted and you can use <code>n</code> to jump from matches and <code>Shift + n</code> to jump to previous match.</li>
+<li>To search from the bottom of the Man Page (<code>G</code>) use <code>?</code> and type your string.</li>
+<li>Press <code>q</code> to quit.</li>
+</ul>
+<hr>
+<ul>
+<li>If an option specifies a pipe symbol, the command would like you to pass either of the option, you cannot pass both.</li>
+<li>Example: <code>command [-this | -that] ...</code></li>
+</ul>
+<hr>
+<ul>
+<li>To view Man Pages in <code>less</code> mode press <code>h</code> key while you're on a Man Page.</li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">less (Private)</a> command</li>
+</ul>
+<hr>
+<ul>
+<li>There are two type of commands, executables files on the disk and shell builtin commands.</li>
+<li>To check if a command is an executable or a shell builtin command, use <code>type</code> followed by the command you want to check, example: <code>type df</code>, if it returns a path, its an executable and will have a dedicated <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Man Pages (Private)</a></li>
+<li>If a command is a shell builtin, such as: <code>type cd</code>, it'll return "cd is a shell builtin".</li>
+<li><code>type</code> is also a shell builtin</li>
+</ul>
+<!-- end list -->
+<ul>
+<li>To get help for shell builtin commands, use <code>help</code> command instead of <code>man</code>.</li>
+<li><code>--help</code> followed by a command, will return help pages for both executables and shell builtins.</li>
+</ul>

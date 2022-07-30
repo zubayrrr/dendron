@@ -1,0 +1,38 @@
+<h1 id="transport-layer---osi"><a aria-hidden="true" class="anchor-heading" href="#transport-layer---osi"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Transport Layer - OSI</h1>
+<h1 id="layer-4--transport-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-4--transport-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 4 – Transport Layer</h1>
+<ul>
+<li>The Transport Layer (Layer 4) is the dividing line between the upper layers and the lower layers.</li>
+<li>Data is sent as <strong>Segments</strong> and Datagrams.</li>
+<li><a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a>/<a href="/notes/k57h8hxtsubu8fdb61aahxc">UDP</a> are the two protocols used in Transport Layer.</li>
+<li>We also have reliability features such as <a href="/notes/96793xhkcwxryb0kilyt9i4">Windowing</a> and <a href="/notes/ug0shyduxjj1t5fh9grn64l">Buffering</a>.</li>
+</ul>
+<hr>
+<p>This layer guarantees an end to end error-free connection between the two different hosts or devices of networks. This is the first one which takes the data from the upper layer i.e. the application layer, and then splits it into smaller packets called the segments and dispenses it to the network layer for further delivery to the destination host.</p>
+<p>It ensures that the data received at host end will be in the same order in which it was transmitted. It provides an end to end supply of the data segments of both inter and intra sub-networks. For an end to end communication over the networks, all devices are equipped with a Transport service access point (TSAP) and are also branded as port numbers.</p>
+<p>A host will recognize its peer host at the remote network by its port number.</p>
+<p><strong>Error Detection &#x26; Control</strong>: Error checking is provided in this layer because of the following two reasons:</p>
+<p>Even if no errors are introduced when a segment is moving over a link, it can be possible for errors to be introduced when a segment is stored in the router’s memory (for queuing). The data link layer is not able to detect an error in this scenario.</p>
+<p>There is no assurance that all the links between the source and destination will provide error scrutiny. One of the links may be using a link layer protocol which doesn’t offer the desired outcomes.</p>
+<h3 id="the-methods-used-for-error-check-and-control-are-crc-cyclic-redundancy-check-and-checksum"><a aria-hidden="true" class="anchor-heading" href="#the-methods-used-for-error-check-and-control-are-crc-cyclic-redundancy-check-and-checksum"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The methods used for error check and control are CRC (cyclic redundancy check) and checksum.</h3>
+<p><strong>CRC</strong>: The concept of CRC (Cyclic Redundancy Check) grounds on the binary division of the data component, as the remainder of which (CRC) is appended to the data component and sent to the receiver. The recipient divides data component by an identical divisor.</p>
+<p>If the remainder comes up to zero then the data component is allowed to pass to forward the protocol, else, it is assumed that the data unit has been distorted in transmission and the packet is discarded.</p>
+<p><strong>Checksum Generator &#x26; checker</strong>: In this method, the sender uses the checksum generator mechanism in which initially the data component is split into equal segments of n bits. Then, all the segments are added together by employing 1’s complement.</p>
+<p>Later, it complements once again, and now it turns into checksum and then is sent along with the data component.</p>
+<p><strong>Example</strong>: If 16 bits is to be sent to the receiver and bits are 10000010 00101011, then the checksum that will be transmitted to the receiver will be 10000010 00101011 01010000.</p>
+<p>Upon receiving the data unit, the receiver divides it into n equal size segments. All the segments are added using 1’s complement. The result is complemented once more and If the result is zero, the data is accepted, else discarded.</p>
+<p>This error detection &#x26; control method permits a receiver to rebuild the original data whenever it is found corrupted in transit.</p>
+<h3 id="layer-4-examples"><a aria-hidden="true" class="anchor-heading" href="#layer-4-examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 4 Examples</h3>
+<ul>
+<li><a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a></li>
+<li><a href="/notes/k57h8hxtsubu8fdb61aahxc">UDP</a></li>
+<li><a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.WAN Accelerators (Private)</a></li>
+<li><a href="/notes/hjm4wdsz5kubm8h8pm006dd">Load Balancer</a>s</li>
+<li><a href="/notes/xqc8lgkkzwz4qcbb6htkgfv">Firewall</a>s</li>
+</ul>
+<p>See: <a href="/notes/fg9c1iu7kore9v72yvr9bji">TCP VS UDP</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a></li>
+<li><a href="/notes/v6g48x2mriiw6z07xifqjd6">Transport Layer - TCP/IP</a></li>
+</ul>

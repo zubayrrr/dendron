@@ -1,0 +1,402 @@
+<h1 id="docker"><a aria-hidden="true" class="anchor-heading" href="#docker"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker</h1>
+<ul>
+<li>Areas: <a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li>Related: <a href="/notes/kgtifubcsyxu0xja4llap2q">Cgroups</a></li>
+</ul>
+<hr>
+<ul>
+<li>Docker is a platform for developers and sysadmins used to develop, deploy and run
+containerized applications.</li>
+<li>A container is a running process that encapsulates everything an application needs to
+run (and only those things).</li>
+<li>Docker makes it really easy to install and run software without worrying about setup or
+dependencies.</li>
+<li>An image is a standalone, isolated, lightweight and executable package that contains
+all the required components (code, runtime, system tools, libraries, settings, etc)
+necessary to run an application. An image is the actual, moveable artifact.</li>
+<li>The container is the runtime instance of the image. From the same image, you can launch more containers.
+Images for many applications can be found on <a href="https://hub.docker.com">https://hub.docker.com</a></li>
+<li>An image "becomes" a container when we actually start an image. It creates a container environment.</li>
+</ul>
+<h2 id="docker-architecture--components"><a aria-hidden="true" class="anchor-heading" href="#docker-architecture--components"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker Architecture &#x26; Components</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657820835/wiki/gzkdopsbfapaqzzq2r5n.png"></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657820890/wiki/yzkdx8fuqd6gyrmd9lug.png"></p>
+<h2 id="install-docker"><a aria-hidden="true" class="anchor-heading" href="#install-docker"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install Docker</h2>
+<p><a href="https://docs.docker.com/engine/install/">Docker Docs</a></p>
+<h2 id="docker-image-vs-container"><a aria-hidden="true" class="anchor-heading" href="#docker-image-vs-container"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker Image vs Container</h2>
+<p>Images can exist without containers, whereas a container needs to run an image to exist. Therefore, containers are dependent on images and use them to construct a run-time environment and run an application.</p>
+<p>The two concepts exist as essential components (or rather phases) in the process of running a Docker container. Having a running container is the final “phase” of that process, indicating it is dependent on previous steps and components. That is why docker images essentially govern and shape containers.</p>
+<p>Container is the running environment for(of) an image. Container has application image, a port binded to it(makes it possible for it to talk to the application running inside it), Containers has virtual FS.</p>
+<p>See also: <a href="/notes/4f08m6qrqyvpf6hfk1898vt">Containers &#x26; Images</a></p>
+<h2 id="docker-cli"><a aria-hidden="true" class="anchor-heading" href="#docker-cli"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker cli</h2>
+<ul>
+<li>
+<p>Run <code>docker info</code>, <code>docker --version</code> or <code>docker version</code> to check it's version and if the client is able to communicate with the server.</p>
+</li>
+<li>
+<p>The new way of running docker commands is:</p>
+<ul>
+<li>First comes the <code>docker</code> command followed by a <code>management command</code> and then a <code>sub command</code> with options</li>
+<li>Run <code>docker help</code> to find all commands, sub commands</li>
+</ul>
+</li>
+<li>
+<p>To test docker run the <code>hello-world</code> container</p>
+<ul>
+<li><code>docker container run hello-world</code></li>
+</ul>
+</li>
+<li>
+<p>To search for an image on docker hub</p>
+<ul>
+<li><code>docker search mongo</code></li>
+</ul>
+</li>
+<li>
+<p>To pull an image</p>
+<ul>
+<li><code>docker image pull redis</code> is same as <code>docker image pull redis:latest</code></li>
+<li><code>docker image pull redis:5.0.10</code> <code>:tag</code>(optional)</li>
+</ul>
+</li>
+<li>
+<p>To list all images</p>
+<ul>
+<li><code>docker images</code> or <code>docker image ls</code></li>
+</ul>
+</li>
+<li>
+<p>To run an container from(of) an image</p>
+<ul>
+<li><code>docker container run redis</code></li>
+</ul>
+</li>
+<li>
+<p>To pull an image and run container</p>
+<ul>
+<li><code>docker container run -P httpd</code> (<code>-P</code> to publish all exposed ports to random ports)</li>
+</ul>
+</li>
+<li>
+<p>The above command executed in two steps</p>
+<ul>
+<li><code>docker container create -p 80:80 httpd</code></li>
+<li><code>docker container start CONTAINER_ID</code></li>
+</ul>
+</li>
+<li>
+<p>To get a shell inside docker</p>
+<ul>
+<li><code>docker container run -it centos</code>(if you run it without passing any commands it'll simply exit, <code>-it</code> is required for shell access of the container)</li>
+</ul>
+</li>
+<li>
+<p>Get terminal of the container</p>
+<ul>
+<li><code>docker exec -it CONTAINER_ID /bin/bash</code></li>
+<li><code>docker exec -it CONTAINER_ID /bin/sh</code></li>
+</ul>
+</li>
+<li>
+<p>To give your container a custom name(default is random)</p>
+<ul>
+<li><code>docker run -d -p 6001:6379 --name redis-olderv redis:4.0</code></li>
+</ul>
+</li>
+<li>
+<p>To list all running docker containers</p>
+<ul>
+<li><code>docker ps</code> or <code>docker container ls</code></li>
+<li><code>ps</code> stands for process status</li>
+</ul>
+</li>
+<li>
+<p>To list all docker containers</p>
+<ul>
+<li><code>docker ps -a</code> or <code>docker container ls -a</code></li>
+</ul>
+</li>
+<li>
+<p>To filter by status run</p>
+<ul>
+<li><code>docker container ls -a -f status=exited</code></li>
+</ul>
+</li>
+<li>
+<p>To list only container IDs</p>
+<ul>
+<li><code>docker container ls -a -f status=exited -q</code> -q comes from quiet</li>
+</ul>
+</li>
+<li>
+<p>To remove image and the container</p>
+<ul>
+<li>First stop and then remove the container</li>
+<li><code>docker container stop CONTAINER_ID</code></li>
+<li>You don't have to write the entire container ID, the first few digits as long as they're unique</li>
+<li><code>docker container rm CONTAINER_ID</code> to remove the container</li>
+</ul>
+</li>
+<li>
+<p>To remove a running container <code>docker container rm -f CONTAINER_ID</code></p>
+</li>
+<li>
+<p>To remove using filter use command substitution</p>
+<ul>
+<li><code>docker container rm $(docker container ls -a -f status=exited -q)</code></li>
+</ul>
+</li>
+<li>
+<p>To remove an image</p>
+<ul>
+<li><code>docker rmi</code> or <code>docker image rm IMAGE_NAME</code> (<code>-f</code> to forcefully remove a still running container's image)</li>
+<li>If you try to remove an image that is stopped or running, it'll throw an error, you'll need to remove the container before removing it's image.</li>
+</ul>
+</li>
+<li>
+<p>To view logs of a container(useful for debugging):</p>
+<ul>
+<li><code>docker container logs CONTAINER_ID</code></li>
+<li><code>docker container logs -f CONTAINER_NAME</code> (<code>-f</code> to view them in realtime)</li>
+</ul>
+</li>
+<li>
+<p>To view all the process running inside a container:</p>
+<ul>
+<li><code>docker container top CONTAINER_NAME</code></li>
+<li><code>docker container top CONTAINER_ID</code></li>
+<li>You can look for the same processes running on the host machine(even the process IDs are same)</li>
+</ul>
+</li>
+<li>
+<p>To display realtime info about running containers:</p>
+<ul>
+<li><code>docker container stats</code></li>
+<li><code>docker container stats CONTAINER_NAME</code> (for info about specific container)</li>
+</ul>
+</li>
+<li>
+<p>To view more info about containers</p>
+<ul>
+<li><code>docker container inspect CONTAINER_NAME/ID</code></li>
+<li>Filter using <a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a></li>
+<li><code>docker container inspect CONTAINER_NAME/ID | grep -i ipaddress</code></li>
+</ul>
+</li>
+<li>
+<p>To commit changes to a container's image:</p>
+<ul>
+<li><code>docker commit -m "commit message" -a "author name" CONTAINER_ID repo_name/image_name:latest</code></li>
+<li>You can now use the newly created image with your committed changes.</li>
+</ul>
+</li>
+<li>
+<p>To add a custom tag to an existing image(<strong>doesn't</strong> create a new image, will point towards the image with the same ID):</p>
+<ul>
+<li><code>docker image tag image_name repo_name/image_name:new_tag</code></li>
+<li><code>docker image tag repo_name/image_name:old_tag repo_name/image_name:new_tag</code></li>
+</ul>
+</li>
+<li>
+<p>To push the image to docker hub:</p>
+<ul>
+<li>The repo name used must match the username on docker hub</li>
+<li><code>docker login</code></li>
+<li><code>docker image push repo_name/image_name:tag</code></li>
+</ul>
+</li>
+<li>
+<p>To rename an image (makes a copy, points to the same image ID)</p>
+<ul>
+<li><code>docker tag my-app:1.0 new-my-app:1.1.0</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="docker-hub"><a aria-hidden="true" class="anchor-heading" href="#docker-hub"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker Hub</h2>
+<p>Image name follows the convention of <code>repository/image_name:tag</code> but official images don't follow this structure as they're at the root level.</p>
+<p>Image ID is used to identify docker images, a single image can have multiple tags pointing to the same image.
+Docker Image ID is a digest which contains the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.sha256 (Private)</a> hash of the image.</p>
+<h2 id="dangling-images"><a aria-hidden="true" class="anchor-heading" href="#dangling-images"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Dangling Images</h2>
+<ul>
+<li>Docker images consist of multiple layers. Dangling images are layers that have no relationship to any tagged images.</li>
+<li>To delete dangling images, stopped containers and networks not used by at least one container run:
+<ul>
+<li><code>docker system prune</code></li>
+</ul>
+</li>
+<li><code>docker system prune -a</code> to remove unused images as well</li>
+<li>An image consists of multiple layers. They're read-only and each has an ID.</li>
+<li>A layer is saved only once and can be used by more than one image. (This saves disk space and time when pulling images.)</li>
+<li>They layers are stacked on top of each other.</li>
+<li>When you run a container from an image, a new writeable layer is added on top of the image layers.</li>
+<li>This writeable layer is often called "Container Layer" and allows you to make changes to the container since the lower layers on the image are read-only.</li>
+<li>When we remove a container, we're in fact only removing the writeable layer.</li>
+<li>To write data to the writeable layer of the container, docker uses "Storage Drivers"</li>
+<li><code>overlay2</code> is the default and recommended driver.</li>
+<li>To view the layers of an image:
+<ul>
+<li><code>docker image inspect image_name</code></li>
+<li>On disk, the layers are located at <code>/var/lib/docker/overlay2</code></li>
+</ul>
+</li>
+<li>There are two different values under "SIZE" when <code>docker container ls</code> is run
+<ul>
+<li>The first value represents the amount of data used for the writeable layer of each container.</li>
+<li>The "Virtual" size represents the amount of data for the read-only image layers plus the container's writeable layer's size</li>
+</ul>
+</li>
+<li>Multiple containers may share some or all read-only image data, and two containers started from same image share 100% of the read-only data.</li>
+</ul>
+<h2 id="image-id"><a aria-hidden="true" class="anchor-heading" href="#image-id"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Image ID</h2>
+<p>A Docker image's ID is a digest, which contains an SHA256 hash of the image's JSON configuration object.</p>
+<h2 id="container"><a aria-hidden="true" class="anchor-heading" href="#container"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Container</h2>
+<ul>
+<li>A container when it starts executes a default command, as long as the container's default command is running it'll stay up. Once the command finishes execution, the container will also exit.</li>
+<li>To get access to a shell of a container use <code>-it</code> flags, <code>i</code> for interactive and <code>t</code> for <a href="/notes/jdwzfnsup2nr4il6m611vvl">tty</a>.</li>
+<li>To escape from a running container without stopping the container use <code>CTRL + P + Q</code></li>
+<li>To execute commands on a running container:
+<ul>
+<li><code>docker container exec -it CONTAINER_ID bash</code> or</li>
+<li><code>docker container exec CONTAINER_ID cat /etc/shadow</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="persistent-data--docker-volumes"><a aria-hidden="true" class="anchor-heading" href="#persistent-data--docker-volumes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Persistent Data / Docker Volumes</h2>
+<p>Containers have Virtual FS inside them.</p>
+<p>By default, all files created inside a container are stored on the writeable container layer. The data doesn't persist when the container no longer exists(stops, removed, restarted) and it can be difficult to get the data out of the container if another process needs it.</p>
+<p>Docker provides two options for the container to store data in the host machine, to make data persist.</p>
+<ol>
+<li>Volumes</li>
+<li>Bind Mounts</li>
+</ol>
+<p>Volumes are preferred over Bind Mounts. While <strong>Bind Mounts</strong> are dependent on the directory structure and the OS of the host machine. Volumes are completely managed by Docker. <strong>A Volume is a persistent directory of a container. Its a mapping between a directory on the docker host and a directory on a container.</strong> To create a volume you mount a physical folder from the host into the virtual file system of Docker. Data is written on the host dir.</p>
+<p>There are different ways of creating Docker Volumes:</p>
+<ul>
+<li>We can create volume by defining it in the Dockerfile using the <code>VOLUME</code> instruction.</li>
+<li>By using <code>-v</code> flag when starting(<code>docker run</code>) a container and mapping a host dir to a to a dir in the container. These are called <strong>Host Volumes</strong></li>
+<li>You don't specify which host dir should be mounted, its created by Docker itself inside <code>/var/lib/docker/volumes</code>. These are called <strong>Anonymous Volumes</strong>. For each container a folder is generated that gets mounted. Anonymous Volumes will have a hash as a name.</li>
+<li>You can specify a name for an autogenerated volume by <code>docker run -v name:/var/lib/mysql/data</code>. There are called <strong>Named Volumes</strong>.</li>
+<li>You can also create them when using <code>docker-compose</code> using the <code>volumes</code> definition under a declared container. You can also define a list of volumes you want that <code>docker-compose</code> file to create so you can reference the same volume on different containers.</li>
+</ul>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657894394/wiki/cwwndvvg1gypnj1wx3p7.png"></p>
+<p>When you mount a volume, they can be named or anonymous. Anonymous volumes are not given an explicit name when they're first mounted into a container; docker gives them a random name that is guaranteed to be unique within a given docker host.</p>
+<ul>
+<li><code>docker volume create volumeName</code></li>
+<li><code>docker volume ls</code> - to list all volumes</li>
+<li><code>docker volume inspect volumeName</code> - info about a volume, like where the data on the volume is physically located on the drive.</li>
+<li><code>docker volume rm volumeName</code></li>
+<li><code>docker volume prune</code> (will remove all unused volumes)</li>
+</ul>
+<p>The directory on the host that is being used as the mount point can be found at <code>/var/lib/docker/volumes/</code></p>
+<ul>
+<li>Starting a container with a volume.</li>
+</ul>
+<p><code>docker container run -d --name mywebapp -p 80:80 -v mysite:/usr/share/ngnix/html nginx</code></p>
+<p>Your website's html is copied TO the container's <code>/usr/share/ngnix/html</code> (in the above example) for it to be served.</p>
+<h2 id="docker-layers"><a aria-hidden="true" class="anchor-heading" href="#docker-layers"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker Layers</h2>
+<ul>
+<li>Docker format gives assets unique identifiers called Docker Layers</li>
+<li>Docker Layers == Assets</li>
+<li>Assets can be <strong>reused</strong> for different components
+<ul>
+<li>E.g. if two Docker Images use same layers, you’d have 2 components that share the layer as an asset.</li>
+</ul>
+</li>
+<li>A Docker Layer can be specific OS, referenced by multiple Docker Images.</li>
+</ul>
+<h2 id="container-port-vs-host-port"><a aria-hidden="true" class="anchor-heading" href="#container-port-vs-host-port"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Container Port VS Host Port</h2>
+<p>Multiple containers(even same images) can run on your host machine. Host machine has certain ports that can be opened.</p>
+<p>A binding needs to be created between your host machine and the container.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657823871/wiki/geibagpoa2uvx95wwaxg.png"></p>
+<p>You can specify the binding of the port along with the run command.</p>
+<p><code>docker run -p HostPort:ContainerPort image</code></p>
+<p><code>docker run -p 6000:6379 redis</code></p>
+<h2 id="docker-network"><a aria-hidden="true" class="anchor-heading" href="#docker-network"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker Network</h2>
+<p>Docker creates it’s own isolated Docker Network where the containers are running. When you deploy two containers in the same Docker Network, they can talk to each other using the Container name.</p>
+<p>Applications outside of the Docker Network connect using localhost and port number.</p>
+<p>In production, this application running/developed outside of the Network is also added to the Network.</p>
+<p><code>docker network ls</code> list networks (some are autogenerated)</p>
+<p><code>docker network create mongo-network</code> to create a new network</p>
+<p>Make a container run inside a Network</p>
+<p><code>docker run -p 27017:27017 -d mongo</code></p>
+<h2 id="docker-compose"><a aria-hidden="true" class="anchor-heading" href="#docker-compose"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Docker Compose</h2>
+<p>Docker Compose file is basically a bunch of docker commands structured nicely so you don’t have to run each of those docker run commands one by one.</p>
+<p><code>docker-compose</code> is a <code>yaml</code> file.</p>
+<p>Docker compose creates a common network for all the containers mentioned inside it.</p>
+<pre class="language-yaml"><code class="language-yaml">version<span class="token punctuation">:</span><span class="token string">'3'</span> <span class="token comment"># version of docker-compose</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span> <span class="token comment"># here goes the containers</span>
+	<span class="token key atrule">mongodb</span><span class="token punctuation">:</span> <span class="token comment"># name of a container</span>
+		<span class="token key atrule">image</span><span class="token punctuation">:</span> mongo <span class="token comment"># name of the image</span>
+		<span class="token key atrule">ports</span><span class="token punctuation">:</span>
+			<span class="token punctuation">-</span> 27017<span class="token punctuation">:</span><span class="token number">27017</span> <span class="token comment"># HOST:CONTAINER</span>
+		<span class="token key atrule">environment</span><span class="token punctuation">:</span> <span class="token comment"># env variables</span>
+			<span class="token punctuation">-</span> MONGO_USERNAME=admin
+			<span class="token punctuation">-</span> <span class="token punctuation">...</span>
+	<span class="token key atrule">mongo-express</span><span class="token punctuation">:</span>
+		<span class="token key atrule">image</span><span class="token punctuation">:</span> mongo<span class="token punctuation">-</span>express
+		<span class="token key atrule">ports</span><span class="token punctuation">:</span>
+			<span class="token punctuation">-</span> 8080<span class="token punctuation">:</span><span class="token number">8080</span>
+		<span class="token key atrule">environment</span><span class="token punctuation">:</span>
+			<span class="token punctuation">-</span> ME_CONFIG<span class="token punctuation">:</span>value
+</code></pre>
+<p>Start Docker container using docker-compose file.</p>
+<p><code>docker-compose -f mongo.yaml up</code></p>
+<h2 id="dockerfile"><a aria-hidden="true" class="anchor-heading" href="#dockerfile"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Dockerfile</h2>
+<ul>
+<li>It is a text file that contains all the instructions needed to create an image. A recipe for creating docker images.</li>
+<li>The syntax it uses is from Docker platform and uses statements to generate docker images.</li>
+<li>It also runs bash commands (single line which uses <code>&#x26;&#x26;</code> to append commands and <code>\</code> backslash for a newline.)</li>
+<li>To use a Dockerfile for a custom image, copy paste the instructions from an existing Dockerfile locally and remove the <code>COPY</code> instructions to adapt it for your custom image with your own instructions.</li>
+<li>To build an image from the custom Dockerfile:
+<ul>
+<li><code>docker image build -t myimage:1.0 .</code></li>
+<li>You should have a Dockerfile in the current working dir.</li>
+</ul>
+</li>
+</ul>
+<p>The specific commands you can use in a dockerfile are:</p>
+<p>FROM, PULL, RUN, and CMD</p>
+<ul>
+<li>FROM - Creates a layer from the ubuntu:18.04</li>
+<li>PULL - Adds files from your Docker repository</li>
+<li>RUN - Builds your container(you can use multiple of these)</li>
+<li>CMD - Specifies what command to run within the container (entrypoint, only one)</li>
+<li>ENV - to define environment variables</li>
+</ul>
+<h2 id="private-docker-repository"><a aria-hidden="true" class="anchor-heading" href="#private-docker-repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Private Docker Repository</h2>
+<ul>
+<li>Creating a private docker repository on <a href="/notes/edoa8rey418xum7jh6iyo0l">AWS ECR</a></li>
+</ul>
+<h2 id="misc"><a aria-hidden="true" class="anchor-heading" href="#misc"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Misc</h2>
+<p>Docker for Mac creates a Linux VM and stores data there.</p>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<ul>
+<li><a href="/notes/q972711fkjnov4mv6kfzb53">Running a Web Server in a Docker Container</a></li>
+<li><a href="/notes/n0qgelqjpctzky75c80cflo">Connecting a Nodejs application to a MongoDB Docker Container</a></li>
+<li><a href="/notes/ccglabj2ycmrw83mownsa6l">Docker repository on Nexus</a></li>
+<li><a href="/notes/kwbbvuw6u3l28epk3prcncf">Nexus as Docker container</a></li>
+</ul>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://labs.play-with-docker.com/">Play with Docker</a></li>
+<li><a href="https://dockerlabs.collabnix.com/advanced/security/networking/">Docker Networking Security Basics | dockerlabs</a></li>
+<li><a href="https://collabnix.com/docker-compose-cheatsheet/">Docker Compose Cheatsheet – Collabnix</a></li>
+<li><a href="https://collabnix.com/docker-cheatsheet/">Docker Cheatsheet – Collabnix</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/y43l1e8ej1au0hfrdkqmdh7">AWS ECS</a></li>
+<li><a href="/notes/uu932tw90r0gvvg8maqr3s1">AWS IAM</a></li>
+<li><a href="/notes/5151o31s5jmalwws5joksse">DevOps Best Practices</a></li>
+<li><a href="/notes/ccglabj2ycmrw83mownsa6l">Docker repository on Nexus</a></li>
+<li><a href="/notes/kwbbvuw6u3l28epk3prcncf">Nexus as Docker container</a></li>
+<li><a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a></li>
+<li><a href="/notes/4f08m6qrqyvpf6hfk1898vt">Containers &#x26; Images</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+<li><a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a></li>
+<li><a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a></li>
+<li><a href="/notes/q972711fkjnov4mv6kfzb53">Running a Web Server in a Docker Container</a></li>
+<li><a href="/notes/bhvn90wgxfjtejvv2t10lvx">Terraform in AWS</a></li>
+</ul>

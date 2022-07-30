@@ -1,0 +1,162 @@
+<h1 id="the-data-engineering-interview-study-guide"><a aria-hidden="true" class="anchor-heading" href="#the-data-engineering-interview-study-guide"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Data Engineering Interview Study Guide</h1>
+<hr>
+<p>created: 2022-02-16
+title: The Data Engineering Interview Study Guide
+tags:</p>
+<ul>
+<li>clips</li>
+<li>articles</li>
+</ul>
+<hr>
+<h1 id="the-data-engineering-interview-study-guide-1"><a aria-hidden="true" class="anchor-heading" href="#the-data-engineering-interview-study-guide-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Data Engineering Interview Study Guide</h1>
+<h2 id="for-your-faang-and-other-technical-interviews"><a aria-hidden="true" class="anchor-heading" href="#for-your-faang-and-other-technical-interviews"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>For your FAANG and other technical interviews</h2>
+<p>Interviewing for any technical position generally requires preparing, studying, and long, all-day interviews.</p>
+<p>Data engineering interviews, like other technical interviews, require plenty of preparation. There are a number of subjects that need to be covered in order to ensure you are ready for back-to-back questions.</p>
+<p>Some positions require <a href="https://hadoop.apache.org/">Hadoop</a>, others <a href="https://en.wikipedia.org/wiki/SQL">SQL</a>. Some roles require understanding statistics, while still others require heavy amounts of system design.</p>
+<p>We have gathered many of the resources that we have used to study and get jobs at companies in the FAANG family as well as other major tech companies. We have yet to find one that requires you to know anything about Hadoop during the interview, so that has not been included in this study guide.</p>
+<p>We recommend asking the recruiter if you aren’t sure which type of interview you will be facing. Some companies are very good at keeping interviews consistent, but even then, teams can deviate depending on what they are looking for. Here are some examples of what we have noticed about some companies' data engineering interviews.</p>
+<p><strong>Amazon —</strong> SQL- and database-design heavy as well as general ETL design. Surprisingly, no Python.</p>
+<p><strong>Netflix —</strong>SQL- and code-heavy, with the expectation that you can not only write SQL and code but can optimize them.</p>
+<blockquote>
+<p><em>“They asked about SQL queries to find time difference between two events given certain condition. ” — Netflix data engineer on Glassdoor</em></p>
+</blockquote>
+<p><strong>Expedia</strong> — Big Data questions, like what is Spark and RDDs, as well as SQL and Python.</p>
+<p>Due to this variance, we’ve created a checklist to keep track of what subject areas you have already studied and what you still need to cover: <a href="https://docs.google.com/spreadsheets/d/1GOO4s1NcxCR8a44F0XnsErz5rYDxNbHAHznu4pJMRkw/edit#gid=0">data engineering study checklist</a>.</p>
+<p>Also, I recently created a <a href="https://www.youtube.com/watch?v=2lloOlnSzSs&#x26;t=1s">video guide</a> to walk through the data engineering interview study guide.</p>
+<p>Let’s get started with SQL.</p>
+<h1 id="sql"><a aria-hidden="true" class="anchor-heading" href="#sql"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SQL</h1>
+<p>As a data engineer, it is almost inevitable that you will get some SQL questions. As someone who has participated in many interviews for a lot of top tech companies, like Amazon and Capital One, I know that they usually follow some similar patterns.</p>
+<p>Typically there will be at least one question that requires an aggregation with a filter, another that requires a few joins, and then one that requires a subquery. Along with that, there might be a few curveball questions that require self-joins, recursions, and analytic functions. So let’s look at a couple of concepts that are good to cover.</p>
+<h2 id="pre-video-sql-problems"><a aria-hidden="true" class="anchor-heading" href="#pre-video-sql-problems"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pre-video SQL problems</h2>
+<p>These first few problems will help you gauge where you are on different concepts. That way you can take notes on the study guide, and go back and review what you feel you were not comfortable with.</p>
+<ol>
+<li><a href="https://leetcode.com/problems/trips-and-users/">262. Trips and Users</a></li>
+<li><a href="https://leetcode.com/problems/human-traffic-of-stadium/">601. Human Traffic of Stadium</a></li>
+<li><a href="https://leetcode.com/problems/department-top-three-salaries/">185. Department Top Three Salaries</a></li>
+<li><a href="https://leetcode.com/problems/rising-temperature/">197. Rising Temperature</a></li>
+<li><a href="https://leetcode.com/problems/exchange-seats/">626. Exchange Seats</a></li>
+<li><a href="https://www.hackerrank.com/challenges/the-report/problem">The Report</a></li>
+<li><a href="https://leetcode.com/problems/nth-highest-salary/">177. Nth Highest Salary</a></li>
+<li><a href="https://www.hackerrank.com/challenges/symmetric-pairs/problem">Symmetric Pairs</a></li>
+<li><a href="https://www.hackerrank.com/challenges/occupations/problem">Occupations</a></li>
+<li><a href="https://www.hackerrank.com/challenges/harry-potter-and-wands/problem">Ollivander’s Inventory</a></li>
+<li><a href="https://www.hackerrank.com/challenges/placements/problem">Placements</a></li>
+</ol>
+<h2 id="videos"><a aria-hidden="true" class="anchor-heading" href="#videos"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Videos</h2>
+<p><a href="https://www.youtube.com/watch?v=QFj-hZi8MKk">Learning about ROW_NUMBER and Analytic Functions</a></p>
+<p><a href="https://www.youtube.com/watch?v=G3kYPzLWtpo&#x26;t=4s">Advanced Implementation Of Analytic Functions Running Total</a></p>
+<p><a href="https://www.youtube.com/watch?v=XecU6Ieyu-4&#x26;t=54s">Advanced Implementation Of Analytic Functions Median</a></p>
+<p><a href="https://www.youtube.com/watch?v=2-1XQHAgDsM&#x26;list=PL6EDEB03D20332309">Wise Owl SQL Videos</a></p>
+<h2 id="post-video-sql-problems"><a aria-hidden="true" class="anchor-heading" href="#post-video-sql-problems"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Post-video SQL problems</h2>
+<p>Once you have finished watching the SQL videos above, consider trying the new problems below. Try to see if you feel like you are improving. Again, note down any specific topics you feel weak on.</p>
+<ol>
+<li><a href="https://www.hackerrank.com/challenges/binary-search-tree-1/problem">Binary Tree Nodes</a></li>
+<li><a href="https://leetcode.com/problems/big-countries/">595. Big Countries</a></li>
+<li><a href="https://leetcode.com/problems/exchange-seats/">626. Exchange Seats</a></li>
+<li><a href="https://www.hackerrank.com/challenges/weather-observation-station-18/problem">Weather Observation Station 18</a></li>
+<li><a href="https://www.hackerrank.com/challenges/challenges/problem">Challenges</a></li>
+<li><a href="https://www.hackerrank.com/challenges/print-prime-numbers/problem">Print Prime Numbers</a></li>
+<li><a href="https://data36.com/sql-interview-questions-tech-screening-data-analysts/">SQL Interview Questions: 3 Tech Screening Exercises (For Data Analysts)</a></li>
+</ol>
+<h1 id="databases-etl-and-data-warehouses"><a aria-hidden="true" class="anchor-heading" href="#databases-etl-and-data-warehouses"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Databases, ETL, and Data Warehouses</h1>
+<p>Source: <a href="https://stackoverflow.com/questions/20346850/sql-movie-database-diagram">Stackoverflow</a></p>
+<p>For database, <a href="https://seattledataguy.substack.com/p/what-are-etls-and-why-we-use-them">ETL</a>, and <a href="https://www.theseattledataguy.com/what-are-the-benefits-of-cloud-data-warehousing-and-why-you-should-migrate/#page-content">data warehouse</a> design questions, we have gathered some books and videos we hope will help you out when it comes to explaining your design in an interview. In addition, we have listed a few plausible database/DW concepts you could attempt to design out on your own.</p>
+<p>We recommend going through the videos and at least skimming the Data Warehouse Toolkit before attempting the self-practice problems.</p>
+<p><a href="https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/books/data-warehouse-dw-toolkit/">The Data Warehouse Toolkit</a>  by Ralph Kimball</p>
+<p><a href="https://www.youtube.com/watch?v=I_rxqSJAj6U">Designing a Traditional Relational Database Video</a></p>
+<p><a href="https://www.youtube.com/watch?v=--OJpdPeH80">Data Warehouse Design Video</a></p>
+<h2 id="self-practice-problems"><a aria-hidden="true" class="anchor-heading" href="#self-practice-problems"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Self-practice problems</h2>
+<p>For this part of your interview practice, we are going to list a few business systems that you can try to design out. First, we recommend designing a relational database, then thinking about how you would design an ETL and DW that rely on that relational DB.</p>
+<p><strong>Note:</strong> In addition, we have found it very common that interviewers will base their interview questions on your design. So think about some of the questions you could answer with your DB and list them.</p>
+<p>Design a database/ETL and DW for a:</p>
+<ul>
+<li>dating app</li>
+<li>bicycle rental service</li>
+<li>music streaming app</li>
+<li>job search website</li>
+<li>Udemy-like website</li>
+</ul>
+<p>These are just a few ideas. We hope they help you have a clearer idea of what you can practice modeling and designing. Take some time to think about how users interact with these websites before getting started.</p>
+<h1 id="programming-problems"><a aria-hidden="true" class="anchor-heading" href="#programming-problems"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Programming Problems</h1>
+<p>Data engineers do a significant amount of programming in their daily life. There are several specific languages data engineers use. Python is arguably the most common.</p>
+<p>If the role requires a lot of Hadoop work, then <a href="https://www.java.com/en/">Java</a> is also a useful language to have. There are a few other useful languages, like Java and <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.1">PowerShell</a> (if you work at a Microsoft shop).</p>
+<p>There are two types of questions we have experienced. Some interviewers will ask you more operational questions. Others will ask classic algorithm and data structure questions.</p>
+<h1 id="operational-programming-problems"><a aria-hidden="true" class="anchor-heading" href="#operational-programming-problems"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Operational Programming Problems</h1>
+<p>Operational interview questions are harder to prep for. There are no “classic” interview questions here. However, they are also often easier to figure out on the spot. Algorithm interview questions usually have some sort of trick. Like the balanced brackets problem: If you don’t know you need to use queues, it will be very difficult to get to the correct answer.</p>
+<p>Operational problems, however, will be more focused on workflows and business processes. So as long as you are good at walking through real problems, this should be easier. Here are some problems that are great for prepping. We find it is helpful to know how to use arrays and dictionaries. Beyond that, there isn’t too much more required.</p>
+<ol>
+<li><a href="https://www.hackerrank.com/challenges/kangaroo/problem">Kangaroo problem</a></li>
+<li><a href="https://www.hackerrank.com/challenges/breaking-best-and-worst-records/problem">Breaking records</a></li>
+<li><a href="https://www.hackerrank.com/challenges/find-a-string/problem">Find a string</a></li>
+<li><a href="https://www.hackerrank.com/challenges/itertools-permutations/problem">itertools.permutations()</a></li>
+<li><a href="https://www.hackerrank.com/challenges/no-idea/problem">No idea!</a></li>
+<li><a href="https://www.hackerrank.com/challenges/day-of-the-programmer/problem">Days of the programmer</a></li>
+<li><a href="https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem">Leaderboard</a></li>
+<li><a href="https://www.hackerrank.com/challenges/word-order/problem">Word order</a></li>
+<li><a href="https://www.hackerrank.com/challenges/sherlock-and-squares/problem">Sherlock and squares</a></li>
+<li><a href="https://www.hackerrank.com/challenges/equality-in-a-array/problem">Equalize the array</a></li>
+<li><a href="https://www.hackerrank.com/challenges/apple-and-orange/problem">Apples and oranges</a></li>
+<li><a href="https://www.hackerrank.com/domains/python">More operational style questions</a></li>
+</ol>
+<h1 id="algorithms-and-data-structures"><a aria-hidden="true" class="anchor-heading" href="#algorithms-and-data-structures"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Algorithms and Data Structures</h1>
+<p>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=medium&#x26;utm_medium=referral">Markus Spiske</a> on <a href="https://unsplash.com?utm_source=medium&#x26;utm_medium=referral">Unsplash</a></p>
+<p>Before going too deep into data structure and algorithms, let’s do a quick check to see how you are currently doing in this area. We have listed eight LeetCode problems that vary in difficulty. Try these out and try to gauge yourself on how long it takes you, as well as how many hints you needed. If you are following along with the study guide, then note this down. At the end of this list are a few more questions. So once you have watched all the videos, consider doing those problems, and see if you feel like you are improving!</p>
+<h2 id="pre-study-problems"><a aria-hidden="true" class="anchor-heading" href="#pre-study-problems"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pre-study problems</h2>
+<ol>
+<li><a href="https://leetcode.com/problems/sum-of-even-numbers-after-queries/">985. Sum of even numbers after queries</a></li>
+<li><a href="https://leetcode.com/problems/robot-return-to-origin/">657. Robot return to origin</a></li>
+<li><a href="https://leetcode.com/problems/n-repeated-element-in-size-2n-array/">961. N-repeated element in size 2N array</a></li>
+<li><a href="https://leetcode.com/problems/balanced-binary-tree/">110. Balanced binary tree</a></li>
+<li><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">3. Longest substring without repeating characters</a></li>
+<li><a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/">19. Remove Nth node from end of list</a></li>
+<li><a href="https://leetcode.com/problems/merge-k-sorted-lists/">23. Merge k sorted lists</a></li>
+<li><a href="https://leetcode.com/problems/next-permutation/">31. Next permutation</a></li>
+</ol>
+<p>Now that you have gone through these eight questions and shaken off the rust, let’s start reviewing these concepts.</p>
+<h2 id="data-structures"><a aria-hidden="true" class="anchor-heading" href="#data-structures"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><strong>Data structures</strong></h2>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=bum_19loj9A">Data Structures &#x26; Algorithms #1 — What Are Data Structures?</a></li>
+<li><a href="https://youtu.be/njTh_OwMljA">Data Structures: Linked Lists</a></li>
+<li><a href="https://youtu.be/oSWTXtMglKE">Data Structures: Trees</a></li>
+<li><a href="https://youtu.be/t0Cq6tVNRBA">Data Structures: Heaps</a></li>
+<li><a href="https://youtu.be/shs0KM3wKv8">Data Structures: Hash Tables</a></li>
+<li><a href="https://youtu.be/wjI1WNcIntg">Data Structures: Stacks and Queues</a></li>
+<li><a href="https://youtu.be/DuDz6B4cqVc">Data Structures: Crash Course Computer Science #14</a></li>
+<li><a href="https://www.youtube.com/watch?v=zIjfhVPRZCg">Data Structures: Tries</a></li>
+</ol>
+<h2 id="algorithms"><a aria-hidden="true" class="anchor-heading" href="#algorithms"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><strong>Algorithms</strong></h2>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=p65AHm9MX80">Python Algorithms for Interviews</a></li>
+<li><a href="https://www.youtube.com/watch?v=zaBhtODEL0w&#x26;list=PLX6IKgS15Ue02WDPRCmYKuZicQHit9kFt">Algorithms: Graph Search, DFS, and BFS</a></li>
+<li><a href="https://youtu.be/P3YID7liBug">Algorithms: Binary Search</a></li>
+<li><a href="https://youtu.be/KEEKn7Me-ms">Algorithms: Recursion</a></li>
+<li><a href="https://youtu.be/6Gv8vg0kcHc">Algorithms: Bubble Sort</a></li>
+<li><a href="https://youtu.be/KF2j-9iSf4Q">Algorithms: Merge Sort</a></li>
+<li><a href="https://youtu.be/SLauY6PpjW4">Algorithms: Quicksort</a></li>
+</ol>
+<h2 id="big-o-notation"><a aria-hidden="true" class="anchor-heading" href="#big-o-notation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><strong>Big O notation</strong></h2>
+<p><a href="https://www.youtube.com/watch?v=D6xkbGLQesk">Introduction to Big O Notation and Time Complexity (Data Structures &#x26; Algorithms #7)</a></p>
+<h2 id="some-interview-walk-throughs"><a aria-hidden="true" class="anchor-heading" href="#some-interview-walk-throughs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><strong>Some interview walk-throughs</strong></h2>
+<p><a href="https://www.youtube.com/watch?v=5o-kdjv7FD0">Amazon Coding Interview Question — Recursive Staircase Problem</a></p>
+<p><a href="https://www.youtube.com/watch?v=7HgsS8bRvjo">Google Coding Interview — Universal Value Tree Problem</a></p>
+<p><a href="https://www.youtube.com/watch?v=GJdiM-muYqc">Google Coding Interview Question and Answer #1: First Recurring Character</a></p>
+<h2 id="post-video-problems"><a aria-hidden="true" class="anchor-heading" href="#post-video-problems"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Post-video problems</h2>
+<p>Once you have finished the videos above, consider trying the algorithm and data structure problems below. Make sure you keep track of how comfortable you felt when working on the problems.</p>
+<ol>
+<li><a href="https://www.hackerrank.com/challenges/bigger-is-greater/problem">Bigger is greater</a></li>
+<li><a href="https://leetcode.com/problems/zigzag-conversion/">6. Zigzag conversion</a></li>
+<li><a href="https://leetcode.com/problems/reverse-integer/">7. Reverse integer</a></li>
+<li><a href="https://leetcode.com/problems/combination-sum-ii/">40. Combination sum II</a></li>
+<li><a href="https://leetcode.com/problems/multiply-strings/">43. Multiply strings</a></li>
+<li><a href="https://www.hackerrank.com/challenges/larrys-array/problem">Larry’s array</a></li>
+<li><a href="https://www.hackerrank.com/challenges/short-palindrome/problem">Short palindrome</a></li>
+<li><a href="https://leetcode.com/problems/valid-number/">65. Valid number</a></li>
+</ol>
+<p>If you still feel like you need help, then consider taking a <a href="https://www.udemy.com/course/coding-interview-bootcamp-algorithms-and-data-structure/">course on algorithms and data structures</a>.</p>
+<h1 id="big-data-frameworks"><a aria-hidden="true" class="anchor-heading" href="#big-data-frameworks"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Big Data Frameworks</h1>
+<p>Back in 2020, I made a video about practicing for a data engineering interview. Funny thing was, a person commented about the video and pointed back to my original data engineering study guide. Just by happenstance!</p>
+<p>Small world.</p>
+<p>They also added another section. In this case, they added <a href="https://en.wikipedia.org/wiki/Apache_Spark">Spark</a>. So for those of you out there needing to study for Spark, here is what Paul Russel added to the checklist. What would you add?</p>
+<p><a href="https://www.toptal.com/spark/introduction-to-apache-spark">Architecture Overview &#x26; Use Cases</a></p>
+<p><a href="https://sparkbyexamples.com/spark/">Spark by Examples (tutorial documentation)</a></p>
+<p><a href="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PySpark_SQL_Cheat_Sheet_Python.pdf">PySpark Syntax Cheat Sheet</a></p>

@@ -1,0 +1,35 @@
+<h1 id="connecting-a-nodejs-application-to-a-mongodb-docker-container"><a aria-hidden="true" class="anchor-heading" href="#connecting-a-nodejs-application-to-a-mongodb-docker-container"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Connecting a Nodejs application to a MongoDB Docker Container</h1>
+<p>For our front-end, let's say we've a simple html front-end being served by express on port 3000(backend).</p>
+<p>To add persistent storage, we'll integrate the application with a DB, lets use MongoDB and MongoExpress as the UI of the DB, both as Docker containers.</p>
+<p>Create a new Docker Network and start the Mongo container inside that newly created network.</p>
+<p><code>docker network create mongo-network</code></p>
+<p>Running mongo container</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+  -p <span class="token number">27017</span>:27017 <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">MONGO_INITDB_ROOT_USERNAME</span><span class="token operator">=</span>admin <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">MONGO_INITDB_ROOT_PASSWORD</span><span class="token operator">=</span>password <span class="token punctuation">\</span>
+  --name mongodb <span class="token punctuation">\</span>
+  --net mongo-network <span class="token punctuation">\</span>
+  mongo
+</code></pre>
+<p>Running mongo-express container</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+  -p <span class="token number">8081</span>:8081 <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">ME_CONFIG_MONGODB_ADMINUSERNAME</span><span class="token operator">=</span>admin <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">ME_CONFIG_MONGODB_ADMINPASSWORD</span><span class="token operator">=</span>password <span class="token punctuation">\</span>
+  --net mongo-network <span class="token punctuation">\</span>
+  --name mongo-express <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">ME_CONFIG_MONGODB_SERVER</span><span class="token operator">=</span>mongodb <span class="token comment"># container name</span>
+  mongo-express
+</code></pre>
+<p>Create a new DB from the mongo express UI (alternatively you can specify init DB as env variable)</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657832258/wiki/kjuyn47bzyftrwrfuzro.png"></p>
+<p>Create a collection(like a table)</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1657832418/wiki/ti6cf756ul3v2qjjmalg.png"></p>
+<p>Connect Nodejs server with MongoDB container.</p>
+<p>Using <code>MongoClient</code> to connect to mongodb <code>mongodb://admin:password@localhost:27017</code> or <code>mongodb://admin:password@mongodb:27017</code> or <code>mongodb://admin:password@mongodb</code></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/wf37vjntme0oklsx52ycrn4">Docker</a></li>
+</ul>

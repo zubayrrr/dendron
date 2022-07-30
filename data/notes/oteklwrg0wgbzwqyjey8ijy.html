@@ -1,0 +1,51 @@
+<h1 id="jobs"><a aria-hidden="true" class="anchor-heading" href="#jobs"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>jobs</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>jobs</code> command is used to list the jobs that you are running in the background and in the foreground. If the prompt is returned with no information no jobs are present. All shells are not capable of running this command. This command is only available in the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.csh (Private)</a>, <a href="/notes/26fd6bw5fsykdus523f40bz">Bash</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.tcsh (Private)</a>, and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.ksh (Private)</a> shells.</p>
+<p>Jobs are maintained only by the current shell, hence the Job IDs are local to the current shell, you can have same Job IDs in different shells but the <a href="/notes/v879p2kn7q4pa6g56739q1v">PID</a> is maintained by the kernel and has global scope.</p>
+<h3 id="options"><a aria-hidden="true" class="anchor-heading" href="#options"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Options</h3>
+<table>
+<thead>
+<tr class="header">
+<th>JOB</th>
+<th>Job name or number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-l</td>
+<td>Lists process IDs in addition to the normal information.</td>
+</tr>
+<tr class="even">
+<td>-n</td>
+<td>List only processes that have changed status since the last notification.</td>
+</tr>
+<tr class="odd">
+<td>-p</td>
+<td>Lists process IDs only.</td>
+</tr>
+<tr class="even">
+<td>-r</td>
+<td>Restrict output to running jobs.</td>
+</tr>
+<tr class="odd">
+<td>-s</td>
+<td>Restrict output to stopped jobs.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="process-control-commands"><a aria-hidden="true" class="anchor-heading" href="#process-control-commands"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Process Control Commands</h3>
+<p><code>fg</code> command moves a <a href="/notes/w0vd2ayughwv1t1wm0334f3">background process</a>in the current shell environment into the <a href="/notes/3dz4uwat5h6zuz2tt5xluoe">foreground process</a>. Use the job ID parameter to indicate a specific job to be run in the foreground. If this parameter is not supplied, the <code>fg</code> command uses the job most recently suspended, placed in the background, or run as a background job.</p>
+<p><code>fg %JobID</code></p>
+<p><code>bg</code> is a job control command. It resumes suspended [[devlog.jobs] in the <a href="/notes/w0vd2ayughwv1t1wm0334f3">background process</a>, returning the user to the shell prompt while the job runs.</p>
+<p><code>bg %Job_ID</code></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/w0vd2ayughwv1t1wm0334f3">background process</a></li>
+<li><a href="/notes/2w9ck78j0wq1b1sphw0wvsi">bg</a></li>
+<li><a href="/notes/3dz4uwat5h6zuz2tt5xluoe">foreground process</a></li>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+</ul>

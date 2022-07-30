@@ -1,0 +1,14 @@
+<h1 id="sigterm"><a aria-hidden="true" class="anchor-heading" href="#sigterm"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SIGTERM</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The SIGTERM <a href="/notes/awaxslvw2mr2x9m3pofswnj">signal</a>is sent to a <a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a> to request its termination. Unlike the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SIGKILL (Private)</a> signal, it can be caught and interpreted or ignored by the process. This allows the process to perform nice termination releasing resources and saving state if appropriate. <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SIGINT (Private)</a> is nearly identical to SIGTERM.</p>
+<blockquote>
+<p>—via <a href="https://dsa.cs.tsinghua.edu.cn/oj/static/unix_signal.html">POSIX signals</a></p>
+</blockquote>
+<ul>
+<li>The process may stop immediately, it can stop after some day (after cleaning up resources etc) or the process may run indefinitely (ignore), the process decides what it wants to do.</li>
+<li>It is also called as a <code>soft kill</code></li>
+<li>Processes that ignore SIGTERM will have to be terminated using <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SIGKILL (Private)</a></li>
+</ul>

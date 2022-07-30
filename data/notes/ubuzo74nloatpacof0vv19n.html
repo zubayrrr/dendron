@@ -1,0 +1,90 @@
+<h1 id="60-linux-networking-commands-and-scripts"><a aria-hidden="true" class="anchor-heading" href="#60-linux-networking-commands-and-scripts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>60 Linux Networking Commands and Scripts</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<h1 id="60-linux-networking-commands-and-scripts-1"><a aria-hidden="true" class="anchor-heading" href="#60-linux-networking-commands-and-scripts-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://haydenjames.io/linux-networking-commands-scripts/">60 Linux Networking commands and scripts</a></h1>
+<p>Recently, I wanted to test network throughput via command line with at least 3 tools. For the life of me, I could not remember <code>iperf</code>. Not being able to remember previously used command line tools is frustrating and something we can all relate to. So I created a go-to list of network tools for myself. Then, I thought, why not turn this list into a blog post? So I spent another hour or two compiling this ongoing list of Linux Networking Commands and Scripts. I look forward mostly to suggestions, because I know there’s always something missing or new scripts out there to try.</p>
+<h2 id="linux-networking-commands-and-scripts"><a aria-hidden="true" class="anchor-heading" href="#linux-networking-commands-and-scripts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Linux Networking commands and scripts</h2>
+<p><img src="https://static.haydenjames.io/wp-content/uploads/2019/01/iperf3-stacklinux-vps-screenshot-868x385.png" alt="iperf3 screenshot - Stacklinux.com VPS (Linux Networking Commands and Scripts)" title="iperf3 screenshot - Stacklinux.com VPS (Linux Networking Commands and Scripts)"><br>
+<em><code>iperf</code> command example/screenshot</em></p>
+<p>This list of Linux Networking commands and scripts will receive ongoing updates:</p>
+<ol>
+<li><a href="https://aria2.github.io/">aria2</a> – downloading just about everything. Torrents included.</li>
+<li><a href="https://linux.die.net/man/8/arpwatch">arpwatch</a> – Ethernet Activity Monitor.</li>
+<li><a href="https://github.com/tgraf/bmon">bmon</a> – bandwidth monitor and rate estimator.</li>
+<li><a href="https://www.gropp.org/?id=projects&#x26;sub=bwm-ng">bwm-ng</a> – live network bandwidth monitor.</li>
+<li><a href="https://curl.haxx.se/">curl</a> – transferring data with URLs. (or try <a href="https://httpie.org/">httpie</a>)</li>
+<li><a href="https://unix4lyfe.org/darkstat/">darkstat</a> – captures network traffic, usage statistics.</li>
+<li><a href="https://linux.die.net/man/8/dhclient">dhclient</a> – Dynamic Host Configuration Protocol Client</li>
+<li><a href="https://linux.die.net/man/1/dig">dig</a> – query DNS servers for information.</li>
+<li><a href="https://github.com/dagwieers/dstat">dstat</a> – replacement for vmstat, iostat, mpstat, netstat and ifstat.</li>
+<li><a href="https://mirrors.edge.kernel.org/pub/software/network/ethtool/">ethtool</a> – utility for controlling network drivers and hardware.</li>
+<li><a href="https://www.oreilly.com/library/view/linux-in-a/0596000251/re101.html">gated</a> – gateway routing daemon.</li>
+<li><a href="https://linux.die.net/man/1/host">host</a> – DNS lookup utility.</li>
+<li><a href="http://www.hping.org/">hping</a> – TCP/IP packet assembler/analyzer.</li>
+<li><a href="http://ibmonitor.sourceforge.net/">ibmonitor</a> – shows bandwidth and total data transferred.</li>
+<li><a href="http://gael.roualland.free.fr/ifstat/">ifstat</a> –  report network interfaces bandwidth.</li>
+<li><a href="http://www.ex-parrot.com/pdw/iftop/">iftop</a> – display bandwidth usage.</li>
+<li><a href="https://access.redhat.com/sites/default/files/attachments/rh_ip_command_cheatsheet_1214_jcs_print.pdf">ip</a> (PDF file) – a command with more features that ifconfig (net-tools).</li>
+<li><a href="https://github.com/esnet/iperf">iperf3</a> – network bandwidth measurement tool. (above screenshot <a href="https://stacklinux.com/">Stacklinux VPS</a>)</li>
+<li><a href="https://wiki.linuxfoundation.org/networking/iproute2">iproute2</a> – collection of utilities for controlling TCP/IP.</li>
+<li><a href="https://netfilter.org/">iptables</a> – take control of network traffic.</li>
+<li><a href="http://iptraf.seul.org/">IPTraf</a> – An IP Network Monitor.</li>
+<li><a href="https://wiki.linuxfoundation.org/networking/iputils">iputils</a> – set of small useful utilities for Linux networking.</li>
+<li><a href="https://wireless.wiki.kernel.org/en/users/documentation/iw">iw</a> – a new nl80211 based CLI configuration utility for wireless devices.</li>
+<li><a href="https://www.gnu.org/software/jwhois/">jwhois</a> (whois) – client for the whois service.</li>
+<li><a href="https://www.novell.com/coolsolutions/tip/18078.html">“lsof -i”</a> – reveal information about your network sockets.</li>
+<li><a href="http://www.bitwizard.nl/mtr/">mtr</a> – network diagnostic tool.</li>
+<li><a href="http://net-tools.sourceforge.net/">net-tools</a> – utilities include: arp, hostname, ifconfig, <a href="http://net-tools.sourceforge.net/man/netstat.8.html">netstat</a>, rarp, route, plipconfig, slattach, mii-tool, iptunnel and ipmaddr.</li>
+<li><a href="https://nmap.org/ncat/">ncat</a> – improved re-implementation of the venerable netcat.</li>
+<li><a href="http://nc110.sourceforge.net/">netcat</a> – networking utility for reading/writing network connections.</li>
+<li><a href="https://github.com/raboof/nethogs">nethogs</a> – a small ‘net top’ tool.</li>
+<li><a href="https://github.com/HewlettPackard/netperf">Netperf</a> – Network bandwidth Testing.</li>
+<li><a href="https://netplan.io/">netplan</a> – Netplan is a utility for easily configuring networking on a linux system.</li>
+<li><a href="http://netsniff-ng.org/">netsniff-ng</a> – Swiss army knife for daily Linux network plumbing.</li>
+<li><a href="http://www.slctech.org/~mackay/NETWATCH/netwatch.html">netwatch</a> – monitoring Network Connections.</li>
+<li><a href="https://github.com/jpr5/ngrep/">ngrep</a> – grep applied to the network layer.</li>
+<li><a href="https://linux.die.net/man/1/nload">nload</a> – display network usage.</li>
+<li><a href="https://nmap.org/">nmap</a> – network discovery and security auditing.</li>
+<li><a href="https://developer.gnome.org/NetworkManager/stable/nmcli.html">nmcli</a> – a command-line tool for controlling NetworkManager and reporting network status.</li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Networking_Guide/sec-Networking_Config_Using_nmtui.html">nmtui</a> – provides a text interface to configure networking by controlling NetworkManager.</li>
+<li><a href="https://en.wikipedia.org/wiki/Nslookup">nslookup</a> – query Internet name servers interactively.</li>
+<li><a href="https://en.wikipedia.org/wiki/Ping_(networking_utility)">ping</a> – send icmp echo_request to network hosts.</li>
+<li><a href="https://en.wikipedia.org/wiki/Route_(command)">route</a> – show / manipulate the IP routing table.</li>
+<li><a href="https://github.com/mattthias/slurm">slurm</a> – network load monitor.</li>
+<li><a href="https://www.snort.org/">snort</a> – Network Intrusion Detection and Prevention System.</li>
+<li><a href="https://oss.oetiker.ch/smokeping/">smokeping</a> –  keeps track of your network latency.</li>
+<li><a href="http://www.dest-unreach.org/socat/">socat</a> – establishes two bidirectional byte streams and transfers data between them.</li>
+<li><a href="http://excess.org/speedometer/">speedometer</a> – Measure and display the rate of data across a network.</li>
+<li><a href="https://github.com/sivel/speedtest-cli">speedtest-cli</a> – test internet bandwidth using speedtest.net</li>
+<li><a href="http://linux-ip.net/gl/ss/">ss</a> – utility to investigate sockets.</li>
+<li><a href="https://www.ssh.com/ssh/">ssh</a> –  secure system administration and file transfers over insecure networks.</li>
+<li><a href="https://www.tcpdump.org/">tcpdump</a> – command-line packet analyzer.</li>
+<li><a href="https://github.com/bchretien/tcptrack">tcptrack</a> – Displays information about tcp connections on a network interface.</li>
+<li><a href="https://www.unix.com/man-page/linux/1/telnet/">telnet</a> – user interface to the TELNET protocol.</li>
+<li><a href="https://linux.die.net/man/8/tracepath">tracepath</a> – very similar function to traceroute.</li>
+<li><a href="http://traceroute.sourceforge.net/">traceroute</a> – print the route packets trace to network host.</li>
+<li><a href="https://humdi.net/vnstat/">vnStat</a> – network traffic monitor.</li>
+<li><a href="https://github.com/vi/websocat">websocat</a> – Connection forwarder from/to web sockets to/from usual sockets, in style of socat.</li>
+<li><a href="https://www.gnu.org/software/wget/">wget</a> –  retrieving files using HTTP, HTTPS, FTP and FTPS.</li>
+<li><a href="https://hewlettpackard.github.io/wireless-tools/Tools.html">Wireless Tools for Linux</a> – includes iwconfig, iwlist, iwspy, iwpriv and ifrename.</li>
+<li><a href="https://www.wireshark.org/">Wireshark</a> – network protocol analyzer.</li>
+<li>Suggestions welcomed.</li>
+</ol>
+<p><strong>Read also:</strong></p>
+<ul>
+<li><a href="https://haydenjames.io/20-top-server-monitoring-application-performance-monitoring-apm-solutions/" title="100 Top Observability Tools (+ Server Monitoring and APM solutions)">100 Top Observability Tools (+ Server Monitoring and APM solutions)</a>.</li>
+<li><a href="https://haydenjames.io/best-cdn-providers/" title="25 Best CDN Providers 2022">25 Best CDN Providers</a>,</li>
+<li><a href="https://haydenjames.io/best-linux-server-distro/" title="Choosing the Best Linux Server Distro (2022)">Choosing the Best Linux Server Distro</a>.</li>
+<li><a href="https://haydenjames.io/90-linux-commands-frequently-used-by-linux-sysadmins/" title="90 Linux Commands frequently used by Linux Sysadmins">90 Linux Commands frequently used by Linux Sysadmins</a>.</li>
+<li><a href="https://haydenjames.io/linux-benchmark-scripts-tools/" title="Linux benchmark scripts and tools">Linux benchmark scripts and tools</a>.</li>
+</ul>
+<p><em>Published: January 31st, 2020 | Last updated: April 13th, 2022</em></p>
+<h3 id="tags-commands-scripts-sysadmins"><a aria-hidden="true" class="anchor-heading" href="#tags-commands-scripts-sysadmins"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags: <a href="https://haydenjames.io/tag/commands/">commands</a>, <a href="https://haydenjames.io/tag/scripts/">scripts</a>, <a href="https://haydenjames.io/tag/sysadmins/">sysadmins</a></h3>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #054907;" href="/notes/j9wop01y5eo30zr168a0g3n">articles</a></li>
+<li><a class="color-tag" style="--tag-color: #ffb07c;" href="/notes/d6oeuzrs1weth2ycsn4xbcb">webmark</a></li>
+</ol>

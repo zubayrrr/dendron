@@ -1,0 +1,76 @@
+<h1 id="file-timestamps"><a aria-hidden="true" class="anchor-heading" href="#file-timestamps"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>File Timestamps</h1>
+<p>Every file on Linux has three timestamps:</p>
+<ol>
+<li>The access timestamp or <code>atime</code> is the last time the file was read<br>
+<code>ls -lu</code></li>
+<li>The modified timestamp or <code>mtime</code> is the last time the contents of the file was modified<br>
+<code>ls -ls</code> , <code>ls -lt</code></li>
+<li>The changed timestamp <code>ctime</code> is the last time when some metadata related to the file was changed<br>
+<code>ls -lc</code></li>
+</ol>
+<!-- end list -->
+<ul>
+<li>To reverse sorts use <code>-r</code> or <code>--reverse</code><br>
+Example: <code>ls -lu -r</code> or <code>ls -lutr</code> or <code>ls -lut --reverse</code></li>
+<li>Use <code>ls -l --full-time path</code> to get entire timestamp.</li>
+</ul>
+<hr>
+<ul>
+<li>The Linux Timestamps has an integer number rather than a date or time.</li>
+<li>The integer number is the number of seconds since the <a href="/notes/itgmt8nxs06euxcmb2ad9l5">Unix Epoch</a>.</li>
+<li>When a timestamp is needed to be generated, Linux calculates time passed since <a href="/notes/itgmt8nxs06euxcmb2ad9l5">Unix Epoch</a>, which makes it easier for humans to understand.</li>
+</ul>
+<hr>
+<h2 id="the-stat-command"><a aria-hidden="true" class="anchor-heading" href="#the-stat-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The <a href="/notes/0ftwbeeggjp74wm7lxsngll">stat</a> command</h2>
+<p><code>stat</code> is a command-line utility that displays detailed information about given files or file systems.</p>
+<p>When invoked without any options, <code>stat</code> displays the following file information:</p>
+<ul>
+<li>File - The name of the file.</li>
+<li>Size - The size of the file in bytes.</li>
+<li>Blocks - The number of allocated blocks the file takes.</li>
+<li>IO Block - The size in bytes of every block.</li>
+<li>File type - (ex. regular file, directory, symbolic link.)</li>
+<li>Device - Device number in hex and decimal.</li>
+<li>Inode - Inode number.</li>
+<li>Links - Number of hard links.</li>
+<li>Access - File permissions in the numeric and symbolic methods.</li>
+<li>Uid - User ID and name of the owner .</li>
+<li>Gid - Group ID and name of the owner.</li>
+<li>Context - The SELinux security context.</li>
+<li>Access - The last time the file was accessed.</li>
+<li>Modify - The last time the file’s content was modified.</li>
+<li>Change - The last time the file’s attribute or content was changed.</li>
+<li>Birth - File creation time (not supported in Linux).</li>
+</ul>
+<blockquote>
+<p>—via <a href="https://linuxize.com/post/stat-command-in-linux/">Stat Command in Linux</a></p>
+</blockquote>
+<hr>
+<h2 id="the-touch-command"><a aria-hidden="true" class="anchor-heading" href="#the-touch-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The <a href="/notes/a25t7tco2lrqbkbppyp43ow">touch</a> command</h2>
+<p>The touch command is a standard program for Unix/Linux operating systems, that is used to create, change and modify timestamps of a file. Before heading up for touch command examples, please check out the following options:</p>
+<ul>
+<li>-a, change the access time only</li>
+<li>-c, if the file does not exist, do not create it</li>
+<li>-d, update the access and modification times</li>
+<li>-m, change the modification time only</li>
+<li>-r, use the access and modification times of file</li>
+<li>-t, creates a file using a specified time</li>
+</ul>
+<blockquote>
+<p>—via <a href="https://www.tecmint.com/8-pratical-examples-of-linux-touch-command/">8 Practical Examples of Linux "Touch" Command</a></p>
+</blockquote>
+<ul>
+<li>To create a file using <code>touch</code> simply: <code>touch fileName</code></li>
+</ul>
+<hr>
+<ul>
+<li>Set timestamps of one file to the timestamps of another file:</li>
+</ul>
+<p><code>touch fileOne -r fileTwo</code></p>
+<ul>
+<li><code>touch</code>-ing an existing file will update it's timestamps:</li>
+</ul>
+<p><code>touch fileName</code></p>
+<ul>
+<li>It is not possible to modify just the "change" timestamp (the trick is to set the system time to the desired "change" time and <code>touch</code> it and adjust the "access" and "modify" time to the initial values)</li>
+</ul>

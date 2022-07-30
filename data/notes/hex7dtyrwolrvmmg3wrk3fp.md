@@ -1,0 +1,13 @@
+
+- `+`- Addition
+- `-` - Subtraction
+- `*` - Multiplication
+- `/` - Division
+- `%` - Modulo Operation (Remainder after division
+- `++` - Increment
+- `--` - Decrement
+- `+=` - Addition Assignment
+- `-=` - Subtraction Assignment
+- `*=` - Multiplication Assignment
+- `/=` - Division Assignment
+- `%=` - Modulus Assignment

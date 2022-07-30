@@ -1,0 +1,194 @@
+<h1 id="ansible"><a aria-hidden="true" class="anchor-heading" href="#ansible"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ansible</h1>
+<ul>
+<li>Areas: <a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li>Related: <a href="/notes/zbj9fmibk0nj56jkxz7jpzg">Puppet</a>, <a href="/notes/306gnfs0uii610vyobkxknb">Chef</a></li>
+</ul>
+<hr>
+<ul>
+<li>Ansible is a configuration management system used to configure, automate,monitor, and troubleshoot devices in large networks.</li>
+<li>It is written in <a href="/notes/wa4wthnhw54hd5wfyocyvqa">Python</a> and is open source under GPL License.</li>
+<li>There is a control node and many managed nodes (network devices we manage with Ansible). Windows OS is not supported as a control node at this moment (only <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.WSL (Private)</a>);</li>
+<li>Ansible uses an agentless architecture. No application is installed on the managed nodes and no daemon, process or agent is running;</li>
+<li>Ansible uses for device configuration. Any system that can be configured using <a href="/notes/o922t6d9q6wur3yve290hir">SSH</a> can also be configured using Ansible;</li>
+<li>When managing Windows it users native PowerShell remote support instead of SSH;</li>
+<li>It is also known as an orchestration engine, used in large networks with many devices that need to be configured, maintained and troubleshooted in an automated way.</li>
+<li>Ansible uses Modules which are scripts or units of work that do the actual job.</li>
+<li>Theres no process that runs continuously on neither the controlling machine or the managed machine(s)</li>
+<li>The controlling node doesn't have be a privileged user, it can simply ssh into the managed node.</li>
+</ul>
+<h2 id="ansible-components"><a aria-hidden="true" class="anchor-heading" href="#ansible-components"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ansible Components</h2>
+<ul>
+<li>Inventory is a list of managed nodes. An inventory file is also sometimes called a "host file". The inventory can specify information such as IP address, hostname or domain-name for each managed node. Default location: <code>/etc/ansible/hosts</code> (or use the <code>-i</code> flag to use a custom file). An inventory file can be formatted as an INI or YAML file.</li>
+<li>Modules are the units of code ansible executes. Each module has a particular use, from administering users on a specific type of database to managing VLAN interfaces on a specific type of network device or to installing, configuring and starting a specific server like for example Apache2 on a Linux distribution.</li>
+<li>Tasks are units of action in Ansible. You can execute a single task once with an Ad-Hoc command or multiple tasks in a playbook.</li>
+<li>Playbooks are ordered lists of tasks. We can run those tasks in that order repeatedly.</li>
+<li>Playbooks are written in YAML and are easy to read, write, share and understand.</li>
+</ul>
+<h2 id="inventory-file"><a aria-hidden="true" class="anchor-heading" href="#inventory-file"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Inventory File</h2>
+<p>Within the inventory file, we can organize our server into different groups, this will help us keep the host in order and permit us to use group variables. A host can be part of multiple groups.</p>
+<pre class="language-ini"><code class="language-ini"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">servers</span><span class="token punctuation">]</span></span>
+
+<span class="token key attr-name">vps1 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">207.154.254.221</span>
+<span class="token key attr-name">vps2 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">167.122.186.63</span>
+<span class="token key attr-name">vps3 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">139.59.155.232</span>
+</code></pre>
+<ul>
+<li><code>ansible_host</code> is a predefined variable that holds the value of the managed hosts.</li>
+<li>To parse the inventory file and list all the hosts defined in the inventory file:
+<ul>
+<li><code>ansible -i ./hosts --list-hosts all</code></li>
+</ul>
+</li>
+<li>To check if ansible is able to communicate with the hosts
+<ul>
+<li><code>ansible -i ./hosts vps1 -m ping -u userName -k</code> (to test for the whole group, use the group name such as: <code>servers</code> instead of <code>vps1</code>)</li>
+<li><code>-m</code> is for "module" in this case we're using the <code>ping</code> module - it checks the ssh authentication for the each node.</li>
+<li><code>-u</code> defines the username that will connect to the remote hosts.</li>
+<li><code>-k</code> to prompt for password.
+<ul>
+<li><code>sshpass</code> module must be installed on the controlling machine</li>
+<li>Edit <code>/etc/ansible/ansible.cfg</code> to uncomment <code>host_key_checking = False</code></li>
+<li>If you want to test ssh communication for all the hosts in the inventory file, use option "all" instead of a group or a specific host</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>To get setup info
+<ul>
+<li><code>ansible -i ./hosts servers -m setup -u student -k</code></li>
+</ul>
+</li>
+<li>To setup ssh authentication</li>
+<li>You can omit the <code>-u</code> and <code>-k</code> option you can declare them in the inventory file.</li>
+</ul>
+<pre class="language-ini"><code class="language-ini"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">servers</span><span class="token punctuation">]</span></span>
+
+<span class="token key attr-name">vps1 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">207.154.254.221</span>
+<span class="token key attr-name">vps2 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">167.122.186.63</span>
+<span class="token key attr-name">vps3 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">139.59.155.232</span>
+
+<span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">servers:vars</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">ansible_user</span><span class="token punctuation">=</span><span class="token value attr-value">student</span>
+<span class="token key attr-name">ansible_ssh_pass</span><span class="token punctuation">=</span><span class="token value attr-value">clearPW123</span>
+<span class="token key attr-name">ansible_become_pass</span><span class="token punctuation">=</span><span class="token value attr-value">sudoPWroot</span>
+<span class="token key attr-name">ansible_port</span><span class="token punctuation">=</span><span class="token value attr-value">22</span>
+</code></pre>
+<ul>
+<li>You should use a vault to securely pass your credentials instead of hardcoding it.</li>
+<li>To overwrite variables for a specific host, such as using a different user to authenticate</li>
+</ul>
+<pre class="language-ini"><code class="language-ini"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">servers</span><span class="token punctuation">]</span></span>
+
+<span class="token key attr-name">vps1 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">207.154.254.221 ansible_user=student2</span>
+<span class="token key attr-name">vps2 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">167.122.186.63</span>
+<span class="token key attr-name">vps3 ansible_host</span><span class="token punctuation">=</span><span class="token value attr-value">139.59.155.232</span>
+
+<span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">servers:vars</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">ansible_user</span><span class="token punctuation">=</span><span class="token value attr-value">student</span>
+<span class="token key attr-name">ansible_ssh_pass</span><span class="token punctuation">=</span><span class="token value attr-value">clearPW123</span>
+<span class="token key attr-name">ansible_port</span><span class="token punctuation">=</span><span class="token value attr-value">22</span>
+</code></pre>
+<h2 id="ad-hoc-commands-vs-playbooks"><a aria-hidden="true" class="anchor-heading" href="#ad-hoc-commands-vs-playbooks"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ad-Hoc Commands VS Playbooks</h2>
+<ul>
+<li>Ad-Hoc commands can be used to do quick and simple things like checking the logs, checking if a process is running, or installing a package on a list of servers.</li>
+<li>Playbooks are used for big deployments, orchestration or system configuration. We use the <code>ansible</code> command to run an Ad-Hoc command and the <code>ansible-playbook</code> command to run a playbook.</li>
+<li><code>ansible</code> is used to run Ad-Hoc commands. These commands are quick and easy but are not reusable. You don't save them for later, they demonstrate the simplicity and power of ansible.
+<ul>
+<li>Some examples are rebooting servers, updating servers, copy files, manage package, users.</li>
+</ul>
+</li>
+<li>Playbooks are scripts written in <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.YAML (Private)</a> and are composed of one or more play in an ordered list and each play executes one or more tasks using ansible modules.</li>
+<li>Both Ad-Hoc commands and Playbooks use modules to perform different tasks. Modules are units of code that do the actual work in Ansible.</li>
+</ul>
+<h2 id="ad-hoc-commands"><a aria-hidden="true" class="anchor-heading" href="#ad-hoc-commands"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ad-Hoc Commands</h2>
+<h3 id="the-shell-module"><a aria-hidden="true" class="anchor-heading" href="#the-shell-module"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Shell Module</h3>
+<p>The general syntax of running an Ad-Hoc command is:</p>
+<p><code>ansible -i [path-to-invetory-file] [group-to-connect-to] -m [module] -a [module-arguments] -u [user] -k</code>
+<code>ansible -i ./hosts servers -m shell -a "df -h" -u user1 -k</code></p>
+<p>By default ansible uses multi-threading, with 5 threads as the default. If you've more than 5 hosts, you can increase the threads using the <code>-f</code> option.</p>
+<p>Example:</p>
+<p><code>ansible -i ./hosts servers -m shell -a "ip address show dev eth0 | grep ether | cut -d ' ' -f6 | grep -v ">>"</code></p>
+<h3 id="the-script-module"><a aria-hidden="true" class="anchor-heading" href="#the-script-module"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Script Module</h3>
+<ul>
+<li>This module can be used to run a local shell script on a remote system.</li>
+<li>The classical method of doing something like this would be to first copy the script to the remote machines using <a href="/notes/wosij89dfykieaipt38kees">scp</a>, connect to it and run the script.</li>
+<li>Using the script module, the controlling machine's script is run on each host(in fact the local script is transferred to remote node and then executed).</li>
+<li>This module is also supported for Windows targets.</li>
+</ul>
+<p>Example:</p>
+<p><code>ansible -i ./hosts servers -m scripts -a "./backsup.sh" --become -K</code></p>
+<p><code>--become</code> to run the script as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.root (Private)</a> on the host machines
+<code>-K</code> to prompt for <a href="/notes/jqyxvlopjrxj27o648plyk9">sudo</a> password (you can omit this if you've already declared it inside the inventory file)</p>
+<h3 id="the-apt-module"><a aria-hidden="true" class="anchor-heading" href="#the-apt-module"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The APT Module</h3>
+<ul>
+<li>This module automates software installation, removal and update.</li>
+<li>It allows you to manage packages on Ubuntu(Debian) Distributions.</li>
+<li>If you use other distros, use the corresponding package managers.</li>
+</ul>
+<p>Example:</p>
+<p>Install a specific software on all the hosts.</p>
+<p>The <code>state</code> option indicates the desired state of a package.</p>
+<p><code>ansible -i ./hosts severs -m apt -a "name=nmap state=present update_cache=true" -u [user] -k --become -K</code></p>
+<ul>
+<li>Remove a specific software on all the hosts.</li>
+</ul>
+<p><code>ansible -i ./hosts severs -m apt -a "name=nmap state=absent purge=yes update_cache=true" --become</code></p>
+<ul>
+<li>To perform a full system update on all the hosts.</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m apt "upgrade=full" --become</code></p>
+<ul>
+<li>To remove dependencies that are no longer required.</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m apt "autoremove=yes autoclean=yes" --become</code></p>
+<h3 id="the-service-module"><a aria-hidden="true" class="anchor-heading" href="#the-service-module"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Service Module</h3>
+<p>This module is used to control the services running on the host nodes.</p>
+<p>Examples:</p>
+<ul>
+<li>To start a service on all the hosts.</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m service -a "name=ngnix state=started" --become</code></p>
+<ul>
+<li>To reload a service on all the hosts.</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m service -a "name=ngnix state=restarted" --become</code></p>
+<ul>
+<li>To stop a service on all the hosts.</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m service -a "name=ngnix state=stopped" --become</code></p>
+<ul>
+<li>Set a service to start on boot on all the hosts.</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m service -a "name=ngnix enabled=yes" --become</code></p>
+<h3 id="the-user--group-module"><a aria-hidden="true" class="anchor-heading" href="#the-user--group-module"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The User &#x26; Group Module</h3>
+<ul>
+<li>This module is used to manage groups, user accounts and user attributes.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>Creating a new group on all remote hosts</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m group -a "name=developers state=present" --become</code></p>
+<ul>
+<li>Removing an existing group from all remote hosts</li>
+</ul>
+<p><code>ansible -i ./hosts servers -m group -a "name=developers state=absent" --become</code></p>
+<ul>
+<li>Adding a new user to all remote hosts
+<ul>
+<li>You can give comma separated values if you want to add the user to multiple groups</li>
+<li>The last three options are optional
+<code>ansible -i ./hosts servers -m user -a "name=johndoe state=present groups=developers create_home=yes comment=\"new user\" shell=/bin/bash generate_ssh_key=yes ssh_key_bits=2048" --become</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://github.com/geerlingguy/ansible-for-devops">geerlingguy/ansible-for-devops: Ansible for DevOps examples.</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/mkwoo3ek4y6bnddpy1iteb9">Terraform</a></li>
+</ul>

@@ -1,0 +1,29 @@
+<h1 id="aws-elb"><a aria-hidden="true" class="anchor-heading" href="#aws-elb"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS ELB</h1>
+<p>Elastic Load Balancing supports the following types of load balancers: Application Load Balancers, Network Load Balancers, and Classic Load Balancers. Amazon ECS services can use these types of load balancer. Application Load Balancers are used to route HTTP/HTTPS (or Layer 7) traffic. Network Load Balancers and Classic Load Balancers are used to route <a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a> (or Layer 4) traffic.</p>
+<p><strong>Classic Load Balancer</strong></p>
+<ul>
+<li>Uses Round Robin traffic routing</li>
+<li>Will be deprecated from Aug 2022</li>
+</ul>
+<p><strong>Application Load Balancer</strong></p>
+<ul>
+<li>Path based routing - if you have path <code>/home</code> or <code>/mobile</code> serving different pages from different ASGs.</li>
+<li>Multiple ASG balancing.</li>
+</ul>
+<p><strong>Network Load Balancer</strong></p>
+<ul>
+<li>Streaming service(packet transmission)</li>
+<li>Uses network layer (TCP protocol) (makes this LB faster)</li>
+</ul>
+<p><strong>Gateway Load Balancer</strong></p>
+<ul>
+<li>GWLB Target groups support the Generic Networking Virtualization Encapsulation(<strong>GENEVE</strong>) on port: 6081.</li>
+<li>Runs within one Availability Zone.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/y43l1e8ej1au0hfrdkqmdh7">AWS ECS</a></li>
+<li><a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+</ul>

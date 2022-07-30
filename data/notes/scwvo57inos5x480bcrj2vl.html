@@ -1,0 +1,21 @@
+<h1 id="userdel"><a aria-hidden="true" class="anchor-heading" href="#userdel"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>userdel</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>userdel</code> is used to delete a user, it also deletes the group with the same name as the user, if no other user belongs to that group.</p>
+<ul>
+<li>Deleting a user
+<ul>
+<li><code>sudo userdel james</code> account will be removed but the home dir will stay</li>
+</ul>
+</li>
+<li>Deleting a user along with it's home dir
+<ul>
+<li><code>sudo userdel -r james</code></li>
+</ul>
+</li>
+<li>If the group <code>james</code> was not the primary group of that user, it will not removed by default</li>
+<li>Other files belonging to <code>james</code> will not be deleted, will have to be removed manually</li>
+<li>Just like <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">adduser (Private)</a> for <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">useradd (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Debian (Private)</a> and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Ubuntu (Private)</a> have a friendlier command line utility <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">deluser (Private)</a> that uses userdel as backend.</li>
+</ul>

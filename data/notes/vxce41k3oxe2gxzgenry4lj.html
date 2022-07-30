@@ -1,0 +1,247 @@
+<h1 id="nexus"><a aria-hidden="true" class="anchor-heading" href="#nexus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Nexus</h1>
+<p>Nexus is an open-source <a href="/notes/slohd4hnb6y31jj538tm0do">artifact repository manager</a>. It allows you to upload, download, store different built artifacts. It allows you to manage multiple repositories for different repository formats.</p>
+<p>Nexus is used as private or internal use only repository manager, where you can host your company internal own repositories. You can also create proxy repository (fetching from Maven and keeping it Nexus to centralize/consolidate)</p>
+<ul>
+<li>You can integrate it with <a href="/notes/p26uzzg8atumbncad2vvepp">LDAP</a>.</li>
+<li>Flexible and powerful REST API end-point for integration with other tools.</li>
+<li>Backup and restore.</li>
+<li>Multi-format support (different artifact types - zip, tar, jar, war etc).</li>
+<li>Metadata tagging (labelling and tagging artifacts).</li>
+<li>Cleanup policies.</li>
+<li>Search.</li>
+<li>User token support for non-human users(system user authentication).</li>
+</ul>
+<p>You'll probably not use Nexus manually - it'll be part of your <a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a> and <a href="/notes/eoy9t426lmr0wo5rpxm8g69">CI⁄CD Pipeline</a> cycle. It is meant to be integrated with tools like <a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a> and other deployment tools.</p>
+<hr>
+<ul>
+<li><code>Nexus</code> folder contains the runtime application of Nexus inside the <code>/bin</code>.</li>
+<li><code>Sonatype-work</code> folder contains your own config of Nexus and data.
+<ul>
+<li>Different subdirectories will appear depending on your Nexus configuration, such as plugin directories.</li>
+<li>It also has a log file that has all the IP addresses that have accessed the Nexus application.</li>
+<li>It also has the log file for the Nexus application.</li>
+<li>It is where you upload your files and metadata.</li>
+<li>This folder is used to backup your Nexus application.</li>
+</ul>
+</li>
+<li>As a best practice, create a dedicated user to run this service with the permissions to access the above dirs.</li>
+<li>Inside <code>Nexus/bin/nexus.rc</code> set <code>run_as_user=</code> to the newly created user.</li>
+<li>To start Nexus <code>Nexus/bin/nexus start</code>.
+<ul>
+<li>Use <a href="/notes/05txufwh4u6s1aop2eky199">netstat</a> <code>-lnpt</code> to look for process ID and the port for external requests.</li>
+<li>Set inbound connections for that port on your server's firewall rules(TCP).</li>
+</ul>
+</li>
+<li>The Nexus UI will be available on <code>serverip:nexusport</code>.</li>
+</ul>
+<h2 id="nexus-ui"><a aria-hidden="true" class="anchor-heading" href="#nexus-ui"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Nexus UI</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654644255/wiki/xloscf79pdo22hnbly1d.png"></p>
+<ul>
+<li>A default user(admin) is created along with password when you deploy Nexus.</li>
+<li>Login and configure</li>
+<li>Managing repositories
+<ul>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654644605/wiki/kijj1oitz8sgh1taphvp.png"></li>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654644644/wiki/mudnethtl9ktehqp4ssr.png">
+<ul>
+<li>By default some repositories are created.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="repository-types"><a aria-hidden="true" class="anchor-heading" href="#repository-types"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Repository types</h2>
+<ul>
+<li><strong>Proxy</strong> - linked to a remote repository such as Maven Central Repository. If you’re requesting a package, Nexus will first look locally to see if the requested package is available; if it isn’t, the request will be made to the remote repository and then stored on Nexus locally(and will act like a cache), it’ll also help you with bringing in proprietary/commercial packages that are not available externally.</li>
+<li><strong>Hosted</strong></li>
+<li><strong>Group</strong> - grouping multiple repository end-points to a single repository end-point.</li>
+</ul>
+<h2 id="create-new-repository"><a aria-hidden="true" class="anchor-heading" href="#create-new-repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create new repository</h2>
+<ul>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654645683/wiki/ijv67etao7mokg2fklu0.png"></li>
+</ul>
+<h2 id="publishing-artifacts-to-nexus-repository"><a aria-hidden="true" class="anchor-heading" href="#publishing-artifacts-to-nexus-repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Publishing artifacts to Nexus repository.</h2>
+<ul>
+<li>Both Maven and Gradle have commands for pushing artifacts to remote repositories.</li>
+<li>Maven and <a href="/notes/saz485w50o682scob9knhp1">Gradle</a> needs Nexus repo URL and credentials.</li>
+<li>Nexus users are needed with permissions to upload.
+<ul>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654646661/wiki/z7pdilioj7ermzvy2jz0.png"></li>
+<li>Create role for the newly created users</li>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654646774/wiki/cyzetrxf13ts8xzfwhfb.png"></li>
+</ul>
+</li>
+</ul>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Gradle</span></div>
+<a href="/notes/saz485w50o682scob9knhp1" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h2 id="configuring-gradle-for-publishing-to-nexus"><a aria-hidden="true" class="anchor-heading" href="#configuring-gradle-for-publishing-to-nexus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Configuring Gradle for publishing to Nexus</h2>
+<p>An example <code>build.gradle</code> will look something like this:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654647349/wiki/oycxy56ehtdfouhrk1xt.png"></p>
+<p>All that’s left is building <code>./gradlew build</code> and then <code>./gradlew publish</code>.</p>
+</div></div><p></p>
+<p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Maven</span></div>
+<a href="/notes/482tfc3v73o3d4p8yi3b4z7" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h2 id="configuring-maven-for-publishing-to-nexus"><a aria-hidden="true" class="anchor-heading" href="#configuring-maven-for-publishing-to-nexus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Configuring Maven for publishing to Nexus</h2>
+<p>An example <code>pom.xml</code> will look something like this:</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654647915/wiki/ps52q6penyp1thbar1pi.png"></p>
+<p>To configure user credentials for a repository on a Maven is in the <code>~/.m2/settings.xml</code> dir in your user’s <code>$HOME</code> dir.</p>
+<p><code>settings.xml</code> will looking something like:</p>
+<pre class="language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>settings</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://maven.apache.org/SETTINGS/1.0.0<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
+  <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  ...
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>servers</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>server</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>id</span><span class="token punctuation">></span></span>server001<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>id</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>username</span><span class="token punctuation">></span></span>my_login<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>username</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>password</span><span class="token punctuation">></span></span>my_password<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>password</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>privateKey</span><span class="token punctuation">></span></span>${user.home}/.ssh/id_dsa<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>privateKey</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>passphrase</span><span class="token punctuation">></span></span>some_passphrase<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>passphrase</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>filePermissions</span><span class="token punctuation">></span></span>664<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>filePermissions</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>directoryPermissions</span><span class="token punctuation">></span></span>775<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>directoryPermissions</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>configuration</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>configuration</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>server</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>servers</span><span class="token punctuation">></span></span>
+  ...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>settings</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>All that's left is <code>mvn package</code> and then <code>mvn deploy</code> to upload the <code>.jar</code> to the <a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a> repository.</p></div></div><p></p><p></p>
+<h2 id="nexus-api"><a aria-hidden="true" class="anchor-heading" href="#nexus-api"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Nexus API</h2>
+<ul>
+<li>
+<p>It can be used to query your Nexus repo for different information.</p>
+<ul>
+<li>Which components, repositories, versions are available.</li>
+</ul>
+</li>
+<li>
+<p>This information is needed for your <a href="/notes/eoy9t426lmr0wo5rpxm8g69">CI⁄CD Pipeline</a>, to progmatically set the name, version of the artifact to be deployed.</p>
+</li>
+<li>
+<p>Nexus API's REST endpoint can be used with tools like <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.curl (Private)</a>, <a href="/notes/zt6hnpeyl30i6jlbwa48eth">wget</a> to execute an http request.</p>
+</li>
+<li>
+<p>A Nexus user is created with certain permissions and the user's credentials are used to make queries.</p>
+</li>
+<li>
+<p>Making a request using curl to get repositories</p>
+<ul>
+<li><code>curl -u user:pw -X GET 'http://ip-address:port/serivce/rest/v1/repositories'</code></li>
+<li>It will return data in JSON format.</li>
+</ul>
+</li>
+<li>
+<p>Making a request using curl to list all the components inside a repo</p>
+<ul>
+<li><code>curl -u user:pw -X GET 'http://ip-address:port/serivce/rest/v1/components?repository=repo-name'</code></li>
+</ul>
+</li>
+<li>
+<p>You can also query using component ID</p>
+<ul>
+<li><code>curl -u user:pw -X GET 'http://ip-address:port/serivce/rest/v1/components/component-id'</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="blob-store"><a aria-hidden="true" class="anchor-heading" href="#blob-store"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Blob Store</h2>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654651381/wiki/pxxp2ggectz2acun57hh.png"></p>
+<ul>
+<li>
+<p>Nexus uses Blob Store as storage for it's components.</p>
+</li>
+<li>
+<p>Blob store is what Nexus is using to manage the storage per repository for all of it's components.</p>
+</li>
+<li>
+<p>A blob store is an internal storage mechanism for binary parts of artifacts.</p>
+</li>
+<li>
+<p>It can be on a local FS or on a cloud based storage like <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.s3 (Private)</a></p>
+</li>
+<li>
+<p>Each blob store can be used by one or multiple repository groups.</p>
+</li>
+<li>
+<p>On drive it can be found at <code>/Sonatype-work/nexus3/blobs</code>.</p>
+</li>
+<li>
+<p>Type field = Storage backend</p>
+<ul>
+<li>It can be file system-based storage(default)</li>
+<li>S3 - cloud based storage(when Nexus Repository Manager is hosted on AWS)</li>
+</ul>
+</li>
+<li>
+<p>State field = State of the blob store</p>
+<ul>
+<li>started - running as expected</li>
+<li>failed - configuration issue - failed to initialize</li>
+</ul>
+</li>
+<li>
+<p>Blob count field = number of blobs currently stored(<code>/blobs/default/content</code>)</p>
+</li>
+<li>
+<p>Total size</p>
+</li>
+<li>
+<p>Available space</p>
+</li>
+<li>
+<p>Creating new blob store</p>
+<ul>
+<li><img src="https://res.cloudinary.com/zubayr/image/upload/v1654651357/wiki/w1gk5ilsrqc78n85lyxf.png"></li>
+</ul>
+</li>
+<li>
+<p>Once created it cannot be modified</p>
+</li>
+<li>
+<p>Blob store used by a repository cannot be deleted</p>
+</li>
+<li>
+<p>One repository cannot use multiple blob store</p>
+</li>
+</ul>
+<h2 id="components-vs-assets"><a aria-hidden="true" class="anchor-heading" href="#components-vs-assets"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Components VS Assets</h2>
+<p>A component is more abstract - like the entire application that was uploaded. It is a generic definition, the term components refers to any type/format of package that was uploaded to the repository(an artifact, a package, archive etc).</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654651811/wiki/e9ox01rt7okk17e8fbye.png"></p>
+<p>Assets are individual files inside the application.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654651861/wiki/f69xhzetjfeca6kedqtz.png"></p>
+<h2 id="cleanup-policies"><a aria-hidden="true" class="anchor-heading" href="#cleanup-policies"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Cleanup policies</h2>
+<p>It helps you define rules that will cleanup artifacts(components) from the repository(either if they’re too old or haven’t been used in a long time etc) to free up storage for new components.</p>
+<p>Create a new policy</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654652487/wiki/n07gfou0xjnhsmwpiiwd.png"></p>
+<p>Make sure to attach the policy to a repository.</p>
+<p>As soon as a cleanup policy is created, a task is also created that will schedule the execution of the policy.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654652738/wiki/nw1hx6vze1oelsftyk5l.png"></p>
+<p>Cleanup will only mark them(the components) for deletion. It is called a softdelete. To actually delete files from the disk, the blob store needs to be compacted(a task can be created).</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1654652902/wiki/pyvyzxlmqg1dckmhfv65.png"></p>
+<p>You can also manually trigger the tasks.</p>
+<p>See also: <a href="/notes/kwbbvuw6u3l28epk3prcncf">Nexus as Docker container</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/slohd4hnb6y31jj538tm0do">Artifact Repository</a></li>
+<li><a href="/notes/5151o31s5jmalwws5joksse">DevOps Best Practices</a></li>
+<li><a href="/notes/ccglabj2ycmrw83mownsa6l">Docker repository on Nexus</a></li>
+<li><a href="/notes/kwbbvuw6u3l28epk3prcncf">Nexus as Docker container</a></li>
+<li><a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Automation</a></li>
+<li><a href="/notes/4f08m6qrqyvpf6hfk1898vt">Containers &#x26; Images</a></li>
+<li><a href="/notes/jqsu891tokqfup82wkq6j02">Jenkins</a></li>
+<li><a href="/notes/482tfc3v73o3d4p8yi3b4z7">Maven</a></li>
+</ul>

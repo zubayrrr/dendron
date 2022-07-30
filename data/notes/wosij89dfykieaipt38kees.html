@@ -1,0 +1,37 @@
+<h1 id="scp"><a aria-hidden="true" class="anchor-heading" href="#scp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>scp</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a>, <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<p><code>scp</code> stands for Secure Copy, it allows securely copy files and directories between two hosts, using <a href="/notes/o922t6d9q6wur3yve290hir">SSH</a>. It is part of the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.OpenSSH (Private)</a> client package.</p>
+<h2 id="local-to-remote"><a aria-hidden="true" class="anchor-heading" href="#local-to-remote"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Local to remote</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token function">scp</span> -P <span class="token number">22</span> file.txt user@hostip:~
+</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># with specific name</span>
+<span class="token function">scp</span> -P <span class="token number">22</span> file.txt user@hostip:~/scp-copied-file.txt
+</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># to copy a dir use -r for recursive</span>
+<span class="token function">scp</span> -r -P <span class="token number">22</span> dirName/ user@hostip:~
+</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># -p to preserve modification and access time</span>
+<span class="token function">scp</span> -rp -P <span class="token number">22</span> dirName/ user@hostip:~
+</code></pre>
+<ul>
+<li>The user must’ve read permissions on the target directory</li>
+</ul>
+<h2 id="remote-to-local"><a aria-hidden="true" class="anchor-heading" href="#remote-to-local"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Remote to local</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token function">scp</span> user@hostip:/etc/passwd /home/user/Desktop/
+
+<span class="token comment"># use -r to copy a dir recursively</span>
+<span class="token function">scp</span> -r user@hostip:~/Desktop /home/user/Desktop
+</code></pre>
+<h2 id="remote-to-remote"><a aria-hidden="true" class="anchor-heading" href="#remote-to-remote"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Remote to remote</h2>
+<pre class="language-bash"><code class="language-bash"><span class="token function">scp</span> user1@IP1:/path_to_source user2@IP2:/path_to_destination
+</code></pre>
+<p>See also: <a href="/notes/xcl88vd87rcbnk0jpdkjuxy">SFTP</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">FileZilla (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">WinSCP (Private)</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/mwyyxjbpi0gztjd00f39biv">Ansible</a></li>
+</ul>

@@ -1,0 +1,34 @@
+<h1 id="cidr"><a aria-hidden="true" class="anchor-heading" href="#cidr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CIDR</h1>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Subnet</span></div>
+<a href="/notes/9vmmmhyayk6vi0i7w5cnwjv" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h2 id="drawbacks-of-classful-addressing"><a aria-hidden="true" class="anchor-heading" href="#drawbacks-of-classful-addressing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Drawbacks of Classful Addressing</h2>
+<ul>
+<li><strong>Lack of internal address flexibility</strong>: Large organizations are assigned "monolithic" blocks of addresses that don't match well with the structure of the internal network.</li>
+<li><strong>Inefficient use of address space</strong>: The existence of only three block sizes(classes A,B and C) leads to wastage of limited IP address space.</li>
+<li><strong>Proliferation of router table entries</strong>: As the internet grows, more entries are required for routers to handle the routing if IP datagrams, which causes performance problems for routers. Attempting to reduce inefficient address space allocation leads to even more router table entries.</li>
+</ul>
+</div></div><p></p><p></p>
+<h2 id="classless-interdomain-routing-cidr"><a aria-hidden="true" class="anchor-heading" href="#classless-interdomain-routing-cidr"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Classless Interdomain Routing (CIDR)</h2>
+<p>CIDR is a notation for describing blocks of IP addresses and is used heavily in various networking configurations. IP addresses contain 4 octets, each consisting of 8 bits giving values between 0 and 255. The decimal value that comes after the slash is the number of bits consisting of the routing prefix. This in turn can be translated into a netmask, and also designates how many available addresses are in the block.</p>
+<p>Sometimes we want to vary the length of our subnet masks and we don’t want to stick to the standard classes so we use CIDR. It helps optimize the IP space. It uses variable length subnet mask(VLSM).</p>
+<p>CIDR (Classless Inter-Domain Routing) -- also known as supernetting -- is a method of assigning Internet Protocol (IP) addresses that improves the efficiency of address distribution and replaces the previous system based on Class A, Class B and Class C networks.</p>
+<h2 id="resources"><a aria-hidden="true" class="anchor-heading" href="#resources"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resources</h2>
+<ul>
+<li><a href="https://cidr.xyz/">CIDR.xyz</a></li>
+<li><a href="https://www.youtube.com/watch?v=z07HTSzzp3o&#x26;t=216s">IPv4, CIDR, and VPC Subnets Made Simple! - YouTube</a></li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+<li><a href="/notes/3ozxwzvy9lv8t60yjvx45e9">AWS VPC</a></li>
+<li><a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a></li>
+</ul>

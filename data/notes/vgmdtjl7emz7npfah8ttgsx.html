@@ -1,0 +1,39 @@
+<h1 id="umask"><a aria-hidden="true" class="anchor-heading" href="#umask"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>umask</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>When user create a file or directory under Linux or UNIX, they create it with a default set of permissions. In most case the system defaults may be open or relaxed for file sharing purpose. For example, if a text file has 666 permissions, it grants read and write permission to everyone. Similarly a directory with 777 permissions, grants read, write, and execute permission to everyone.</p>
+<h3 id="default-umask-value"><a aria-hidden="true" class="anchor-heading" href="#default-umask-value"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Default umask Value</h3>
+<p>The user file-creation mode mask (umask) is use to determine the file permission for newly created files. It can be used to control the default file permission for new files. It is a four-digit octal number. A umask can be set or expressed using:</p>
+<ul>
+<li>Symbolic values</li>
+<li>Octal values</li>
+</ul>
+<blockquote>
+<p>—via <a href="https://www.cyberciti.biz/tips/understanding-linux-unix-umask-value-usage.html">What is Umask and How To Setup Default umask Under Linux? - nixCraft</a></p>
+</blockquote>
+<p>It is used by <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">mkdir (Private)</a>, <a href="/notes/a25t7tco2lrqbkbppyp43ow">touch</a> and other commands that create new files, dirs.</p>
+<p>The default permissions with which news files/dirs are created are determined by <code>umask</code>.</p>
+<h3 id="default-permissions"><a aria-hidden="true" class="anchor-heading" href="#default-permissions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Default permissions</h3>
+<ul>
+<li><code>0666</code> for files</li>
+<li><code>0777</code> for directories</li>
+</ul>
+<p>umask value - default permissions = current permission</p>
+<p>run <code>umask</code> to get default umask value</p>
+<p>0777 - 0002 = 0775 for dirs
+0666 - 0002 = 0664 for files</p>
+<h3 id="working-with-umask"><a aria-hidden="true" class="anchor-heading" href="#working-with-umask"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Working with <code>umask</code></h3>
+<p><code>umask umaskNumber</code></p>
+<ul>
+<li>The permissions of the existing files are not effected, only the files created after the changing of the <code>umask</code> value will have effect.</li>
+<li>The <code>umask</code> value only lasts as long as the terminal instance is open.</li>
+<li>To make this change persist add it to the user's <code>.bashrc</code> file.</li>
+</ul>
+<p><span class="underline">It is however uncommon to change default</span> <code>umask</code><span class="underline">'s value</span></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+</ul>

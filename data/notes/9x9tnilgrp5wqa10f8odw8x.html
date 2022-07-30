@@ -1,0 +1,84 @@
+<h1 id="mount"><a aria-hidden="true" class="anchor-heading" href="#mount"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>mount</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>All files in a <strong>Linux</strong> filesystem are arranged in form of a big tree rooted at ‘<strong>/</strong>‘.These files can be spread out on various devices based on your partition table, initially your parent directory is mounted(i.e attached) to this tree at ‘<strong>/</strong>‘, others can be mounted manually using GUI interface(if available) or using <strong>mount</strong> command.</p>
+<p>If you want to access a filesystem that is on another partition or disk - you’ll need to mount it or logically attach it to an existing directory of your Unix/Linux filesystem. This directory is called as mount point.</p>
+<pre><code>mount -t type device dir
+</code></pre>
+<p>The commands tells the <strong>Kernel</strong> to attach the filesystem found at <strong>device</strong> to the <strong>dir</strong>.</p>
+<ul>
+<li>
+<p>If you leave the <strong>dir</strong> part of syntax it looks for a <strong>mount point</strong> in <strong>/etc/fstab</strong>.</p>
+</li>
+<li>
+<p>You can use <strong>–source</strong> or <strong>–target</strong> to avoid ambivalent interpretation.</p>
+<p><code>mount --target /mountpoint</code></p>
+</li>
+<li>
+<p><strong>/etc/fstab</strong> usually contains information about which device is need to be mounted where.</p>
+</li>
+<li>
+<p>Most of the devices are indicated by files like <strong>/dev/sda4</strong>, etc. But it can be different for certain filesystems.</p>
+</li>
+</ul>
+<p><strong>Some Important Options:</strong></p>
+<ul>
+<li><strong>l</strong> : Lists all the filesystems mounted yet.</li>
+<li><strong>h</strong> : Displays options for command.</li>
+<li><strong>V</strong> : Displays the version information.</li>
+<li><strong>a</strong> : Mounts all devices described at <strong>/etc/fstab</strong>.</li>
+<li><strong>t</strong> : Type of filesystem device uses.</li>
+<li><strong>T</strong> : Describes an alternative fstab file.</li>
+<li><strong>r</strong> : Read-only mode mounted.</li>
+</ul>
+<h2 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h2>
+<p>Running <code>mount</code> without any options will show all the currently attached filesystems along with virtual file systems such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">sysfs (Private)</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">tmpfs (Private)</a>, <a href="/notes/4cmnu8nf5qp9o17i5ecn6xx">/proc</a> and so on.</p>
+<p>Display all partitions of a specific filesystem type</p>
+<pre><code>mount -l -t ext4
+</code></pre>
+<p>Storage drives are represented on the system as files in the <code>/dev</code> directory. Typically, files representing storage devices start with <code>sd</code> or <code>hd</code> followed by a letter. For instance, the first drive on a server is usually something like <code>/dev/sda</code>.</p>
+<p>Partitions on these drives also have files within <code>/dev</code>, represented by appending the partition number to the end of the drive name. For example, the first partition on the drive from the previous example would be <code>/dev/sda1</code>.</p>
+<p>Most times disks like USB drives are mounted automatically, if you want to mount it manually for various reasons such with different options or at a different mount point(other than <code>/media</code>)</p>
+<ul>
+<li>Use <a href="/notes/i84env82kxcly9udsbwt1t6">fdisk</a> to find the name of the device file.</li>
+<li>Use <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">dmesg (Private)</a> to find the name of the device.</li>
+<li>You can also use <a href="/notes/b97p1rha3zv9gm49n6ieom7">lsblk</a> to find all block devices.</li>
+</ul>
+<pre><code>sudo fdisk -l
+dmesg
+</code></pre>
+<p>Once you have the name of the device, you can mount it on any dir that already exists.</p>
+<pre><code>mkdir /home/user/Desktop/usb
+sudo mount /dev/sdb /home/user/Desktop/usb
+</code></pre>
+<p>You can mount the same physical device on multiple mount points.</p>
+<p>Mount usually automatically recognises the filesystem type but if it fails you can explicitly specify it using <code>-t</code> option.</p>
+<pre><code>sudo mount -t vfat /dev/sdb /home/user/Desktop/usb
+</code></pre>
+<p>Use <a href="/notes/ixi78tg04g5oavzuk4a8plt">umount</a> to un-mount a mounted device.</p>
+<pre><code>sudo umount /home/user/Desktop/usb
+</code></pre>
+<p><code>-o</code> for additional options</p>
+<p>Mount in Read-Only mode</p>
+<pre><code>sudo mount -o ro /dev/sdb /home/user/Destop/usb
+</code></pre>
+<p>To remount with other options or Write permissions</p>
+<pre><code>sudo mount -o rw,remount /dev/sdb /home/user/Destop/usb
+</code></pre>
+<h2 id="mounting-an-iso-file"><a aria-hidden="true" class="anchor-heading" href="#mounting-an-iso-file"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Mounting an ISO file</h2>
+<p>Start by creating a mount point</p>
+<pre><code>mkdir ~/iso-mount
+</code></pre>
+<p>Mount ISO using mount command</p>
+<pre><code>sudo mount /path_to_iso_file /home/user/iso-mount -o loop
+</code></pre>
+<p>See also: <a href="/notes/1z0ttpmpktr0o5walg267vb">Gparted</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/mx45kfy1ylv6jtvjxsomm0o">dd</a></li>
+<li><a href="/notes/ixi78tg04g5oavzuk4a8plt">umount</a></li>
+</ul>

@@ -1,0 +1,131 @@
+<h1 id="prometheus"><a aria-hidden="true" class="anchor-heading" href="#prometheus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus</h1>
+<p>Prometheus is a monitoring tool. It collects metrics and stores it with which we can make dashboards and alerts.</p>
+<p>It was created to monitor highly dynamic container environments like <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a>, <a href="/notes/q5su7hd0um6fz4hbue7gzpr">Docker Swarm</a> etc. It can also be used in traditional non-container infrastructure.</p>
+<p>Typically you've many servers that run containerized applications, hundreds of different processes running on that infrastructure which are all interconnected. To get insights on this infrastructure such as errors, latency etc.</p>
+<p>To make it easier for us to debug these system and fix them without much downtime, we'll use something like Prometheus, that will constantly monitor all the services/resources, alerts the maintainers as soon as anything goes wrong. <strong>In fact it can identify problems before they even occur</strong> and notify the maintainers so the failures can be prevented.</p>
+<h1 id="prometheus-architecture"><a aria-hidden="true" class="anchor-heading" href="#prometheus-architecture"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus Architecture</h1>
+<h2 id="prometheus-server"><a aria-hidden="true" class="anchor-heading" href="#prometheus-server"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus Server</h2>
+<p>This is what does the actual monitoring.</p>
+<p>It constitutes of three components:</p>
+<ul>
+<li>Time Series DB - stores metrics data, no. of exceptions.</li>
+<li>Data Retrieval Worker - responsible for pulling metrics from applications/services/servers - target resources and pushing them to the Time series DB.</li>
+<li>HTTP Server - Accepts PromQL queries for that stored data. Web server API is used to display data in a dashboard or UI - either Prometheus UI or Grafana etc.</li>
+</ul>
+<h2 id="targets-and-metrics"><a aria-hidden="true" class="anchor-heading" href="#targets-and-metrics"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Targets and Metrics</h2>
+<p>What does Prometheus monitor?</p>
+<p>It can be an entire <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a> server, Windows server, a standalone <a href="/notes/hquxlv96i7vchw88x1zr8hk">Apache</a> server, single application or service. These are called as <strong>Targets</strong>.</p>
+<p>Each target has unit of monitoring:</p>
+<ul>
+<li>For a Linux server it could be current CPU usage, memory usage, disk space usage.</li>
+<li>For an application - No. of exceptions, requests, request duration.</li>
+</ul>
+<p>A unit that you'd want to monitor for a target is called a <strong>Metric</strong>.
+They're what gets stored in Prometheus DB component. Prometheus defines human readable, text based format for the metrics. Metric entries or data has <code>TYPE</code> and <code>HELP</code> attributes to increase it's readability.</p>
+<p><code>HELP</code> is basically description of the metric.
+<code>TYPE</code> is one of three metric types:</p>
+<ul>
+<li><code>Counter</code>
+<ul>
+<li>For how many times x happened</li>
+</ul>
+</li>
+<li><code>Gauge</code>
+<ul>
+<li>For a metric that can go up and down. Eg: Current value of x now?</li>
+</ul>
+</li>
+<li><code>Histogram</code>
+<ul>
+<li>For tracking how long something took or how big something was(like the size of a request).</li>
+</ul>
+</li>
+</ul>
+<h2 id="getting-metrics"><a aria-hidden="true" class="anchor-heading" href="#getting-metrics"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Getting metrics</h2>
+<p>How does Prometheus collect metrics from the targets?</p>
+<p><strong>Pulling</strong></p>
+<p>Your application(regardless of technology) will have to expose a metrics HTTP endpoint and Prometheus will scrape from the endpoint. By default is is: <code>hostaddress/metrics</code>.</p>
+<p>Data available in the <code>/metrics</code> endpoint should be in the correct format that Prometheus understands.</p>
+<p>Some servers expose Prometheus endpoints by default so you don't really have to do extra work for it. But many services don't have native Prometheus endpoints in which case you'd need an <strong>Exporter</strong></p>
+<p><strong>Exporter</strong></p>
+<p>It basically a script/service that fetches metrics from your target and converts them in format Prometheus understands and exposes it's converted data at it's own <code>/metrics</code> endpoint where Prometheus can scrape them.</p>
+<p>Prometheus has a list of exporters for different services like <a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a>, <a href="/notes/boyz5i8gtwc9aoj4zfz556y">Elasticsearch</a>, <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a> servers, <a href="/notes/qcaw5ht4vcnucydq104gh7v">Build Tools</a>, Cloud Platforms and so on.</p>
+<p>If you want to monitor a Linux server, see: <a href="https://prometheus.io/docs/guides/node-exporter/">Monitoring Linux host metrics with the Node Exporter | Prometheus</a></p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656150261/wiki/xfe8c37gmzogdoin3wtx.png"></p>
+<p>Exporters are also available as Docker images. SO</p>
+<p>If you want to monitor <a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a> container in a <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> cluster, you can deploy  a sidecar container of MySQL exporter that will run inside the pod with MySQL container, connect to it and start sending MySQL metrics for Prometheus and making them available at it’s own <code>/metrics</code> endpoint.</p>
+<p><strong>Monitoring  your own applications?</strong></p>
+<ul>
+<li>
+<p>How many requests your applications are receiving.</p>
+</li>
+<li>
+<p>How many exceptions are occurring.</p>
+</li>
+<li>
+<p>How many server resources your application is using.</p>
+<p> For this you can use Client Libraries for different languages using which you can expose <code>/metrics</code> endpoint for metrics that are relevant to you.
+<a href="https://prometheus.io/docs/instrumenting/clientlibs/">Client libraries | Prometheus</a></p>
+</li>
+</ul>
+<h2 id="push-based-vs-pull-based"><a aria-hidden="true" class="anchor-heading" href="#push-based-vs-pull-based"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Push based VS Pull based</h2>
+<p>Most monitoring systems like <a href="/notes/42qbhsb3tdd4z7w7ynfmjj1">AWS CloudWatch</a> or <a href="/notes/g8txkrlv8lggex7u6372sd1">New Relic</a> etc use a Push system. Applications and servers are responsible for pushing their metric data to a centralized collection platform of that monitoring tool.</p>
+<p>In large microservices based system this approach can create a bottleneck for your infrastructure as all of these microservices constantly make push request to your monitoring tool thus flooding your system.</p>
+<p>Plus, you’ll also need to install additional software(daemons) on each of your targets to push the metrics to the monitoring server. In contrast with Prometheus which only requires a scraping endpoint.</p>
+<p>Multiple Prometheus instances can collect/pull metrics. Using pull, Prometheus can easily detect whether a service is up and running or not.</p>
+<p>Pushing can be ambiguous when checking if the service is up or not when compared to pull mechanism. Because there can be many reasons for a push request to fail. </p>
+<p><strong>Pushing</strong></p>
+<p>Pushgateway can be utilized when a target only runs for a short time.
+Eg: A batch job, scheduled job etc. For such jobs, Prometheus offers Pushgateway component. So these services can push metrics directly to Prometheus DB.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655885235/wiki/yguspabejdgcr4qbzegm.png"></p>
+<h2 id="configuring-prometheus"><a aria-hidden="true" class="anchor-heading" href="#configuring-prometheus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Configuring Prometheus</h2>
+<p><code>prometheus.yaml</code> file contains all the info needed for Prometheus to know what(targets) to scrape and when(intervals). </p>
+<p>Prometheus then uses <strong>Service Discovery</strong>  mechanism to find those target endpoints.</p>
+<p>You can find the sample config files with default values which comes with your first Prometheus installation.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656153062/wiki/p2l9ubydx8h1viv4pafn.png"></p>
+<p>Under <code>global:</code> you define how often Prometheus will scrape it’s targets.</p>
+<p>Rules are for aggregating metric values or creating alerts when conditions
+are met.</p>
+<p><code>scrape_configs:</code> define what resources Prometheus monitors; essentially targets. You can define your own jobs and default values for each job(overwrite global interval values).</p>
+<p>Since Prometheus has it’s own <code>/metrics</code> endpoint, it can monitor it’s own health.</p>
+<h2 id="alertmanager"><a aria-hidden="true" class="anchor-heading" href="#alertmanager"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AlertManager</h2>
+<p>How does Prometheus trigger alerts that are defined by rules in <code>prometheus.yaml</code> and who receives these alerts?</p>
+<p>Prometheus has a component called AlertManger that is responsible for firing alerts via different channels (Emails, Slack channel or other notification clients).</p>
+<p>Prometheus server will read alert rules and if the conditions under rules is met an alert is fired. </p>
+<h2 id="prometheus-data-storage"><a aria-hidden="true" class="anchor-heading" href="#prometheus-data-storage"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus Data Storage</h2>
+<p>Where does Prometheus store all the data that it collects/aggregates? How can other systems use this data?</p>
+<p>Prometheus stores metric data on disks, includes Local on disk <strong>Time Series DB</strong> but also optionally integrates with remote storage system. It is stored in custom Time Series format. Because of this you cannot directly write this data on a relational DB or something else.</p>
+<p>Once collected, Prometheus lets you query the data through it’s server API using it’s query language called <strong>PromQL</strong>.</p>
+<h2 id="promql"><a aria-hidden="true" class="anchor-heading" href="#promql"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>PromQL</h2>
+<p>You can use Prometheus dashboard UI to ask Prometheus server via PromQL to for example show the status of a target right now.</p>
+<p>Or use more powerful data visualization tools like <strong>Grafana</strong> to display the data which uses PromQL under the hood to get data out of Prometheus .</p>
+<p>Example PromQL query to:</p>
+<p>Query all HTTP status codes except <code>4xx</code> ones</p>
+<pre class="language-sql"><code class="language-sql">http_requests_total{<span class="token keyword">status</span><span class="token operator">!</span><span class="token operator">~</span><span class="token string">"4.."</span>}
+</code></pre>
+<p>This query does some subquery:</p>
+<p>Returns the 5 minute rate of the <em>http_requests_total</em> metric for the past 30 minutes.</p>
+<pre class="language-sql"><code class="language-sql">rate<span class="token punctuation">(</span>http_requests_total<span class="token punctuation">[</span><span class="token number">5</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">30</span>m:<span class="token punctuation">]</span>
+</code></pre>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1656153983/wiki/qu5c4x2hrwuozqeqebxy.png"></p>
+<h2 id="sailent-characteristics-of-prometheus"><a aria-hidden="true" class="anchor-heading" href="#sailent-characteristics-of-prometheus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Sailent Characteristics of Prometheus</h2>
+<p>It is designed to be reliable even when other systems have an outage so you can diagnose the problems and fix them.</p>
+<p>Each Prometheus server is standalone and self-contained. It doesn’t depend on network storage or other remote services. It is meant to be still working when other parts of the infrastructure are broken.</p>
+<p>It doesn’t require extensive setup needed.</p>
+<p><strong>Drawbacks:</strong></p>
+<p>It can be difficult to scale, when you have hundreds of servers that you want to use multiple Prometheus instances for aggregation of metrics setting them up can get complicated.</p>
+<p>A workaround this would be to increase the capacity of your Prometheus server, limit the number of metrics Prometheus collects from applications.</p>
+<h2 id="prometheus-federation"><a aria-hidden="true" class="anchor-heading" href="#prometheus-federation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus Federation</h2>
+<p>To scale monitoring with scalable cloud apps.</p>
+<p>Prometheus Federation allows one Prometheus server to scrape data from another Prometheus server. This will allow you to scale your Prometheus setup with your multi-node applications.</p>
+<h2 id="prometheus-with-docker--kubernetes"><a aria-hidden="true" class="anchor-heading" href="#prometheus-with-docker--kubernetes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Prometheus with Docker &#x26; Kubernetes</h2>
+<p>It is fully compatible with both.</p>
+<p>Prometheus components are available as Docker images and therefore can be deployed on Kubernetes or other container environments.</p>
+<p>It provides monitoring of K8s Cluster Node Resource out of the box! Once deployed on K8s, it starts gather metrics data on each Kubernetes node server without any extra configuration.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+<li><a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a></li>
+</ul>

@@ -1,0 +1,55 @@
+<h1 id="system-administration-script-using-menus"><a aria-hidden="true" class="anchor-heading" href="#system-administration-script-using-menus"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>System Administration Script using Menus</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable"><span class="token environment constant">PS3</span></span><span class="token operator">=</span><span class="token string">"Your choice: "</span>
+<span class="token keyword">select</span> <span class="token for-or-select variable">ITEM</span> <span class="token keyword">in</span> <span class="token string">"Add user"</span> <span class="token string">"List All Processes"</span> <span class="token string">"Kill Process"</span> <span class="token string">"Install Program"</span> <span class="token string">"Quit"</span>
+<span class="token keyword">do</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token environment constant">$REPLY</span> -eq <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    <span class="token builtin class-name">read</span> -p <span class="token string">"Enter the username: "</span> username
+    <span class="token assign-left variable">output</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">grep</span> -w $username /etc/passwd<span class="token variable">)</span></span>"</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> -n <span class="token string">"<span class="token variable">$output</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"The user <span class="token variable">$username</span> already exists."</span>
+    <span class="token keyword">else</span>
+        <span class="token function">sudo</span> <span class="token function">useradd</span> -m -d /bin/bash <span class="token string">"<span class="token variable">$username</span>"</span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$?</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+        <span class="token keyword">then</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">"The user <span class="token variable">$username</span> was added successfully."</span>
+            <span class="token function">tail</span> -n <span class="token number">1</span> /etc/passwd
+        <span class="token keyword">else</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">"There was an error adding the user <span class="token variable">$username</span>."</span>
+        <span class="token keyword">fi</span>
+    <span class="token keyword">fi</span>
+<span class="token keyword">elif</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token environment constant">$REPLY</span> -eq <span class="token number">2</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Listing all processess..."</span>
+    <span class="token function">sleep</span> <span class="token number">1</span>
+    <span class="token function">ps</span> -ef
+<span class="token keyword">elif</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token environment constant">$REPLY</span> -eq <span class="token number">3</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    <span class="token builtin class-name">read</span> -p <span class="token string">"Enter the process to kill: "</span> process
+    <span class="token function">pkill</span> <span class="token variable">$process</span>
+<span class="token keyword">elif</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token environment constant">$REPLY</span> -eq <span class="token number">4</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    <span class="token builtin class-name">read</span> -p <span class="token string">"Enter the program to install: "</span> app
+    <span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&#x26;&#x26;</span> <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token variable">$app</span>
+<span class="token keyword">elif</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token environment constant">$REPLY</span> -eq <span class="token number">5</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Quitting..."</span>
+    <span class="token function">sleep</span> <span class="token number">1</span>
+    <span class="token builtin class-name">exit</span>
+<span class="token keyword">else</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Invalid menu selection."</span>
+<span class="token keyword">fi</span>
+<span class="token keyword">done</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/26fd6bw5fsykdus523f40bz">Bash</a></li>
+</ul>

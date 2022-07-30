@@ -1,0 +1,40 @@
+<h1 id="suid"><a aria-hidden="true" class="anchor-heading" href="#suid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SUID</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<h3 id="special-permission---suid"><a aria-hidden="true" class="anchor-heading" href="#special-permission---suid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Special Permission - <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a></h3>
+<ul>
+<li><strong>When an execuatable file with <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> is executed then the resulting process will have the permissions of the owner of the command, not the permissions of the user who executes the command</strong>.</li>
+<li>Sometimes it is necessary for a system to temporarily treat a user as root which is where <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> comes into play.
+<ul>
+<li><a href="/notes/ktm0z46nm4ur05mdk0nesij">passwd</a> command has SUID set by default so that even nonpriviledged users can change their password.</li>
+</ul>
+</li>
+<li>Absolute Mode: <code>chmod 4xxx file</code></li>
+<li>Relative Mode: <code>chmod u+s file</code></li>
+<li><code>ls -l /usr/bin/passwd</code>
+<ul>
+<li><code>-rwsr-xr-x 1 root root 68208 apr 16 15:36</code> /usr/bin/passwd</li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<p><code>cat</code> will only be able to read a file if the user has the permissions to read the file.</p>
+<p><code>ls -l /usr/bin/cat</code> the owner of the executable is <code>root</code> but it'll be run as per the privileges of the user that invokes the command.</p>
+<p>In case of <code>/etc/shadow</code> file, <code>cat</code> will not be able to read the contents because it doesn't yet have the <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> <code>s</code> set for it, so its not able to inherit the permissions of the <code>root</code>, even though <code>root</code> is the owner of the command <code>cat</code> but since <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> is not set, it is inherting the permissions of the nonprivileged user.</p>
+<p>If there is a <code>0</code> before the numeric value for "Access" when you run <a href="/notes/0ftwbeeggjp74wm7lxsngll">stat</a> on a file, it means there are no special permissions set for that file.</p>
+<h3 id="setting-up-suid"><a aria-hidden="true" class="anchor-heading" href="#setting-up-suid"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setting up SUID</h3>
+<p><code>sudo chmod 4755 /usr/bin/cat</code> using <a href="/notes/8e78vq83ld131fb43r7xf90">chmod</a> setting the <a href="/notes/29n92e4t22kpncwz11elghh">SUID</a> and checking with <code>ls -l /usr/bin/cat</code> will return <code>-rwsr-xr-x</code> with /usr/bin/cat in red(or different) color.</p>
+<p>If you check with <a href="/notes/0ftwbeeggjp74wm7lxsngll">stat</a> command you'll find "Access" with the value: <code>4755</code></p>
+<p>Sometimes you'll find an uppercase <code>S</code> instead of a lowercase <code>s</code> denoting that there are no <code>x</code> executable permissions for that file.</p>
+<h4 id="suid-with-symbolic-mode"><a aria-hidden="true" class="anchor-heading" href="#suid-with-symbolic-mode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SUID with symbolic mode</h4>
+<p><code>sudo chmod u+s /usr/bin/cat</code></p>
+<h3 id="finding-all-the-commands-with-the-suid-set"><a aria-hidden="true" class="anchor-heading" href="#finding-all-the-commands-with-the-suid-set"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Finding all the commands with the SUID set</h3>
+<p><code>find /usr/bin -perm -4000</code> <a href="/notes/mx4bqwojj5gg8gvl4mdyvoj">find</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+<li><a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a></li>
+</ul>

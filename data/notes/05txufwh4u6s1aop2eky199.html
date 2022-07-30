@@ -1,0 +1,39 @@
+<h1 id="netstat"><a aria-hidden="true" class="anchor-heading" href="#netstat"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>netstat</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Netstat is a command-line tool used by system administrators to evaluate network configuration and activity. The term Netstat is results from network and statistics. It shows open ports on the host device and their corresponding addresses, the routing table, and masquerade connections.</p>
+<p>Netstat is part of a package named net-tools.</p>
+<h2 id="display-routing-table"><a aria-hidden="true" class="anchor-heading" href="#display-routing-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Display Routing table:</h2>
+<p>Netstat command shows the routing table detail on the terminal. If you wish to see the routing table, use the –nr flag with Netstat; it shows the kernel routing table in the same way that route does. Use the below command:</p>
+<pre><code>netstat -nr
+</code></pre>
+<p>Instead of using symbolic address names, the -nr option allows Netstat to print addresses divided by dots</p>
+<h2 id="display-interface-statistics"><a aria-hidden="true" class="anchor-heading" href="#display-interface-statistics"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Display interface statistics:</h2>
+<p>Using the ‘-i’ flag or option with Netstat will show statistics for the currently configured network interfaces.</p>
+<pre><code>netstat -i
+
+#or
+
+netstat -ai
+</code></pre>
+<p>If the “–a” flag is also used with “-i”, the command prints all of the kernel interfaces.</p>
+<h2 id="display-network-connection"><a aria-hidden="true" class="anchor-heading" href="#display-network-connection"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Display Network connection:</h2>
+<p>To view active or passive sockets, Netstat has a range of options. Active <a href="/notes/ahxqeweymljwoy5u6g6hxb3">TCP</a>, <a href="/notes/k57h8hxtsubu8fdb61aahxc">UDP</a>, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">RAW (Private)</a>, and Unix socket connections are specified by the –t, –u, –w, and –x options, respectively.</p>
+<pre><code>netstat -ta
+</code></pre>
+<h2 id="display-network-services"><a aria-hidden="true" class="anchor-heading" href="#display-network-services"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Display Network Services:</h2>
+<p>Run the following command to see a list of networks, their current states, and their associated ports:</p>
+<pre><code>netstat -pnltu
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/4w41i16jw8ybk0trp8xd3le">Checking for Listening Ports</a></li>
+<li><a href="/notes/jk679m664x5iqeq1uchums6">Grep to filter out listening ports</a></li>
+<li><a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a></li>
+<li><a href="/notes/vxce41k3oxe2gxzgenry4lj">Nexus</a></li>
+<li><a href="/notes/79jsb6jmqdyg3kpz195kpso">ss</a></li>
+</ul>

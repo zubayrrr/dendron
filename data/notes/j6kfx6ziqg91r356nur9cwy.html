@@ -1,0 +1,277 @@
+<h1 id="mapreduce"><a aria-hidden="true" class="anchor-heading" href="#mapreduce"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>MapReduce</h1>
+<ul>
+<li>MapReduce is a simple algorithm</li>
+<li>It uses distinct steps and one-way communication</li>
+<li><strong>Map</strong> first then <strong>Reduce</strong>, can be combined into multiple layers</li>
+</ul>
+<h3 id="example-of-mapreduce-but-non-parallel"><a aria-hidden="true" class="anchor-heading" href="#example-of-mapreduce-but-non-parallel"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example of MapReduce (but non parallel)</h3>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.uyhzcdyhtl.png"></p>
+<h3 id="mapreduce-design-principles"><a aria-hidden="true" class="anchor-heading" href="#mapreduce-design-principles"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>MapReduce Design Principles</h3>
+<p><strong>"Can we read parts(<em>slices</em>) of the file at the same time on different systems?"</strong></p>
+<ul>
+<li>For certain types of problems the answer is "Yes"</li>
+<li>Slice data and spread across multiple HDDs on multiple servers (<a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a>)</li>
+<li>Obtain performance from reading slices at the same time</li>
+<li>Moving computation to data, if possible(cheaper than moving data to computation)</li>
+<li>Allows scalable software that can hide (most) execution details from the user</li>
+<li>The ability to be fault tolerant (map steps crashing, restarting) which can be extended to reducers.</li>
+</ul>
+<h3 id="mapreduce-big-picture"><a aria-hidden="true" class="anchor-heading" href="#mapreduce-big-picture"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>MapReduce Big Picture</h3>
+<ul>
+<li>Slice data and place each part on a different server(node)?</li>
+<li>Improve performance by mapping (processing) each slice independently</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.2eclq7p550p.png"></p>
+<ul>
+<li>Slicing happens automatically, the administrator can change the size of the slice</li>
+<li>Slice is blind to the data that is inside the file(s), we're not slicing based on structure but based on size.</li>
+</ul>
+<h3 id="slices-and-splits"><a aria-hidden="true" class="anchor-heading" href="#slices-and-splits"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Slices and Splits</h3>
+<ul>
+<li>Each slice has programmatically defined data splits that independent of slice boundaries.</li>
+<li><strong>A map is applied to each split in the slice.</strong></li>
+<li>Edge splits may span two slices.</li>
+<li>There can be multiple maps occuring on the same slice.
+<ul>
+<li>If a split doesn't fit on a slice, edge splits may span to other slices(not a lot of data and MapReduce algo will account for it automagically)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.wstyvft6d0s.png"></p>
+<h3 id="scalable-mapping-step"><a aria-hidden="true" class="anchor-heading" href="#scalable-mapping-step"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Scalable Mapping Step</h3>
+<ol>
+<li>Slice data into parts</li>
+<li>Apply the same Mapping function to <strong>Input list</strong> (user defined splits)</li>
+<li>Each step provides a separate set of results(<strong>Output list</strong>)</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.2glgo0k8cyt.png"></p>
+<h3 id="reduction-step"><a aria-hidden="true" class="anchor-heading" href="#reduction-step"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Reduction Step</h3>
+<ul>
+<li>Results from each map(as applied to each split) are combined and reduced to a single Output value.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.w1uoldg3if.png"></p>
+<h3 id="summary"><a aria-hidden="true" class="anchor-heading" href="#summary"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Summary</h3>
+<ul>
+<li><a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> provides a MapReduce engine as part of the core components (<a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a>, <a href="/notes/6k7g4x7ws565lditv1n8hxm">YARN</a> and <a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a>)</li>
+<li>Hadoop MapReduce can be used directly or by higher level applications(e.g. <a href="/notes/30isnfzmqrvmmiii03d0chj">Hive</a>)</li>
+<li>Original MapReduce was somewhat slow because intermediate results are written to disk.</li>
+<li>Current MapReduce uses <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Tez (Private)</a> acceleration to keep intermediate results in memory (very fast)</li>
+<li>Operate on "Bigger than Database" amounts of data.</li>
+</ul>
+<h3 id="advantages-of-hadoop-mapreduce"><a aria-hidden="true" class="anchor-heading" href="#advantages-of-hadoop-mapreduce"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Advantages of Hadoop MapReduce</h3>
+<ul>
+<li>Uses a functional approach (original data is unchanged)</li>
+<li>Restricted to one-way communication path</li>
+<li>Provides the following features:
+<ul>
+<li>Highly scalable(same user code)</li>
+<li>Easily managed workflow</li>
+<li>Hardware fault tolerant</li>
+</ul>
+</li>
+<li>MapReduce is powerful paradigm for solving problems</li>
+<li>Often referred to as a "Data Parallel" or <strong>S</strong>ingle <strong>I</strong>nstrution <strong>M</strong>ultiple <strong>D</strong>ata problem (SIMD)</li>
+</ul>
+<h3 id="programming-hadoop-mapreduce"><a aria-hidden="true" class="anchor-heading" href="#programming-hadoop-mapreduce"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Programming Hadoop MapReduce</h3>
+<ul>
+<li><strong>Program Natively</strong> using Java API (Either <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Tez (Private)</a> or MapReduce)</li>
+<li>Uses other languages like Python with the Streaming interface(stdin, stdout and text only)</li>
+<li>Use the C++ Pipes interface.</li>
+<li>Use higher level tools (e.g., <a href="/notes/30isnfzmqrvmmiii03d0chj">Hive</a>, Pig) on top of MapReduce or Tez acceleration</li>
+<li>MapReduce applications can scale with no change to the application</li>
+<li>Computation is moved close to the data in HDFS</li>
+<li>There is no need to manage side-effects or process state</li>
+<li>SW/HW faults in HDFS and YARN are handled by automatic restart of tasks, transparent to the application.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.bnsj6fk5m18.png"></p>
+<h2 id="examples-mapreduce-in-parallel"><a aria-hidden="true" class="anchor-heading" href="#examples-mapreduce-in-parallel"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples (MapReduce in Parallel)</h2>
+<h3 id="word-count"><a aria-hidden="true" class="anchor-heading" href="#word-count"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Word Count</h3>
+<p>Determine how many times unique words are used in the following text.</p>
+<ul>
+<li><code>see spot run</code></li>
+<li><code>run spot run</code></li>
+<li><code>see the cat</code></li>
+</ul>
+<p>A trivial task. How does MapReduce perform this at scale when a collection of document has 50 billion words?</p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.upf9zn7wm2.png"></p>
+<p>We can add improvements to our mapper using a combiner</p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.x9crxdaozq.png"></p>
+<h3 id="working-example-of-word-count"><a aria-hidden="true" class="anchor-heading" href="#working-example-of-word-count"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Working Example of Word Count</h3>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar > words.txt</code></p>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar wordcount wordcount/in wordcount/out</code></p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.vkmgyisvvbc.png"></p>
+<p>Check the output that was created</p>
+<p><code>hdfs dfs -cat wordcount/out/part-r-00000</code></p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.8velr6e7whs.png"></p>
+<h3 id="calculate-pi"><a aria-hidden="true" class="anchor-heading" href="#calculate-pi"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Calculate pi</h3>
+<ul>
+<li>Simple MapReduce program to run, good for quick tests.</li>
+<li>The following is run on the 4-node cluster</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar pi 16 100000</code><br>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.ip1wh7ittuc.png">
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.op5t2hnmh7l.png"></p>
+<ul>
+<li>The following is a short test that will run on the LHM-VM (If you increase</li>
+<li>the number of maps (8) or the number of guesses (1000) then the</li>
+<li>application will take longer.</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar pi 8 1000</code></p>
+<h3 id="the-terasort-benchmark"><a aria-hidden="true" class="anchor-heading" href="#the-terasort-benchmark"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The Terasort Benchmark</h3>
+<p><strong>IMPORTANT: The test will not run on the LHM-VM. Indeed, as run below,
+the Teragen portion will create a 50GB file (by default the LHM-VM has
+70 GB of file space. The actual Terasort step will create another
+50 GB file. You can try to reduce the file size from 500000000 to
+5000 so the application can finish.</strong>
+Terasort is used to measure the raw sorting power of Hadoop MapReduce, though it is of no practical use, it can provide an indication of how fast your cluster can process data.</p>
+<p>The following steps are for the the 4-node cluster mentioned above, using the HDFS account <code>/user/deadline</code>.</p>
+<p>There are three steps required to run the complete test:</p>
+<ol>
+<li>Generate the table</li>
+<li>Sort the table</li>
+<li>Validate the sort</li>
+</ol>
+<!-- end list -->
+<ul>
+<li>
+<p>rows are 100 bytes long, thus the total amount of data written is 100 times the</p>
+</li>
+<li>
+<p>number of rows (i.e. to write a 100 GBytes of data, use 1000000000 rows). You</p>
+</li>
+<li>
+<p>will also need to specify input and output directories in HDFS.</p>
+</li>
+<li>
+<p>1. Run teragen to generate 500 MB of data, 500,000 rows of random data to sort</p>
+</li>
+</ul>
+<p><code>yarn jar $$EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar teragen 5000000 /user/hands-on/TeraGen-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.dhhwu16cazc.png"> * Check if the data was created; this will be your input for the next step in the terasort benchmark
+<code>hdfs dfs -ls TeraGen-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.brz6odys9hv.png"></p>
+<ul>
+<li>2. Run terasort to sort the database</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar terasort /user/hands-on/TeraGen-500MB /user/hands-on/TeraSort-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.idartp3zxj.png">
+Check the output that was created for <code>TeraSort-500MB</code> (which was the output dir)
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.bohj41tce1a.png"></p>
+<p>A combined single file was created</p>
+<ul>
+<li>3. Run teravalidate to validate the sort Teragen</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar teravalidate /user/hands-on/TeraSort-500MB /user/hands-on/TeraValid-500MB</code>
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.m6uaknqoch.png">
+Check the results that was created and the checksum of the file
+<img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.4ch3o9j2lo7.png"> * Interpret the results: * Measure the time it takes to complete the terasort application. Results are * usually reported in Database Size in Seconds (or Minutes).</p>
+<ul>
+<li>The performance can be increased by increasing the number of reducers (default is one)</li>
+<li>add the option -Dmapred.reduce.tasks=NUMBER_OF_REDUCERS</li>
+<li>The command below uses 4 reducers.</li>
+</ul>
+<p><code>yarn jar $EXAMPLES/hadoop-mapreduce-examples-3.3.0.jar terasort -Dmapred.reduce.tasks=4 /user/hands-on/TeraGen-500MB /user/hands-on/TeraSort-500MB</code></p>
+<ul>
+<li>Don't for get to delete you files in HDFS before the next run!</li>
+</ul>
+<p><code>hdfs dfs -rm -r -skipTrash Tera*</code></p>
+<h3 id="miscellaneous-notes"><a aria-hidden="true" class="anchor-heading" href="#miscellaneous-notes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Miscellaneous notes</h3>
+<p><a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> and <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a> usually work with "INPUT DIRECTORIES" not files. Note that the argument given to word count in the above example was a directory NOT the "words.txt" file. We can add more files to the input directory and <code>wordcount</code> will ingest all the files in finds.</p>
+<h2 id="simulating-map-and-reduce-using-python-and-bash-scripts"><a aria-hidden="true" class="anchor-heading" href="#simulating-map-and-reduce-using-python-and-bash-scripts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Simulating Map and Reduce using Python and Bash scripts</h2>
+<p>Source: <a href="https://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/">https://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/</a></p>
+<p>There are several methods to program a Hadoop MapReduce. The most direct and lowest level is using the Java Hadoop API or the C++ Pipes library.</p>
+<p>Many users prefer the flexibility of the Streams Interface that allows a variety of programming language to be used.</p>
+<p>This method will work with any program that can read and write TEXT DATA to <a href="/notes/n4ernfsrloq7zjrscm8t5rc">Redirecting stdin &#x26; stderr</a> and <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a>.</p>
+<h3 id="developing-a-hadoop-streaming-word-counting-application"><a aria-hidden="true" class="anchor-heading" href="#developing-a-hadoop-streaming-word-counting-application"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Developing a Hadoop Streaming word counting application.</h3>
+<ul>
+<li>pymapper.py - a python word count mapper</li>
+<li>shuffer.sh - a simulated shuffle step using bash script</li>
+<li>pyreducer.py - a python word count reducer</li>
+</ul>
+<!-- end list -->
+<pre><code>#!/usr/bin/env python
+"""pymapper.py"""
+
+import sys
+
+# input comes from STDIN (standard input)
+for line in sys.stdin:
+    # remove leading and trailing whitespace
+    line = line.strip()
+    # split the line into words
+    words = line.split()
+    # increase counters
+    for word in words:
+        # write the results to STDOUT (standard output);
+        # what we output here will be the input for the
+        # Reduce step, i.e. the input for reducer.py
+        #
+        # tab-delimited; the trivial word count is 1
+        print '%s\t%s' % (word, 1)
+
+#!/bin/bash
+# shuffle.sh
+sort -k1,1
+
+#!/usr/bin/env python
+"""pyreducer.py"""
+
+from operator import itemgetter
+import sys
+
+current_word = None
+current_count = 0
+word = None
+
+# input comes from STDIN
+for line in sys.stdin:
+    # remove leading and trailing whitespace
+    line = line.strip()
+
+    # parse the input we got from mapper.py
+    word, count = line.split('\t', 1)
+
+    # convert count (currently a string) to int
+    try:
+        count = int(count)
+    except ValueError:
+        # count was not a number, so silently
+        # ignore/discard this line
+        continue
+
+    # this IF-switch only works because Hadoop sorts map output
+    # by key (here: word) before it is passed to the reducer
+    if current_word == word:
+        current_count += count
+    else:
+        if current_word:
+            # write result to STDOUT
+            print ('%s\t%s' % (current_word, current_count))
+        current_count = count
+        current_word = word
+
+# do not forget to output the last word if needed!
+if current_word == word:
+    print ('%s\t%s' % (current_word, current_count))
+</code></pre>
+<p>1. Run the <code>pymapper.py</code> with some simple data and change the input words to key value pairs.</p>
+<pre><code>echo "see spot run run spot run see the cat" | ./pymapper.py
+</code></pre>
+<p>2. Sort the data passed through <code>pymapper.py</code></p>
+<pre><code>echo "see spot run run spot run see the cat" | ./pymapper.py | ./shuffle.sh
+</code></pre>
+<p>3. Add the reducer stage and count all the same keys</p>
+<pre><code>echo "see spot run run spot run see the cat" | ./pymapper.py | ./shuffle.sh | ./pyreducer.py
+</code></pre>
+<p>See also: <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Tez (Private)</a>, <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+<li><a href="/notes/s5t9uscswvpo3p6gebui1ea">Big Data</a></li>
+<li><a href="/notes/bojmgq30yfxpn44hgo0ofcf">DAG</a></li>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+<li><a href="/notes/30isnfzmqrvmmiii03d0chj">Hive</a></li>
+<li><a href="/notes/e92qvq2zwoa9wyn0p0187l3">HQL</a></li>
+<li><a href="/notes/7v21vh269qxy069is0fkrzn">Tez</a></li>
+</ul>

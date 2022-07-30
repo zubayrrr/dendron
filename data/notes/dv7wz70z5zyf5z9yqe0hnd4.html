@@ -1,0 +1,27 @@
+<h1 id="strings"><a aria-hidden="true" class="anchor-heading" href="#strings"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>strings</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Binary files—such as program files—may contain strings of human-readable text.</li>
+<li>The Linux strings command pulls those bits of text—called “strings”—out for you.</li>
+<li>If you use <a href="/notes/r3ndxve356r9xbujnl3ysp2">cat</a> or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">less (Private)</a> you are likely to end up with a hung terminal window. Programs that are designed to work with text files don’t cope well if non-printable characters are fed through them.</li>
+<li>Most of the bytes within a binary file are not human readable and cannot be printed to the terminal window in a way that makes any sense. There are no characters or standard symbols to represent binary values that do not correspond to alphanumeric characters, punctuation, or whitespace. Collectively, these are known as “printable” characters. The rest are “non-printable” characters.</li>
+</ul>
+<blockquote>
+<p>—via <a href="https://www.howtogeek.com/427805/how-to-use-the-strings-command-on-linux/">How to Use the strings Command on Linux</a></p>
+</blockquote>
+<ul>
+<li>There could also be <code>help</code> info embedded inside the binary file of the program, copyright and other miscellaneous info about the program.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li><code>strings /usr/bin/ls | less</code> will print all the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ASCII (Private)</a> characters embedded the binary file of <a href="/notes/5fqo87mub8wr9a7qpy7sxtv">ls</a></li>
+<li><code>sudo strings -a /dev/sda5</code> to prints out all the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ASCII (Private)</a> chracters on the device file</li>
+<li>To search in the machine's physical memory:
+<ul>
+<li><code>sudo strings /dev/mem | less</code> will throw all the printable characters in the physical memory</li>
+</ul>
+</li>
+</ul>

@@ -1,0 +1,114 @@
+<h1 id="vim"><a aria-hidden="true" class="anchor-heading" href="#vim"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>vim</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li><code>vim</code> is a text editor that is upwards compatible to <code>vi</code>. Infact in most distros, vi is <a href="/notes/qj2j8vs4rumzknty271dz04">Aliases</a> to vim. It stands for "Vi Improved".</li>
+</ul>
+<p>There are a lot of enhancements above vi: multi level undo, multiple windows and buffers, syntax highlighting, command line editing, file name completion, a complete help system, visual selection, and others.</p>
+<h3 id="vim-is-a-modal-editor-it-has-two-primary-modes"><a aria-hidden="true" class="anchor-heading" href="#vim-is-a-modal-editor-it-has-two-primary-modes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>vim</code> is a modal editor, it has two primary "modes":</h3>
+<p>COMMAND mode and INSERT mode.</p>
+<p>In COMMAND mode, you execute commands (like undo, redo, find and replace, quit, etc.). In INSERT mode, you type text. There is a third mode, VISUAL mode, that is used to highlight and edit text in bulk.</p>
+<ul>
+<li>To go into INSERT mode from COMMAND mode, you type <code>i</code>.</li>
+<li>To go back to COMMAND mode, you type the <code>esc</code> key.</li>
+</ul>
+<hr>
+<ul>
+<li><span class="underline">vim starts out in COMMAND mode</span>.</li>
+<li><span class="underline">Note that all commands mentioned below (except for arrow keys) only work in COMMAND mode.</span></li>
+</ul>
+<h3 id="entering-insert-mode"><a aria-hidden="true" class="anchor-heading" href="#entering-insert-mode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Entering INSERT Mode</h3>
+<p>When you are ready to enter text, you should switch to INSERT mode. There are a few ways to do this:</p>
+<ul>
+<li><code>i</code> enter INSERT mode before the cursor</li>
+<li><code>I</code> enter INSERT mode at the start of the current line</li>
+<li><code>a</code> enter INSERT mode appending after the cursor</li>
+<li><code>A</code> enter INSERT mode appending to the end of the current line</li>
+<li><code>o</code> enter INSERT mode on a new line below the current line</li>
+<li><code>O</code> enter INSERT mode on a new line above the current line</li>
+</ul>
+<p>Then, just type as normal to enter text. You can use the arrow keys to navigate, or switch back to COMMAND mode.</p>
+<h3 id="last-line-mode"><a aria-hidden="true" class="anchor-heading" href="#last-line-mode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Last Line Mode</h3>
+<p>You can enter the Last Line Mode from the COMMAND mode((<code>esc</code>) using <code>:</code> colon key, after pressing the colon, you can do all sorts of things from this mode.</p>
+<h3 id="highlighting-text"><a aria-hidden="true" class="anchor-heading" href="#highlighting-text"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Highlighting text</h3>
+<p>If you want to highlight multiple lines or particular words in a line, you can do so in VISUAL mode. There are three different visual modes:</p>
+<ul>
+<li><code>v</code> enters character-wise visual mode to highlight one character at a time.</li>
+<li><code>V</code> enters line-wise visual mode to highlight entire lines at a time.</li>
+<li><code>ctrl-v</code> enters block-wise visual mode to highlight over rows and columns, etc.</li>
+</ul>
+<p>Once you enter these modes by typing these in COMMAND mode, you can use the keyboard navigation (e.g., <code>hjkl</code> or <code>w</code> or <code>b</code>) to highlight text). Then you can batch delete (<code>d</code>), yank (<code>y</code>), or paste (<code>p</code>) whatever is highlighted. To exit VISUAL mode, use <code>esc</code>.</p>
+<p>VISUAL mode is also useful for adjusting indent to a batch of text. For example, if you wanted to reduce the indent of a set of lines, you can enter block-wise visual mode (<code>ctrl-v</code>) to select a vertical column of indents (using keyboard navigation), and then batch delete with <code>d</code>. To increase the indent of a set of lines, enter block-wise visual mode and select a vertical column, and then batch insert at the beginning of this block with <code>I</code>, type in your indentation, and then use <code>esc</code>. You should see all highlighted lines get the same inserted space.</p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li><code>ZZ</code> shift zz to save and quit quickly.</li>
+<li><code>gg</code> to move to the start of the file.</li>
+<li><code>/</code> followed by the string and press enter to forward search,<br>
+<code>n</code> to find the next occurrence and <code>N</code> to search in opposite direction, just like <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">less (Private)</a></li>
+<li><code>G</code> or <code>Shift + g</code> to move you to the bottom of the file.</li>
+<li><code>?</code> followed by the string and press enter to backward search.</li>
+<li>Press <code>*</code> to find the next occurance of the word under the cursor.</li>
+<li>Press <code>#</code> to find the previous occurance of the word under the cursor.</li>
+</ul>
+<hr>
+<ul>
+<li><code>u</code> undo the last action</li>
+<li><code>U</code> undo all recent changes made to the current line</li>
+<li><code>ctrl-r</code> redo</li>
+<li><code>:e!</code> undo till the last saved version of the file</li>
+</ul>
+<hr>
+<ul>
+<li><code>:w myprogram.c</code> save the current changes to a file. If you don't specify a name, changes will be saved to the current file. If you would like to save the file under a different name, specify a filename.</li>
+<li><code>:q</code> quits Vim. If you have unsaved changes, you will be asked whether or not you'd like to save your changes before quitting.</li>
+<li><code>:q!</code> quit without saving unsaved changes.</li>
+<li><code>:wq</code> save and quit.</li>
+<li><code>:!</code> to run the shell commands like <code>:!dir</code>, <code>:!ls</code></li>
+<li><code>:</code> followed by the line number to move to that specific line</li>
+<li><code>:%s/foo/bar/g</code> Subsitute all matches of the word <code>foo</code> in the file with <code>bar</code>. where <code>g</code> stands for globally. To ignore case in search use <code>gi</code></li>
+<li><code>:set nu</code> to give line numbers, <code>:set nonu</code> to remove line numbers</li>
+<li><code>:syntax on</code> to turn on syntax highlightings and <code>:syntax off</code> to turn off</li>
+</ul>
+<hr>
+<ul>
+<li><code>dd</code> to cut a line (copied to the clipboard)</li>
+<li><code>Shift + p</code> to paste before the cursor</li>
+<li><code>p</code> to paste after the cursor</li>
+<li>To cut more than one line from the cursor, type the number of lines and <code>dd</code></li>
+<li><code>v</code> to start selectng, navigate with arrow keys to define the selection</li>
+<li><code>Shift + V</code> to select the entire line</li>
+<li><code>Ctrl + V</code> to select in rectagular boxes</li>
+<li><code>y</code> yank to copy</li>
+</ul>
+<hr>
+<ul>
+<li>Create a file <code>.vimrc</code> in the user's home dir and write all the commands you'd write in the last line mode that you'd like to be <span class="underline">persistent</span>.</li>
+<li>Open multiple files in <code>vim file1 file2</code>
+<ul>
+<li><code>:n</code> or <code>:next</code> to go to the next file</li>
+<li><code>:N</code> or <code>:prev</code> to go the previous file</li>
+</ul>
+</li>
+<li>To open multiple files in stacked mode <code>vim -o file1 file2</code>
+<ul>
+<li><code>Ctrl + w</code> to switch between files</li>
+</ul>
+</li>
+<li>To open files side by side (split) that shows <a href="/notes/8jubll0iaagwha7xjx7kozh">diff</a> <code>vim -d file1 file2</code>
+<ul>
+<li>You can also use <code>vimdiff</code> the wrapper to show the <a href="/notes/8jubll0iaagwha7xjx7kozh">diff</a> between two files</li>
+<li><code>Ctrl + w</code> to switch between files</li>
+</ul>
+</li>
+<li>When <code>vim</code> is closed unconventionally, the next time you open the same file with vim, you'll be prompted about a swap file for the file you previously worked on, you can recover the file by pressing <code>R</code> and saving it or simply delete the file that was created. <code>rm .fileName.swp</code> and you'll be able to open it normally.</li>
+</ul>
+<blockquote>
+<p>—via <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1218/resources/vim.html">CS107 The Vim Editor</a></p>
+</blockquote>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+</ul>

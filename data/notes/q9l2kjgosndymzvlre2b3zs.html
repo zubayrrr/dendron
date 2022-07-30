@@ -1,0 +1,100 @@
+<h1 id="dataframe"><a aria-hidden="true" class="anchor-heading" href="#dataframe"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>DataFrame</h1>
+<ul>
+<li>Areas: <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+</ul>
+<hr>
+<p>DataFrame is a distributed collection of data organized into named columns. ... DataFrames can be constructed from a wide array of sources such as: structured data files, tables in Hive, external databases, or existing RDDs.</p>
+<p>Created a SparkSession(it allows creating, reading and writing DataFrames)</p>
+<pre><code>val spark = SparkSession.builder()
+    .appName("My Application")
+    .config("spark.master", "local")
+    .getOrCreate()
+</code></pre>
+<p>Reading a DataFrame from a file</p>
+<pre><code>var firstDF = spark.read()
+    .format("json")
+    .option("inferSchema", "true")
+    .load("path/to/file.json")
+</code></pre>
+<p>Performing operations on a DataFrame</p>
+<pre><code>firstDF.show()
+firstDF.printSchema()
+firstDF.take(5)
+</code></pre>
+<p>Rows = unstructured data; and the information about the structure of the data is applied to the DataFrame in the form of a Schema</p>
+<p>Schema = description of fields aka columns and their type</p>
+<p>Spark types, they spark at runtime rather than compile time.</p>
+<hr>
+<h3 id="how-dataframes-work"><a aria-hidden="true" class="anchor-heading" href="#how-dataframes-work"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How DataFrames Work</h3>
+<p>Distributed spreadsheets with rows and columns, like a table that is split between multiple nodes in a Spark cluster, the information each Spark node recieves is the schema of the DataFrame anda few of the rows that compose the DataFrame.</p>
+<p>Distributed collections of Rows conforming to a schema</p>
+<p>DataFrames are:</p>
+<ul>
+<li>Immutable
+<ul>
+<li>Can't be changed once created</li>
+<li>If you want to modify them you will have to create new DataFrames using transformations</li>
+</ul>
+</li>
+</ul>
+<p>Schema = list describing the column names and types</p>
+<ul>
+<li>Types are known to Spark when the DataFrame is being used, not at compile time(to make them available at compile time with Type safe Datasets)</li>
+<li>Schema can hold arbitrary number of columns</li>
+<li>All rows have the same structure</li>
+<li>Rows do not have schema but they conform to the same structure</li>
+</ul>
+<!-- end list -->
+<pre><code>val carsSchema = StructType(Array(
+    StructField("Name", StringType),
+    StructField("HorsePower", IntegerType),
+    StructField("Acceleration", DoubleType)
+))
+</code></pre>
+<h3 id="need-to-be-distributed"><a aria-hidden="true" class="anchor-heading" href="#need-to-be-distributed"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Need to be distributed</h3>
+<p>These collections of rows need to be distributed, because either the data is too big for a single computer or it takes too long to process entier data on a single CPU.</p>
+<h3 id="partitioning"><a aria-hidden="true" class="anchor-heading" href="#partitioning"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Partitioning</h3>
+<ul>
+<li>Splits the data into files, distributed between nodes in the cluster</li>
+<li>Impacts the processing parallelism</li>
+<li>More partitions may mean more parallelism but if you have 1000 partitions (1000 small files that compose your DataFrame) and a single node to process them all, parallelism will still be one because you only have one node to process all that data.</li>
+<li>Inversely, if you have 1 partition and many nodes in your Spark cluster, only one node will have access to that partition and the parallelism would still be one.</li>
+</ul>
+<h3 id="transformations"><a aria-hidden="true" class="anchor-heading" href="#transformations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Transformations</h3>
+<ul>
+<li>Narrow = one input partition contributes to at most one output partition(e.g map), partitioning is not changed in a DataFrame.
+<ul>
+<li>If you do a map, that would transform data row by row and so the partitioning is not changed, whereas</li>
+</ul>
+</li>
+<li>Wide = input partitions(one or more) create many output partitions, so the partitioning of the DataFrame is changed.
+<ul>
+<li>If you do a sort, that will involve exchanging data between partitions in between nodes in the cluster.</li>
+</ul>
+</li>
+<li>These operations are known as Shuffle = data exchange between cluster nodes.
+<ul>
+<li>Shuffling occurs in Wide transformations and its a massive performance topic, it can impact the time it takes for your jobs by orders of magnitude.</li>
+</ul>
+</li>
+</ul>
+<h3 id="computing-dataframes"><a aria-hidden="true" class="anchor-heading" href="#computing-dataframes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Computing DataFrames</h3>
+<p>How DataFrames work at runtime</p>
+<p>Lazy evaluation</p>
+<ul>
+<li>Spark mechanism to wait until the last moment to execute the DF transformations</li>
+</ul>
+<p>Planning</p>
+<ul>
+<li>Spark compiles the DF transformations and dependencies into a graph before running any code, Spark will know before hand every single step that it will have to take including data exchanges between nodes before it actually starts loading or running any code.</li>
+<li>Logical plan = DF dependency graph + narrow/wide transformations sequence</li>
+<li>Physical plan = optimized seqence of steps(and it will know which node will execute which part of transformations) for nodes in the cluster.</li>
+<li>Optimizations such as: avoiding multiple passes over the data or pushing down predecates in SQL or chaining multiple predecates or where clauses into one and so on.</li>
+</ul>
+<h3 id="transformations-vs-actions"><a aria-hidden="true" class="anchor-heading" href="#transformations-vs-actions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Transformations vs Actions</h3>
+<ul>
+<li>A transformation descibes how new DFs are obtained (e.g map)</li>
+<li>Action actually starts executing Spark code (e.g show, count)</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.rv3o8j0t3m.png"></p>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.mymxbbtheoj.png"></p>

@@ -1,0 +1,60 @@
+<h1 id="ps"><a aria-hidden="true" class="anchor-heading" href="#ps"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ps</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>ps</code> stands for <a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a> status, displays processes running in the current terminal.</p>
+<p>Basic information displayed consists of 4 columns PID, TTY, TIME, CMD</p>
+<ul>
+<li><a href="/notes/v879p2kn7q4pa6g56739q1v">PID</a></li>
+<li><a href="/notes/jdwzfnsup2nr4il6m611vvl">tty</a> represents the name of the controlling terminal for the <a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a>
+<ul>
+<li>If you see <code>?</code> in the TTY column, it indicates the process has no terminal attached to it, probably a system service, or a <a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a>.</li>
+</ul>
+</li>
+<li>TIME represents the cumulative CPU time of the process shown in minutes and second</li>
+<li>CMD is the name of the command that was used to start the process</li>
+<li>PPID - ID of the parent process</li>
+<li>STIME time whe the process was started</li>
+</ul>
+<h3 id="options"><a aria-hidden="true" class="anchor-heading" href="#options"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Options</h3>
+<ul>
+<li><code>ps -e</code> for all processes running</li>
+<li><code>ps -f</code> full status information</li>
+<li><code>ps -ef</code> all process with full status information</li>
+<li><code>ps -ef | wc -l</code></li>
+<li><code>ps aux</code> or <code>ps -aux</code></li>
+<li><code>ps aux --sort=%mem | less</code> sort by MEM usage, in ascending order, add <code>-</code> before <code>%mem%</code> for descending order</li>
+<li><code>ps -f -u userName</code> for user specific processes</li>
+<li><code>ps -ef | grep sshd</code> filter with <a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a>
+<ul>
+<li>You might get 2 results even though only one processes is truly running, but <code>grep</code> selects itself since a process was created when you tried to filter using <code>grep</code></li>
+</ul>
+</li>
+<li>See also: <a href="/notes/2x54d3zk1jvphjt0102em8k">pgrep</a>, <a href="/notes/w31t92yckdu68yntiofqbzu">pstree</a></li>
+</ul>
+<hr>
+<ul>
+<li>%CPU - CPU utilization in percentage</li>
+<li>%MEM - Memory utilization of a process, ratio of the processes resident set size to the physical memory of the machine</li>
+<li>VSZ - virtual memory size, includes all the memory the process can access including the memory that is swapped out, memory that is allocated but not used, memory from the shared library</li>
+<li>RSS - physical memory the process is using indicates how much memory is allocated to the process, doesn't include the memory swapped out, includes memory from shared library as long they're actually in memory, it does include stack and heap memory.</li>
+<li>STAT - state of the process using code
+<ul>
+<li>S for sleeping</li>
+<li>R for running</li>
+<li>T for stopped</li>
+<li>Z for zombie</li>
+<li>I for idle kernel thread</li>
+<li>\&#x3C; means high priority</li>
+<li>N means low priority</li>
+</ul>
+</li>
+<li>A CPU core can run a single process at a specific moment, if there are 4 cores on a CPU, then no more than 4 processes can run simultaneously, it appears that the OS is performing jobs simultaneously but in reality it is performing one process per core at a time and just switches between all of its ongoing processes, the Linux kernel will execute some instructions from process A and then will set aside process A and executes instructions from process B. This process is called <a href="/notes/wlubl67qke3xleespg7py7z">process scheduler</a>.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+<li><a href="/notes/w31t92yckdu68yntiofqbzu">pstree</a></li>
+</ul>

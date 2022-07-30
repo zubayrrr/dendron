@@ -1,0 +1,19 @@
+<h1 id="process-scheduler"><a aria-hidden="true" class="anchor-heading" href="#process-scheduler"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>process scheduler</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>The process scheduler is responsible for choosing which processes run and for how long. A scheduler is the basic part of a multitasking operating system like Linux.</p>
+<p>A multitasking operating system gives the illusion that multiple tasks are running at once when in fact there is only a limited set of processors. There are two kinds of multitasking operating systems: preemptive and cooperative.</p>
+<p>Linux is a preemptive operating system. Preemptive operating systems decide when to stop executing a process, and which new process should begin running. The amount of time a process runs is usually determined before it’s scheduled, this is called the timeslice and it is effectively a slice of the processors time [1, P. 41].</p>
+<p>In cooperative operating systems the scheduler relies on the process to explicitly tell the scheduler that it’s ready to stop (this is often called yielding). Cooperative operating systems have a problem where tasks that don’t yield can bring down the entire operating system. The last mainstream cooperative OSes were Mac OS 9 and Windows 3.1 [1, P. 42].</p>
+<p>The Linux scheduler has gone through several iterations. The latest scheduler—CFS (the Completely Fair Scheduler)—uses the concept of fair scheduling from queue theory [1, P. 42].</p>
+<p>—via <a href="https://notes.eddyerburgh.me/operating-systems/linux/process-scheduling">Process Scheduling - CS Notes</a></p>
+</blockquote>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+<li><a href="/notes/ei7r1wwxflu59yd7m0tx6j5">ps</a></li>
+</ul>

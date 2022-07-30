@@ -1,0 +1,31 @@
+<h1 id="sudo"><a aria-hidden="true" class="anchor-heading" href="#sudo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>sudo</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>sudo (Super User DO) command in Linux is generally used as a prefix of some command that only superuser are allowed to run. If you prefix “sudo” with any command, it will run that command with elevated privileges or in other words allow a user with proper permissions to execute a command as another user, such as the superuser. This is the equivalent of “run as administrator” option in Windows. The option of sudo lets us have multiple administrators.</p>
+<p>These users who can use the sudo command need to have an entry in the sudoers file located at “/etc/sudoers”. Remember that to edit or view the sudoers file you have to use sudo command. To edit the sudoers file it is recommended to use “visudo” command. 
+By default, sudo requires that users authenticate themselves with a password which is the user’s password, not the root password itself.</p>
+<p>—via <a href="https://www.geeksforgeeks.org/sudo-command-in-linux-with-examples/">sudo command in Linux with Examples - GeeksforGeeks</a></p>
+</blockquote>
+<ul>
+<li>In CentOS sudo is <code>wheel</code></li>
+</ul>
+<h3 id="creating-admin-users"><a aria-hidden="true" class="anchor-heading" href="#creating-admin-users"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Creating Admin Users</h3>
+<ul>
+<li>A user has to be added to the <a href="/notes/jqyxvlopjrxj27o648plyk9">sudo</a> <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.group (Private)</a> or the <code>sudoer file</code> inorder for them to use <code>sudo</code> privileges, <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">usermod (Private)</a> can be used to achieve this.
+<ul>
+<li><code>sudo usermod -aG sudo james</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/qh05nhekoydzi8s33m16o05">Creating Admin users</a></li>
+<li><a href="/notes/mwyyxjbpi0gztjd00f39biv">Ansible</a></li>
+<li><a href="/notes/n7z6kcxrme63oo11wv760w6">Getting root Access</a></li>
+<li><a href="/notes/ck6ds17ovyjf6n0sidmat7v">Networking in Linux</a></li>
+<li><a href="/notes/ktm0z46nm4ur05mdk0nesij">passwd</a></li>
+</ul>

@@ -1,0 +1,16 @@
+<h1 id="resizing-svg-in-html"><a aria-hidden="true" class="anchor-heading" href="#resizing-svg-in-html"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Resizing SVG in html</h1>
+<p>Open your <code>.svg</code> file with a text editor (it's just XML), and look for something like this at the top:</p>
+<pre class="language-xml"><code class="language-xml">&#x3C;svg ... width="50px" height="50px"...
+</code></pre>
+<p>Erase width and height attributes; the defaults are 100%, so it should stretch to whatever the container allows it.</p>
+<hr>
+<p>I have found it best to add <code>viewBox</code> and <code>preserveAspectRatio</code> attributes to my SVGs. The viewbox should describe the full width and height of the SVG in the form <code>0 0 w h</code>:</p>
+<pre class="language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>svg</span> <span class="token attr-name">preserveAspectRatio</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xMidYMid meet<span class="token punctuation">"</span></span> <span class="token attr-name">viewBox</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0 0 700 550<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>svg</span><span class="token punctuation">></span></span>
+</code></pre>
+<hr>
+<p>Use the following code:</p>
+<pre class="language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>g</span> <span class="token attr-name">transform</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>scale(0.1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>g</span><span class="token punctuation">></span></span>
+</code></pre>
+<p><a href="https://stackoverflow.com/questions/3120739/resizing-svg-in-html">Resizing SVG in html? - Stack Overflow</a></p>

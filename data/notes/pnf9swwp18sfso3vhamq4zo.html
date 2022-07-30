@@ -1,0 +1,32 @@
+<h1 id="create-table"><a aria-hidden="true" class="anchor-heading" href="#create-table"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CREATE TABLE</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<hr>
+<h3 id="copying-data-from-one-table-to-another"><a aria-hidden="true" class="anchor-heading" href="#copying-data-from-one-table-to-another"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Copying data from one table to another</h3>
+<p>A new table will be created with the exact same values as the <code>orders</code> table but the <code>orders_archived</code> table will not have the same attributes, the primary key will not be assigned, AUTO_INCREMENT will also be not assigned, if you want to explicitly insert a record into that table, supply a value for <code>order_id</code> as its no longer marked for auto completion.</p>
+<pre><code>CREATE TABLE orders_archived AS
+SELECT * FROM orders
+</code></pre>
+<h3 id="exercise"><a aria-hidden="true" class="anchor-heading" href="#exercise"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Exercise</h3>
+<pre><code>USE sql_invoicing;
+
+CREATE TABLE invoices_archived AS
+SELECT
+    i.invoice_id,
+    i.number,
+    c.name AS client,
+    i.invoice_total,
+    i.payment_total,
+    i.payment_date,
+    i.invoice_date,
+    i.due_date
+-- c.client_id,
+-- i.client_id,
+FROM invoices i
+JOIN clients c
+    USING (client_id)
+-- ON c.client_id = i.client_id
+WHERE i.payment_total > 0.00
+-- WHERE payment_date IS NOT NULL
+</code></pre>

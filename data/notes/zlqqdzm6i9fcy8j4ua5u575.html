@@ -1,0 +1,52 @@
+<h1 id="union"><a aria-hidden="true" class="anchor-heading" href="#union"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>UNION</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<hr>
+<p>Combine rows from multiple tables/queries</p>
+<pre><code>SELECT
+    order_id,
+    order_date,
+    'Active' AS status
+FROM orders
+WHERE order_date >= '2019-01-01'
+
+UNION
+
+SELECT
+    order_id,
+    order_date,
+    'Archived' AS status
+FROM orders
+WHERE order_date > '2019-01-01'
+</code></pre>
+<p>Another example</p>
+<pre><code>SElECT first_name
+FROM customers
+UNION
+SELECT name
+FROM shippers
+</code></pre>
+<p>The first query being unionized with the second one should return same amount of columns.</p>
+<p>Name of the columns returned will be based on the first query.</p>
+<p>Order of the query matters.</p>
+<h3 id="exercise"><a aria-hidden="true" class="anchor-heading" href="#exercise"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Exercise</h3>
+<pre><code>USE sql_store;
+
+SELECT customer_id, first_name, points, 'Bronze' AS type
+FROM customers
+WHERE points &#x3C; 2000
+
+UNION
+
+SELECT customer_id, first_name, points, 'Silver' AS type
+FROM customers
+WHERE points BETWEEN 2000 AND 3000
+
+UNION
+
+SELECT customer_id, first_name, points, 'Gold' AS type
+FROM customers
+WHERE points > 3000
+ORDER BY first_name
+</code></pre>

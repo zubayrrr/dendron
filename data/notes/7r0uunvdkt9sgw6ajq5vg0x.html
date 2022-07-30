@@ -1,0 +1,48 @@
+<h1 id="router"><a aria-hidden="true" class="anchor-heading" href="#router"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>router</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<p>A device that connects two different networks together and intelligently forwards traffic to and from a network based on its logical address(<a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>)</p>
+<p>Modern routers use <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>es to determine the routing of network traffic, although there are other routing protocols as well.</p>
+<hr>
+<ul>
+<li>Layer 3 device used to connect multiple networks together</li>
+<li>Making forwarding decisions based on logical network address information
+<ul>
+<li>Such as using <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>es (<a href="/notes/d6dakasx29em4cil8uhjy62">Ipv4</a> or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.IPv6 (Private)</a>)</li>
+</ul>
+</li>
+<li>Routers are typically more feature rich and support a broader range of interface types than multilayer <a href="/notes/arlkpmdlwn4hm2n8iu7gmgs">Switch</a>es</li>
+</ul>
+<hr>
+<ul>
+<li>Each port is a separate <a href="/notes/uirqzeld6hvqmdshssza5we">Collision Domains</a></li>
+<li>Each port is a separate <a href="/notes/t3w7c2u9g3w14hu315oj6ma">Broadcast Domain</a></li>
+</ul>
+<p><strong>How a router routes a packet:</strong></p>
+<p>When a router receives a packet, it makes a routing decision based on the destination address portion of the packet. It then looks up the destination address in its routing table. If the destination address is within a known network/subnetwork, the router forwards the packet to the next hop gateway for that destination network/subnetwork. Once the packet leaves the router, it is the responsibility of the next hop gateway to forward the packet to its final destination. If the router does not have the destination network in its routing table, it may forward the packet to a predetermined default gateway if configured and let the default gateway handle getting the packet to the destination network or it will drop the packet and inform the sending host that the network is not reachable.</p>
+<p>The routing table is a list of networks that router knows about. It can learn these routes by 3 means: a routing protocol such as; <a href="/notes/47kqarif53fgm4mn91r2kcg">RIP</a>, <a href="/notes/jqwe0nqc1h9ulnmhbxbgmhe">IGRP</a>, and <a href="/notes/613csq7phgdc2zr0y6ny2bv">OSPF</a>, a static route that has been manually been set by a network administrator, or by being directly connected to that network on one of its interfaces.</p>
+<p>The routing table will contain many pieces of information about the learned network, but the main information is the network address and the next hop gateway.</p>
+<p>The network address can be either a full class network address or a subnetwork address, depending on the netmask being used. The next hop gateway is the ip address of the gateway to hand off the outbound packet to.</p>
+<p>Keep in mind that all of the routers must know of a way to reach each other. The receiving host must have a path to get back to the sending host in order for data to pass.</p>
+<p>Via — <a href="http://penta2.ufrgs.br/trouble/ts_ip.htm">Basic IP Addressing and Troubleshooting Guide</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+<li><a href="/notes/ug0shyduxjj1t5fh9grn64l">Buffering</a></li>
+<li><a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a></li>
+<li><a href="/notes/tl2l2ioab7ezjb3y0ek2wrq">Layer 3 Switch</a></li>
+<li><a href="/notes/txhkupatmnyfpbh26k59e6u">MMF</a></li>
+<li><a href="/notes/vro2wf2ayviwa9mlv92e452">netplan</a></li>
+<li><a href="/notes/mqnu3nuizmn3qct5215u9it">Network Components</a></li>
+<li><a href="/notes/zw1gitvx9j99ar0rar3o90b">Network Infrastructure Devices</a></li>
+<li><a href="/notes/2lmaspsqaxrf42wuvmcp02f">Network Layer - OSI</a></li>
+<li><a href="/notes/x7isiac8ilnito56s6gt660">Overview of Networks</a></li>
+<li><a href="/notes/5xbq8dqh6wbqd14aqyn863v">ping</a></li>
+<li><a href="/notes/1py9mwp8nfyok10003rq7nb">SMF</a></li>
+<li><a href="/notes/6hvydsuke9vd4sglh0hcgu5">SNMP</a></li>
+<li><a href="/notes/ebbsmmds8qkj39bw5g14klp">Straight-Through Patch Cable</a></li>
+<li><a href="/notes/ay31a1sdstjlypyw2loughn">TFTP</a></li>
+</ul>

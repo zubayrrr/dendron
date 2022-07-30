@@ -1,0 +1,109 @@
+<h1 id="5-types-of-zsh-aliases-you-should-know"><a aria-hidden="true" class="anchor-heading" href="#5-types-of-zsh-aliases-you-should-know"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>5 Types of Zsh Aliases You Should Know</h1>
+<h1 id="5-types-of-zsh-aliases-you-should-know-1"><a aria-hidden="true" class="anchor-heading" href="#5-types-of-zsh-aliases-you-should-know-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><a href="https://www.thorsten-hans.com/5-types-of-zsh-aliases">5 Types Of ZSH Aliases You Should Know</a></h1>
+<p>My shell means everything to me. It is the first program I start in the morning and the last one I close in the evening. It is the program that I regularly tweak to boost my overall productivity. From my perspective, Microsoft’s release of Windows Terminal 1.0 and WSL 2.0 will boost overall Shell adoption. Over the past decade, I have seen numerous users installing and using different shells. However, the number of people that invest time in configuring their shell to be more productive is just a small percentage. And that is a shame!</p>
+<p>You can also stick with tools like Finder or Windows Explorer if you install and use a shell without customizing it. Shells like ZSH shine once they have individual configurations: configurations that make you - the user - super productive. I wrote this article for inspiration. It should demonstrate how you can increase your overall productivity with simple things like adopting the 5 types of aliases in ZSH. Aliases are the first step towards a tailored shell experience. Aliases are a super individual thing.</p>
+<p>I use Docker, Kubernetes, and Microsoft Azure every day. That said, it makes sense for me to have aliases supporting me with these tools and environments. However, maybe you are using different clouds and command-line tools so that you will end up with different aliases. The key takeaway should be that you create and use aliases to help you get your job done.</p>
+<p>All your aliases are defined in <code>~/.zshrc</code>. ZSH loads the configuration file during startup. However, you can always force to reload your configuration file use <code>source ~/.zshrc</code>.</p>
+<p>This article will teach you how to create and use these five types of aliases:</p>
+<ul>
+<li><a href="https://www.thorsten-hans.com/#simple-aliases">Simple Aliases</a></li>
+<li><a href="https://www.thorsten-hans.com/#suffix-aliases">Suffix Aliases</a></li>
+<li><a href="https://www.thorsten-hans.com/#functions-for-aliases-with-parameters">Functions for Aliases With Parameters</a></li>
+<li><a href="https://www.thorsten-hans.com/#global-aliases">Global Aliases</a></li>
+<li><a href="https://www.thorsten-hans.com/#operating-system-specific-aliases">Operating system specific aliases</a></li>
+</ul>
+<h2 id="simple-aliases"><a aria-hidden="true" class="anchor-heading" href="#simple-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Simple Aliases</h2>
+<p>Simple Aliases are a good starting point. I use them to reduce the number of keystrokes to fire up a command. The definition of a simple alias uses the <code>alias my-alias="command"</code> pattern.</p>
+<pre><code># navigation aliases
+alias dev="cd ~/dev/"
+alias personal="cd ~/dev/thorstenhans"
+alias business="cd ~/dev/thinktecture"
+
+# kubectl aliases
+alias k="kubectl"
+alias kgx="kubectl config get-contexts"
+
+# docker aliases
+alias d="docker"
+alias dps="docker ps"
+</code></pre>
+<p>Having those aliases registered in my <code>~/.zshrc</code>, I can navigate quickly to commonly used directories and to fire-up commands that I use frequently using just a few keystrokes.</p>
+<h2 id="suffix-aliases"><a aria-hidden="true" class="anchor-heading" href="#suffix-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Suffix Aliases</h2>
+<p>Suffix Aliases are defined using the <code>-s</code> flag. With suffix aliases, you can launch files with a specific extension (or suffix) in your favorite tool. To register a suffix alias, we use the <code>alias -s extension=name-of-the-tool</code> pattern. The following samples assume that VisualStudio Code is installed and can be launched using the <code>code</code> command from the terminal.</p>
+<pre><code># Azure CLI files
+alias -s azcli=code
+
+# Markdown files
+alias -s md=code
+
+# JSON files
+alias -s json=code
+
+# bulk association
+alias -s {cs,ts,html}=code
+</code></pre>
+<p>Load the modified <code>~/.zshrc</code> and execute the following:</p>
+<pre><code>echo "#Hello World" > sample.md
+
+# now type the name of the file and commit via ENTER
+sample.md
+</code></pre>
+<p>The suffix alias translates <code>sample.md</code> into <code>code sample.md</code>, and you should see VisualStudio Code launching and showing the content of <code>sample.md</code>.</p>
+<h2 id="functions-for-aliases-with-parameters"><a aria-hidden="true" class="anchor-heading" href="#functions-for-aliases-with-parameters"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Functions for Aliases With Parameters</h2>
+<p>Sometimes you want to create aliases that require some contextual information. Parameters are used to describe this contextual information for shell commands. The registration of aliases with parameters looks pretty similar to a function definition in regular programming languages. We use the following pattern to define aliases with parameters:</p>
+<pre><code>aliasname() {
+  command $firstParam $secondParam
+}
+</code></pre>
+<p>For example, consider you want to optimize the process of listing Azure Kubernetes Service (AKS) instances in your Azure Subscription. To achieve this, Azure CLI provides the <code>az aks list</code> command. The command allows further configuration by adding several parameters.</p>
+<p>The following alias accepts two parameters—first, the Resource Group Name (Resource Groups are logical containers in Azure). The second parameter specifies the desired output format.</p>
+<pre><code>getaks() {
+  az aks list -g $1 -o $2
+}
+</code></pre>
+<p>We can now use the <code>getaks</code> alias with parameters to look for AKS instances in <code>resource-group-1</code> and print results in colored JSON (<code>jsonc</code>) using <code>getaks resource-group-1 jsonc</code>.</p>
+<h2 id="global-aliases"><a aria-hidden="true" class="anchor-heading" href="#global-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Global Aliases</h2>
+<p>Global aliases are defined using the <code>-g</code> flag. A global alias is aggressive. Once registered, it replaces all occurrences of the alias name with the specified command. The definition follows the pattern <code>alias -g aliasName="command"</code>.</p>
+<pre><code># I have to ask for Azure Resource Ids frequently
+alias -g qId="--query id -o tsv"
+</code></pre>
+<p>Having <code>qId</code> registered as a global alias, I can optimize my performance when asking for unique resource identifiers using Azure CLI. See the following snippet comparing the regular command, to the optimized one using my global alias:</p>
+<pre><code># proper command to query the identifier of an AKS instance
+az aks show -n myaks2020 -g rg-demo --query id -o tsv
+
+# command to query the identifier of an AKS instance with global alias
+az aks show -n myaks2020 -g rg-demo qId
+</code></pre>
+<h2 id="operating-system-specific-aliases"><a aria-hidden="true" class="anchor-heading" href="#operating-system-specific-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Operating system specific aliases</h2>
+<p>An operating system specific alias is not a real type. However, I think platform-specific aliases are important—especially when using multiple platforms. I use macOS as a daily driver, so I also have some aliases tied to my rig.</p>
+<p>However, I love VisualStudio Codespaces that are using Linux as an operating system. In both situations, I want to use my dotfiles. To achieve this, I use simple <code>if</code>-statements.</p>
+<pre><code># macOS aliasses
+if [[ $OSTYPE == darwin* ]]; then
+alias flush='dscacheutil -flushcache'
+# Apps
+alias browse="open -a /Applications/Google\ Chrome.app"
+# * Browse Azure Portal
+alias azure="browse https://preview.portal.azure.com"
+fi
+</code></pre>
+<p>See the following image showing all my platform related aliases for macOS:</p>
+<p><img src="https://www.thorsten-hans.com/images/zsh-aliases-1.png" alt="Platform specific aliases in ZSH" title="5 alias types in zsh - platform specific aliases"></p>
+<h2 id="use-aliases-to-edit-and-reload-zshrc--omit-in-toc-"><a aria-hidden="true" class="anchor-heading" href="#use-aliases-to-edit-and-reload-zshrc--omit-in-toc-"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Use Aliases To Edit and Reload .zshrc &#x3C;!– omit in toc –></h2>
+<p>I have two aliases in my <code>~/.zshrc</code>, which are super-efficient. I open my <code>~/.zshrc</code> in my favorite editor with <code>ec</code> and source it (apply the current state of <code>~/.zshrc</code> to your ZSH session) with <code>sc</code>. The alias definition for both looks like this:</p>
+<pre><code># open ~/.zshrc in using the default editor specified in $EDITOR
+alias ec="$EDITOR $HOME/.zshrc"
+
+# source ~/.zshrc
+alias sc="source $HOME/.zshrc"
+</code></pre>
+<h2 id="conclusion--omit-in-toc-"><a aria-hidden="true" class="anchor-heading" href="#conclusion--omit-in-toc-"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Conclusion &#x3C;!– omit in toc –></h2>
+<p>You have seen five different types of ZSH aliases (counting os-specific aliases as dedicated type) that will boost your productivity.</p>
+<p>Take your time. Do some research. Identify the command-line tools you are using daily or regularly, find patterns, and create corresponding aliases that increase your productivity by reducing keystrokes.</p>
+<p>Having powerful shells on all operating systems (finally including windows using WSL 2.0), you should care about your shell performance. Make ZSH your own.</p>
+<p>I do a lot of conference speaking; if you are presenting at conferences or meetups too, you should start your presentation by quickly explaining the aliases you will use throughout the talk to onboard your audience. Maybe they are using <code>kc</code> instead of <code>k</code> for <code>kubectl</code>. 😂</p>
+<p>Special thanks to <a href="https://github.com/learnbyexample">Sundeep Agarwal</a> for pointing me to some typos and to <a href="https://github.com/smhmd">simohamed</a> for the tip regarding bulk association for suffix aliases.</p>
+<hr>
+<h2 id="tags"><a aria-hidden="true" class="anchor-heading" href="#tags"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tags</h2>
+<ol>
+<li><a class="color-tag" style="--tag-color: #054907;" href="/notes/j9wop01y5eo30zr168a0g3n">articles</a></li>
+</ol>

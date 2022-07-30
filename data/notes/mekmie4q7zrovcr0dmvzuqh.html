@@ -1,0 +1,43 @@
+<h1 id="tee"><a aria-hidden="true" class="anchor-heading" href="#tee"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>tee</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Picking up here from <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Piping (Private)</a></li>
+<li>By default redirection of <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> breaks pipelines, unless the <code>tee</code> command is used.</li>
+<li>We use <code>tee</code> command to continue using <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> after redirecting it.</li>
+<li>The <code>tee</code> command helps us with data flow in two directions:</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.mgl2zixejh.png"></p>
+<ul>
+<li>Example:
+<ul>
+<li><code>date | tee date.md | cut -d " " -f 1 > day.md</code>
+<ul>
+<li>Not only are we saving the full date inside <code>date.md</code> using the <code>tee</code> command but we are also saving the day inside <code>day.md</code>.</li>
+<li><code>date | tee date.md | cut -d " " -f 1 | tee day.md | command -opt args ...</code> to keep using <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="another-example-using-ifconfig-private-and-grep"><a aria-hidden="true" class="anchor-heading" href="#another-example-using-ifconfig-private-and-grep"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Another Example using <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ifconfig (Private)</a> and <a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a></h3>
+<ul>
+<li><code>ifconfig | grep ether</code> just prints <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a></li>
+<li><code>ifconfig | grep ether > mac.txt</code> only redirects <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> to <code>mac.txt</code> without printing it out to the screen</li>
+</ul>
+<p>Combining these two using the <code>tee</code> command</p>
+<ul>
+<li><code>ifconfig | grep ether | tee mac.txt</code> now it would both create the file <code>mac.txt</code> and also print out the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a></li>
+</ul>
+<h3 id="append-option"><a aria-hidden="true" class="anchor-heading" href="#append-option"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Append Option</h3>
+<ul>
+<li>Passing the <code>-a</code> option to the <code>tee</code> command would instruct it to append the <a href="/notes/do68y261xeu98bpq3vl5cn9">stdout</a> when redirecting it to a file instead of overwriting it.</li>
+<li>Example:
+<ul>
+<li><code>who | tee -a who.txt</code></li>
+<li><code>uname -r | tee -a who.txt kernel.txt</code> would append the kernel version to both <code>who.txt</code> as well as <code>kernel.txt</code></li>
+</ul>
+</li>
+</ul>

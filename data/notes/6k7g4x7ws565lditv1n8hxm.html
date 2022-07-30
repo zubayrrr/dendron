@@ -1,0 +1,24 @@
+<h1 id="yarn"><a aria-hidden="true" class="anchor-heading" href="#yarn"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>YARN</h1>
+<ul>
+<li>Areas: <a href="/notes/s5t9uscswvpo3p6gebui1ea">Big Data</a></li>
+</ul>
+<p><strong>Y</strong>et <strong>A</strong>nother <strong>R</strong>esource <strong>N</strong>egotiator</p>
+<ul>
+<li>YARN is the main job scheduler and resource allocator for the entire <a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> cluster. User applications request resoruces from YARN(contains with data locality).</li>
+<li>Resources can include cores, memory, GPUs, software licenses and data.</li>
+<li>Suppose you've a cluster of 10 machines and 50 users and they want to use certain amount of cores and other resources in general, YARN will setup a queue and depending on the policy on the site, jobs get submitted to the queue and YARN will determine when they'll run based on the policy and availability of resources.</li>
+<li>Each user application is managed at run-time by an ApplicationMaster (AM) container and is responsible for requesting further containers for jobs that are part of the application.</li>
+<li>AM is basically a localised resource manager for the application that can adapt at run-time for the resources as available.</li>
+<li>AM manages dynamic resource allocation at run-time. In other words, the <strong>number of mapper processes is usually the number of reducers</strong>.</li>
+<li>From the cluster view: there is one main ResourceManager and multiple NodeManagers.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/zubayrrr/twiki/main/bin/image.0nif9dneaz0n.png"></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+<li><a href="/notes/2fz1tdl3yy2s78wdmo7ql56">Data Engineering Roadmap</a></li>
+<li><a href="/notes/kdddo1f7ltfsuwhexj4s535">HDFS</a></li>
+<li><a href="/notes/j6kfx6ziqg91r356nur9cwy">MapReduce</a></li>
+<li><a href="/notes/iholoz516z4p3yeo29eldm4">Spark Architecture</a></li>
+</ul>

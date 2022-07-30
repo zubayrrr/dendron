@@ -1,0 +1,26 @@
+<h1 id="sighup"><a aria-hidden="true" class="anchor-heading" href="#sighup"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SIGHUP</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The SIGHUP signal is sent to a process when its controlling terminal is closed. It was originally designed to notify the process of a serial line drop (a hangup). In modern systems, this signal usually means that the controlling pseudo or virtual terminal has been closed. Many daemons will reload their configuration files and reopen their logfiles instead of exiting when receiving this signal. <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">nohup (Private)</a> is a command to make a command ignore the <a href="/notes/awaxslvw2mr2x9m3pofswnj">signal</a>.</p>
+<blockquote>
+<p>—via <a href="https://dsa.cs.tsinghua.edu.cn/oj/static/unix_signal.html">POSIX signals</a></p>
+</blockquote>
+<h3 id="example"><a aria-hidden="true" class="anchor-heading" href="#example"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example</h3>
+<p>Servers read their configuration file only once on their boot up to make them reload, we can use SIGHUP signal, in this example, we'll use <a href="/notes/o922t6d9q6wur3yve290hir">SSH</a> <a href="/notes/bovjw27cydp3ukc68znivg5">daemon</a></p>
+<ul>
+<li><code>sudo systemctl status ssh</code></li>
+<li><code>tail -f /var/log/auth.log/</code></li>
+<li>The <a href="/notes/v879p2kn7q4pa6g56739q1v">PID</a> of a server, is typically located inside <code>/var/run</code> dir
+<ul>
+<li><code>ssh.pid</code> will be the name of the file that is storing the <a href="/notes/v879p2kn7q4pa6g56739q1v">PID</a> in our case</li>
+</ul>
+</li>
+<li><code>cat /var/run/ssh.pid</code> or <code>pgrep -l sshd</code> using <a href="/notes/2x54d3zk1jvphjt0102em8k">pgrep</a></li>
+<li><code>sudo kill -1 processID</code> or <code>sudo kill -1 $(cat /var/run/sshd.pid)</code>
+<ul>
+<li>The daemon should reload</li>
+</ul>
+</li>
+</ul>

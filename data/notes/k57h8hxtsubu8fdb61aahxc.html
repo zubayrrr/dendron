@@ -1,0 +1,30 @@
+<h1 id="udp"><a aria-hidden="true" class="anchor-heading" href="#udp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>UDP</h1>
+<ul>
+<li>Areas: <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<ul>
+<li>User Data-gram Protocol is a connection-less protocol.</li>
+<li>Unreliable transport of segments.
+<ul>
+<li>If dropped, sender is unaware. No sequencing or acknowledgement.</li>
+</ul>
+</li>
+<li>No <a href="/notes/96793xhkcwxryb0kilyt9i4">Windowing</a>, re-transmission.</li>
+<li>Good for audio/video streaming (less overhead, increased performance).</li>
+<li>E.g. YouTube video/audio streaming</li>
+</ul>
+<p>UDP is a connectionless and unreliable protocol. Once data is transmitted between two hosts, the receiver host doesn’t send any acknowledgment of receiving the data packets. Thus the sender will keep on sending data without waiting for an acknowledgment.</p>
+<p>This makes it very easy to process any network requirement as no time is wasted in waiting for acknowledgment. The end host will be any machine like a computer, phone or tablet.</p>
+<p>This type of protocol is widely used in video streaming, online games, video calls, voice over IP where when some data packets of video are lost then it doesn’t have much significance, and can be ignored as it doesn’t make much impact on the information it carries and doesn’t have much relevance.</p>
+<p>See also: <a href="/notes/fg9c1iu7kore9v72yvr9bji">TCP VS UDP</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/jgdmbgmoda37pmf3u085az9">IPv4 Packets</a></li>
+<li><a href="/notes/05txufwh4u6s1aop2eky199">netstat</a></li>
+<li><a href="/notes/fg9c1iu7kore9v72yvr9bji">TCP VS UDP</a></li>
+<li><a href="/notes/q92tfbbhyglmyk3jdtx5vm5">TCP⁄IP Model</a></li>
+<li><a href="/notes/nygs97pchi3schragqr6gei">Transport Layer - OSI</a></li>
+<li><a href="/notes/v6g48x2mriiw6z07xifqjd6">Transport Layer - TCP/IP</a></li>
+</ul>

@@ -1,0 +1,30 @@
+<h1 id="aws-lambda"><a aria-hidden="true" class="anchor-heading" href="#aws-lambda"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS Lambda</h1>
+<p>It is a compute service that lets you run code without having to install it on the operating system/provision a server. <a href="/notes/0dhybuldv4znj0j1ivmevhe">Serverless</a>. Lambda is stateless. It is event driven. It is a function that is invoked by an event and returns a response. Event sources can be events from <a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a>, <a href="/notes/tczgjqm691xi6olmcy78ckc">AWS DynamoDB</a>, <a href="/notes/cwbupxqnwdcc2f9cfdsiqh9">AWS API Gateway</a>, <a href="/notes/nimgbn0mpjrqmik4qwworir">AWS SES</a>, based on these events we can many things.</p>
+<ul>
+<li>The Lambda function (Code and Deployment package) is a single file.</li>
+<li>Memory Size Specification.</li>
+<li>Execution Timeout (15 minutes)</li>
+<li>IAM Role(The Execution Role)</li>
+<li>Event Source Mapping</li>
+</ul>
+<p>You are charged for when the Lambda function is invoked or how long it runs.</p>
+<p>If your functions are running for longer than 15 minutes, you might want to consider step functions. Run multiple functions in parallel.</p>
+<h2 id="versions-and-aliases"><a aria-hidden="true" class="anchor-heading" href="#versions-and-aliases"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Versions and Aliases</h2>
+<p>You can publish one or more versions of your Lambda functions. Each Lambda function has a unique ARN. Once published it cannot be changed. Latest version of the function is tagged as <strong>$Latest</strong> (which happens to be default version).</p>
+<p>An Alias is a pointer to a specific Lambda function version. Each Alias has a unique ARN and unique Lambda functions they can be modified can be updated to point to different Lambda functions. They can be used for debugging and are ideal for rapid rollback deployments. Be careful when pointing multiple aliases to one version.</p>
+<h2 id="sam-framework---serverless-application-model"><a aria-hidden="true" class="anchor-heading" href="#sam-framework---serverless-application-model"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SAM Framework - Serverless Application Model</h2>
+<p>It is an open source framework for building serverless applications. It provides shorthand syntax to expression functions, APIs, databases, event source mappings. We do this using YAML. It integrates with <a href="/notes/7zaax8a13r0jjnssx46u39a">AWS CloudFormation</a>. To use it we install <a href="/notes/es95bb2vwmmx720qkpcvjh5">AWS SAM</a> Cli, it provides a Lambda like execution environment to locally build, test and debug your applications and prepare them for integration with CloudFormation.</p>
+<p>It provides a bridge between Lambda and CloudFormation. Ultimately, we can store our Lambda functions and execute them within CloudFormation(templates). It is basically a CloudFormation extension optimized for serverless applications. Using the <strong>Transform function</strong> we can include SAM code in our CF templates.</p>
+<p><img src="https://res.cloudinary.com/zubayr/image/upload/v1655655371/wiki/mhvxogw0tbatikroqohf.png"></p>
+<p>There is no charge for SAM. You’re only charged for the resources created.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/cwbupxqnwdcc2f9cfdsiqh9">AWS API Gateway</a></li>
+<li><a href="/notes/gualur07hbgjlaw396spiji">AWS CodeCommit</a></li>
+<li><a href="/notes/49naltrgmfezkzp9g3fjfaq">AWS CodeDeploy</a></li>
+<li><a href="/notes/3n1o179sti2wtnjkq48one1">AWS CodePipeline</a></li>
+<li><a href="/notes/4i7qpwtzjjihtv7m1gfnjxw">AWS Step Functions</a></li>
+<li><a href="/notes/7gs83aparu74kp0h3mkz2p9">Cloud</a></li>
+</ul>

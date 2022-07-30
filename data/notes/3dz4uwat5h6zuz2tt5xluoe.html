@@ -1,0 +1,19 @@
+<h1 id="foreground-process"><a aria-hidden="true" class="anchor-heading" href="#foreground-process"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>foreground process</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>Foreground processes are started by the user and not by the system services and while they're running, the user cannot start another from the same terminal. By default every <a href="/notes/xlsa83es4v1pnpfw5i0k74w">process</a> you start runs in the foreground. It gets its input from the keyboard and sends output through the terminal. Simulate this using the <code>sleep</code> command, <code>sleep 15</code> will run in foreground for 15 seconds.</p>
+<p>You can suspend processes running in the foreground anytime by using <code>Ctrl + Z</code>, the process will not be discarded from the RAM or terminated, it was simply temporarily stopped and can be viewed using <a href="/notes/oteklwrg0wgbzwqyjey8ijy">jobs</a> command when ran from the same shell that started the foreground process.</p>
+<p>You can resume is anytime using <a href="/notes/desuvutv1t7setmx8gj70tl">fg</a> or <a href="/notes/2w9ck78j0wq1b1sphw0wvsi">bg</a></p>
+<ul>
+<li><code>bg %JobID</code> resumes it in the background</li>
+<li><code>fg %JobID</code> resumes it in the foreground</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/w0vd2ayughwv1t1wm0334f3">background process</a></li>
+<li><a href="/notes/oteklwrg0wgbzwqyjey8ijy">jobs</a></li>
+<li><a href="/notes/5ccrjhw574ds80msc2k6pcr">Linux Process Management</a></li>
+</ul>

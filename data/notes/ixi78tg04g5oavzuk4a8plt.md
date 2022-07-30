@@ -1,0 +1,17 @@
+
+- Areas: [[devlog.linux]]
+
+---
+
+`umount` Un[[devlog.mount]]s a previously mounted file system, directory, or file.
+
+```
+sudo umount /dev/sdb
+```
+
+You cannot use the **umount** command on a device in use. A device is in use if any file is open for any reason or if a user's current directory is on that device.
+To overcome this use the `-l` (lazy) option. This causes `umount` to wait until the file system is able to be safely unmounted.
+
+```
+sudo umount -l /dev/sdb
+```

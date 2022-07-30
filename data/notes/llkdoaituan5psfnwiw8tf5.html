@@ -1,0 +1,35 @@
+<h1 id="eks-cluster-information"><a aria-hidden="true" class="anchor-heading" href="#eks-cluster-information"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>EKS cluster information</h1>
+<ul>
+<li>Related: <a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a>, <a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a></li>
+</ul>
+<hr>
+<p><strong>Premise</strong></p>
+<p>We want to get our EKS Cluster info like:</p>
+<ul>
+<li>Cluster Status</li>
+<li>Which <a href="/notes/gbeh61d6hvbmxxy63chp81b">Kubernetes</a> version?</li>
+<li>Cluster Endpoint</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> boto3
+
+client <span class="token operator">=</span> boto3<span class="token punctuation">.</span>client<span class="token punctuation">(</span><span class="token string">'eks'</span><span class="token punctuation">,</span> region_name<span class="token operator">=</span><span class="token string">"eu-west-3"</span><span class="token punctuation">)</span>
+clusters <span class="token operator">=</span> client<span class="token punctuation">.</span>list_clusters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'clusters'</span><span class="token punctuation">]</span>
+
+<span class="token keyword">for</span> cluster <span class="token keyword">in</span> clusters<span class="token punctuation">:</span>
+    response <span class="token operator">=</span> client<span class="token punctuation">.</span>describe_cluster<span class="token punctuation">(</span>
+        name<span class="token operator">=</span>cluster
+    <span class="token punctuation">)</span>
+    cluster_info <span class="token operator">=</span> response<span class="token punctuation">[</span><span class="token string">'cluster'</span><span class="token punctuation">]</span>
+    cluster_status <span class="token operator">=</span> cluster_info<span class="token punctuation">[</span><span class="token string">'status'</span><span class="token punctuation">]</span>
+    cluster_endpoint <span class="token operator">=</span> cluster_info<span class="token punctuation">[</span><span class="token string">'endpoint'</span><span class="token punctuation">]</span>
+    cluster_version <span class="token operator">=</span> cluster_info<span class="token punctuation">[</span><span class="token string">'version'</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Cluster </span><span class="token interpolation"><span class="token punctuation">{</span>cluster<span class="token punctuation">}</span></span><span class="token string"> status is </span><span class="token interpolation"><span class="token punctuation">{</span>cluster_status<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Cluster endpoint: </span><span class="token interpolation"><span class="token punctuation">{</span>cluster_endpoint<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Cluster version: </span><span class="token interpolation"><span class="token punctuation">{</span>cluster_version<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/e7pods321uz4fxgzzdhf002">Boto</a></li>
+</ul>

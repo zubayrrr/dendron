@@ -1,0 +1,56 @@
+<h1 id="load-balancer"><a aria-hidden="true" class="anchor-heading" href="#load-balancer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Load Balancer</h1>
+<p>What is a Load Balancer? A load balancer acts as the “traffic cop” sitting in front of your servers and routing client requests across all servers capable of fulfilling those requests in a manner that maximizes speed and capacity utilization and ensures that no one server is overworked, which could degrade performance.</p>
+<p>If a single server goes down, the load balancer redirects traffic to the remaining online servers. When a new server is added to the server group, the load balancer automatically starts to send requests to it.</p>
+<h2 id="types-of-load-balancers--based-on-functions"><a aria-hidden="true" class="anchor-heading" href="#types-of-load-balancers--based-on-functions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Types of Load Balancers – Based on Functions</h2>
+<p>Several load balancing techniques are there for addressing the specific network issues:</p>
+<p><strong>Network Load Balancer / Layer 4 (L4) Load Balancer:</strong></p>
+<p>Based on the network variables like <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a> and destination ports, Network Load balancing is the distribution of traffic at the transport level through the routing decisions. Such load balancing is TCP i.e. level 4, and does not consider any parameter at the application level like the type of content, cookie data, headers, locations, application behavior etc. Performing network addressing translations without inspecting the content of discrete packets, Network Load Balancing cares only about the network layer information and directs the traffic on this basis only.</p>
+<p><strong>Application Load Balancer / Layer 7 (L7) Load Balancer:</strong></p>
+<p>Ranking highest in the <a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a>, Layer 7 load balancer distributes the requests based on multiple parameters at the application level. A much wider range of data is evaluated by the L7 load balancer including the HTTP headers and SSL sessions and distributes the server load based on the decision arising from a combination of several variables. This way application load balancers control the server traffic based on the individual usage and behavior.</p>
+<p><strong>Global Server Load Balancer/Multi-site Load Balancer:</strong></p>
+<p>With the increasing number of applications being hosted in cloud data centers, located at varied geographies, the GSLB extends the capabilities of general L4 and L7 across various data centers facilitating the efficient global load distribution, without degrading the experience for end users. In addition to the efficient traffic balancing, multi-site load balancers also help in quick recovery and seamless business operations, in case of server disaster or disaster at any data center, as other data centers at any part of the world can be used for business continuity.</p>
+<h2 id="types-of-load-balancers--based-on-configurations"><a aria-hidden="true" class="anchor-heading" href="#types-of-load-balancers--based-on-configurations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Types of Load Balancers – Based on Configurations</h2>
+<p>Load Balancers are also classified as:</p>
+<p><strong>Hardware Load Balancers:</strong></p>
+<p>As the name suggests, this is a physical, on-premise, hardware equipment to distribute the traffic on various servers. Though they are capable of handling a huge volume of traffic but are limited in terms of flexibility, and are also fairly high in prices.</p>
+<p><strong>Software Load Balancers:</strong></p>
+<p>They are the computer applications that need to be installed in the system and function similarly to the hardware load balancers. They are of two kinds- Commercial and Open Source and are a cost-effective alternative to the hardware counterparts.</p>
+<p><strong>Virtual Load Balancers:</strong></p>
+<p>This load balancer is different from both the software and hardware load balancers as it is the combination of the program of a hardware load balancer working on a virtual machine.</p>
+<p>Through virtualization, this kind of load balancer imitates the software driven infrastructure. The program application of hardware equipment is executed on a virtual machine to get the traffic redirected accordingly. But such load balancers have similar challenges as of the physical on-premise balancers viz. lack of central management, lesser scalability and much limited automation.</p>
+<h2 id="load-balancing-methods"><a aria-hidden="true" class="anchor-heading" href="#load-balancing-methods"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Load Balancing Methods</h2>
+<p>All kinds of Load Balancers receive the balancing requests, which are processed in accordance with a pre-configured algorithm.</p>
+<p><strong>Industry Standard Algorithms</strong></p>
+<p>The most common load balancing methodologies include:</p>
+<ul>
+<li>
+<p>Round Robin Algorithm:
+It relies on a rotation system to sort the traffic when working with servers of equal value. The request is transferred to the first available server and then that server is placed at the bottom of the line.</p>
+</li>
+<li>
+<p>Weighted Round Robin Algorithm:
+This algorithm is deployed to balance loads of different servers with different characteristics.</p>
+</li>
+<li>
+<p>Least Connections Algorithm:
+In this algorithm, traffic is directed to the server having the least traffic. This helps maintain the optimized performance, especially at peak hours by maintaining a uniform load at all the servers.</p>
+</li>
+<li>
+<p>Least Response Time Algorithm:
+This algorithm, like the least connection one, directs traffic to the server with a lower number of active connections and also considers the server having the least response time as its top priority.</p>
+</li>
+<li>
+<p>IP Hash Algorithm:
+A fairly simple balancing technique assigns the client’s IP address to a fixed server for optimal performance.</p>
+</li>
+</ul>
+<p>Via - <a href="https://www.appviewx.com/education-center/load-balancer-and-types/">Load Balancer | Types of Load Balancers | Benefits of Load balancer</a></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/49naltrgmfezkzp9g3fjfaq">AWS CodeDeploy</a></li>
+<li><a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a></li>
+<li><a href="/notes/5eybx5vd339tjnkglx8igde">Devops Interview Questions</a></li>
+<li><a href="/notes/nygs97pchi3schragqr6gei">Transport Layer - OSI</a></li>
+</ul>

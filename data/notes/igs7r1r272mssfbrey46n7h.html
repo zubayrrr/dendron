@@ -1,0 +1,41 @@
+<h1 id="groups"><a aria-hidden="true" class="anchor-heading" href="#groups"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>groups</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The primary purpose of groups is to define a set of privilages or permissions like read, write or execute for a given file that can be shared among users within the group.</p>
+<p>There are two types of groups that a user can belong to:</p>
+<ul>
+<li>1. The primary group: The ID is stored in <code>/etc/passwd</code> and the group name in <code>/etc/group</code>
+<ul>
+<li>When a user creates a file the user will be the owner of the file and its primary group will be the group owner of the file. (in Linux a file is owned both by a group and a user)</li>
+<li>Each user should belong to exactly one primary group (usually the name of the group is same as the username and no other user would be part of this group)</li>
+</ul>
+</li>
+<li>2. The secondary group: stored in <code>/etc/group</code>
+<ul>
+<li>A user can belong to none or many secondary or supplementary groups.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><code>grep 'userName' /etc/passwd</code>
+<ul>
+<li>Third field indicates the user ID, fourth indicates the primary group ID</li>
+</ul>
+</li>
+<li><code>grep 'groupID' /etc/group</code></li>
+<li>To search for secondary groups that a user belongs to, type for <code>/username</code> after <code>less /etc/group</code>
+<ul>
+<li>If there are multiple users belonging to a secondary group, they'll be separated by a comma.</li>
+</ul>
+</li>
+<li>You can also use the <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">id (Private)</a> command to get info about the groups and their IDs the current user belongs to.</li>
+</ul>
+<hr>
+<h3 id="the-groups-command"><a aria-hidden="true" class="anchor-heading" href="#the-groups-command"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>The <code>groups</code> command</h3>
+<ul>
+<li><code>groups</code> when executed without any arguments returns all the groups the current user belongs to, the first group being the primary group.</li>
+<li><code>groups username</code> to search for a specific user</li>
+</ul>

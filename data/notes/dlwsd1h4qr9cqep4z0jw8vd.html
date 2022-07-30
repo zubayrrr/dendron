@@ -1,0 +1,76 @@
+<h1 id="rsync"><a aria-hidden="true" class="anchor-heading" href="#rsync"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>rsync</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a>, <a href="/notes/5fv3dcbwq6x4tla4qd6mx3a">Networking</a></li>
+</ul>
+<hr>
+<p>The <code>rsync</code> utility expressions take the following form:</p>
+<pre class="language-sh"><code class="language-sh">Local to Local:  rsync [OPTION]... [SRC]... DEST
+Local to Remote: rsync [OPTION]... [SRC]... [USER@]HOST:DEST
+Remote to Local: rsync [OPTION]... [USER@]HOST:SRC... [DEST]
+</code></pre>
+<p>Copy</p>
+<ul>
+<li><code>OPTION</code> - The rsync options .</li>
+<li><code>SRC</code> - Source directory.</li>
+<li><code>DEST</code> - Destination directory.</li>
+<li><code>USER</code> - Remote username.</li>
+<li><code>HOST</code> - Remote hostname or IP Address.</li>
+</ul>
+<p><code>rsync</code> provides a number of options that control how the command behaves. The most widely used options are:</p>
+<ul>
+<li><code>-a</code>, <code>--archive</code>, archive mode, equivalent to <code>-rlptgoD</code>. This option tells <code>rsync</code> to syncs directories recursively, transfer special and block devices, preserve symbolic links, modification times, groups, ownership, and permissions.</li>
+<li><code>-z</code>, <code>--compress</code>. This option forces <code>rsync</code> to compresses the data as it is sent to the destination machine. Use this option only if the connection to the remote machine is slow.</li>
+<li><code>-P</code>, equivalent to <code>--partial --progress</code>. When this option is used, <code>rsync</code> shows a progress bar during the transfer and keeps the partially transferred files. It is useful when transferring large files over slow or unstable network connections.</li>
+<li><code>--delete</code>. When this option is used, <code>rsync</code> deletes extraneous files from the destination location. It is useful for mirroring.</li>
+<li><code>-q</code>, <code>--quiet</code>. Use this option if you want to suppress non-error messages.</li>
+<li><code>-e</code>. This option allows you to choose a different remote shell. By default, <code>rsync</code> is configured to use ssh.</li>
+</ul>
+<h2 id="basic-rsync-usage"><a aria-hidden="true" class="anchor-heading" href="#basic-rsync-usage"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Basic Rsync Usage</h2>
+<p>The most basic use case of <code>rsync</code> is to copy a single file from one to another local location. Here is an example:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">rsync</span> -a /etc/ ~/etc_backup/
+</code></pre>
+<p>The user running the command must have read permissions on the source location and write permissions on the destination.</p>
+<p>Omitting the filename from the destination location copies the file with the current name. If you want to save the file under a different name, specify the new name on the destination part:</p>
+<pre><code>rsync -a /opt/filename.zip /tmp/newfilename.zip
+</code></pre>
+<p>The real power of <code>rsync</code> comes when synchronizing directories. The example below shows how to create a local backup of website files:</p>
+<pre><code>rsync -a /var/www/domain.com/public_html/ /var/www/domain.com/public_html_backup/
+</code></pre>
+<p>If the destination directory doesn’t exist, <code>rsync</code> will create it.</p>
+<p>It is worth mentioning that <code>rsync</code> gives different treatment to the source directories with a trailing slash (<code>/</code>). If the source directory has a trailing slash, the command will copy only the directory contents to the destination directory. When the trailing slash is omitted, <code>rsync</code> copies the source directory inside the destination directory.</p>
+<hr>
+<h2 id="using-rsync-over-the-network"><a aria-hidden="true" class="anchor-heading" href="#using-rsync-over-the-network"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Using rsync Over the Network</h2>
+<p>When using <code>rsync</code> to [transfer data remotely , it must be installed on both the source and the destination machine. The new versions of <code>rsync</code> are configured to use SSH as default remote shell.</p>
+<p>In the following example, we are transferring a directory from a local to a remote machine:</p>
+<pre><code>rsync -a /opt/media/ remote_user@remote_host_or_ip:/opt/media/
+</code></pre>
+<p>or</p>
+<pre><code>rsync -av -e ssh /etc/ remote_user@remote_host_or_ip:~/etc_bacup/
+</code></pre>
+<p>To transfer data from a remote to a local machine, use the remote location as a source:</p>
+<pre><code>rsync -a remote_user@remote_host_or_ip:/opt/media/ /opt/media/
+</code></pre>
+<p>If SSH on the remote host is listening on a port other than the default 22 , specify the port using the <code>-e</code> option:</p>
+<pre><code>rsync -a -e "ssh -p 2322" /opt/media/ remote_user@remote_host_or_ip:/opt/media/
+</code></pre>
+<p>There are two options to exclude files and directories. The first option is to use the <code>--exclude</code> argument and specify the files and directories you want to exclude on the command line.</p>
+<p>When excluding files or directories , you need to use their relative paths to the source location.</p>
+<p>In the following example shows how exclude the <code>node_modules</code> and <code>tmp</code> directories:</p>
+<pre><code>rsync -a --exclude=node_modules --exclude=tmp /src_directory/ /dst_directory/
+</code></pre>
+<p>The second option is to use the <code>--exclude-from</code> option and specify the files and directories you want to exclude in a file.</p>
+<pre><code>rsync -a --exclude-from='/exclude-file.txt' /src_directory/ /dst_directory/
+</code></pre>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">cat</span> exclude-file.txt
+node_modules
+tmp
+</code></pre>
+<blockquote>
+<p>via - <a href="https://linuxize.com/post/how-to-use-rsync-for-local-and-remote-data-transfer-and-synchronization/">Rsync Command in Linux with Examples | Linuxize</a></p>
+</blockquote>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/522ww47pqvt6y0yj8zparmy">DevOps</a></li>
+<li><a href="/notes/o922t6d9q6wur3yve290hir">SSH</a></li>
+</ul>

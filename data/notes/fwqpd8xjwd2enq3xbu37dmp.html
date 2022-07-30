@@ -1,0 +1,73 @@
+<h1 id="update"><a aria-hidden="true" class="anchor-heading" href="#update"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>UPDATE</h1>
+<ul>
+<li>Areas: <a href="/notes/93cp838qc8pnou1we4cbdjb">SQL</a></li>
+</ul>
+<hr>
+<h3 id="updating-a-single-row"><a aria-hidden="true" class="anchor-heading" href="#updating-a-single-row"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Updating a single row</h3>
+<p>Using <code>UPDATE</code> and <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SET (Private)</a> clause</p>
+<pre><code>UPDATE invoices
+SET payment_total = 10, payment_date = "2019-03-01"
+WHERE invoice_id = 1
+</code></pre>
+<p>Restore values</p>
+<pre><code>UPDATE invoices
+SET payment_total = DEFAULT, payment_date = NULL
+WHERE invoice_id = 1
+</code></pre>
+<p>Modifying existing row</p>
+<pre><code>UPDATE invoices
+SET
+    payment_total = invoice_total * 0.5,
+    payment_date = due_date
+WHERE invoice_id = 1
+</code></pre>
+<h3 id="updating-multiple-rows"><a aria-hidden="true" class="anchor-heading" href="#updating-multiple-rows"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Updating multiple rows</h3>
+<p><a href="/notes/ypszfixe0p3s5k0inqs5g08">MySql</a> workbench by default works in safe-mode and doesn't allow updating of multiple rows, remove this setting from
+<code>Workbench Preferences > SQL Editor > uncheck Safe Updates</code> and restart client.</p>
+<pre><code>UPDATE invoices
+SET
+    payment_total = invoice_total * 0.5,
+    payment_date = due_date
+WHERE client_id = 3
+-- WHERE client_id IN (3, 4)
+-- To update all records in the table, remove the WHERE clause
+</code></pre>
+<h3 id="exercise"><a aria-hidden="true" class="anchor-heading" href="#exercise"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Exercise</h3>
+<pre><code>USE sql_store;
+
+UPDATE customers
+SET points = points + 50
+WHERE birth_date &#x3C; "1990-01-01"
+</code></pre>
+<h3 id="using-subqueries-in-updates"><a aria-hidden="true" class="anchor-heading" href="#using-subqueries-in-updates"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Using Subqueries in updates</h3>
+<p>Using Subquery to use client's name for fetching their ID</p>
+<pre><code>UPDATE invoices
+SET
+    payment_total = invoice_total * 0.5,
+    payment_date = due_date
+WHERE client_id =
+            (SELECT client_id
+            FROM clients
+            WHERE name = 'Myworks')
+</code></pre>
+<p>When a subqery returns multiple records, we cannot use <code>=</code> in the WHERE clause, replace it with an <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">IN (Private)</a> operator instead</p>
+<pre><code>UPDATE invoices
+SET
+    payment_total = invoice_total * 0.5,
+    payment_date = due_date
+WHERE client_id IN
+            (SELECT client_id
+            FROM clients
+            WHERE state IN ('CA', 'NY'))
+</code></pre>
+<h3 id="exercise-1"><a aria-hidden="true" class="anchor-heading" href="#exercise-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Exercise</h3>
+<pre><code>USE sql_store;
+
+UPDATE orders
+SET
+    comment = "Gold Customer"
+WHERE customer_id IN
+    (SELECT customer_id
+    FROM customers
+    WHERE points > 3000)
+</code></pre>

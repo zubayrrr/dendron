@@ -1,0 +1,49 @@
+<h1 id="ls"><a aria-hidden="true" class="anchor-heading" href="#ls"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ls</h1>
+<ul>
+<li><code>~</code> - tilda symbolizes the current user's <code>Home</code> directory</li>
+<li><code>ls</code> command prints out content of the current working directory(See also: <a href="/notes/9dvixdv1wugyrpompmarhdw">pwd</a>)</li>
+<li><code>ls -d $PWD/*</code> command to display the absolute path names of all files or directories in the current directory.</li>
+<li>To list contents of a specific directory <code>ls path</code></li>
+<li><code>ls -1 path</code> to list out all the content in one column</li>
+<li>You can do: <code>ls -F</code> to filter out the directories</li>
+<li>To get info about the directory itself(as opposed to info about the contents of the dir): <code>ls -d path</code></li>
+<li>To get details about directories in longform, use: <code>ls -l</code></li>
+<li>You can combine options too: <code>ls -lha</code>, where <code>-a</code> is for hidden dirs</li>
+<li>You can use the flag <code>-S</code> to sort by size.</li>
+<li>Sort by file type(extension): <code>ls -l -X path</code></li>
+<li>Use <code>ls --hide=*.extensionName path</code> to omit files with a certain extension</li>
+<li><code>ls -lR</code> to list <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.recursive (Private)</a>ly</li>
+<li>An <a href="/notes/qj2j8vs4rumzknty271dz04">Aliases</a> can be set for <code>ls</code> to use <code>ls --color=auto</code> which determines the colors of the file names listed, such as blue for dirs, cyan for <a href="/notes/ztyk0cbpfcvz4h2czvm3tp4">symlink</a>s etc.</li>
+</ul>
+<hr>
+<ul>
+<li>Reading the results of <code>ls -lh</code> where <code>-l</code> stands for longform and <code>h</code> stands for human readable file size</li>
+<li>For example:</li>
+</ul>
+<p><code>drwxr-xr-x 3 kira kira 4.0K Sep 3 17:01 Applications</code></p>
+<ul>
+<li><code>d</code> signifies that its a directory( <code>-</code> means a normal file, <code>l</code> indicates a <a href="/notes/ztyk0cbpfcvz4h2czvm3tp4">symlink</a>).</li>
+<li>The 9 characters after file type (d, l, -), are the permissions for the owner, group owner and the others, example:</li>
+<li><code>rwx</code> signifies file permissions for the user and group <code>kira</code>.</li>
+<li><code>x</code> execute, <code>r</code> read, <code>w</code> write</li>
+<li><code>3</code> is the number of hardlinks</li>
+<li>The first <code>kira</code> is the user, the second <code>kira</code> is the group, <code>4.0K</code> is the size (in kilobytes), last modified date and the actual name of the file (in this case <code>Applications</code>)</li>
+</ul>
+<hr>
+<h3 id="ls--lh-vs-du--sh"><a aria-hidden="true" class="anchor-heading" href="#ls--lh-vs-du--sh"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ls -lh vs <a href="/notes/de3476man150zxg0zjal7e5">du</a> -sh</h3>
+<ul>
+<li><code>ls -lh</code> doesn't return the true size of the file/dir, it returns the size as reported by the <a href="/notes/dwnum4w9cbqdhsbd1y7but3">inode</a> structure.</li>
+<li>Use <code>du -sh path</code> to return the true size of the file/dir</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/uua60b3x9in6imfnwfa5f7t">Everything about Linux Terminal</a></li>
+<li><a href="/notes/qfc3k99hj61yzdpez1zbfg4">File Attributes</a></li>
+<li><a href="/notes/slwkpjzurunu7jlsa4wcj9y">File Permissions</a></li>
+<li><a href="/notes/d3d1v1gzr71bjd8nc7jaibf">grep</a></li>
+<li><a href="/notes/hy62pxdr1mo1pamj5uggb2r">Navigating the Linux File System</a></li>
+<li><a href="/notes/iicnw4qgra6rr5f6k4dlw3z">PATH Variable</a></li>
+<li><a href="/notes/6pfeic1cz5vt0wgm5ctmmsw">sha256sum</a></li>
+<li><a href="/notes/dv7wz70z5zyf5z9yqe0hnd4">strings</a></li>
+</ul>

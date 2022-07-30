@@ -1,0 +1,37 @@
+<h1 id="etcshadow"><a aria-hidden="true" class="anchor-heading" href="#etcshadow"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>/etc/shadow</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<ul>
+<li>Stores passwords on behalf of <code>/etc/passwd</code> in an encrypted format</li>
+<li>Hash of the password and other attributes such as a password's expiration date</li>
+<li>It is only readable by the root account</li>
+<li>Contains 9 comma separated fields</li>
+</ul>
+<!-- end list -->
+<ol>
+<li>Username - it is how the corresponding line is connected to <code>/etc/passwd</code></li>
+<li>The password, the entire string between the colons</li>
+</ol>
+<!-- end list -->
+<ul>
+<li>The other seven fields related to password expiration, last password change, minimum maximum password age, so on.</li>
+<li>If the password field contains an <code>*</code> or <code>!</code>, it means the user cannot login using the password, other login methods, like key based authentication or switching users is still allowed.</li>
+<li>Password format is set to <code>$type$salt$hash</code>
+<ul>
+<li>$type:
+<ul>
+<li><code>1</code> <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">MD5 (Private)</a></li>
+<li><code>2a</code> <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Blowfish (Private)</a></li>
+<li><code>2y</code> <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Eksblowfish (Private)</a></li>
+<li><code>5</code> <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SHA256 (Private)</a></li>
+<li><code>6</code> <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">SHA512 (Private)</a></li>
+</ul>
+</li>
+<li>$salt: A salt combined with the password is added to the hashing process to enforce the uniqueness of hash generated. $salt is random but not secret. It helps mitigate attacks such as <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Rainbow table (Private)</a>s.</li>
+</ul>
+</li>
+<li>Never edit the shadow file manually, use a command line tool designed for doing so.</li>
+</ul>
+<p>Check <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">Man Pages (Private)</a> <code>man shadow</code></p>

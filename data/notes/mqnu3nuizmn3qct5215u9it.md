@@ -1,0 +1,11 @@
+
+- The goal of networks is to transfer data(it can be anything, video, audio etc) from one machine to another.
+- Network Components consists of:
+  - [[devlog.Client]]
+  - [[devlog.Server]]
+  - [[devlog.Hub]]
+  - [[WAP]]
+  - [[devlog.Switch]]
+  - [[devlog.router]]
+  - [[devlog.Media]]
+  - [[WAN Link]]

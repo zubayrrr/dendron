@@ -1,0 +1,105 @@
+<h1 id="physical-layer---osi"><a aria-hidden="true" class="anchor-heading" href="#physical-layer---osi"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Physical Layer - OSI</h1>
+<h1 id="layer-1--physical-layer"><a aria-hidden="true" class="anchor-heading" href="#layer-1--physical-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Layer 1 – Physical layer</h1>
+<p>This where the transmission of bits across the network occurs and is focused on the physical and electrical characteristics of the network.</p>
+<p>There is where we decide if we're using an <a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a> network or if we're using <a href="/notes/y7dwtr5ud15dkh6e7x7ose4">Fiber Optic</a>, or Copper cables.</p>
+<p>No matter what method we're using to transmit our data, it will always be in the form of binary <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a>s</p>
+<p>Binary <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a>s are series of 1s and 0s.</p>
+<p>Each media has different ways of representing these <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a>s</p>
+<p>For example, if we're using a Copper wire such as in a <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Cat5 (Private)</a> or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.Cat6 (Private)</a> network, you'll find that the voltage of the wire will be zero for a 0 <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a> and to represent a 1, you might use a +5 or -5 voltage on the Copper wire.</p>
+<p><strong>Transition Modulation</strong> is what dictates the change is (or how it should be interpreted), If it changed during the clock cycle, then a 1 is represented (otherwise it is a 0).</p>
+<p>In case of a <a href="/notes/y7dwtr5ud15dkh6e7x7ose4">Fiber Optic</a> cable, we'll be using light instead of voltages; when we want a 1, we turn the light on. when we want to represent a 0, we turn the light off.</p>
+<hr>
+<p>Once we have the data from the <a href="/notes/cmj4t357d9m7uwpuo9k0ed2">Media</a>, we'll have <a href="/notes/fzlykicsgkocfcx21dc9st2">Connector Types</a> on the end of the cables that go inside our devices. These connectors are wired based on a standard.</p>
+<ul>
+<li>TIA/EIA-568-B
+<ul>
+<li><a href="/notes/ybp1ugwoj4sywjxyk876ql1">RJ-45</a> cables and ports</li>
+</ul>
+</li>
+<li>T-568A and T-568B
+<ul>
+<li>Crossover cables</li>
+</ul>
+</li>
+<li><a href="/notes/ebbsmmds8qkj39bw5g14klp">Straight-Through Patch Cable</a> typically uses T-568B on both ends, but could also use T-568A.</li>
+<li>See: <a href="/notes/d9mmfrib2n77l9wxxl9x0l9">Pinouts</a></li>
+</ul>
+<h3 id="topology-of-the-network-at-the-physical-layer"><a aria-hidden="true" class="anchor-heading" href="#topology-of-the-network-at-the-physical-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Topology of the network at the Physical Layer</h3>
+<ul>
+<li>Layer 1 devices view networks from a physical topology perspective, as discussed in <a href="/notes/3tjqysfje7v916n5bbpa8k3">Wired Network Topology</a> &#x26; <a href="/notes/flsqkapy0cah8so900kymaq">Wireless Network Topology</a>.</li>
+</ul>
+<hr>
+<h3 id="synchronizing-communication-at-physical-layer"><a aria-hidden="true" class="anchor-heading" href="#synchronizing-communication-at-physical-layer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Synchronizing communication at Physical Layer</h3>
+<p>How do we know that the receiving end is ready to accept the <a href="/notes/csrwmzyo53d5qu6hnccltlz">Bit</a>s that we're ready to send?</p>
+<ul>
+<li>We can work this out either Asynchronously or Synchronously:</li>
+</ul>
+<h4 id="asynchronous"><a aria-hidden="true" class="anchor-heading" href="#asynchronous"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Asynchronous</h4>
+<ul>
+<li>Uses "start bits" and "stop bits" to indicate when transmissions occur from sender to receiver.</li>
+</ul>
+<h4 id="synchronous"><a aria-hidden="true" class="anchor-heading" href="#synchronous"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Synchronous</h4>
+<ul>
+<li>Uses a reference block to coordinate the transmissions by both sender and receiver. Happens in Real-time. Uses a time source, transmits data on the cadence of the time.</li>
+</ul>
+<hr>
+<h3 id="how-is-the-bandwidth-utilized"><a aria-hidden="true" class="anchor-heading" href="#how-is-the-bandwidth-utilized"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>How is the bandwidth utilized?</h3>
+<p>There are again two ways, Broadband and Baseband.</p>
+<h4 id="broadband"><a aria-hidden="true" class="anchor-heading" href="#broadband"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Broadband</h4>
+<ul>
+<li>Divides bandwidth into separate channels. (e.g. Cable TV)</li>
+</ul>
+<h4 id="baseband"><a aria-hidden="true" class="anchor-heading" href="#baseband"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Baseband</h4>
+<ul>
+<li>Uses all available frequencies on a medium (cable) to transmit data and uses a reference clock to coordinate the transmissions by both sender and receiver. (e.g. Telephone, Home <a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a>)</li>
+</ul>
+<hr>
+<h3 id="if-were-using-a-single-baseband-using-all-of-the-bandwidth-how-can-we-get-more-out-of-a-limited-network"><a aria-hidden="true" class="anchor-heading" href="#if-were-using-a-single-baseband-using-all-of-the-bandwidth-how-can-we-get-more-out-of-a-limited-network"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>If we're using a single Baseband using all of the bandwidth how can we get more out of a limited network?</h3>
+<ul>
+<li>Time-Division Multiplexing (TDM)
+<ul>
+<li>Each session takes a turn, using time slots, to share the medium between all users.</li>
+</ul>
+</li>
+<li>Statistical Time-Division Multiplexing (StatTDM)
+<ul>
+<li>More efficient version of TDM since it dynamically allocates time slots on an as-needed basis instead of statically assigning.</li>
+</ul>
+</li>
+<li>Frequency-Division Multiplexing (FDM)
+<ul>
+<li>Medium is divided into various channels based on frequencies and each session is transmitted over a different channel.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="media-at-layer-1-layer-1-examples"><a aria-hidden="true" class="anchor-heading" href="#media-at-layer-1-layer-1-examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Media at Layer 1 (Layer 1 Examples)</h3>
+<p>Devices that give physical response, hence a physical layer device.</p>
+<ul>
+<li>Cables
+<ul>
+<li><a href="/notes/co4eno6fzx5ov2408cmwe3w">Ethernet</a></li>
+<li><a href="/notes/y7dwtr5ud15dkh6e7x7ose4">Fiber Optic</a></li>
+</ul>
+</li>
+<li>Radio Frequencies
+<ul>
+<li><a href="/notes/mygms43r4xeguoaflrlzlkr">Wi-Fi</a></li>
+<li><a href="/notes/sp5wj63pztdvt98eu4dbiic">Bluetooth</a></li>
+<li><a href="/notes/ev6lezairasf9iuaytiqo7g">NFC</a></li>
+</ul>
+</li>
+<li>Infrastructure Devices
+<ul>
+<li><a href="/notes/pkic9qil8dq2q3bqmk01047">Hub</a>s</li>
+<li>Wireless Access Points</li>
+<li><a href="/notes/4lr9cfvrkbkc8ycvmzpgs8p">Media Converters</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/ofmapzoha5kl5i46y1lkc2b">Data Link Layer - OSI</a></li>
+<li><a href="/notes/mmu3q72ghud78jtb8fv44ex">OSI Model</a></li>
+</ul>

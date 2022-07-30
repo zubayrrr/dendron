@@ -1,0 +1,16 @@
+<h1 id="aws-vpc"><a aria-hidden="true" class="anchor-heading" href="#aws-vpc"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>AWS VPC</h1>
+<p>A VPC is a logically isolated portion of the AWS cloud within a region where you can deploy your resources inside it.</p>
+<p><a href="/notes/faxbzx44mmk9u2ix1fdfuu7">AWS S3</a> is an example of service that sits outside of a VPC.</p>
+<p>Within a region there are availability zones, you can use those availability zone by creating subnets and assigning subnets to those availability zones. A subnet is always assigned to one availability zone. It cannot span over multiple AZs. You can multiple subnets within same AZs.</p>
+<p>We can deploy resources such as <a href="/notes/1h5mmmv2b68di6siwa31jvh">AWS EC2</a> in a subnet. There is such a thing called <strong>VPC Router</strong>. We can interact with it by configuring <strong>route tables</strong>. The VPC Router takes care of routing within the VPC and outside of VPC.</p>
+<p>To be able to access the internet, you also need an <strong>Internet Gateway</strong>. It is attached to your VPC. You only get one per VPC. It is used to send data out to the internet and in from the internet.</p>
+<p>We configure the route table with the Internet Gateway ID that tells it to send all the traffic that doesn't fit for one the networks in the route table to the internet gateway.</p>
+<p>You’ve a default VPC that AWS automatically creates for you in every region.</p>
+<p>You can create multiple VPCs within a region(5 by default, soft limit).</p>
+<p>Each VPC has a <a href="/notes/h75m1yelgfwk39wqm1ep89z">CIDR</a> block, overall block of address from which you then create the addresses you assign to the subnets.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/ervusa6qabwyx7sbb1a4vcg">AWS EKS</a></li>
+<li><a href="/notes/8io7ikmud38hlpv4vqm3f7r">AWS Fargate</a></li>
+</ul>

@@ -1,0 +1,67 @@
+<h1 id="ip"><a aria-hidden="true" class="anchor-heading" href="#ip"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>ip</h1>
+<ul>
+<li>Areas: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p><code>ip</code> command in Linux is present in the net-tools which is used for performing several network administration tasks. IP stands for Internet Protocol. This command is used to show or manipulate routing, devices, and tunnels. It is similar to <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">ifconfig (Private)</a> command but it is much more powerful with more functions and facilities attached to it. ifconfig is one of the deprecated commands in the net-tools of Linux that has not been maintained for many years. <code>ip</code> command is used to perform several tasks like assigning an address to a network interface or configuring network interface parameters.</p>
+<p>It can perform several other tasks like configuring and modifying the default and static routing, setting up tunnel over IP, listing IP addresses and property information, modifying the status of the interface, assigning, deleting and setting up IP addresses and routes.</p>
+<h3 id="examples"><a aria-hidden="true" class="anchor-heading" href="#examples"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Examples</h3>
+<ul>
+<li>To display a list of network interfaces and the associated <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>:
+<ul>
+<li><code>ip address show</code> "address" is the object and "show" is the command executed on the object, <code>ip addr show</code> <code>ip a show</code> are same. You can also omit the <code>show</code> command as it is the default.</li>
+</ul>
+</li>
+<li>If you want to display only <a href="/notes/d6dakasx29em4cil8uhjy62">Ipv4</a> or <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.IPv6 (Private)</a> addresses:
+<ul>
+<li><code>ip -4 address</code> and <code>ip -6 address</code></li>
+</ul>
+</li>
+<li>To get info about specific network inteface:
+<ul>
+<li><code>ip addr show dev enp0s3</code> or <code>ip a s dev enp0s3</code></li>
+</ul>
+</li>
+<li>To get <a title="Private" style="color: brown" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank">devlog.default gateway (Private)</a>:
+<ul>
+<li><code>ip route show</code></li>
+</ul>
+</li>
+<li>To turn an interface off/on:
+<ul>
+<li><code>ip link set enp0s3 down</code></li>
+<li>The interface will be down(disabled) and to display it:
+<ul>
+<li><code>ip link dev enp0s3</code></li>
+</ul>
+</li>
+<li><code>ip link set enp0s3 up</code> to enable it</li>
+</ul>
+</li>
+<li>To assign a new <a href="/notes/mj7tlpbhhzfpg8pbegkkasb">IP Address</a>:
+<ul>
+<li>Remove existing IP Address from the interface: <code>ip address del 192.168.0.111/24 dev enp0s3</code></li>
+<li>Add the needed IP Address: <code>ip address add 192.168.0.222/24 dev enp0s3</code></li>
+</ul>
+</li>
+<li>To change default gateway;
+<ul>
+<li>Removing existing default gateway: <code>ip route del default</code></li>
+<li>Add a new default gateway: <code>ip route add default via 192.168.0.2</code></li>
+</ul>
+</li>
+<li>To change the <a href="/notes/96d9arn92ova0u1tdgns8ts">MAC</a> Address:
+<ul>
+<li><code>ip link set dev enp0s3 address 08:00:27:51:05:01</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/notes/osajilt9rsnrz5ng14pmy8x">ifconfig</a></li>
+<li><a href="/notes/nhbnwxjfzr4ecq57maduvqz">Internet Layer - TCP/IP</a></li>
+<li><a href="/notes/8d1ya7990mhbcd1kidhigtj">iw</a></li>
+<li><a href="/notes/ck6ds17ovyjf6n0sidmat7v">Networking in Linux</a></li>
+<li><a href="/notes/79jsb6jmqdyg3kpz195kpso">ss</a></li>
+</ul>

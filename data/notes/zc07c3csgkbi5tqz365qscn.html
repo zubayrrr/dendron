@@ -1,0 +1,41 @@
+<h1 id="modprobe"><a aria-hidden="true" class="anchor-heading" href="#modprobe"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Modprobe</h1>
+<ul>
+<li>Related: <a href="/notes/owoutsv5dicylguol2odc3e">Linux</a></li>
+</ul>
+<hr>
+<p>The <code>modprobe</code> command allows you to add and remove Linux kernel modules.</p>
+<h2 id="adding-kernel-modules"><a aria-hidden="true" class="anchor-heading" href="#adding-kernel-modules"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Adding Kernel Modules</h2>
+<p>The Kernel modules are stored in the <code>/lib/modules/&#x3C;kernel_version></code> directory. You find the <a href="https://linuxize.com/post/how-to-check-the-kernel-version-in-linux/">version of the running kernel</a> , use the <code>uname -r</code> command.</p>
+<p>Only users with administrative privileged can manage Kernel modules.</p>
+<p>To load a module, invoke the <code>modprobe</code> command followed by the module name:</p>
+<pre><code>modprobe module_name
+</code></pre>
+<p>The <code>modprobe</code> command will load the given module and any additional module dependencies. Only one module can be specified at the command line.</p>
+<p>Use the <code>lsmod</code> command to confirm that the module is loaded:</p>
+<pre><code>lsmod | grep module_name
+</code></pre>
+<p>To load a module with additional parameters, use the <code>parameter=value</code> syntax:</p>
+<pre><code>modprobe module_name parameter=value
+</code></pre>
+<p>The command accepts multiple <code>parameter=value</code> pairs separated by space.</p>
+<p>Generally, you would need to load the module during the system boot. You can do that by that by specifying the module and its parameters in a file inside the <code>/etc/modules-load.d</code> directory. Files must end with <code>.conf</code> and can have any name:</p>
+<p><code>/etc/modules-load.d/module_name.conf</code></p>
+<pre class="language-ini"><code class="language-ini"><span class="token key attr-name">option module_name parameter</span><span class="token punctuation">=</span><span class="token value attr-value">value</span>
+</code></pre>
+<p>Copy</p>
+<p>The settings specified in these files are read by <code>udev</code>, which loads the modules at system startup using <code>modprobe</code>.</p>
+<h2 id="removing-kernel-modules-"><a aria-hidden="true" class="anchor-heading" href="#removing-kernel-modules-"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Removing Kernel Modules <a href="https://linuxize.com/post/modprobe-command-in-linux//#removing-kernel-modules">#</a></h2>
+<p>To remove a module, invoke the <code>modprobe</code> command with the <code>-r</code> option followed by the module name:</p>
+<pre><code>modprobe -r module_name
+</code></pre>
+<p><code>modprobe</code> will also remove the unused module dependencies.</p>
+<p>When invoked with <code>-r</code>, the command accepts multiple modules as arguments:</p>
+<pre><code>modprobe -r module_name1 module_name2
+</code></pre>
+<p>You can also use the <code>rmmod</code> command to unload a module from the Linux Kernel.</p>
+<p>If you want to prevent a Kernel module from loading at boot time, create a <code>.conf</code> file with any name inside the <code>/etc/modprobe.d</code>. The syntax is:</p>
+<p><code>/etc/modprobe.d/blacklist.conf</code></p>
+<pre class="language-ini"><code class="language-ini">blacklist module_name
+</code></pre>
+<p>If you want to blacklist additional modules, specify the modules on a new line, or create a new <code>.conf</code> file.</p>
+<p>Via - <a href="https://linuxize.com/post/modprobe-command-in-linux/">Modprobe Command in Linux | Linuxize</a></p>

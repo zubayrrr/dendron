@@ -1,0 +1,24 @@
+<h1 id="spark-cluster-managers"><a aria-hidden="true" class="anchor-heading" href="#spark-cluster-managers"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spark Cluster Managers</h1>
+<ul>
+<li>Areas: <a href="/notes/f2kecna72pmc7re3wh1ugk4">Apache Spark</a></li>
+</ul>
+<hr>
+<h3 id="spark-standalone-mode"><a aria-hidden="true" class="anchor-heading" href="#spark-standalone-mode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Spark Standalone mode</h3>
+<ul>
+<li>By default applications submitted to the standalone mode cluster will run in FIFO order and each application will try to use all available nodes.</li>
+<li>Which basically means you'll have multiple nodes and you'd have one master node running and the other nodes will be Spark Worker processes running.</li>
+<li>It'll not be a distributed file system since it is a standalone mode, it'll rely on external sources to get data or the file system of the node where the data is stored. (the processes will happen across the worker nodes)</li>
+</ul>
+<h3 id="apache-mesos"><a aria-hidden="true" class="anchor-heading" href="#apache-mesos"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Apache Mesos</h3>
+<ul>
+<li>Apache Mesos is an open-source project to manage computer clusters and can also run <a href="/notes/85w31vcdf3bjnm0yxh72ygf">Hadoop</a> applications.</li>
+</ul>
+<h3 id="hadoop-yarnapache-yarn"><a aria-hidden="true" class="anchor-heading" href="#hadoop-yarnapache-yarn"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>hadoop YARN/Apache YARN</h3>
+<ul>
+<li>Apache YARN is the cluster resource manager of hadoop 2.</li>
+<li>Spark can run on YARN.</li>
+</ul>
+<h3 id="kubernetes"><a aria-hidden="true" class="anchor-heading" href="#kubernetes"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Kubernetes</h3>
+<ul>
+<li>Kubernetes is an open-source system for automating, deployment, scaling and management of containerized applications.</li>
+</ul>
