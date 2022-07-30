@@ -14,5 +14,6 @@
   "showLineNumber": true,
   "strictLineBreaks": true,
   "mobilePullAction": "templater-obsidian:bin/templates/Temporal/Now.md",
-  "showUnsupportedFiles": true
+  "showUnsupportedFiles": true,
+  "communityThemeSortOrder": "downloadReverse"
 }

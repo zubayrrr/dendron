@@ -1,8 +1,8 @@
 ---
 id: tdistpevgctrmqw4kgejbws
 title: Mimetic Desire 101
-desc: ''
-updated: 1652786936174
+desc: ""
+updated: 1658553552096
 created: 1652786936174
 tags:
   - articles
@@ -39,7 +39,7 @@ In each of these cases, I’ve convinced myself that my desire is independent an
 
 The assumption that my desires are all my own—this story that I tell myself—is what the French social scientist René Girard calls “The Romantic Lie.” The Lie is that I want things independently, or that I choose all of the objects of my desire out of some secret desire chamber in my heart. I know a good thing when I see it; I know what’s desirable and what’s not, unaided.
 
-[![The Romantic Lie by René Girard](inbox/assets/The%20Romantic%20Lie%20by%20René%20Girard..png%20"The%20Romantic%20Lie%20by%20René%20Girard")](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fef3b977b-c029-4e39-ae9e-447b8b245240_800x312.png)
+[![The Romantic Lie by René Girard](inbox/assets/The%20Romantic%20Lie%20by%20René%20Girard.png")](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fef3b977b-c029-4e39-ae9e-447b8b245240_800x312.png)
 
 All illustrations by Liana Finck. Her work can be found in the New Yorker and on her excellent Instagram page.
 
@@ -53,7 +53,7 @@ The value of objects is not objective—it’s subjective. And that subjective v
 
 And it doesn’t have to be a shirt. It can be anything.
 
-[![Novelistic Truth René Girard](inbox/assets/Novelistic%20Truth%20René%20Girard..png%20"Novelistic%20Truth%20René%20Girard")](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fc5439f0e-7a6d-417b-8022-46fbc99bc7d5_776x480.png)
+[![Novelistic Truth René Girard](inbox/assets/Novelistic%20Truth%20René%20Girard.png")](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fc5439f0e-7a6d-417b-8022-46fbc99bc7d5_776x480.png)
 
 The path between us and the thing we want is never straight. It’s always curved. It goes through, or around, models.
 

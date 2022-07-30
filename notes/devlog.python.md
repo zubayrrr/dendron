@@ -2,7 +2,7 @@
 id: wa4wthnhw54hd5wfyocyvqa
 title: Python
 desc: ""
-updated: 1658506051653
+updated: 1658681069506
 created: 1653569054257
 ---
 
@@ -14,3 +14,7 @@ created: 1653569054257
 - Errors not handled correctly can lead to data loss, downtime etc.
 - Consider critical and non-critical infrastructure/data/operations.
 - Use `try` `except` blocks.
+
+## Labs
+
+- [[devlog.website monitoring]]

@@ -2,7 +2,7 @@
 id: qq13iyd4oakxz606fh0cxdw
 title: Learning
 desc: ""
-updated: 1657945473153
+updated: 1658724815547
 created: 1655669112285
 tags:
   - areas
@@ -80,3 +80,4 @@ Focus, concentrate, set goals – let your spotlight shine bright. But occasiona
 ## Resources
 
 - [Learn Better with 10 Ways to Be a Better Learner - Lifelong Learning](https://www.missiontolearn.com/learn-better/)
+- [Learning How to Learn: Powerful mental tools to help you master tough subjects | Coursera](https://www.coursera.org/learn/learning-how-to-learn?action=enroll)

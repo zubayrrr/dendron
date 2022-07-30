@@ -1,12 +1,10 @@
 [
   "templater-obsidian",
-  "quickadd",
   "homepage",
   "obsidian-wikipedia",
   "search-on-internet",
   "cm-typewriter-scroll-obsidian",
   "remember-cursor-position",
-  "open-vscode",
   "obsidian-smart-typography",
   "obsidian-cloudinary-uploader",
   "obsidian-style-settings",
@@ -20,13 +18,10 @@
   "obsidian-editor-shortcuts",
   "obsidian-reveal-active-file",
   "obsidian-contextual-typography",
-  "obsidian-excalidraw-plugin",
-  "obsidian-local-rest-api",
   "obsidian-autocomplete-plugin",
   "markdown-table-editor",
   "obsidian-spaced-repetition",
   "various-complements",
   "podcast-note",
-  "workbench-obsidian",
-  "workspaces-plus"
+  "workbench-obsidian"
 ]
